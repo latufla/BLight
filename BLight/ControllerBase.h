@@ -1,6 +1,8 @@
 #pragma once
 #include "stdafx.h"
 #include "ObjectBase.h"
+#include "ViewBase.h"
+#include "ClanLib\core.h"
 
 class BehaviorBase;
 
@@ -26,13 +28,18 @@ public:
 	string getName();
 	void setName(string);
 
+	ObjectBase* getObject();
+
 protected:
 	void init(int, string);
 
-private:
 	int id;
 	string name;
-	ObjectBase* object; 
+	ObjectBase* object; // gets ownership
+	ViewBase* view; // gets ownership
+
 	vector<BehaviorBase*> *behaviors; // gets ownership
+	
+	clan::Slot updateConnector;
 };
 

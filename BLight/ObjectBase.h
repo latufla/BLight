@@ -1,5 +1,6 @@
 #pragma once
 #include "stdafx.h"
+#include <ClanLib/core.h>
 
 using namespace std;
 
@@ -20,10 +21,13 @@ public:
 	string getName();
 	void setName(string);
 
+	bool fireUpdates();
+
+	clan::Signal_v1<ObjectBase*> updateSignal;
+
 protected:
 	void init(int, string);
 
-private:
 	int id;
 	string name;
 };

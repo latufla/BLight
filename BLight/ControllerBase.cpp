@@ -30,8 +30,10 @@ void ControllerBase::init( int id, string name)
 	this->name = name;
 
 	behaviors = new vector<BehaviorBase*>();
-}
+	view = new ViewBase();
 
+	updateConnector = object->updateSignal.connect(view, &ViewBase::update);
+}
 
 bool ControllerBase::addBehavior( BehaviorBase* b)
 {
@@ -122,4 +124,9 @@ void ControllerBase::setId( int val )
 void ControllerBase::setName( string val )
 {
 	this->name = val;
+}
+
+ObjectBase* ControllerBase::getObject()
+{
+	return object;
 }

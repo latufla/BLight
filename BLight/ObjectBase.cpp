@@ -13,7 +13,7 @@ ObjectBase::ObjectBase( int id, string name)
 
 ObjectBase::~ObjectBase(void)
 {
-	cout << "\n" + string(__FUNCTION__) + " " + string(*this);
+
 }
 
 void ObjectBase::init( int id, string name )
@@ -22,6 +22,13 @@ void ObjectBase::init( int id, string name )
 	this->name = name;
 }
 
+
+
+bool ObjectBase::fireUpdates()
+{
+	updateSignal.invoke(this);
+	return true;
+}
 
 
 bool ObjectBase::operator == (ObjectBase obj)
@@ -55,7 +62,6 @@ void ObjectBase::setName( string val )
 {
 	this->name = val;
 }
-
 
 
 

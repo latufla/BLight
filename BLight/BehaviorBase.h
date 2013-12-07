@@ -33,8 +33,7 @@ public:
 
 protected:
 	virtual void init(int, string);
-
-private:
+	
 	int id;
 	string name;
 	ControllerBase* controller; // get`s no ownership

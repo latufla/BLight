@@ -13,6 +13,15 @@ using namespace clan;
 
 void initialTests();
 
+void slot_function1(int p1, int p2)
+{
+	clan::Console::write_line("Slot 1: %1,%2", p1, p2);
+}
+void slot_function2(int p1, int p2)
+{
+	clan::Console::write_line("Slot 2: %1,%2", p1, p2);
+}
+
 int main(const std::vector<std::string> &args){ 
 
 	SetupCore setup_core;
@@ -21,19 +30,17 @@ int main(const std::vector<std::string> &args){
 
 	ConsoleWindow console_window("Console");
 
-	initialTests();
-		
+	//initialTests();
+	
 	DisplayWindow window("", 1024, 768); 
 
 	Canvas canvas(window); 
 	InputDevice keyboard = window.get_ic().get_keyboard(); 	
 	
 	ObjectBase* obj1 = new ObjectBase(1, "obj1");
-	BehaviorBase* b1 = new BehaviorBase(1, "move");
-	BehaviorBase* b2 = new BehaviorBase(2, "shoot");
+	StubBehavior* b1 = new StubBehavior(1, "move");
 	ControllerBase* c = new ControllerBase(obj1);
 	c->addBehavior(b1);
-	c->addBehavior(b2);
 	c->startBehaviors();
 
 	GameTime gameTime(60, 60);
