@@ -12,7 +12,7 @@ ViewBase::~ViewBase(void)
 {
 }
 
-void ViewBase::update( ObjectBase* obj)
+void ViewBase::update(ObjectBase* obj)
 {
-	clan::Console::write_line("update view for: " + string(*obj));
+	clan::Console::write_line("update view with: " + string(*obj));
 }

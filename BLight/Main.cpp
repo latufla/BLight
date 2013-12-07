@@ -43,13 +43,20 @@ int main(const std::vector<std::string> &args){
 	c->addBehavior(b1);
 	c->startBehaviors();
 
+	ObjectBase* obj2 = new ObjectBase(2, "obj2");
+	StubBehavior* b2 = new StubBehavior(2, "move");
+	ControllerBase* c2 = new ControllerBase(obj2);
+	c2->addBehavior(b2);
+	c2->startBehaviors();
+
 	GameTime gameTime(60, 60);
 	while (!keyboard.get_keycode(keycode_escape)) { 
 		canvas.clear(Colorf::white);
 	
 		gameTime.update();
 		c->doBehaviorsStep(gameTime.get_time_elapsed_ms());
-		
+		c2->doBehaviorsStep(gameTime.get_time_elapsed_ms());
+
 		canvas.flush();
 		window.flip();
 		KeepAlive::process();
