@@ -1,4 +1,5 @@
 #include "BehaviorBase.h"
+#include <ClanLib/core.h>
 
 
 BehaviorBase::BehaviorBase(void)
@@ -42,7 +43,8 @@ bool BehaviorBase::stop()
 
 bool BehaviorBase::doStep( int stepInMSecs )
 {
-	cout << "\n" + string(__FUNCTION__) + " " + this->name + " " + to_string((long long)stepInMSecs);
+//	cout << "\n" + string(__FUNCTION__) + " " + this->name + " " + to_string((long long)stepInMSecs);
+	clan::Console::write_line(string(__FUNCTION__) + " " + this->name + " " + to_string((long long)stepInMSecs));
 	return true;
 }
 

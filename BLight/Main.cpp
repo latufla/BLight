@@ -27,8 +27,22 @@ int main(const std::vector<std::string> &args){
 
 	Canvas canvas(window); 
 	InputDevice keyboard = window.get_ic().get_keyboard(); 	
+	
+	ObjectBase* obj1 = new ObjectBase(1, "obj1");
+	BehaviorBase* b1 = new BehaviorBase(1, "move");
+	BehaviorBase* b2 = new BehaviorBase(2, "shoot");
+	ControllerBase* c = new ControllerBase(obj1);
+	c->addBehavior(b1);
+	c->addBehavior(b2);
+	c->startBehaviors();
+
+	GameTime gameTime(60, 60);
 	while (!keyboard.get_keycode(keycode_escape)) { 
 		canvas.clear(Colorf::white);
+	
+		gameTime.update();
+		c->doBehaviorsStep(gameTime.get_time_elapsed_ms());
+		
 		canvas.flush();
 		window.flip();
 		KeepAlive::process();
