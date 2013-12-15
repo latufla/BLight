@@ -38,7 +38,5 @@ protected:
 	ViewBase* view; // gets ownership
 
 	vector<BehaviorBase*> *behaviors; // gets ownership
-	
-	clan::Slot updateConnector;
 };
 

@@ -1,4 +1,5 @@
 #include "ObjectBase.h"
+#include "EventHeap.h"
 
 
 ObjectBase::ObjectBase(void)
@@ -23,10 +24,9 @@ void ObjectBase::init( int id, string name )
 }
 
 
-
 bool ObjectBase::fireUpdates()
 {
-	updateSignal.invoke(this);
+	EventHeap::fire(this);
 	return true;
 }
 
