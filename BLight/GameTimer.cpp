@@ -13,6 +13,8 @@ GameTimer::GameTimer(int ticksPerSecond = 60, int maxUpdatesPerSecond = 60)
 
 GameTimer::~GameTimer(void)
 {
+	timer->reset();
+	delete timer;
 }
 
 void GameTimer::init(int ticksPerSecond, int maxUpdatesPerSecond)
