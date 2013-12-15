@@ -1,6 +1,7 @@
 #include "ControllerBase.h"
 #include "BehaviorBase.h"
 #include "EventHeap.h"
+#include "EventHeap.cpp"
 
 ControllerBase::ControllerBase(void)
 {
@@ -22,7 +23,7 @@ ControllerBase::~ControllerBase(void)
 		delete (*it);
 	}
 
-	EventHeap::registerObject(object, view);
+	EventHeap<ObjectBase, ViewBase>::getInstance().unregisterObject(object);
 
 	delete behaviors;
 	delete object;
@@ -37,7 +38,7 @@ void ControllerBase::init( int id, string name)
 	behaviors = new vector<BehaviorBase*>();
 	view = new ViewBase();
 
-	EventHeap::registerObject(object, view);
+	EventHeap<ObjectBase, ViewBase>::getInstance().registerObject(object, view, &ViewBase::update);
 }
 
 bool ControllerBase::addBehavior( BehaviorBase* b)

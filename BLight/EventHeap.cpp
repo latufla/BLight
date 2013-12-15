@@ -1,34 +1,27 @@
 #include "EventHeap.h"
 
-SlotContainer EventHeap::slots;
-map<ObjectBase*, clan::Signal_v1<ObjectBase*>> EventHeap::signals;
-
-EventHeap::EventHeap(void)
-{
-}
-
-
-EventHeap::~EventHeap(void)
-{
-}
-
-void EventHeap::registerObject( ObjectBase* obj, ViewBase* view)
+template<class I, class L>
+void EventHeap<I, L>::registerObject( I* obj, L* view, void (L::*listen)(I*))
 {	
-	Signal_v1<ObjectBase*> signal;
-	slots.connect(signal, view, &ViewBase::update);
+	Signal_v1<I*> signal;
+	slots.connect(signal, view, listen);
 	signals[obj] = signal;
 }
 
-void EventHeap::fire(ObjectBase* obj)
+template<class I, class L>
+void EventHeap<I, L>::fire(I* obj)
 {
-	Signal_v1<ObjectBase*>* signal = &signals[obj];
+	Signal_v1<I*>* signal = &signals[obj];
 
 	if(signal != nullptr)
 		signal->invoke(obj);
 }
 
-void EventHeap::unregisterObject( ObjectBase* obj)
+template<class I, class L>
+void EventHeap<I, L>::unregisterObject( I* obj)
 {
 	signals.erase(obj);
 }
+
+
 
