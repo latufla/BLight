@@ -8,21 +8,13 @@
 #include "BehaviorBase.h"
 #include "ControllerBase.h"
 #include "StubBehavior.h"
+#include "GameTimer.h"
 
 using namespace clan; 
 
 void initialTests();
 
-void slot_function1(int p1, int p2)
-{
-	clan::Console::write_line("Slot 1: %1,%2", p1, p2);
-}
-void slot_function2(int p1, int p2)
-{
-	clan::Console::write_line("Slot 2: %1,%2", p1, p2);
-}
-
-int main(const std::vector<std::string> &args){ 
+int main(const vector<string> &args){ 
 
 	SetupCore setup_core;
 	SetupDisplay setup_display; 
@@ -49,13 +41,14 @@ int main(const std::vector<std::string> &args){
 	c2->addBehavior(b2);
 	c2->startBehaviors();
 
-	GameTime gameTime(60, 60);
+	int elapsedTime = 0;
+	GameTimer gameTimer(60, 60);
 	while (!keyboard.get_keycode(keycode_escape)) { 
 		canvas.clear(Colorf::white);
 	
-		gameTime.update();
-		c->doBehaviorsStep(gameTime.get_time_elapsed_ms());
-		c2->doBehaviorsStep(gameTime.get_time_elapsed_ms());
+		elapsedTime = gameTimer.update();		
+		c->doBehaviorsStep(elapsedTime);
+		c2->doBehaviorsStep(elapsedTime);
 
 		canvas.flush();
 		window.flip();
