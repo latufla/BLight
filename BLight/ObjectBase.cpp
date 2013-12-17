@@ -27,7 +27,7 @@ void ObjectBase::init( int id, string name )
 
 bool ObjectBase::fireUpdates()
 {
-	EventHeap<ObjectBase, ViewBase>::getInstance().fire(this);
+	EventHeap<ObjectBase, ViewBase>::getInstance().fire(this, CHANGE);
 	return true;
 }
 

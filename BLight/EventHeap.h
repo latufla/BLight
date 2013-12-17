@@ -5,12 +5,13 @@
 
 using namespace std;
 
+enum EventType{DEFAULT, CHANGE};
 
 template<class I,class L>
 class EventData
 {
 public:
-	int typeId;
+	EventType typeId;
 	I* invoker;
 	L* reciever;
 	void (L::*listener)(I*);
@@ -28,7 +29,7 @@ public:
 	}
 
 	void registerObject(I*, L*, void (L::*listen)(I*));
-	void fire(I*);
+	void fire(I*, EventType = DEFAULT);
 	void unregisterObject(I*);
 	
 	vector<EventData<I, L>> events;

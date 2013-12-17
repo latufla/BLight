@@ -4,7 +4,7 @@ template<class I, class L>
 void EventHeap<I, L>::registerObject( I* obj, L* view, void (L::*listener)(I*))
 {	
 	EventData<I, L> eData;
-	eData.typeId = 1;
+	eData.typeId = CHANGE;
 	eData.invoker = obj;
 	eData.reciever = view;
 	eData.listener = listener;
@@ -12,11 +12,12 @@ void EventHeap<I, L>::registerObject( I* obj, L* view, void (L::*listener)(I*))
 }
 
 template<class I, class L>
-void EventHeap<I, L>::fire(I* obj) // TODO: fire event with id
+void EventHeap<I, L>::fire(I* obj, EventType typeId)
 {
 	for (auto it = events.cbegin(); it != events.cend(); it++){
 		I* invoker = (*it).invoker;
-		if(*invoker == *obj){
+		int id = (*it).typeId;
+		if(*invoker == *obj && id == typeId){
 			void (L::*listener)(I*) = (*it).listener;
 			L* reciever = (*it).reciever;
 			if(reciever != nullptr && listener != nullptr)
