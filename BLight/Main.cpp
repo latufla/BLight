@@ -16,10 +16,18 @@ ObjectBase* obj1 = new ObjectBase(1, "obj1");
 StubBehavior* b1 = new StubBehavior(1, "move");
 ControllerBase* c = new ControllerBase(obj1);
 
+
+ObjectBase* obj2 = new ObjectBase(2, "obj2");
+StubBehavior* b2 = new StubBehavior(2, "sleep");
+ControllerBase* c2 = new ControllerBase(obj2);
+
 int main(const vector<string> &args){ 
 	c->addBehavior(b1);
 	c->startBehaviors();
 	
+	c2->addBehavior(b2);
+	c2->startBehaviors();
+
 	engineConnector.start(&mainLoop);
 
 	return 0; 
@@ -28,6 +36,7 @@ int main(const vector<string> &args){
 void mainLoop(int elapsedTime)
 {
 	c->doBehaviorsStep(elapsedTime);
+	c2->doBehaviorsStep(elapsedTime);
 }
 
 
