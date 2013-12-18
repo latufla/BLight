@@ -28,14 +28,11 @@ public:
 		return instance;
 	}
 
-	void registerObject(I*, L*, void (L::*listen)(I*));
-	void fire(I*, EventType = DEFAULT);
+	void registerObject(I*, L*, void (L::*listen)(I*), EventType = CHANGE);
+	void fire(I*, EventType = CHANGE);
 	void unregisterObject(I*);
 	
 	vector<EventData<I, L>> events;
-
-	map<I*, L*> recievers;
-	map<I*, void (L::*)(I*)> listeners;
 
 private:
 	EventHeap() {};               

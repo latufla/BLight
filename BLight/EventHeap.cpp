@@ -1,10 +1,10 @@
 #include "EventHeap.h"
 
 template<class I, class L>
-void EventHeap<I, L>::registerObject( I* obj, L* view, void (L::*listener)(I*))
+void EventHeap<I, L>::registerObject( I* obj, L* view, void (L::*listener)(I*), EventType typeId)
 {	
 	EventData<I, L> eData;
-	eData.typeId = CHANGE;
+	eData.typeId = typeId;
 	eData.invoker = obj;
 	eData.reciever = view;
 	eData.listener = listener;
@@ -29,16 +29,10 @@ void EventHeap<I, L>::fire(I* obj, EventType typeId)
 template<class I, class L>
 void EventHeap<I, L>::unregisterObject( I* obj)
 {
-	vector<vector<EventData<I, L>>::const_iterator> invokerEvents;
-	for (auto it = events.cbegin(); it != events.cend(); it++){
-		I* invoker = (*it).invoker;
-		if(*invoker == *obj)
-			invokerEvents.push_back(it);
-	}
-
-	for (auto it = invokerEvents.cbegin(); it != invokerEvents.cend(); it++){
-		events.erase(*it);
-	}
+	events.erase(remove_if(events.begin(), events.end(), [obj](const EventData<I,L>& eData) -> bool{
+		I* invoker = eData.invoker;
+		return *invoker == *obj;
+	}), events.end());
 }
 
 
