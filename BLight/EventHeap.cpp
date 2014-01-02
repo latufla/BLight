@@ -1,38 +1,38 @@
 #include "EventHeap.h"
 
-template<class I, class L>
-void EventHeap<I, L>::registerObject( I* obj, L* view, void (L::*listener)(I*), EventType typeId)
+template<class D, class R>
+void EventHeap<D, R>::addEventListener(D* dispatcher, R* reciever, void (R::*listener)(D*), EventType typeId)
 {	
-	EventData<I, L> eData;
+	EventData<D, R> eData;
 	eData.typeId = typeId;
-	eData.invoker = obj;
-	eData.reciever = view;
+	eData.dispatcher = dispatcher;
+	eData.reciever = reciever;
 	eData.listener = listener;
 	events.push_back(eData);
 }
 
-template<class I, class L>
-void EventHeap<I, L>::fire(I* obj, EventType typeId)
+template<class D, class R>
+void EventHeap<D, R>::removeEventListener(D* dispatcher)
 {
-	for (auto it = events.cbegin(); it != events.cend(); it++){
-		I* invoker = (*it).invoker;
-		int id = (*it).typeId;
-		if(*invoker == *obj && id == typeId){
-			void (L::*listener)(I*) = (*it).listener;
-			L* reciever = (*it).reciever;
-			if(reciever != nullptr && listener != nullptr)
-				(reciever->*listener)(obj);
-		}
-	}		
+	events.erase(remove_if(events.begin(), events.end(), [dispatcher](const EventData<D,R>& eData) -> bool{
+		D* dsp = eData.dispatcher;
+		return *dsp == *dispatcher;
+	}), events.end());
 }
 
-template<class I, class L>
-void EventHeap<I, L>::unregisterObject( I* obj)
+template<class D, class R>
+void EventHeap<D, R>::dispatch(D* dispatcher, EventType typeId)
 {
-	events.erase(remove_if(events.begin(), events.end(), [obj](const EventData<I,L>& eData) -> bool{
-		I* invoker = eData.invoker;
-		return *invoker == *obj;
-	}), events.end());
+	for (auto it = events.cbegin(); it != events.cend(); it++){
+		D* dsp = (*it).dispatcher;
+		int id = (*it).typeId;
+		if(*dsp == *dispatcher && id == typeId){
+			void (R::*listener)(D*) = (*it).listener;
+			R* reciever = (*it).reciever;
+			if(reciever != nullptr && listener != nullptr)
+				(reciever->*listener)(dispatcher);
+		}
+	}		
 }
 
 

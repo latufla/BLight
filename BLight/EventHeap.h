@@ -1,23 +1,22 @@
 #pragma once
-#include "ObjectBase.h"
-#include "ViewBase.h"
 #include <map>
+#include <vector>
 
 using namespace std;
 
 enum EventType{DEFAULT, CHANGE};
 
-template<class I,class L>
+template<class D,class R>
 class EventData
 {
 public:
 	EventType typeId;
-	I* invoker;
-	L* reciever;
-	void (L::*listener)(I*);
+	D* dispatcher;
+	R* reciever;
+	void (R::*listener)(D*);
 };
 
-template<class I, class L> // Invoker, Listener
+template<class D, class R> // Dispatcher, Receiver
 class EventHeap
 {
 public:
@@ -28,16 +27,17 @@ public:
 		return instance;
 	}
 
-	void registerObject(I*, L*, void (L::*listen)(I*), EventType = CHANGE);
-	void fire(I*, EventType = CHANGE);
-	void unregisterObject(I*);
-	
-	vector<EventData<I, L>> events;
+	void addEventListener(D*, R*, void (R::*listener)(D*), EventType = CHANGE);
+	void removeEventListener(D*);
+
+	void dispatch(D*, EventType = CHANGE);	
 
 private:
 	EventHeap() {};               
 	EventHeap(EventHeap const&);              
 	void operator=(EventHeap const&);
+
+	vector<EventData<D, R>> events;
 };
 
 

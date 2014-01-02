@@ -1,6 +1,7 @@
 #include "ObjectBase.h"
 #include "EventHeap.h"
 #include "EventHeap.cpp"
+#include "ViewBase.h"
 
 
 ObjectBase::ObjectBase(void)
@@ -27,7 +28,7 @@ void ObjectBase::init( int id, string name )
 
 bool ObjectBase::fireUpdates()
 {
-	EventHeap<ObjectBase, ViewBase>::getInstance().fire(this, CHANGE);
+	EventHeap<ObjectBase, ViewBase>::getInstance().dispatch(this, CHANGE);
 	return true;
 }
 
