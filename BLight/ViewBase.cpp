@@ -1,5 +1,5 @@
 #include "ViewBase.h"
-//#include "EngineConnector.h"
+#include "EngineConnector.h"
 
 ViewBase::ViewBase(void)
 {

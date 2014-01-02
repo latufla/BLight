@@ -10,8 +10,8 @@ public:
 
 	bool doStep(int);
 	
-	static string GetClassName() {return "StubBehavior";} // TODO: fix this dirt 
-	string getClassName(){return StubBehavior::GetClassName();}
+	static string GetFullClassName() {return "StubBehavior";} // TODO: fix this dirt 
+	string getClassName(){return StubBehavior::GetFullClassName();}
 
 };
 

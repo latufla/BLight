@@ -28,8 +28,8 @@ public:
 	virtual string getName();
 	virtual void setName(string);
 
-	static string GetClassName() {return "BehaviorBase";} // TODO: fix this dirt 
-	virtual string getClassName(){return BehaviorBase::GetClassName();}
+	static string GetFullClassName() {return "BehaviorBase";} // TODO: fix this dirt 
+	virtual string getClassName(){return BehaviorBase::GetFullClassName();}
 
 protected:
 	virtual void init(int, string);

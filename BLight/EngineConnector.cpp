@@ -1,63 +1,66 @@
 #include "EngineConnector.h"
-#include <ClanLib\core.h>
-#include <ClanLib/display.h>
-#include <ClanLib/gl.h>
-#include <ClanLib/application.h> 
 
-using namespace std;
-using namespace clan;
+const int EngineConnector::FPS = 60;
 
 EngineConnector::EngineConnector(void)
 {
-	init(nullptr); // TODO: bad decision
-}
-
-EngineConnector::EngineConnector(MainFunction* main)
-{
-	init(main);
+	init();
 }
 
 
 EngineConnector::~EngineConnector(void)
 {
-	
 }
 
-void EngineConnector::init(MainFunction* main)
+void EngineConnector::init()
 {
-	Application app(main);
+
 }
 
 void EngineConnector::start( void(*mainLoop)(int) )
 {
-	SetupCore setup_core;
-	SetupDisplay setup_display; 
-	SetupGL setup_gl;
+	RenderWindow window(sf::VideoMode(1024, 768), "");
+	window.setFramerateLimit(FPS);
 
-	ConsoleWindow console_window("Console");
-	
-	DisplayWindow window("", 1024, 768); 
+	Clock timer;
+	while (window.isOpen()){
 
-	Canvas canvas(window); 
-	InputDevice keyboard = window.get_ic().get_keyboard(); 	
-
-	int elapsedTime = 0;
-	GameTime gameTime(60, 60);
-	while (!keyboard.get_keycode(keycode_escape)) { 
-		canvas.clear(Colorf::white);
-
-		gameTime.update();
-		mainLoop(gameTime.get_time_elapsed_ms());
-
-		canvas.flush();
-		window.flip();
-		KeepAlive::process();
+		if(shouldStop(window))
+			window.close();
+		
+		window.clear(Color::White);
+		
+		Int32 step = shouldDoStep(timer);
+		//if(step)
+		mainLoop(step);
+			
+		window.display();
 	}
 }
 
 void EngineConnector::printDebug( string str)
 {
-	Console::write_line(str);
+	cout << str << endl;
 }
 
+bool EngineConnector::shouldStop( RenderWindow& window)
+{
+	Event event;
+	while (window.pollEvent(event)){
+		if (event.type == Event::Closed)
+			return true;
+	}
+	return false;
+}
 
+Int32 EngineConnector::shouldDoStep( Clock& timer)
+{
+// 	Int32 stepInterval = 1000 / FPS;
+// 	Int32 time = timer.getElapsedTime().asMilliseconds();
+// 	if(time > stepInterval){
+// 		timer.restart();
+// 		return time;
+// 	}
+// 	return 0;
+	return timer.getElapsedTime().asMilliseconds();
+}
