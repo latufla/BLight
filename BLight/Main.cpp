@@ -5,7 +5,6 @@
 #include "StubBehavior.h"
 #include "EngineConnector.h"
 
-EngineConnector engineConnector;
 void mainLoop(int);
 
 ObjectBase* obj1 = new ObjectBase(1, "obj1");
@@ -25,13 +24,14 @@ int _tmain(int argc, _TCHAR* argv[])
 	c2->addBehavior(b2);
 	c2->startBehaviors();
 
-	engineConnector.start(&mainLoop);
+	EngineConnector::start(&mainLoop);
 	
 	return 0; 
 }
 
 void mainLoop(int elapsedTime)
 {
+	EngineConnector::printDebug(to_string(long long(elapsedTime)));
 	c->doBehaviorsStep(elapsedTime);
 	c2->doBehaviorsStep(elapsedTime);
 }

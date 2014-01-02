@@ -2,21 +2,6 @@
 
 const int EngineConnector::FPS = 60;
 
-EngineConnector::EngineConnector(void)
-{
-	init();
-}
-
-
-EngineConnector::~EngineConnector(void)
-{
-}
-
-void EngineConnector::init()
-{
-
-}
-
 void EngineConnector::start( void(*mainLoop)(int) )
 {
 	RenderWindow window(sf::VideoMode(1024, 768), "");
