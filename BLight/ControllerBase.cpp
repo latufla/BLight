@@ -37,7 +37,7 @@ void ControllerBase::init( int id, string name)
 	behaviors = new vector<BehaviorBase*>();
 	view = new ViewBase();
 
-	EventHeap::getInstance().addEventListener(object, view, view->updateListener);
+	EventHeap::getInstance().addEventListener(object, view, view->getUpdateListener());
 }
 
 bool ControllerBase::addBehavior( BehaviorBase* b)
