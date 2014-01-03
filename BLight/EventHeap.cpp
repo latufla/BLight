@@ -1,7 +1,7 @@
 #include "EventHeap.h"
 
 template<class D, class R>
-void EventHeap<D, R>::addEventListener(D* dispatcher, R* receiver, std::function<void(void*, void*)> listener, EventType typeId)
+void EventHeap<D, R>::addEventListener(D* dispatcher, R* receiver, std::function<void(void*)> listener, EventType typeId)
 {	
 	EventData<D, R> eData;
 	eData.typeId = typeId;
@@ -30,7 +30,7 @@ void EventHeap<D, R>::dispatch(D* dispatcher, EventType typeId)
 			auto listener = (*it).listener;
 			R* receiver = (*it).receiver;
 			if(receiver != nullptr && listener != nullptr)
-				listener(dispatcher, receiver);
+				listener(dispatcher);
 		}
 	}		
 }

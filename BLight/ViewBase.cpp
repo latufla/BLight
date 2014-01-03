@@ -3,6 +3,10 @@
 
 ViewBase::ViewBase(void)
 {
+	ViewBase* self = this;
+	updateListener = [self](void* obj) { 
+		self->update((ObjectBase*)obj);
+	};
 }
 
 
@@ -14,3 +18,5 @@ void ViewBase::update(ObjectBase* obj)
 {
 	EngineConnector::printDebug("update view with: " + string(*obj));
 }
+
+

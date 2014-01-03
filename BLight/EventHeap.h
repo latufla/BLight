@@ -14,7 +14,7 @@ public:
 	EventType typeId;
 	D* dispatcher;
 	R* receiver;
-	std::function<void(void*, void*)> listener;
+	std::function<void(void*)> listener;
 };
 
 template<class D, class R> // Dispatcher, Receiver
@@ -28,7 +28,7 @@ public:
 		return instance;
 	}
 
-	void addEventListener(D*, R*, std::function<void(void*, void*)>, EventType = CHANGE);
+	void addEventListener(D*, R*, std::function<void(void*)>, EventType = CHANGE);
 	void removeEventListener(D*);
 
 	void dispatch(D*, EventType = CHANGE);	

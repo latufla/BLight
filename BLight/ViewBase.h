@@ -2,6 +2,7 @@
 
 #include "stdafx.h"
 #include "ObjectBase.h"
+#include <functional>
 
 class ViewBase
 {
@@ -10,5 +11,6 @@ public:
 	~ViewBase(void);
 
 	void update(ObjectBase*);
+	std::function<void(void*)> updateListener;
 };
 
