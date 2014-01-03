@@ -1,9 +1,8 @@
 #include "EventHeap.h"
 
-template<class D, class R>
-void EventHeap<D, R>::addEventListener(D* dispatcher, R* receiver, std::function<void(void*)> listener, EventType typeId)
+void EventHeap::addEventListener(ObjectBase* dispatcher, void* receiver, function<void(ObjectBase*)> listener, EventType typeId)
 {	
-	EventData<D, R> eData;
+	EventData eData;
 	eData.typeId = typeId;
 	eData.dispatcher = dispatcher;
 	eData.receiver = receiver;
@@ -11,25 +10,22 @@ void EventHeap<D, R>::addEventListener(D* dispatcher, R* receiver, std::function
 	events.push_back(eData);
 }
 
-template<class D, class R>
-void EventHeap<D, R>::removeEventListener(D* dispatcher)
+void EventHeap::removeEventListener(ObjectBase* dispatcher)
 {
-	events.erase(remove_if(events.begin(), events.end(), [dispatcher](const EventData<D,R>& eData) -> bool{
-		D* dsp = eData.dispatcher;
+	events.erase(remove_if(events.begin(), events.end(), [dispatcher](const EventData& eData) -> bool{
+		ObjectBase* dsp = eData.dispatcher;
 		return *dsp == *dispatcher;
 	}), events.end());
 }
 
-template<class D, class R>
-void EventHeap<D, R>::dispatch(D* dispatcher, EventType typeId)
+void EventHeap::dispatch(ObjectBase* dispatcher, EventType typeId)
 {
 	for (auto it = events.cbegin(); it != events.cend(); it++){
-		D* dsp = (*it).dispatcher;
+		ObjectBase* dsp = (*it).dispatcher;
 		int id = (*it).typeId;
 		if(*dsp == *dispatcher && id == typeId){
 			auto listener = (*it).listener;
-			R* receiver = (*it).receiver;
-			if(receiver != nullptr && listener != nullptr)
+			if(listener != nullptr)
 				listener(dispatcher);
 		}
 	}		

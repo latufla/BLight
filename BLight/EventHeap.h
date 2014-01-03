@@ -2,22 +2,21 @@
 #include <map>
 #include <vector>
 #include <functional>
+#include "ObjectBase.h"
 
 using namespace std;
 
 enum EventType{DEFAULT, CHANGE};
 
-template<class D,class R>
 class EventData
 {
 public:
 	EventType typeId;
-	D* dispatcher;
-	R* receiver;
-	std::function<void(void*)> listener;
+	ObjectBase* dispatcher;
+	void* receiver;
+	function<void(ObjectBase*)> listener;
 };
 
-template<class D, class R> // Dispatcher, Receiver
 class EventHeap
 {
 public:
@@ -28,17 +27,17 @@ public:
 		return instance;
 	}
 
-	void addEventListener(D*, R*, std::function<void(void*)>, EventType = CHANGE);
-	void removeEventListener(D*);
+	void addEventListener(ObjectBase*, void*, function<void(ObjectBase*)>, EventType = CHANGE);
+	void removeEventListener(ObjectBase*);
 
-	void dispatch(D*, EventType = CHANGE);	
+	void dispatch(ObjectBase*, EventType = CHANGE);	
 
 private:
 	EventHeap() {};               
 	EventHeap(EventHeap const&);              
 	void operator=(EventHeap const&);
 
-	vector<EventData<D, R>> events;
+	vector<EventData> events;
 };
 
 
