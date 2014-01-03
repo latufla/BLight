@@ -1,6 +1,6 @@
 #include "EngineConnector.h"
 
-const int EngineConnector::FPS = 1;
+const int EngineConnector::FPS = 12;
 
 void EngineConnector::start( void(*mainLoop)(int) )
 {
@@ -16,8 +16,8 @@ void EngineConnector::start( void(*mainLoop)(int) )
 		window.clear(Color::White);
 		
 		Int32 step = shouldDoStep(timer);
-		//if(step)
-		mainLoop(step);
+		if(step)
+			mainLoop(step);
 			
 		window.display();
 	}
@@ -47,5 +47,7 @@ Int32 EngineConnector::shouldDoStep( Clock& timer)
 // 		return time;
 // 	}
 // 	return 0;
-	return timer.getElapsedTime().asMilliseconds();
+	Int32 time = timer.getElapsedTime().asMilliseconds();
+	timer.restart();
+	return time;
 }
