@@ -12,5 +12,5 @@ ViewBase::~ViewBase(void)
 
 void ViewBase::update(ObjectBase* obj)
 {
-	//EngineConnector::printDebug("update view with: " + string(*obj));
+	EngineConnector::printDebug("update view with: " + string(*obj));
 }

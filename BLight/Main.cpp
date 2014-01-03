@@ -5,12 +5,12 @@
 #include "StubBehavior.h"
 #include "EngineConnector.h"
 
+
 void mainLoop(int);
 
 ObjectBase* obj1 = new ObjectBase(1, "obj1");
 StubBehavior* b1 = new StubBehavior(1, "move");
 ControllerBase* c = new ControllerBase(obj1);
-
 
 ObjectBase* obj2 = new ObjectBase(2, "obj2");
 StubBehavior* b2 = new StubBehavior(2, "sleep");
@@ -31,9 +31,9 @@ int _tmain(int argc, _TCHAR* argv[])
 
 void mainLoop(int elapsedTime)
 {
-	EngineConnector::printDebug(to_string(long long(elapsedTime)));
-	c->doBehaviorsStep(elapsedTime);
-	c2->doBehaviorsStep(elapsedTime);
+ 	EngineConnector::printDebug(to_string(long long(elapsedTime)));
+ 	c->doBehaviorsStep(elapsedTime);
+ 	c2->doBehaviorsStep(elapsedTime);
 }
 
 

@@ -1,6 +1,7 @@
 #pragma once
 #include <map>
 #include <vector>
+#include <functional>
 
 using namespace std;
 
@@ -12,8 +13,8 @@ class EventData
 public:
 	EventType typeId;
 	D* dispatcher;
-	R* reciever;
-	void (R::*listener)(D*);
+	R* receiver;
+	std::function<void(void*, void*)> listener;
 };
 
 template<class D, class R> // Dispatcher, Receiver
@@ -27,7 +28,7 @@ public:
 		return instance;
 	}
 
-	void addEventListener(D*, R*, void (R::*listener)(D*), EventType = CHANGE);
+	void addEventListener(D*, R*, std::function<void(void*, void*)>, EventType = CHANGE);
 	void removeEventListener(D*);
 
 	void dispatch(D*, EventType = CHANGE);	
