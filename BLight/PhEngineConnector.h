@@ -19,6 +19,7 @@ public:
 	void setBoxShape(ObjectBase*, float, float);
 	void setDensity(ObjectBase*, float);
 	void setFriction(ObjectBase*, float);
+	void setResitution(ObjectBase*, float);
 
 	void doStep(int);
 

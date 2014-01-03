@@ -30,6 +30,7 @@ public:
 	void setBoxShape(float, float);	
 	void setDensity(float);
 	void setFriction(float);
+	void setRestitution(float);
 	// end initial
 	// end Ph
 

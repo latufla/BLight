@@ -29,13 +29,16 @@ int _tmain(int argc, _TCHAR* argv[])
 
 	PhEngineConnector::getInstance().init(); // should be earlier all object bases
 
-// 	pair<float, float> pos(0.0f, -10.0f);
-// 	groundBox = &ObjectBase::create(1, "gBox", 0, pos);
-// 	groundBox->setBoxShape(50.0f, 10.0f);
+	pair<float, float> pos(0.0f, -10.0f);
+	groundBox = new ObjectBase(1, "gBox", 0, pos);
+	groundBox->setBoxShape(50.0f, 10.0f);
 
 	pair<float, float> pos2(0.0f, 4.0f);
-	groundBox = new ObjectBase(2, "dBox", 2, pos2);
-	groundBox->setBoxShape(1.0f, 1.0f);
+	dynamicBox = new ObjectBase(2, "dBox", 2, pos2);
+	dynamicBox->setBoxShape(1.0f, 1.0f);
+	dynamicBox->setDensity(1.0f);
+	dynamicBox->setFriction(0.3f);
+	dynamicBox->setRestitution(1.0f);
 
 	EngineConnector::start(&mainLoop);
 	

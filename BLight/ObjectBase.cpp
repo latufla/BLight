@@ -70,12 +70,17 @@ void ObjectBase::setBoxShape(float hWidth, float hHeight)
 	PhEngineConnector::getInstance().setBoxShape(this, hWidth, hHeight);
 }
 
-void ObjectBase::setDensity( float d)
+void ObjectBase::setDensity(float d)
 {
 	PhEngineConnector::getInstance().setDensity(this, d);
 }
 
-void ObjectBase::setFriction( float f)
+void ObjectBase::setFriction(float f)
 {
 	PhEngineConnector::getInstance().setFriction(this, f);
+}
+
+void ObjectBase::setRestitution(float r)
+{
+	PhEngineConnector::getInstance().setResitution(this, r);
 }

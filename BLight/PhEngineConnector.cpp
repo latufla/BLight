@@ -3,36 +3,7 @@
 void PhEngineConnector::init()
 {
 	b2Vec2 gravity(0.0f, -10.0f);
-
 	world = new b2World(gravity);
-
-	// ground box
-	/*b2BodyDef groundBodyDef;
-	groundBodyDef.position.Set(0.0f, -10.0f);
-
-	groundBody = world->CreateBody(&groundBodyDef);
-
-	b2PolygonShape groundBoxShape;
-	groundBoxShape.SetAsBox(50.0f, 10.0f);
-
-	groundBody->CreateFixture(&groundBoxShape, 0.0f);
-	// end ground box
-
-	// falling box
-	b2BodyDef bodyDef;
-	bodyDef.type = b2_dynamicBody; 
-	bodyDef.position.Set(0.0f, 4.0f);
-
-	body = world->CreateBody(&bodyDef);//--
-
-	b2PolygonShape dynamicBoxShape;
-	dynamicBoxShape.SetAsBox(1.0f, 1.0f);
-
-	b2FixtureDef fixtureDef;
-	fixtureDef.shape = &dynamicBoxShape;
-	fixtureDef.density = 1.0f;
-	fixtureDef.friction = 0.3f;
-	body->CreateFixture(&fixtureDef);*/
 }
 
 void PhEngineConnector::doStep(int stepInMSecs)
@@ -66,21 +37,25 @@ void PhEngineConnector::setBoxShape( ObjectBase* obj, float hWidth, float hHeigh
 	b2FixtureDef fixtureDef;
 	fixtureDef.shape = &shape;
 	
-	//-- deprecate
-	fixtureDef.density = 1.0f;
-	fixtureDef.friction = 0.3f;
-	//
-
 	b->CreateFixture(&fixtureDef);
 }
 
-void PhEngineConnector::setDensity( ObjectBase*, float )
+void PhEngineConnector::setDensity( ObjectBase* obj, float d)
 {
-
+	b2Fixture* fixture = objects[obj]->GetFixtureList();
+	fixture->SetDensity((float32)d); 
 }
 
-void PhEngineConnector::setFriction( ObjectBase*, float )
+void PhEngineConnector::setFriction( ObjectBase* obj, float f)
 {
-
+	b2Fixture* fixture = objects[obj]->GetFixtureList();
+	fixture->SetFriction((float32)f);
 }
+
+void PhEngineConnector::setResitution( ObjectBase* obj, float r)
+{
+	b2Fixture* fixture = objects[obj]->GetFixtureList();
+	fixture->SetRestitution((float32)r);
+}
+
 
