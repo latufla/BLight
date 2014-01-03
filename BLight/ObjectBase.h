@@ -1,9 +1,10 @@
 #pragma once
 #include "stdafx.h"
+#include "EventDispatcher.h"
 
 using namespace std;
 
-class ObjectBase
+class ObjectBase : public EventDispatcher
 {
 public:
 	ObjectBase(void);
@@ -25,7 +26,6 @@ public:
 protected:
 	void init(int, string);
 
-	int id;
 	string name;
 };
 

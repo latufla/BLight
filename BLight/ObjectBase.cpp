@@ -7,7 +7,7 @@ ObjectBase::ObjectBase(void)
 }
 
 ObjectBase::ObjectBase( int id, string name)
-{
+{	
 	init(id, name);
 }
 

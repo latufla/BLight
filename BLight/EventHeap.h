@@ -1,8 +1,9 @@
 #pragma once
-#include <map>
 #include <vector>
 #include <functional>
-#include "ObjectBase.h"
+#include <algorithm>
+
+#include "EventDispatcher.h"
 
 using namespace std;
 
@@ -12,9 +13,9 @@ class EventData
 {
 public:
 	EventType typeId;
-	ObjectBase* dispatcher;
+	EventDispatcher* dispatcher;
 	void* receiver;
-	function<void(ObjectBase*)> listener;
+	function<void(EventDispatcher*)> listener;
 };
 
 class EventHeap
@@ -27,10 +28,10 @@ public:
 		return instance;
 	}
 
-	void addEventListener(ObjectBase*, void*, function<void(ObjectBase*)>, EventType = CHANGE);
-	void removeEventListener(ObjectBase*);
+	void addEventListener(EventDispatcher*, void*, function<void(EventDispatcher*)>, EventType = CHANGE);
+	void removeEventListener(EventDispatcher*);
 
-	void dispatch(ObjectBase*, EventType = CHANGE);	
+	void dispatch(EventDispatcher*, EventType = CHANGE);	
 
 private:
 	EventHeap() {};               

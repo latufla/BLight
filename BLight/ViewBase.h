@@ -11,6 +11,6 @@ public:
 	~ViewBase(void);
 
 	void update(ObjectBase*);
-	std::function<void(void*)> updateListener;
+	std::function<void(EventDispatcher*)> updateListener;
 };
 

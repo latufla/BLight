@@ -1,6 +1,6 @@
 #include "EventHeap.h"
 
-void EventHeap::addEventListener(ObjectBase* dispatcher, void* receiver, function<void(ObjectBase*)> listener, EventType typeId)
+void EventHeap::addEventListener(EventDispatcher* dispatcher, void* receiver, function<void(EventDispatcher*)> listener, EventType typeId)
 {	
 	EventData eData;
 	eData.typeId = typeId;
@@ -10,18 +10,18 @@ void EventHeap::addEventListener(ObjectBase* dispatcher, void* receiver, functio
 	events.push_back(eData);
 }
 
-void EventHeap::removeEventListener(ObjectBase* dispatcher)
+void EventHeap::removeEventListener(EventDispatcher* dispatcher)
 {
 	events.erase(remove_if(events.begin(), events.end(), [dispatcher](const EventData& eData) -> bool{
-		ObjectBase* dsp = eData.dispatcher;
+		EventDispatcher* dsp = eData.dispatcher;
 		return *dsp == *dispatcher;
 	}), events.end());
 }
 
-void EventHeap::dispatch(ObjectBase* dispatcher, EventType typeId)
+void EventHeap::dispatch(EventDispatcher* dispatcher, EventType typeId)
 {
 	for (auto it = events.cbegin(); it != events.cend(); it++){
-		ObjectBase* dsp = (*it).dispatcher;
+		EventDispatcher* dsp = (*it).dispatcher;
 		int id = (*it).typeId;
 		if(*dsp == *dispatcher && id == typeId){
 			auto listener = (*it).listener;

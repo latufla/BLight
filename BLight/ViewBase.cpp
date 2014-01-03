@@ -4,7 +4,7 @@
 ViewBase::ViewBase(void)
 {
 	ViewBase* self = this;
-	updateListener = [self](void* obj) { 
+	updateListener = [self](EventDispatcher* obj) { 
 		self->update((ObjectBase*)obj);
 	};
 }
