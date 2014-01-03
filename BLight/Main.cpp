@@ -8,24 +8,34 @@
 
 void mainLoop(int);
 
-ObjectBase* obj1 = new ObjectBase(1, "obj1");
-StubBehavior* b1 = new StubBehavior(1, "move");
-ControllerBase* c = new ControllerBase(obj1);
+// ObjectBase* obj1 = new ObjectBase(1, "obj1");
+// StubBehavior* b1 = new StubBehavior(1, "move");
+// ControllerBase* c = new ControllerBase(obj1);
+// 
+// ObjectBase* obj2 = new ObjectBase(2, "obj2");
+// StubBehavior* b2 = new StubBehavior(2, "sleep");
+// ControllerBase* c2 = new ControllerBase(obj2);
 
-ObjectBase* obj2 = new ObjectBase(2, "obj2");
-StubBehavior* b2 = new StubBehavior(2, "sleep");
-ControllerBase* c2 = new ControllerBase(obj2);
+ObjectBase* groundBox;
+ObjectBase* dynamicBox;
 
-PhEngineConnector phEC;
 int _tmain(int argc, _TCHAR* argv[])
 { 
-	c->addBehavior(b1);
-	c->startBehaviors();
-	
-	c2->addBehavior(b2);
-	c2->startBehaviors();
+// 	c->addBehavior(b1);
+// 	c->startBehaviors();
+// 	
+// 	c2->addBehavior(b2);
+// 	c2->startBehaviors();
 
-	phEC.init();
+	PhEngineConnector::getInstance().init(); // should be earlier all object bases
+
+// 	pair<float, float> pos(0.0f, -10.0f);
+// 	groundBox = &ObjectBase::create(1, "gBox", 0, pos);
+// 	groundBox->setBoxShape(50.0f, 10.0f);
+
+	pair<float, float> pos2(0.0f, 4.0f);
+	groundBox = new ObjectBase(2, "dBox", 2, pos2);
+	groundBox->setBoxShape(1.0f, 1.0f);
 
 	EngineConnector::start(&mainLoop);
 	
@@ -37,11 +47,11 @@ void mainLoop(int elapsedTime)
  	EngineConnector::printDebug(to_string(long long(elapsedTime)));
  	
 	// behaviors
-	c->doBehaviorsStep(elapsedTime);
- 	c2->doBehaviorsStep(elapsedTime);
+// 	c->doBehaviorsStep(elapsedTime);
+// 	c2->doBehaviorsStep(elapsedTime);
 
 	// phys
-	phEC.doStep(elapsedTime);
+	PhEngineConnector::getInstance().doStep(elapsedTime);
 
 	// draw stuff
 }

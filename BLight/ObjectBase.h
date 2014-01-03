@@ -1,6 +1,8 @@
 #pragma once
 #include "stdafx.h"
 #include "EventDispatcher.h"
+#include <utility>
+#include <map>
 
 using namespace std;
 
@@ -8,7 +10,7 @@ class ObjectBase : public EventDispatcher
 {
 public:
 	ObjectBase(void);
-	ObjectBase(int, string);
+	ObjectBase(int, string, int, pair<float, float>);
 
 	~ObjectBase(void);
 
@@ -23,9 +25,18 @@ public:
 
 	bool fireUpdates();
 
+	// Ph
+	// initial
+	void setBoxShape(float, float);	
+	void setDensity(float);
+	void setFriction(float);
+	// end initial
+	// end Ph
+
 protected:
 	void init(int, string);
 
 	string name;
+
 };
 

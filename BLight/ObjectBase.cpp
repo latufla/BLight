@@ -1,14 +1,16 @@
 #include "ObjectBase.h"
 #include "EventHeap.h"
+#include "PhEngineConnector.h"
 
 ObjectBase::ObjectBase(void)
 {
 	init(0, "dummy");
 }
 
-ObjectBase::ObjectBase( int id, string name) : EventDispatcher(id)
+ObjectBase::ObjectBase( int id, string name, int oType, pair<float, float> pos ) : EventDispatcher(id)
 {	
 	init(id, name);
+	PhEngineConnector::getInstance().createBody(this, oType, pos);
 }
 
 ObjectBase::~ObjectBase(void)
@@ -63,4 +65,17 @@ void ObjectBase::setName( string val )
 }
 
 
+void ObjectBase::setBoxShape(float hWidth, float hHeight)
+{
+	PhEngineConnector::getInstance().setBoxShape(this, hWidth, hHeight);
+}
 
+void ObjectBase::setDensity( float d)
+{
+	PhEngineConnector::getInstance().setDensity(this, d);
+}
+
+void ObjectBase::setFriction( float f)
+{
+	PhEngineConnector::getInstance().setFriction(this, f);
+}
