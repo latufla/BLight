@@ -5,6 +5,11 @@ EventDispatcher::EventDispatcher(void)
 {
 }
 
+EventDispatcher::EventDispatcher( int id )
+{
+	this->id = id;
+}
+
 
 EventDispatcher::~EventDispatcher(void)
 {

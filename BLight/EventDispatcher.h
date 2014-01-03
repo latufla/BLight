@@ -3,7 +3,7 @@ class EventDispatcher
 {
 public:
 	EventDispatcher(void);
-	EventDispatcher(int id);
+	EventDispatcher(int);
 	~EventDispatcher(void);
 	
 	bool operator == (EventDispatcher); // not virtual, only for dispatchers cmp
