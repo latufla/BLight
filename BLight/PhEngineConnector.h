@@ -2,6 +2,7 @@
 #include <Box2D/Box2D.h>
 #include "ObjectBase.h"
 #include <map>
+#include "Field.h"
 
 using namespace std;
 
@@ -14,7 +15,7 @@ public:
 		return instance;
 	}
 
-	void init();
+	void init(Field*);
 	void createBody(ObjectBase*, int oType, pair<float, float> pos);
 	void setBoxShape(ObjectBase*, float, float);
 	void setDensity(ObjectBase*, float);
@@ -23,17 +24,12 @@ public:
 
 	void doStep(int);
 
-protected:
-	b2World* world;
-
-	b2Body* groundBody;
-	b2Body* body;
-
 private:
 	PhEngineConnector() {};               
 	PhEngineConnector(PhEngineConnector const&);              
 	void operator=(PhEngineConnector const&);
 
-	map<ObjectBase*, b2Body*> objects;
+	b2World* world;
+	map<ObjectBase*, b2Body*> objectConnectors;
 };
 

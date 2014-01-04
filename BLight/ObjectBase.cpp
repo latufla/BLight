@@ -7,10 +7,9 @@ ObjectBase::ObjectBase(void)
 	init(0, "dummy");
 }
 
-ObjectBase::ObjectBase( int id, string name, int oType, pair<float, float> pos ) : EventDispatcher(id)
+ObjectBase::ObjectBase(int id, string name) : EventDispatcher(id)
 {	
 	init(id, name);
-	PhEngineConnector::getInstance().createBody(this, oType, pos);
 }
 
 ObjectBase::~ObjectBase(void)

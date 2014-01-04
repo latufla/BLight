@@ -18,6 +18,7 @@ void mainLoop(int);
 
 ObjectBase* groundBox;
 ObjectBase* dynamicBox;
+Field* field;
 
 int _tmain(int argc, _TCHAR* argv[])
 { 
@@ -27,14 +28,15 @@ int _tmain(int argc, _TCHAR* argv[])
 // 	c2->addBehavior(b2);
 // 	c2->startBehaviors();
 
-	PhEngineConnector::getInstance().init(); // should be earlier all object bases
+	field = new Field();
+	PhEngineConnector::getInstance().init(field); // should be earlier all object bases
 
 	pair<float, float> pos(0.0f, -10.0f);
-	groundBox = new ObjectBase(1, "gBox", 0, pos);
+	groundBox = field->createObject(1, "gBox", 0, pos);
 	groundBox->setBoxShape(50.0f, 10.0f);
 
 	pair<float, float> pos2(0.0f, 4.0f);
-	dynamicBox = new ObjectBase(2, "dBox", 2, pos2);
+	dynamicBox = field->createObject(2, "dBox", 2, pos2);
 	dynamicBox->setBoxShape(1.0f, 1.0f);
 	dynamicBox->setDensity(1.0f);
 	dynamicBox->setFriction(0.3f);

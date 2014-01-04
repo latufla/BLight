@@ -10,7 +10,7 @@ class ObjectBase : public EventDispatcher
 {
 public:
 	ObjectBase(void);
-	ObjectBase(int, string, int, pair<float, float>);
+	ObjectBase(int, string);
 
 	~ObjectBase(void);
 

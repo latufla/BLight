@@ -1,6 +1,6 @@
 #include "PhEngineConnector.h"
 
-void PhEngineConnector::init()
+void PhEngineConnector::init(Field* f)
 {
 	b2Vec2 gravity(0.0f, -10.0f);
 	world = new b2World(gravity);
@@ -11,6 +11,7 @@ void PhEngineConnector::doStep(int stepInMSecs)
 	int32 velocityIterations = 6;
 	int32 positionIterations = 2;
 	float32 step = stepInMSecs / 1000.0f;
+	
 	world->Step(step, velocityIterations, positionIterations);
 
 	b2Body* b = world->GetBodyList();
@@ -24,12 +25,12 @@ void PhEngineConnector::createBody(ObjectBase* obj, int oType, pair<float, float
 	b2BodyDef bodyDef;
 	bodyDef.type = (b2BodyType)oType; 
 	bodyDef.position.Set((float32)pos.first, (float32)pos.second);
-	objects[obj] = world->CreateBody(&bodyDef);
+	objectConnectors[obj] = world->CreateBody(&bodyDef);
 }
 
 void PhEngineConnector::setBoxShape( ObjectBase* obj, float hWidth, float hHeight)
 {
-	b2Body* b = objects[obj];
+	b2Body* b = objectConnectors[obj];
 	
 	b2PolygonShape shape;
 	shape.SetAsBox(hWidth, hHeight);
@@ -42,19 +43,19 @@ void PhEngineConnector::setBoxShape( ObjectBase* obj, float hWidth, float hHeigh
 
 void PhEngineConnector::setDensity( ObjectBase* obj, float d)
 {
-	b2Fixture* fixture = objects[obj]->GetFixtureList();
+	b2Fixture* fixture = objectConnectors[obj]->GetFixtureList();
 	fixture->SetDensity((float32)d); 
 }
 
 void PhEngineConnector::setFriction( ObjectBase* obj, float f)
 {
-	b2Fixture* fixture = objects[obj]->GetFixtureList();
+	b2Fixture* fixture = objectConnectors[obj]->GetFixtureList();
 	fixture->SetFriction((float32)f);
 }
 
 void PhEngineConnector::setResitution( ObjectBase* obj, float r)
 {
-	b2Fixture* fixture = objects[obj]->GetFixtureList();
+	b2Fixture* fixture = objectConnectors[obj]->GetFixtureList();
 	fixture->SetRestitution((float32)r);
 }
 
