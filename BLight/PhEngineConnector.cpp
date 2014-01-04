@@ -6,13 +6,14 @@ void PhEngineConnector::init(Field* f)
 	world = new b2World(gravity);
 }
 
+// TODO: if it`s network multi player
+// make several 1 / 60 steps 
+// stepInMSecs / (1000 / 60) times
 void PhEngineConnector::doStep(int stepInMSecs)
 {
-	// TODO: make several 1 / 60 steps 
-	// stepInMSecs / (1000 / 60) times
 	int32 velocityIterations = 6;
 	int32 positionIterations = 2;
-	float32 step = stepInMSecs / 1000.0f;	
+	float32 step = 1.0f / 60.0f; // single player or split screen	
 	world->Step(step, velocityIterations, positionIterations); 
 }
 
