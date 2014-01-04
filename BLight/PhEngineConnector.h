@@ -16,11 +16,15 @@ public:
 	}
 
 	void init(Field*);
+	
 	void createBody(ObjectBase*, int oType, pair<float, float> pos);
 	void setBoxShape(ObjectBase*, float, float);
 	void setDensity(ObjectBase*, float);
 	void setFriction(ObjectBase*, float);
 	void setResitution(ObjectBase*, float);
+
+	pair<float, float> getPosition(ObjectBase*);
+	float getRotation(ObjectBase*);
 
 	void doStep(int);
 

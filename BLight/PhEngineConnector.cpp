@@ -8,16 +8,12 @@ void PhEngineConnector::init(Field* f)
 
 void PhEngineConnector::doStep(int stepInMSecs)
 {
+	// TODO: make several 1 / 60 steps 
+	// stepInMSecs / (1000 / 60) times
 	int32 velocityIterations = 6;
 	int32 positionIterations = 2;
-	float32 step = stepInMSecs / 1000.0f;
-	
-	world->Step(step, velocityIterations, positionIterations);
-
-	b2Body* b = world->GetBodyList();
-	b2Vec2 position = b->GetPosition();
-	float32 angle = b->GetAngle();
-	printf("%4.2f %4.2f %4.2f\n", position.x, position.y, angle);
+	float32 step = stepInMSecs / 1000.0f;	
+	world->Step(step, velocityIterations, positionIterations); 
 }
 
 void PhEngineConnector::createBody(ObjectBase* obj, int oType, pair<float, float> pos)
@@ -59,4 +55,16 @@ void PhEngineConnector::setResitution( ObjectBase* obj, float r)
 	fixture->SetRestitution((float32)r);
 }
 
+pair<float, float> PhEngineConnector::getPosition(ObjectBase* obj)
+{
+	b2Body* body = objectConnectors[obj];
+	b2Vec2 pos = body->GetPosition();
+	pair<float, float> res((float)pos.x, (float)pos.y);
+	return res;
+}
 
+float PhEngineConnector::getRotation(ObjectBase* obj)
+{
+	b2Body* body = objectConnectors[obj];
+	return (float)body->GetAngle();
+}

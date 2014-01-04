@@ -58,5 +58,9 @@ void mainLoop(int elapsedTime)
 	// phys
 	PhEngineConnector::getInstance().doStep(elapsedTime);
 
+	pair<float, float> position = dynamicBox->getPosition();
+	float angle = dynamicBox->getRotation();
+	printf("%4.2f %4.2f %4.2f\n", position.first, position.second, angle);
+
 	// draw stuff
 }

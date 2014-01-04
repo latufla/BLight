@@ -32,6 +32,9 @@ public:
 	void setFriction(float);
 	void setRestitution(float);
 	// end initial
+
+	pair<float, float> getPosition();
+	float getRotation();
 	// end Ph
 
 protected:

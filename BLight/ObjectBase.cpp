@@ -83,3 +83,13 @@ void ObjectBase::setRestitution(float r)
 {
 	PhEngineConnector::getInstance().setResitution(this, r);
 }
+
+pair<float, float> ObjectBase::getPosition()
+{
+	return PhEngineConnector::getInstance().getPosition(this);
+}
+
+float ObjectBase::getRotation()
+{
+	return PhEngineConnector::getInstance().getRotation(this);
+}
