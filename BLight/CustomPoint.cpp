@@ -11,11 +11,6 @@ CustomPoint::CustomPoint( float x, float y)
 	this->y = y;
 }
 
-
-CustomPoint::~CustomPoint(void)
-{
-}
-
 CustomPoint::operator string()
 {	
 	char strX[6];

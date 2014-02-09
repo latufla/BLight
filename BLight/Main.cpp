@@ -31,22 +31,22 @@ int _tmain(int argc, _TCHAR* argv[])
 	field = new Field();
 	PhEngineConnector::getInstance().init(field); // should be earlier all object bases
 
-	pair<float, float> pos(0.0f, -10.0f);
+	pair<float, float> pos(0.0f, 2.0f);
 	groundBox = field->createObject(1, "gBox", 0, pos);
-	groundBox->setBoxShape(50.0f, 10.0f);
+	groundBox->setBoxShape(5.0f, 1.0f);
 
-	pair<float, float> pos2(0.0f, 4.0f);
+	pair<float, float> pos2(1.0f, 10.0f);
 	dynamicBox = field->createObject(2, "dBox", 2, pos2);
 	dynamicBox->setBoxShape(1.0f, 1.0f);
 	dynamicBox->setDensity(1.0f);
 	dynamicBox->setFriction(0.3f);
-	dynamicBox->setRestitution(1.0f);
+	dynamicBox->setRestitution(.5f);
 
-	auto vxs = dynamicBox->getVertexes();
-	printf("vertexes:\n");
-	for (auto it = vxs.cbegin(); it != vxs.cend(); it++){
-		EngineConnector::printDebug((CustomPoint)*it);
-	}
+// 	auto vxs = dynamicBox->getVertexes();
+// 	printf("vertexes:\n");
+// 	for (auto it = vxs.cbegin(); it != vxs.cend(); it++){
+// 		EngineConnector::printDebug((CustomPoint)*it);
+// 	}
 
 	EngineConnector::start(&mainLoop);
 	
@@ -66,13 +66,11 @@ void mainLoop(int elapsedTime)
 
 	CustomPoint position = dynamicBox->getPosition();
 	float angle = dynamicBox->getRotation();
- 	printf("position: %4.2f %4.2f %4.2f\n", position.x, position.y, angle);
-
-	auto vxs = dynamicBox->getVertexes();
-	printf("vertexes:\n");
-	for (auto it = vxs.cbegin(); it != vxs.cend(); it++){
-		EngineConnector::printDebug((CustomPoint)*it);
-	}
-
+ 	
+	//printf("position: %4.2f %4.2f %4.2f\n", position.x, position.y, angle);
+	//EngineConnector::printDebug((CustomPoint)*it);
+	
 	// draw stuff
+	EngineConnector::drawObject(groundBox);
+	EngineConnector::drawObject(dynamicBox);
 }

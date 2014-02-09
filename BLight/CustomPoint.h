@@ -6,7 +6,6 @@ class CustomPoint
 public:
 	CustomPoint(void);
 	CustomPoint(float, float);
-	~CustomPoint(void);
 
 	operator string();
 
