@@ -18,6 +18,9 @@ void mainLoop(int);
 
 ObjectBase* groundBox;
 ObjectBase* dynamicBox;
+ControllerBase* groundBoxC;
+ControllerBase* dynamicBoxC;
+
 Field* field;
 
 int _tmain(int argc, _TCHAR* argv[])
@@ -34,6 +37,7 @@ int _tmain(int argc, _TCHAR* argv[])
 	pair<float, float> pos(0.0f, 2.0f);
 	groundBox = field->createObject(1, "gBox", 0, pos);
 	groundBox->setBoxShape(5.0f, 1.0f);
+	groundBoxC = new ControllerBase(groundBox);
 
 	pair<float, float> pos2(1.0f, 10.0f);
 	dynamicBox = field->createObject(2, "dBox", 2, pos2);
@@ -41,12 +45,7 @@ int _tmain(int argc, _TCHAR* argv[])
 	dynamicBox->setDensity(1.0f);
 	dynamicBox->setFriction(0.3f);
 	dynamicBox->setRestitution(.5f);
-
-// 	auto vxs = dynamicBox->getVertexes();
-// 	printf("vertexes:\n");
-// 	for (auto it = vxs.cbegin(); it != vxs.cend(); it++){
-// 		EngineConnector::printDebug((CustomPoint)*it);
-// 	}
+	dynamicBoxC = new ControllerBase(dynamicBox);
 
 	EngineConnector::start(&mainLoop);
 	
@@ -55,11 +54,11 @@ int _tmain(int argc, _TCHAR* argv[])
 
 void mainLoop(int elapsedTime)
 {
-//  	EngineConnector::printDebug(to_string(long long(elapsedTime)));
+  	// EngineConnector::printDebug(to_string(long long(elapsedTime)));
 
 	// behaviors
-// 	c->doBehaviorsStep(elapsedTime);
-// 	c2->doBehaviorsStep(elapsedTime);
+ 	// c->doBehaviorsStep(elapsedTime);
+ 	// c2->doBehaviorsStep(elapsedTime);
 
 	// phys
 	PhEngineConnector::getInstance().doStep(elapsedTime);
@@ -67,10 +66,7 @@ void mainLoop(int elapsedTime)
 	CustomPoint position = dynamicBox->getPosition();
 	float angle = dynamicBox->getRotation();
  	
-	//printf("position: %4.2f %4.2f %4.2f\n", position.x, position.y, angle);
-	//EngineConnector::printDebug((CustomPoint)*it);
-	
 	// draw stuff
-	EngineConnector::drawObject(groundBox);
-	EngineConnector::drawObject(dynamicBox);
+	groundBoxC->draw();
+	dynamicBoxC->draw();
 }

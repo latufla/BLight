@@ -19,6 +19,8 @@ public:
 	bool stopBehaviors();
 	bool doBehaviorsStep(int);
 
+	void draw();
+
 	operator string();
 
 	int getId();

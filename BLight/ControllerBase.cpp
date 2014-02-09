@@ -93,6 +93,12 @@ bool ControllerBase::doBehaviorsStep( int stepInMSec )
 }
 
 
+void ControllerBase::draw()
+{
+	view->draw(object);
+}
+
+
 ControllerBase::operator string()
 {
 	string res = string(typeid(*this).name()) 
