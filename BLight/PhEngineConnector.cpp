@@ -7,8 +7,7 @@ void PhEngineConnector::init(Field* f)
 }
 
 // TODO: if it`s network multi player
-// make several 1 / 60 steps 
-// stepInMSecs / (1000 / 60) times
+// make several 1 / 60 steps stepInMSecs / (1000 / 60) times
 void PhEngineConnector::doStep(int stepInMSecs)
 {
 	int32 velocityIterations = 6;
@@ -56,11 +55,11 @@ void PhEngineConnector::setResitution( ObjectBase* obj, float r)
 	fixture->SetRestitution((float32)r);
 }
 
-pair<float, float> PhEngineConnector::getPosition(ObjectBase* obj)
+CustomPoint PhEngineConnector::getPosition(ObjectBase* obj)
 {
 	b2Body* body = objectConnectors[obj];
 	b2Vec2 pos = body->GetPosition();
-	pair<float, float> res((float)pos.x, (float)pos.y);
+	CustomPoint res((float)pos.x, (float)pos.y);
 	return res;
 }
 
@@ -68,4 +67,20 @@ float PhEngineConnector::getRotation(ObjectBase* obj)
 {
 	b2Body* body = objectConnectors[obj];
 	return (float)body->GetAngle();
+}
+
+vector<CustomPoint> PhEngineConnector::getVertexes(ObjectBase* obj)
+{
+	CustomPoint pos = obj->getPosition();
+	b2Fixture* fixture = objectConnectors[obj]->GetFixtureList();
+	b2PolygonShape* shape = (b2PolygonShape*)(fixture->GetShape());	
+	vector<CustomPoint> res;
+	b2Vec2 bVx; 
+	char n = shape->GetVertexCount();
+	for (char i = 0; i < n; i++){
+		bVx = shape->GetVertex(i);
+		CustomPoint vertex((float)bVx.x + pos.x, (float)bVx.y + pos.y);
+		res.push_back(vertex);
+	}
+	return res;
 }

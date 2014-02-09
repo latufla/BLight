@@ -14,7 +14,6 @@ ObjectBase::ObjectBase(int id, string name) : EventDispatcher(id)
 
 ObjectBase::~ObjectBase(void)
 {
-
 }
 
 void ObjectBase::init( int id, string name )
@@ -84,7 +83,7 @@ void ObjectBase::setRestitution(float r)
 	PhEngineConnector::getInstance().setResitution(this, r);
 }
 
-pair<float, float> ObjectBase::getPosition()
+CustomPoint ObjectBase::getPosition()
 {
 	return PhEngineConnector::getInstance().getPosition(this);
 }
@@ -92,4 +91,9 @@ pair<float, float> ObjectBase::getPosition()
 float ObjectBase::getRotation()
 {
 	return PhEngineConnector::getInstance().getRotation(this);
+}
+
+vector<CustomPoint> ObjectBase::getVertexes()
+{
+	return PhEngineConnector::getInstance().getVertexes(this); 
 }

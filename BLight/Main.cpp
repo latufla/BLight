@@ -42,6 +42,12 @@ int _tmain(int argc, _TCHAR* argv[])
 	dynamicBox->setFriction(0.3f);
 	dynamicBox->setRestitution(1.0f);
 
+	auto vxs = dynamicBox->getVertexes();
+	printf("vertexes:\n");
+	for (auto it = vxs.cbegin(); it != vxs.cend(); it++){
+		EngineConnector::printDebug((CustomPoint)*it);
+	}
+
 	EngineConnector::start(&mainLoop);
 	
 	return 0; 
@@ -49,8 +55,8 @@ int _tmain(int argc, _TCHAR* argv[])
 
 void mainLoop(int elapsedTime)
 {
- 	EngineConnector::printDebug(to_string(long long(elapsedTime)));
- 	
+//  	EngineConnector::printDebug(to_string(long long(elapsedTime)));
+
 	// behaviors
 // 	c->doBehaviorsStep(elapsedTime);
 // 	c2->doBehaviorsStep(elapsedTime);
@@ -58,9 +64,15 @@ void mainLoop(int elapsedTime)
 	// phys
 	PhEngineConnector::getInstance().doStep(elapsedTime);
 
-	pair<float, float> position = dynamicBox->getPosition();
+	CustomPoint position = dynamicBox->getPosition();
 	float angle = dynamicBox->getRotation();
-	printf("%4.2f %4.2f %4.2f\n", position.first, position.second, angle);
+ 	printf("position: %4.2f %4.2f %4.2f\n", position.x, position.y, angle);
+
+	auto vxs = dynamicBox->getVertexes();
+	printf("vertexes:\n");
+	for (auto it = vxs.cbegin(); it != vxs.cend(); it++){
+		EngineConnector::printDebug((CustomPoint)*it);
+	}
 
 	// draw stuff
 }

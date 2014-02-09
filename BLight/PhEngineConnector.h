@@ -23,8 +23,10 @@ public:
 	void setFriction(ObjectBase*, float);
 	void setResitution(ObjectBase*, float);
 
-	pair<float, float> getPosition(ObjectBase*);
+	CustomPoint getPosition(ObjectBase*);
 	float getRotation(ObjectBase*);
+
+	vector<CustomPoint> getVertexes(ObjectBase*);
 
 	void doStep(int);
 

@@ -1,6 +1,6 @@
 #include "EngineConnector.h"
 
-const int EngineConnector::FPS = 12;
+const int EngineConnector::FPS = 1;
 
 void EngineConnector::start( void(*mainLoop)(int) )
 {

@@ -3,6 +3,7 @@
 #include "EventDispatcher.h"
 #include <utility>
 #include <map>
+#include "CustomPoint.h"
 
 using namespace std;
 
@@ -33,14 +34,15 @@ public:
 	void setRestitution(float);
 	// end initial
 
-	pair<float, float> getPosition();
+	CustomPoint getPosition();
 	float getRotation();
-	// end Ph
 
+	vector<CustomPoint> getVertexes();
+	// end Ph
+	
 protected:
 	void init(int, string);
 
 	string name;
-
 };
 
