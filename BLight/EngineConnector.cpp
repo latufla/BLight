@@ -23,7 +23,7 @@ void EngineConnector::start( void(*mainLoop)(int) )
 		if(shouldStop(window))
 			window->close();
 		
-		window->clear(Color::Black);
+		window->clear(Color::White);
 		
 		Int32 step = shouldDoStep(timer);
 		if(step)
@@ -68,12 +68,12 @@ void EngineConnector::drawLine( CustomPoint b, CustomPoint e)
 	applyAxises(&e);
 
 	static Vertex line[] =	{
-		Vertex(),
-		Vertex()
+		Vertex(Vector2f(), Color::Magenta),
+		Vertex(Vector2f(), Color::Magenta)
 	};
 
 	line[0].position.x = b.x; 
-	line[0].position.y = b.y; 
+	line[0].position.y = b.y;
 
 	line[1].position.x = e.x; 
 	line[1].position.y = e.y; 
