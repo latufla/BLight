@@ -1,6 +1,6 @@
 #include "EngineConnector.h"
 
-const int EngineConnector::FPS = 30;
+const int EngineConnector::FPS = 60;
 
 const int EngineConnector::MUL_X = 20;
 const int EngineConnector::MUL_Y = 20;
