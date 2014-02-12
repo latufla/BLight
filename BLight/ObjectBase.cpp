@@ -20,6 +20,8 @@ void ObjectBase::init( int id, string name )
 {
 	this->id = id;
 	this->name = name;
+
+	vertexes = new vector<CustomPoint>();
 }
 
 
@@ -63,10 +65,11 @@ void ObjectBase::setName( string val )
 }
 
 
-void ObjectBase::setBoxShape(float hWidth, float hHeight)
+void ObjectBase::setPolygonShape( CustomPolygon* poly)
 {
-	PhEngineConnector::getInstance().setBoxShape(this, hWidth, hHeight);
+	PhEngineConnector::getInstance().setPolygonShape(this, poly);	
 }
+
 
 void ObjectBase::setDensity(float d)
 {
@@ -93,7 +96,8 @@ float ObjectBase::getRotation()
 	return PhEngineConnector::getInstance().getRotation(this);
 }
 
-vector<CustomPoint> ObjectBase::getVertexes()
+vector<CustomPoint>* ObjectBase::getVertexes()
 {
-	return PhEngineConnector::getInstance().getVertexes(this); 
+	PhEngineConnector::getInstance().getVertexes(this, vertexes); 
+	return vertexes;
 }

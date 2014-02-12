@@ -4,6 +4,7 @@
 #include <utility>
 #include <map>
 #include "CustomPoint.h"
+#include "CustomPolygon.h"
 
 using namespace std;
 
@@ -28,7 +29,8 @@ public:
 
 	// Ph
 	// initial
-	void setBoxShape(float, float);	
+	void setPolygonShape(CustomPolygon*);
+
 	void setDensity(float);
 	void setFriction(float);
 	void setRestitution(float);
@@ -37,12 +39,13 @@ public:
 	CustomPoint getPosition();
 	float getRotation();
 
-	vector<CustomPoint> getVertexes();
+	vector<CustomPoint>* getVertexes();
 	// end Ph
 	
 protected:
 	void init(int, string);
 
 	string name;
+	vector<CustomPoint>* vertexes;
 };
 

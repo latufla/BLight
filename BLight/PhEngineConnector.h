@@ -18,7 +18,8 @@ public:
 	void init(Field*);
 	
 	void createBody(ObjectBase*, int oType, pair<float, float> pos);
-	void setBoxShape(ObjectBase*, float, float);
+	void setPolygonShape(ObjectBase*, CustomPolygon* poly);
+
 	void setDensity(ObjectBase*, float);
 	void setFriction(ObjectBase*, float);
 	void setResitution(ObjectBase*, float);
@@ -26,7 +27,7 @@ public:
 	CustomPoint getPosition(ObjectBase*);
 	float getRotation(ObjectBase*);
 
-	vector<CustomPoint> getVertexes(ObjectBase*);
+	vector<CustomPoint>* getVertexes(ObjectBase*, vector<CustomPoint>*);
 
 	void doStep(int);
 
