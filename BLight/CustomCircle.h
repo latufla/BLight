@@ -10,11 +10,13 @@ public:
 	void setPosition(CustomPoint);
 	CustomPoint getPosition();
 	
-	void setRadius(int);
-	int getRadius();
+	void setRadius(float);
+	float getRadius();
+
+	virtual string getType(){return "Circle";};
 
 protected:
 	CustomPoint position;
-	int radius;
+	float radius;
 };
 

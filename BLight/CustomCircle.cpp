@@ -20,12 +20,12 @@ CustomPoint CustomCircle::getPosition()
 	return position;
 }
 
-void CustomCircle::setRadius( int val)
+void CustomCircle::setRadius(float val)
 {
 	radius = val;
 }
 
-int CustomCircle::getRadius()
+float CustomCircle::getRadius()
 {
 	return radius;
 }

@@ -24,7 +24,9 @@ public:
   	static void printDebug(string);
 
 	static void drawObject(ObjectBase*);
- 	static void drawLine(CustomPoint, CustomPoint);
+	static void drawPolygon(ObjectBase*);
+	static void drawCircle(ObjectBase*);
+	static void drawLine(CustomPoint, CustomPoint);
 
 private:
 	static bool shouldStop(RenderWindow*);

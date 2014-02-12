@@ -1,4 +1,5 @@
 #include "EngineConnector.h"
+#include "CustomCircle.h"
 
 const int EngineConnector::FPS = 60;
 
@@ -89,6 +90,16 @@ void EngineConnector::applyAxises( CustomPoint* outPoint)
 
 void EngineConnector::drawObject( ObjectBase* obj)
 {
+	
+	string sType = obj->getShape()->getType();
+	if( sType== "Polygon")
+		drawPolygon(obj);
+	else if(sType == "Circle")
+		drawCircle(obj);		
+}
+
+void EngineConnector::drawPolygon( ObjectBase* obj)
+{
 	CustomPolygon* poly = (CustomPolygon*)obj->getShape();
 	vector<CustomPoint>* vxs = poly->getVertexes();
 	for (auto it = vxs->cbegin(); it != vxs->cend() - 1; it++){
@@ -96,6 +107,22 @@ void EngineConnector::drawObject( ObjectBase* obj)
 	}
 	EngineConnector::drawLine(*vxs->cbegin(), *(vxs->cend() - 1));
 }
+
+void EngineConnector::drawCircle( ObjectBase* obj)
+{
+	CustomCircle* circle = (CustomCircle*)obj->getShape();
+	float radius = circle->getRadius();
+	CircleShape c(radius * MUL_X);
+	CustomPoint pos = circle->getPosition();
+	applyAxises(&pos);
+	c.setOrigin(radius*MUL_X, radius*MUL_X);
+	c.setPosition(pos.x, pos.y);
+	c.setOutlineThickness(1);
+	c.setOutlineColor(Color::Blue);
+	window->draw(c);
+}
+
+
 
 
 
