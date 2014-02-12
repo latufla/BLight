@@ -3,6 +3,7 @@
 #include "ObjectBase.h"
 #include <map>
 #include "Field.h"
+#include "CustomPolygon.h"
 
 using namespace std;
 
@@ -18,7 +19,7 @@ public:
 	void init(Field*);
 	
 	void createBody(ObjectBase*, int oType, pair<float, float> pos);
-	void setPolygonShape(ObjectBase*, CustomPolygon* poly);
+	void setShape(ObjectBase*, CustomPolygon* poly);
 
 	void setDensity(ObjectBase*, float);
 	void setFriction(ObjectBase*, float);
@@ -27,7 +28,7 @@ public:
 	CustomPoint getPosition(ObjectBase*);
 	float getRotation(ObjectBase*);
 
-	vector<CustomPoint>* getVertexes(ObjectBase*, vector<CustomPoint>*);
+	CustomPolygon* getShape(ObjectBase*, CustomPolygon*);
 
 	void doStep(int);
 

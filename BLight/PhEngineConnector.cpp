@@ -24,30 +24,6 @@ void PhEngineConnector::createBody(ObjectBase* obj, int oType, pair<float, float
 	objectConnectors[obj] = world->CreateBody(&bodyDef);
 }
 
-void PhEngineConnector::setPolygonShape( ObjectBase* obj, CustomPolygon* poly )
-{
-	b2Body* b = objectConnectors[obj];
-
-	b2PolygonShape shape;
-
-	vector<CustomPoint>* vertexes = poly->getVertexes();
-	CustomPoint* vertex;
-	char n = vertexes->size();
-	b2Vec2* vxsB2 = new b2Vec2[n];
-	for(int i = 0; i < n; i++){
-		vertex = &vertexes->at(i);
-		vxsB2[i] = b2Vec2((float32)vertex->x, (float32)vertex->y);
-	}
-	shape.Set(vxsB2, n);
-	delete [] vxsB2;
-
-	b2FixtureDef fixtureDef;
-	fixtureDef.shape = &shape;
-
-	b->CreateFixture(&fixtureDef);
-
-}
-
 void PhEngineConnector::setDensity( ObjectBase* obj, float d)
 {
 	b2Fixture* fixture = objectConnectors[obj]->GetFixtureList();
@@ -80,22 +56,44 @@ float PhEngineConnector::getRotation(ObjectBase* obj)
 	return (float)body->GetAngle();
 }
 
-vector<CustomPoint>* PhEngineConnector::getVertexes(ObjectBase* obj, vector<CustomPoint>* vertexes)
+
+void PhEngineConnector::setShape( ObjectBase* obj, CustomPolygon* poly )
+{
+	b2Body* b = objectConnectors[obj];
+
+	b2PolygonShape shape;
+
+	vector<CustomPoint>* vertexes = poly->getVertexes();
+	CustomPoint* vertex;
+	char n = vertexes->size();
+	b2Vec2* vxsB2 = new b2Vec2[n];
+	for(int i = 0; i < n; i++){
+		vertex = &vertexes->at(i);
+		vxsB2[i] = b2Vec2((float32)vertex->x, (float32)vertex->y);
+	}
+	shape.Set(vxsB2, n);
+	delete [] vxsB2;
+
+	b2FixtureDef fixtureDef;
+	fixtureDef.shape = &shape;
+
+	b->CreateFixture(&fixtureDef);
+
+}
+
+CustomPolygon* PhEngineConnector::getShape( ObjectBase* obj, CustomPolygon* poly)
 {
 	CustomPoint pos = obj->getPosition();
 	b2Fixture* fixture = objectConnectors[obj]->GetFixtureList();
 	b2PolygonShape* shape = (b2PolygonShape*)(fixture->GetShape());	
-	
+
+	vector<CustomPoint>* vertexes = poly->getVertexes();
 	b2Vec2 bVx; 
 	char n = shape->GetVertexCount();
 	for (char i = 0; i < n; i++){
 		bVx = shape->GetVertex(i);
-
-		if((char)vertexes->size() <= i)
-			vertexes->push_back(CustomPoint());
-
 		(*vertexes)[i].x = (float)bVx.x + pos.x;
 		(*vertexes)[i].y = (float)bVx.y + pos.y;
 	}
-	return vertexes;
+	return poly;
 }

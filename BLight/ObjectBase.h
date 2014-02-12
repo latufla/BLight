@@ -29,7 +29,7 @@ public:
 
 	// Ph
 	// initial
-	void setPolygonShape(CustomPolygon*);
+	void setShape(CustomPolygon*);
 
 	void setDensity(float);
 	void setFriction(float);
@@ -39,13 +39,14 @@ public:
 	CustomPoint getPosition();
 	float getRotation();
 
-	vector<CustomPoint>* getVertexes();
+	CustomPolygon* getShape();
 	// end Ph
 	
 protected:
 	void init(int, string);
 
 	string name;
-	vector<CustomPoint>* vertexes;
+
+	CustomPolygon* shape;
 };
 
