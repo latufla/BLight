@@ -44,14 +44,14 @@ int _tmain(int argc, _TCHAR* argv[])
 // 	poly->push_back(CustomPoint(0.0f, 1.0f));
 // 	groundBox->setPolygonShape(poly);
 
-	groundBox->setShape(new CustomPolygon(5.0f, 1.0f));
+	groundBox->setShape((CustomShape*)new CustomPolygon(5.0f, 1.0f));
 	
 	groundBoxC = new ControllerBase(groundBox);
 
 	pair<float, float> pos2(1.0f, 10.0f);
 	dynamicBox = field->createObject(2, "dBox", 2, pos2);
 
-	dynamicBox->setShape(new CustomPolygon(1.0f, 1.0f));
+	dynamicBox->setShape((CustomShape*)new CustomPolygon(1.0f, 1.0f));
 	//delete poly;
 	dynamicBox->setDensity(1.0f);
 	dynamicBox->setFriction(0.3f);

@@ -19,7 +19,7 @@ public:
 	void init(Field*);
 	
 	void createBody(ObjectBase*, int oType, pair<float, float> pos);
-	void setShape(ObjectBase*, CustomPolygon* poly);
+	void setShape(ObjectBase*, CustomShape* poly);
 
 	void setDensity(ObjectBase*, float);
 	void setFriction(ObjectBase*, float);
@@ -28,7 +28,7 @@ public:
 	CustomPoint getPosition(ObjectBase*);
 	float getRotation(ObjectBase*);
 
-	CustomPolygon* getShape(ObjectBase*, CustomPolygon*);
+	CustomShape* getShape(ObjectBase*, CustomShape*);
 
 	void doStep(int);
 

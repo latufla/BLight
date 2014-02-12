@@ -63,13 +63,6 @@ void ObjectBase::setName( string val )
 }
 
 
-void ObjectBase::setShape(CustomPolygon* poly)
-{
-	shape = poly;
-	PhEngineConnector::getInstance().setShape(this, shape);	
-}
-
-
 void ObjectBase::setDensity(float d)
 {
 	PhEngineConnector::getInstance().setDensity(this, d);
@@ -95,7 +88,14 @@ float ObjectBase::getRotation()
 	return PhEngineConnector::getInstance().getRotation(this);
 }
 
-CustomPolygon* ObjectBase::getShape()
+
+void ObjectBase::setShape(CustomShape* poly)
+{
+	shape = poly;
+	PhEngineConnector::getInstance().setShape(this, shape);	
+}
+
+CustomShape* ObjectBase::getShape()
 {
 	return PhEngineConnector::getInstance().getShape(this, shape); 
 }

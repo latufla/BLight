@@ -57,13 +57,13 @@ float PhEngineConnector::getRotation(ObjectBase* obj)
 }
 
 
-void PhEngineConnector::setShape( ObjectBase* obj, CustomPolygon* poly )
+void PhEngineConnector::setShape( ObjectBase* obj, CustomShape* poly )
 {
 	b2Body* b = objectConnectors[obj];
 
 	b2PolygonShape shape;
 
-	vector<CustomPoint>* vertexes = poly->getVertexes();
+	vector<CustomPoint>* vertexes = ((CustomPolygon*)poly)->getVertexes();
 	CustomPoint* vertex;
 	char n = vertexes->size();
 	b2Vec2* vxsB2 = new b2Vec2[n];
@@ -81,13 +81,13 @@ void PhEngineConnector::setShape( ObjectBase* obj, CustomPolygon* poly )
 
 }
 
-CustomPolygon* PhEngineConnector::getShape( ObjectBase* obj, CustomPolygon* poly)
+CustomShape* PhEngineConnector::getShape( ObjectBase* obj, CustomShape* poly)
 {
 	CustomPoint pos = obj->getPosition();
 	b2Fixture* fixture = objectConnectors[obj]->GetFixtureList();
 	b2PolygonShape* shape = (b2PolygonShape*)(fixture->GetShape());	
 
-	vector<CustomPoint>* vertexes = poly->getVertexes();
+	vector<CustomPoint>* vertexes = ((CustomPolygon*)poly)->getVertexes();
 	b2Vec2 bVx; 
 	char n = shape->GetVertexCount();
 	for (char i = 0; i < n; i++){

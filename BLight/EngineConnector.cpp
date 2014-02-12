@@ -89,7 +89,7 @@ void EngineConnector::applyAxises( CustomPoint* outPoint)
 
 void EngineConnector::drawObject( ObjectBase* obj)
 {
-	CustomPolygon* poly = obj->getShape();
+	CustomPolygon* poly = (CustomPolygon*)obj->getShape();
 	vector<CustomPoint>* vxs = poly->getVertexes();
 	for (auto it = vxs->cbegin(); it != vxs->cend() - 1; it++){
 		EngineConnector::drawLine(*it, *(it + 1));
