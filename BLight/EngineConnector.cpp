@@ -90,15 +90,6 @@ void EngineConnector::applyAxises( CustomPoint* outPoint)
 	outPoint->y = outPoint->y * MUL_Y * SCALE_Y + WINDOW_H;
 }
 
-void EngineConnector::drawObject( ObjectBase* obj)
-{
-	string sType = obj->getShape()->getType();
-	if(sType == CustomPolygon::TYPE())
-		drawShape((CustomPolygon*)obj->getShape());
-	else if(sType == CustomCircle::TYPE())
-		drawShape((CustomCircle*)obj->getShape());		
-}
-
 void EngineConnector::drawShape(CustomPolygon* poly)
 {
 	vector<CustomPoint>* vxs = poly->getVertexes();
@@ -111,14 +102,14 @@ void EngineConnector::drawShape(CustomPolygon* poly)
 void EngineConnector::drawShape(CustomCircle* circle)
 {
 	CircleShape c(circle->getRadius() * MUL_X);
-	
+
 	CustomPoint origin = circle->getOrigin();
-    c.setOrigin(origin.x * MUL_X, origin.y * MUL_Y);
-		
+	c.setOrigin(origin.x * MUL_X, origin.y * MUL_Y);
+
 	CustomPoint pos = circle->getPosition();
 	applyAxises(&pos);
 	c.setPosition(pos.x, pos.y);
-	
+
 	c.setOutlineThickness(1);
 	c.setOutlineColor(Color::Blue);
 	window->draw(c);

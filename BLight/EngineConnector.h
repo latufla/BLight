@@ -24,8 +24,6 @@ public:
 
 	static void start(void(*)(int));
   	static void printDebug(string);
-
-	static void drawObject(ObjectBase*);
 	
 	static void drawShape(CustomPolygon*);
 	static void drawShape(CustomCircle*);

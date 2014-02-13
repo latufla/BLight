@@ -20,7 +20,6 @@ public:
 	void init(Field*);
 	
 	void createBody(ObjectBase*, int oType, pair<float, float> pos);
-	//void setShape(ObjectBase*, CustomShape*);
 	void setShape(ObjectBase*, CustomPolygon*);
 	void setShape(ObjectBase*, CustomCircle*);
 
@@ -32,7 +31,8 @@ public:
 	CustomPoint getPosition(ObjectBase*);
 	float getRotation(ObjectBase*);
 
-	CustomShape* getShape(ObjectBase*, CustomShape*);
+	CustomShape* getShape(ObjectBase*, CustomPolygon*);
+	CustomShape* getShape(ObjectBase*, CustomCircle*);
 
 	void doStep(int);
 

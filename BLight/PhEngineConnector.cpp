@@ -95,29 +95,33 @@ void PhEngineConnector::setShape( ObjectBase* obj, CustomCircle* circle)
 }
 
 
-CustomShape* PhEngineConnector::getShape( ObjectBase* obj, CustomShape* poly)
+CustomShape* PhEngineConnector::getShape( ObjectBase* obj, CustomPolygon* poly)
+{
+	CustomPoint pos = obj->getPosition();
+	b2Fixture* fixture = objectConnectors[obj]->GetFixtureList();
+
+	b2PolygonShape* shape = (b2PolygonShape*)(fixture->GetShape());	
+
+	vector<CustomPoint>* vertexes = ((CustomPolygon*)poly)->getVertexes();
+	b2Vec2 bVx; 
+	char n = shape->GetVertexCount();
+	for (char i = 0; i < n; i++){
+		bVx = shape->GetVertex(i);
+		(*vertexes)[i].x = (float)bVx.x + pos.x;
+		(*vertexes)[i].y = (float)bVx.y + pos.y;
+	}
+	return (CustomShape*)poly;
+}
+
+CustomShape* PhEngineConnector::getShape( ObjectBase* obj, CustomCircle* circle )
 {
 	CustomPoint pos = obj->getPosition();
 	b2Fixture* fixture = objectConnectors[obj]->GetFixtureList();
 	
-	string sType = poly->getType();
-	if(sType == "Polygon"){
-		b2PolygonShape* shape = (b2PolygonShape*)(fixture->GetShape());	
-
-		vector<CustomPoint>* vertexes = ((CustomPolygon*)poly)->getVertexes();
-		b2Vec2 bVx; 
-		char n = shape->GetVertexCount();
-		for (char i = 0; i < n; i++){
-			bVx = shape->GetVertex(i);
-			(*vertexes)[i].x = (float)bVx.x + pos.x;
-			(*vertexes)[i].y = (float)bVx.y + pos.y;
-		}
-	}else if(sType == "Circle"){
-		b2CircleShape* shape = (b2CircleShape*)(fixture->GetShape());
-		((CustomCircle*)poly)->setRadius(shape->m_radius);
-		CustomPoint p(shape->m_p.x + pos.x, shape->m_p.y + pos.y);
-		((CustomCircle*)poly)->setPosition(p);
-	}
-
-	return poly;
+	b2CircleShape* shape = (b2CircleShape*)(fixture->GetShape());
+	circle->setRadius(shape->m_radius);
+	CustomPoint p(shape->m_p.x + pos.x, shape->m_p.y + pos.y);
+	circle->setPosition(p);
+	
+	return (CustomShape*)circle;
 }

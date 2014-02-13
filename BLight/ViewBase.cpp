@@ -15,8 +15,13 @@ ViewBase::~ViewBase(void)
 }
 
 void ViewBase::draw(ObjectBase* obj)
-{
-	EngineConnector::drawObject(obj);
+{	
+	CustomShape* sp = obj->getShape();
+	string sType = obj->getShape()->getType();
+	if(sType == CustomPolygon::TYPE())
+		EngineConnector::drawShape((CustomPolygon*)obj->getShape());
+	else if(sType == CustomCircle::TYPE())
+		EngineConnector::drawShape((CustomCircle*)obj->getShape());
 }
 
 

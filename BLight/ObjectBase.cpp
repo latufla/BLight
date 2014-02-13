@@ -101,5 +101,11 @@ void ObjectBase::setShape(CustomShape* shape)
 
 CustomShape* ObjectBase::getShape()
 {
-	return PhEngineConnector::getInstance().getShape(this, shape); 
+	string sType = shape->getType();
+	if(sType == CustomPolygon::TYPE())
+		return PhEngineConnector::getInstance().getShape(this, (CustomPolygon*)this->shape);
+	else if(sType == CustomCircle::TYPE())
+		return PhEngineConnector::getInstance().getShape(this, (CustomCircle*)this->shape);
+
+	return nullptr;
 }
