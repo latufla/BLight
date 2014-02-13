@@ -4,6 +4,7 @@
 #include <map>
 #include "Field.h"
 #include "CustomPolygon.h"
+#include "CustomCircle.h"
 
 using namespace std;
 
@@ -19,7 +20,10 @@ public:
 	void init(Field*);
 	
 	void createBody(ObjectBase*, int oType, pair<float, float> pos);
-	void setShape(ObjectBase*, CustomShape* poly);
+	//void setShape(ObjectBase*, CustomShape*);
+	void setShape(ObjectBase*, CustomPolygon*);
+	void setShape(ObjectBase*, CustomCircle*);
+
 
 	void setDensity(ObjectBase*, float);
 	void setFriction(ObjectBase*, float);
@@ -36,6 +40,9 @@ private:
 	PhEngineConnector() {};               
 	PhEngineConnector(PhEngineConnector const&);              
 	void operator=(PhEngineConnector const&);
+
+//	void setPolygon(ObjectBase*, CustomPolygon*);
+//	void setCircle(ObjectBase*, CustomCircle*);
 
 	b2World* world;
 	map<ObjectBase*, b2Body*> objectConnectors;

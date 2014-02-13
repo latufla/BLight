@@ -89,10 +89,14 @@ float ObjectBase::getRotation()
 }
 
 
-void ObjectBase::setShape(CustomShape* poly)
+void ObjectBase::setShape(CustomShape* shape)
 {
-	shape = poly;
-	PhEngineConnector::getInstance().setShape(this, shape);	
+	this->shape = shape;
+	string sType = shape->getType();
+	if(sType == CustomPolygon::TYPE())
+		PhEngineConnector::getInstance().setShape(this, (CustomPolygon*)this->shape);
+	else if(sType == CustomCircle::TYPE())
+		PhEngineConnector::getInstance().setShape(this, (CustomCircle*)this->shape);
 }
 
 CustomShape* ObjectBase::getShape()

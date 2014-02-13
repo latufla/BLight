@@ -15,9 +15,11 @@ RenderWindow* EngineConnector::window = nullptr;
 
 void EngineConnector::start( void(*mainLoop)(int) )
 {
-	window = new RenderWindow(VideoMode(WINDOW_W, WINDOW_H), "");
+	ContextSettings settings;
+	settings.antialiasingLevel = 0;
+	window = new RenderWindow(VideoMode(WINDOW_W, WINDOW_H), "", Style::Default, settings);
 	window->setFramerateLimit(FPS);
-
+	
 	Clock timer;
 	while (window->isOpen()){
 
@@ -90,17 +92,15 @@ void EngineConnector::applyAxises( CustomPoint* outPoint)
 
 void EngineConnector::drawObject( ObjectBase* obj)
 {
-	
 	string sType = obj->getShape()->getType();
-	if( sType== "Polygon")
-		drawPolygon(obj);
-	else if(sType == "Circle")
-		drawCircle(obj);		
+	if(sType == CustomPolygon::TYPE())
+		drawShape((CustomPolygon*)obj->getShape());
+	else if(sType == CustomCircle::TYPE())
+		drawShape((CustomCircle*)obj->getShape());		
 }
 
-void EngineConnector::drawPolygon( ObjectBase* obj)
+void EngineConnector::drawShape(CustomPolygon* poly)
 {
-	CustomPolygon* poly = (CustomPolygon*)obj->getShape();
 	vector<CustomPoint>* vxs = poly->getVertexes();
 	for (auto it = vxs->cbegin(); it != vxs->cend() - 1; it++){
 		EngineConnector::drawLine(*it, *(it + 1));
@@ -108,15 +108,17 @@ void EngineConnector::drawPolygon( ObjectBase* obj)
 	EngineConnector::drawLine(*vxs->cbegin(), *(vxs->cend() - 1));
 }
 
-void EngineConnector::drawCircle( ObjectBase* obj)
+void EngineConnector::drawShape(CustomCircle* circle)
 {
-	CustomCircle* circle = (CustomCircle*)obj->getShape();
-	float radius = circle->getRadius();
-	CircleShape c(radius * MUL_X);
+	CircleShape c(circle->getRadius() * MUL_X);
+	
+	CustomPoint origin = circle->getOrigin();
+    c.setOrigin(origin.x * MUL_X, origin.y * MUL_Y);
+		
 	CustomPoint pos = circle->getPosition();
 	applyAxises(&pos);
-	c.setOrigin(radius*MUL_X, radius*MUL_X);
 	c.setPosition(pos.x, pos.y);
+	
 	c.setOutlineThickness(1);
 	c.setOutlineColor(Color::Blue);
 	window->draw(c);

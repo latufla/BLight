@@ -14,9 +14,11 @@ public:
 	void setVertexes(vector<CustomPoint>);
 	vector<CustomPoint>* getVertexes();
 
-	virtual string getType(){return "Polygon";}
+	virtual string getType(){return TYPE();}
+	static string TYPE(){return "Polygon";}
 
 protected:
 	vector<CustomPoint> vertexes;
+
 };
 

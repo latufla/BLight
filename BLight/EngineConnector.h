@@ -3,6 +3,8 @@
 #include <SFML/Graphics.hpp>
 #include "CustomPoint.h"
 #include "ObjectBase.h"
+#include "CustomCircle.h"
+#include "CustomPolygon.h"
 
 using namespace sf;
 
@@ -24,8 +26,10 @@ public:
   	static void printDebug(string);
 
 	static void drawObject(ObjectBase*);
-	static void drawPolygon(ObjectBase*);
-	static void drawCircle(ObjectBase*);
+	
+	static void drawShape(CustomPolygon*);
+	static void drawShape(CustomCircle*);
+
 	static void drawLine(CustomPoint, CustomPoint);
 
 private:

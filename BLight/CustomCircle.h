@@ -5,6 +5,7 @@ class CustomCircle
 {
 public:
 	CustomCircle(void);
+	CustomCircle(CustomPoint, float);
 	~CustomCircle(void);
 
 	void setPosition(CustomPoint);
@@ -13,7 +14,10 @@ public:
 	void setRadius(float);
 	float getRadius();
 
-	virtual string getType(){return "Circle";};
+	CustomPoint getOrigin();
+
+	virtual string getType(){return TYPE();};
+	static string TYPE(){return "Circle";};
 
 protected:
 	CustomPoint position;
