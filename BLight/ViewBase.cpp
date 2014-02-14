@@ -17,11 +17,10 @@ ViewBase::~ViewBase(void)
 void ViewBase::draw(ObjectBase* obj)
 {	
 	CustomShape* sp = obj->getShape();
-	string sType = obj->getShape()->getType();
-	if(sType == CustomPolygon::TYPE())
-		EngineConnector::drawShape((CustomPolygon*)obj->getShape());
-	else if(sType == CustomCircle::TYPE())
-		EngineConnector::drawShape((CustomCircle*)obj->getShape());
+	if(CustomShape::isPolygon(sp))
+		EngineConnector::drawShape((CustomPolygon*)sp);
+	else if(CustomShape::isCircle(sp))
+		EngineConnector::drawShape((CustomCircle*)sp);
 }
 
 

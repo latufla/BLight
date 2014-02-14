@@ -92,19 +92,17 @@ float ObjectBase::getRotation()
 void ObjectBase::setShape(CustomShape* shape)
 {
 	this->shape = shape;
-	string sType = shape->getType();
-	if(sType == CustomPolygon::TYPE())
+	if(CustomShape::isPolygon(this->shape))
 		PhEngineConnector::getInstance().setShape(this, (CustomPolygon*)this->shape);
-	else if(sType == CustomCircle::TYPE())
+	else if(CustomShape::isCircle(this->shape))
 		PhEngineConnector::getInstance().setShape(this, (CustomCircle*)this->shape);
 }
 
 CustomShape* ObjectBase::getShape()
 {
-	string sType = shape->getType();
-	if(sType == CustomPolygon::TYPE())
+	if(CustomShape::isPolygon(this->shape))
 		return PhEngineConnector::getInstance().getShape(this, (CustomPolygon*)this->shape);
-	else if(sType == CustomCircle::TYPE())
+	else if(CustomShape::isCircle(this->shape))
 		return PhEngineConnector::getInstance().getShape(this, (CustomCircle*)this->shape);
 
 	return nullptr;

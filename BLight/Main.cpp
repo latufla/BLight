@@ -37,6 +37,8 @@ int _tmain(int argc, _TCHAR* argv[])
 
 	pair<float, float> pos(0.1f, 1.0f);
 	groundBox = field->createObject(1, "gBox", 0, pos);
+	
+	
 	CustomPolygon* poly = new CustomPolygon(5.0f, 1.0f);
 	groundBox->setShape((CustomShape*)poly);
 
