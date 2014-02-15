@@ -89,21 +89,21 @@ float ObjectBase::getRotation()
 }
 
 
-void ObjectBase::setShape(CustomShape* shape)
+void ObjectBase::setShape(CustomShape* val)
 {
-	this->shape = shape;
-	if(CustomShape::isPolygon(this->shape))
-		PhEngineConnector::getInstance().setShape(this, (CustomPolygon*)this->shape);
-	else if(CustomShape::isCircle(this->shape))
-		PhEngineConnector::getInstance().setShape(this, (CustomCircle*)this->shape);
+	this->shape = val;
+	if(CustomShape::isPolygon(shape))
+		PhEngineConnector::getInstance().setShape(this, (CustomPolygon*)shape);
+	else if(CustomShape::isCircle(shape))
+		PhEngineConnector::getInstance().setShape(this, (CustomCircle*)shape);
 }
 
 CustomShape* ObjectBase::getShape()
 {
-	if(CustomShape::isPolygon(this->shape))
-		return PhEngineConnector::getInstance().getShape(this, (CustomPolygon*)this->shape);
-	else if(CustomShape::isCircle(this->shape))
-		return PhEngineConnector::getInstance().getShape(this, (CustomCircle*)this->shape);
+	if(CustomShape::isPolygon(shape))
+		return PhEngineConnector::getInstance().getShape(this, (CustomPolygon*)shape);
+	else if(CustomShape::isCircle(shape))
+		return PhEngineConnector::getInstance().getShape(this, (CustomCircle*)shape);
 
 	return nullptr;
 }

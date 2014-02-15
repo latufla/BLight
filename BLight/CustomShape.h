@@ -1,7 +1,7 @@
 #pragma once
 #include "stdafx.h"
-#include "CustomCircle.h"
-#include "CustomPolygon.h"
+
+enum ShapeType{NONE, POLYGON, CIRCLE};
 
 class CustomShape
 {
@@ -9,9 +9,9 @@ public:
 	CustomShape(void);
 	~CustomShape(void);
 		
-	virtual string getType(){return "";};
+	virtual ShapeType getType(){return NONE;};
 
-	static bool isCircle(CustomShape* shape){return shape->getType() == CustomCircle::TYPE();};
-	static bool isPolygon(CustomShape* shape){return shape->getType() == CustomPolygon::TYPE();};
+	static bool isPolygon(CustomShape* shape){return shape->getType() == POLYGON;};
+	static bool isCircle(CustomShape* shape){return shape->getType() == CIRCLE;};
 };
 

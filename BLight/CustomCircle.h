@@ -1,7 +1,9 @@
 #pragma once
 #include "stdafx.h"
 #include "CustomPoint.h"
-class CustomCircle
+#include "CustomShape.h"
+
+class CustomCircle : public CustomShape
 {
 public:
 	CustomCircle(void);
@@ -16,8 +18,7 @@ public:
 
 	CustomPoint getOrigin();
 
-	virtual string getType(){return TYPE();};
-	static string TYPE(){return "Circle";};
+	ShapeType getType(){return CIRCLE;};
 
 protected:
 	CustomPoint position;

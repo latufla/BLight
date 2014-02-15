@@ -1,8 +1,9 @@
 #pragma once
 #include "stdafx.h"
 #include "CustomPoint.h"
+#include "CustomShape.h"
 
-class CustomPolygon
+class CustomPolygon : public CustomShape
 {
 public:
 	CustomPolygon(void);
@@ -14,8 +15,7 @@ public:
 	void setVertexes(vector<CustomPoint>);
 	vector<CustomPoint>* getVertexes();
 
-	virtual string getType(){return TYPE();}
-	static string TYPE(){return "Polygon";}
+	ShapeType getType(){return POLYGON;};
 
 protected:
 	vector<CustomPoint> vertexes;
