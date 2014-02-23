@@ -19,7 +19,7 @@ public:
 
 	void init(Field*);
 	
-	void createBody(ObjectBase*, int oType, pair<float, float> pos);
+	void createBody(ObjectBase*, int oType, CustomPoint pos);
 	void setShape(ObjectBase*, CustomPolygon*);
 	void setShape(ObjectBase*, CustomCircle*);
 

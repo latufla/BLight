@@ -13,7 +13,7 @@ Field::~Field(void)
 {
 }
 
-ObjectBase* Field::createObject(int id, string name, int oType, pair<float, float> pos )
+ObjectBase* Field::createObject(int id, string name, int oType, CustomPoint pos )
 {
 	ObjectBase* obj = new ObjectBase(id, name); 
 	objects.push_back(obj);

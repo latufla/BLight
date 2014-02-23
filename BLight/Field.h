@@ -7,7 +7,7 @@ public:
 	Field(void);
 	~Field(void);
 
-	ObjectBase* createObject(int, string, int, pair<float, float>);
+	ObjectBase* createObject(int, string, int, CustomPoint);
 
 protected:
 	vector<ObjectBase*> objects; 

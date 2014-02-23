@@ -17,11 +17,11 @@ void PhEngineConnector::doStep(int stepInMSecs)
 	world->Step(step, velocityIterations, positionIterations); 
 }
 
-void PhEngineConnector::createBody(ObjectBase* obj, int oType, pair<float, float> pos)
+void PhEngineConnector::createBody(ObjectBase* obj, int oType, CustomPoint pos)
 {
 	b2BodyDef bodyDef;
 	bodyDef.type = (b2BodyType)oType; 
-	bodyDef.position.Set((float32)pos.first, (float32)pos.second);
+	bodyDef.position.Set((float32)pos.x, (float32)pos.y);
 	objectConnectors[obj] = world->CreateBody(&bodyDef);
 }
 

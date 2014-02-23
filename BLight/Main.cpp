@@ -35,17 +35,13 @@ int _tmain(int argc, _TCHAR* argv[])
 	field = new Field();
 	PhEngineConnector::getInstance().init(field); // should be earlier all object bases
 
-	pair<float, float> pos(0.1f, 1.0f);
-	groundBox = field->createObject(1, "gBox", 0, pos);
-	
+	groundBox = field->createObject(1, "gBox", 0, CustomPoint(0.1f, 0.1f));	
 	
 	CustomPolygon* poly = new CustomPolygon(5.0f, 1.0f);
 	groundBox->setShape((CustomShape*)poly);
-
 	groundBoxC = new ControllerBase(groundBox);
 
-	pair<float, float> pos2(1.0f, 10.0f);
-	dynamicBox = field->createObject(2, "dBox", 2, pos2);
+	dynamicBox = field->createObject(2, "dBox", 2, CustomPoint(1.0f, 10.0f));
 
 	CustomCircle* circle = new CustomCircle(CustomPoint(0.0f, 0.0f), 1.0f);
 	dynamicBox->setShape((CustomShape*)circle);
