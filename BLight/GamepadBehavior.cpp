@@ -2,24 +2,24 @@
 
 GamepadBehavior::GamepadBehavior(void)
 {
+	touch = new CustomPoint();
 }
 
 
 GamepadBehavior::~GamepadBehavior(void)
 {
+	delete touch;
 }
 
-bool GamepadBehavior::doStep(int step)
+CustomPoint* GamepadBehavior::getTouch()
 {
-	if(!enabled)
-		return false;
-
-	__super::doStep(step);
-
-	if(EngineConnector::isLeftMouseButtonPressed())
-		EngineConnector::printDebug(EngineConnector::getMousePosition());
-
-	return true;
+	if(!EngineConnector::isLeftMouseButtonPressed())
+		return nullptr;		
+	
+	CustomPoint pos = EngineConnector::getMousePosition();
+	touch->x = pos.x;
+	touch->y = pos.y;
+	return touch;
 }
 
 

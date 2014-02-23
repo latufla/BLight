@@ -9,6 +9,9 @@ public:
 	GamepadBehavior(void);
 	~GamepadBehavior(void);
 
-	bool doStep(int);
+	CustomPoint* getTouch();
+
+private:
+	CustomPoint* touch;
 };
 

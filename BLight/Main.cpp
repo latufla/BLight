@@ -6,7 +6,7 @@
 #include "EngineConnector.h"
 #include "PhEngineConnector.h"
 #include "CustomCircle.h"
-#include "GamepadBehavior.h"
+#include "UserControlBehavior.h"
 
 void mainLoop(int);
 
@@ -50,7 +50,7 @@ int _tmain(int argc, _TCHAR* argv[])
 	dynamicBox->setFriction(0.3f);
 	dynamicBox->setRestitution(.5f);
 	dynamicBoxC = new ControllerBase(dynamicBox);
-	dynamicBoxC->addBehavior(new GamepadBehavior());
+	dynamicBoxC->addBehavior(new UserControlBehavior());
 	dynamicBoxC->startBehaviors();
 
 	EngineConnector::start(&mainLoop);
