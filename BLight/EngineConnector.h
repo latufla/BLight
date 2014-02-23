@@ -1,6 +1,8 @@
 #pragma once
 #include "stdafx.h"
 #include <SFML/Graphics.hpp>
+#include <SFML/window/Mouse.hpp>
+
 #include "CustomPoint.h"
 #include "ObjectBase.h"
 #include "CustomCircle.h"
@@ -29,6 +31,9 @@ public:
 	static void drawShape(CustomCircle*);
 
 	static void drawLine(CustomPoint, CustomPoint);
+
+	static bool isLeftMouseButtonPressed();
+	static CustomPoint getMousePosition();
 
 private:
 	static bool shouldStop(RenderWindow*);

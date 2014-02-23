@@ -1,5 +1,5 @@
 #include "CustomPoint.h"
-
+#include <math.h>
 
 CustomPoint::CustomPoint(void)
 {
@@ -12,12 +12,9 @@ CustomPoint::CustomPoint( float x, float y)
 }
 
 CustomPoint::operator string()
-{	
-	char strX[6];
-	sprintf(strX, "%4.2f", x); 
-	
-	char strY[6];
-	sprintf(strY, "%4.2f", y); 
-	
-	return string(" x: " + string(strX) + ", y: " + string(strY));
+{
+	int modX = fmod(x, floor(x)) * 100;
+	int modY = fmod(y, floor(y)) * 100;
+	return " x: " + to_string(long long(x)) + "." + to_string(long long(modX))
+		 + " y: " + to_string(long long(y)) + "." + to_string(long long(modY));
 }

@@ -115,6 +115,18 @@ void EngineConnector::drawShape(CustomCircle* circle)
 	window->draw(c);
 }
 
+bool EngineConnector::isLeftMouseButtonPressed()
+{
+	return Mouse::isButtonPressed(Mouse::Left);
+}
+
+CustomPoint EngineConnector::getMousePosition()
+{
+	Vector2i pos = Mouse::getPosition(); // get relative right here
+	Vector2i wPos = window->getPosition();
+	return CustomPoint(pos.x - wPos.x, pos.y - wPos.y);	
+}
+
 
 
 
