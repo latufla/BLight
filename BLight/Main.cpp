@@ -49,6 +49,8 @@ int _tmain(int argc, _TCHAR* argv[])
 	dynamicBox->setDensity(1.0f);
 	dynamicBox->setFriction(0.3f);
 	dynamicBox->setRestitution(.5f);
+	dynamicBox->setLinearDamping(1.0f);
+
 	dynamicBoxC = new ControllerBase(dynamicBox);
 	dynamicBoxC->addBehavior(new UserControlBehavior());
 	dynamicBoxC->startBehaviors();

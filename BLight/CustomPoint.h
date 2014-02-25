@@ -9,7 +9,11 @@ public:
 
 	operator string();
 
+	float getLength();
+	void normalize();
+
 	float x;
 	float y;
+
 };
 

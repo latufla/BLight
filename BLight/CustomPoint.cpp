@@ -18,3 +18,15 @@ CustomPoint::operator string()
 	return " x: " + to_string(long long(x)) + "." + to_string(long long(modX))
 		 + " y: " + to_string(long long(y)) + "." + to_string(long long(modY));
 }
+
+float CustomPoint::getLength()
+{
+	return sqrt(pow(x, 2) + pow(y, 2));	
+}
+
+void CustomPoint::normalize()
+{
+	float length = getLength();
+	x /= length;
+	y /= length;
+}

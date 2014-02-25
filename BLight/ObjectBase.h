@@ -29,17 +29,19 @@ public:
 	bool fireUpdates();
 
 	// Ph
-	// initial
 	void setShape(CustomShape*);
 	void setDensity(float);
 	void setFriction(float);
 	void setRestitution(float);
-	// end initial
 
 	CustomPoint getPosition();
 	float getRotation();
 
 	CustomShape* getShape();
+	
+	void applyLinearImpulse(CustomPoint*);
+	void setLinearDamping(float);
+	CustomPoint getGlobalCenter();
 	// end Ph
 	
 protected:

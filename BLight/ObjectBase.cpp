@@ -107,3 +107,18 @@ CustomShape* ObjectBase::getShape()
 
 	return nullptr;
 }
+
+void ObjectBase::applyLinearImpulse( CustomPoint* impulse )
+{
+	PhEngineConnector::getInstance().applyLinearImpulse(this, impulse);
+}
+
+void ObjectBase::setLinearDamping( float damping )
+{
+	PhEngineConnector::getInstance().setLinearDamping(this, damping);
+}
+
+CustomPoint ObjectBase::getGlobalCenter()
+{
+	return PhEngineConnector::getInstance().getGlobalCenter(this);
+}

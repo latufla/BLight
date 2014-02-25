@@ -3,7 +3,7 @@
 
 void PhEngineConnector::init(Field* f)
 {
-	b2Vec2 gravity(0.0f, -10.0f);
+	b2Vec2 gravity(0.0f, 0.0f);
 	world = new b2World(gravity);
 }
 
@@ -111,7 +111,7 @@ CustomShape* PhEngineConnector::getShape( ObjectBase* obj, CustomPolygon* poly)
 		(*vertexes)[i].y = (float)bVx.y + pos.y;
 	}
 	return (CustomShape*)poly;
-}
+};
 
 CustomShape* PhEngineConnector::getShape( ObjectBase* obj, CustomCircle* circle )
 {
@@ -125,3 +125,25 @@ CustomShape* PhEngineConnector::getShape( ObjectBase* obj, CustomCircle* circle 
 	
 	return (CustomShape*)circle;
 }
+
+void PhEngineConnector::applyLinearImpulse( ObjectBase* obj, CustomPoint* impulse )
+{
+	b2Body* b = objectConnectors[obj];
+	b2Vec2 bImpulse(impulse->x, impulse->y);
+	b->ApplyLinearImpulse(bImpulse, b->GetWorldCenter());
+}
+
+void PhEngineConnector::setLinearDamping( ObjectBase* obj, float damping )
+{
+	b2Body* b = objectConnectors[obj];
+	b->SetLinearDamping(damping);
+}
+
+CustomPoint PhEngineConnector::getGlobalCenter( ObjectBase* obj )
+{
+	b2Body* b = objectConnectors[obj];
+	b2Vec2 bCenter = b->GetWorldCenter();
+	return CustomPoint(bCenter.x, bCenter.y);
+}
+
+

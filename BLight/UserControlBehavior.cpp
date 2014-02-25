@@ -1,6 +1,5 @@
 #include "UserControlBehavior.h"
 
-
 UserControlBehavior::UserControlBehavior(void)
 {
 	gamepad = new GamepadBehavior();
@@ -37,6 +36,17 @@ bool UserControlBehavior::doStep(int step)
 	__super::doStep(step);
 
 	gamepad->doStep(step);
+
+	CustomPoint* dest = getDestination();
+	if(dest != nullptr){
+		CustomPoint pos = controller->getObject()->getGlobalCenter();
+		CustomPoint impulse = *dest;
+		impulse.x = impulse.x / 20.0f - pos.x; // TODO: EngineConnector axises
+		impulse.y = (impulse.y - 768) / -20.0f - pos.y;
+		impulse.normalize();
+		controller->getObject()->applyLinearImpulse(&impulse);
+	}
+
 	return true;
 }
 

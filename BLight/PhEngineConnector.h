@@ -34,6 +34,10 @@ public:
 	CustomShape* getShape(ObjectBase*, CustomPolygon*);
 	CustomShape* getShape(ObjectBase*, CustomCircle*);
 
+	void applyLinearImpulse(ObjectBase*, CustomPoint*);
+	void setLinearDamping(ObjectBase*, float);
+	CustomPoint getGlobalCenter(ObjectBase*);
+
 	void doStep(int);
 
 private:
