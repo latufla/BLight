@@ -46,5 +46,5 @@ CustomPoint* UserControlBehavior::getDestination()
 
 int UserControlBehavior::getForce()
 {
-	return 10;
+	return 15;
 }

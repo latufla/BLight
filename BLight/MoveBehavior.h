@@ -11,5 +11,9 @@ public:
 	bool doStep(int);
 
 	BehaviorType getType(){return MOVE;};
+
+protected:
+	bool shouldStop(CustomPoint*);
+	void applyStoppage();
 };
 

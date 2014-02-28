@@ -16,19 +16,39 @@ bool MoveBehavior::doStep(int step)
 
 	__super::doStep(step);
 	
-	BehaviorBase* control = controller->getBehaviorBy(USER_CONTROL);
+	ControlBehavior* control = (ControlBehavior*)controller->getBehaviorBy(USER_CONTROL);
 	if(control == nullptr)
 		return false;
 	
-	CustomPoint* dest = ((ControlBehavior*)control)->getDestination();	
+	CustomPoint* dest = control->getDestination();	
 	if(dest == nullptr)
 		return false;
 
 	CustomPoint pos = controller->getObject()->getPosition();
-	CustomPoint impulse = *dest;
-	impulse.x = impulse.x - pos.x;
-	impulse.y = impulse.y - pos.y;
-	impulse.normalize();
-	controller->getObject()->applyLinearImpulse(&impulse);		
+	static CustomPoint force;
+	force.x = dest->x - pos.x;
+	force.y = dest->y - pos.y;
+	
+	if(shouldStop(&force)){
+		applyStoppage();
+		return false;
+	}
+
+	force.normalize(control->getForce());	
+	controller->getObject()->applyForce(&force);
 	return true;
 }
+
+bool MoveBehavior::shouldStop(CustomPoint* force)
+{
+	return force->getLength() < .1f;
+}
+
+void MoveBehavior::applyStoppage()
+{
+	static CustomPoint vel(0.0f, 0.0f);
+	controller->getObject()->setLinearVelocity(&vel);	
+}
+
+
+

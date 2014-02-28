@@ -23,7 +23,6 @@ public:
 	void setShape(ObjectBase*, CustomPolygon*);
 	void setShape(ObjectBase*, CustomCircle*);
 
-
 	void setDensity(ObjectBase*, float);
 	void setFriction(ObjectBase*, float);
 	void setResitution(ObjectBase*, float);
@@ -34,8 +33,11 @@ public:
 	CustomShape* getShape(ObjectBase*, CustomPolygon*);
 	CustomShape* getShape(ObjectBase*, CustomCircle*);
 
+	void applyForce(ObjectBase*, CustomPoint*);
 	void applyLinearImpulse(ObjectBase*, CustomPoint*);
 	void setLinearDamping(ObjectBase*, float);
+	void setLinearVelocity(ObjectBase*, CustomPoint*);
+
 	CustomPoint getGlobalCenter(ObjectBase*);
 
 	void doStep(int);

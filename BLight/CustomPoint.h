@@ -10,7 +10,7 @@ public:
 	operator string();
 
 	float getLength();
-	void normalize();
+	void normalize(float = 1);
 
 	float x;
 	float y;

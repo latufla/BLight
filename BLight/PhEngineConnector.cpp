@@ -146,4 +146,24 @@ CustomPoint PhEngineConnector::getGlobalCenter( ObjectBase* obj )
 	return CustomPoint(bCenter.x, bCenter.y);
 }
 
+void PhEngineConnector::applyForce( ObjectBase* obj, CustomPoint* force )
+{
+	b2Body* b = objectConnectors[obj];
+	
+	static b2Vec2 bForce;
+	bForce.x = force->x;
+	bForce.y = force->y;
+	b->ApplyForceToCenter(bForce);	
+}
+
+void PhEngineConnector::setLinearVelocity( ObjectBase* obj, CustomPoint* vel)
+{
+	b2Body* b = objectConnectors[obj];
+
+	static b2Vec2 bVel;
+	bVel.x = vel->x;
+	bVel.y = vel->y;
+	b->SetLinearVelocity(bVel);	
+}
+
 

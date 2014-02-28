@@ -122,3 +122,13 @@ CustomPoint ObjectBase::getGlobalCenter()
 {
 	return PhEngineConnector::getInstance().getGlobalCenter(this);
 }
+
+void ObjectBase::applyForce( CustomPoint* force)
+{
+	PhEngineConnector::getInstance().applyForce(this, force);
+}
+
+void ObjectBase::setLinearVelocity( CustomPoint* vel)
+{
+	PhEngineConnector::getInstance().setLinearVelocity(this, vel);
+}

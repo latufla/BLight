@@ -24,9 +24,9 @@ float CustomPoint::getLength()
 	return sqrt(pow(x, 2) + pow(y, 2));	
 }
 
-void CustomPoint::normalize()
+void CustomPoint::normalize(float weight)
 {
-	float length = getLength();
+	float length = getLength() / weight;
 	x /= length;
 	y /= length;
 }

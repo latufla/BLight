@@ -39,8 +39,11 @@ public:
 
 	CustomShape* getShape();
 	
+	void applyForce(CustomPoint*);
 	void applyLinearImpulse(CustomPoint*);
 	void setLinearDamping(float);
+	void setLinearVelocity(CustomPoint*);
+
 	CustomPoint getGlobalCenter();
 	// end Ph
 	
