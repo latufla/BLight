@@ -15,7 +15,10 @@ public:
 	virtual bool start(ControllerBase*);
 	virtual bool stop();
 	virtual bool doStep(int); // frame behavior
-	virtual bool onInteraction(ObjectBase*, ObjectBase*); // event behavior	
+
+	// event behavior	
+	virtual bool onBeginInteraction(ObjectBase*, ObjectBase*){return false;}; 
+	virtual bool onEndInteraction(ObjectBase*, ObjectBase*){return false;};
 
 	virtual bool operator == (BehaviorBase);
 	virtual operator string();

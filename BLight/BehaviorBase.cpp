@@ -44,11 +44,6 @@ bool BehaviorBase::doStep( int stepInMSecs )
 	return true;
 }
 
-bool BehaviorBase::onInteraction( ObjectBase* obj1, ObjectBase* obj2)
-{
-	return true;
-}
-
 
 bool BehaviorBase::operator ==(BehaviorBase obj)
 {

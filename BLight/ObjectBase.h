@@ -46,11 +46,15 @@ public:
 
 	CustomPoint getGlobalCenter();
 	// end Ph
-	
+
+	int getEnergy();
+	void setEnergy(int);
+
 protected:
 	void init(int, string);
 
 	string name;
+	int energy;
 
 	CustomShape* shape;
 };

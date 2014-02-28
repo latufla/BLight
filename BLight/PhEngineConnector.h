@@ -5,6 +5,8 @@
 #include "Field.h"
 #include "CustomPolygon.h"
 #include "CustomCircle.h"
+#include "CustomContactListener.h"
+#include "BehaviorBase.h"
 
 using namespace std;
 
@@ -42,15 +44,22 @@ public:
 
 	void doStep(int);
 
+	void addContactReceiver(BehaviorBase*);
+
+	vector<BehaviorBase*>* getContactReceivers();
+	map<ObjectBase*, b2Body*>* getObjectToBody();
+	map<b2Body*, ObjectBase*>* getBodyToObject();
+
 private:
 	PhEngineConnector() {};               
 	PhEngineConnector(PhEngineConnector const&);              
 	void operator=(PhEngineConnector const&);
 
-//	void setPolygon(ObjectBase*, CustomPolygon*);
-//	void setCircle(ObjectBase*, CustomCircle*);
-
 	b2World* world;
-	map<ObjectBase*, b2Body*> objectConnectors;
+	map<ObjectBase*, b2Body*> objectToBody;
+	map<b2Body*, ObjectBase*> bodyToObject;
+	
+	vector<BehaviorBase*> contactReceivers;
+	CustomContactListener* contactListener;
 };
 

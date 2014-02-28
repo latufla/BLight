@@ -5,6 +5,6 @@ class ControlBehavior : public BehaviorBase
 {
 public:
 	virtual CustomPoint* getDestination() = 0;
-	virtual int getForce() = 0;
+	virtual float getForce() = 0;
 };
 

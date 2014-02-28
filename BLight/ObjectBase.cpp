@@ -20,6 +20,7 @@ void ObjectBase::init( int id, string name )
 {
 	this->id = id;
 	this->name = name;
+	energy = 20;
 }
 
 
@@ -131,4 +132,14 @@ void ObjectBase::applyForce( CustomPoint* force)
 void ObjectBase::setLinearVelocity( CustomPoint* vel)
 {
 	PhEngineConnector::getInstance().setLinearVelocity(this, vel);
+}
+
+int ObjectBase::getEnergy()
+{
+	return energy;
+}
+
+void ObjectBase::setEnergy(int step)
+{
+	energy = step;
 }

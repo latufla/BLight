@@ -14,8 +14,6 @@ ControllerBase::ControllerBase( ObjectBase* object )
 
 ControllerBase::~ControllerBase(void)
 {
-	cout << "\n" + string(__FUNCTION__) + " " + string(*this);
-	
 	for (auto it = behaviors->cbegin(); it != behaviors->cend(); it++){
 		(*it)->stop();
 		delete (*it);

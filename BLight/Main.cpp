@@ -7,6 +7,7 @@
 #include "CustomCircle.h"
 #include "UserControlBehavior.h"
 #include "MoveBehavior.h"
+#include "ChargerBehavior.h"
 
 void mainLoop(int);
 
@@ -27,6 +28,8 @@ int _tmain(int argc, _TCHAR* argv[])
 	CustomPolygon* poly = new CustomPolygon(5.0f, 1.0f);
 	groundBox->setShape((CustomShape*)poly);
 	groundBoxC = new ControllerBase(groundBox);
+	groundBoxC->addBehavior(new ChargerBehavior());
+	groundBoxC->startBehaviors();
 
 	dynamicBox = field->createObject(2, "dBox", 2, CustomPoint(1.0f, 10.0f));
 
@@ -52,6 +55,7 @@ void mainLoop(int elapsedTime)
   	// EngineConnector::printDebug(to_string(long long(elapsedTime)));
 
 	// behaviors
+	groundBoxC->doBehaviorsStep(elapsedTime);
 	dynamicBoxC->doBehaviorsStep(elapsedTime);
 
 	// phys

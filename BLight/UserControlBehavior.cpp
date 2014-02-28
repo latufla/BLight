@@ -44,7 +44,7 @@ CustomPoint* UserControlBehavior::getDestination()
 	return gamepad->getTouch();
 }
 
-int UserControlBehavior::getForce()
+float UserControlBehavior::getForce()
 {
-	return 15;
+	return 15.0f;
 }
