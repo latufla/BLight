@@ -30,6 +30,7 @@ public:
 	static void drawShape(CustomPolygon*);
 	static void drawShape(CustomCircle*);
 
+	static void drawPoint(CustomPoint);
 	static void drawLine(CustomPoint, CustomPoint);
 
 	static bool isLeftMouseButtonPressed();

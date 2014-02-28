@@ -65,23 +65,38 @@ Int32 EngineConnector::shouldDoStep( Clock& timer)
 	return time;
 }
 
-void EngineConnector::drawLine( CustomPoint b, CustomPoint e)
+void EngineConnector::drawPoint(CustomPoint p)
+{
+	static CircleShape c(0);
+	
+	c.setRadius(2);
+	
+	c.setOrigin(2, 2);
+
+	applyAxises(&p);
+	c.setPosition(p.x, p.y);
+
+	c.setFillColor(Color::Blue);
+	window->draw(c);
+}
+
+
+void EngineConnector::drawLine(CustomPoint b, CustomPoint e)
 {
 	applyAxises(&b);
 	applyAxises(&e);
 
-	static Vertex line[] =	{
-		Vertex(Vector2f(), Color::Magenta),
-		Vertex(Vector2f(), Color::Magenta)
-	};
-
+	static VertexArray line(Lines, 2);
+	
 	line[0].position.x = b.x; 
 	line[0].position.y = b.y;
+	line[0].color = Color::Magenta;
 
 	line[1].position.x = e.x; 
 	line[1].position.y = e.y; 
+	line[1].color = Color::Magenta;
 
-	window->draw(line, 2, Lines);
+	window->draw(line);
 }
 
 
@@ -109,8 +124,10 @@ void EngineConnector::drawShape(CustomPolygon* poly)
 
 void EngineConnector::drawShape(CustomCircle* circle)
 {
-	CircleShape c(circle->getRadius() * MUL_X);
-
+	static CircleShape c(0);
+	
+	c.setRadius(circle->getRadius() * MUL_X);
+	
 	CustomPoint origin = circle->getOrigin();
 	c.setOrigin(origin.x * MUL_X, origin.y * MUL_Y);
 
@@ -130,10 +147,8 @@ bool EngineConnector::isLeftMouseButtonPressed()
 
 CustomPoint EngineConnector::getMousePosition()
 {
-	Vector2i pos = Mouse::getPosition(); // get relative right here
-	Vector2i wPos = window->getPosition();
-
-	CustomPoint res(pos.x - wPos.x, pos.y - wPos.y);
+	Vector2i pos = Mouse::getPosition(*window);
+	CustomPoint res((float)pos.x, (float)pos.y);
 	declineAxises(&res);
 	return res;	
 }
