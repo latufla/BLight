@@ -46,10 +46,6 @@ public:
 
 	void addContactReceiver(BehaviorBase*);
 
-	vector<BehaviorBase*>* getContactReceivers();
-	map<ObjectBase*, b2Body*>* getObjectToBody();
-	map<b2Body*, ObjectBase*>* getBodyToObject();
-
 private:
 	PhEngineConnector() {};               
 	PhEngineConnector(PhEngineConnector const&);              
@@ -61,5 +57,7 @@ private:
 	
 	vector<BehaviorBase*> contactReceivers;
 	CustomContactListener* contactListener;
+	
+	friend class CustomContactListener;
 };
 

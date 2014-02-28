@@ -178,19 +178,5 @@ void PhEngineConnector::addContactReceiver( BehaviorBase* b)
 	contactReceivers.push_back(b);
 }
 
-vector<BehaviorBase*>* PhEngineConnector::getContactReceivers()
-{
-	return &contactReceivers;
-}
-
-map<ObjectBase*, b2Body*>* PhEngineConnector::getObjectToBody()
-{
-	return &objectToBody;
-}
-
-map<b2Body*, ObjectBase*>* PhEngineConnector::getBodyToObject()
-{
-	return &bodyToObject;
-}
 
 

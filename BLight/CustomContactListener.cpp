@@ -13,8 +13,8 @@ CustomContactListener::~CustomContactListener(void)
 
 void CustomContactListener::BeginContact( b2Contact* contact)
 {
-	vector<BehaviorBase*>* receivers = PhEngineConnector::getInstance().getContactReceivers();
-	map<b2Body*, ObjectBase*>* bodyToObject = PhEngineConnector::getInstance().getBodyToObject();
+	vector<BehaviorBase*>* receivers = &PhEngineConnector::getInstance().contactReceivers;
+	map<b2Body*, ObjectBase*>* bodyToObject = &PhEngineConnector::getInstance().bodyToObject;
 
 	b2Body* b1;
 	b2Body* b2; 
@@ -27,8 +27,8 @@ void CustomContactListener::BeginContact( b2Contact* contact)
 
 void CustomContactListener::EndContact( b2Contact* contact)
 {
-	vector<BehaviorBase*>* receivers = PhEngineConnector::getInstance().getContactReceivers();
-	map<b2Body*, ObjectBase*>* bodyToObject = PhEngineConnector::getInstance().getBodyToObject();
+	vector<BehaviorBase*>* receivers = &PhEngineConnector::getInstance().contactReceivers;
+	map<b2Body*, ObjectBase*>* bodyToObject = &PhEngineConnector::getInstance().bodyToObject;
 
 	b2Body* b1;
 	b2Body* b2; 
