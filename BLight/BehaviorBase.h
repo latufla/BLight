@@ -3,6 +3,8 @@
 #include "ObjectBase.h"
 #include "ControllerBase.h"
 
+enum BehaviorType{INVALID, GAMEPAD, USER_CONTROL, MOVE};
+
 class BehaviorBase
 {
 public:
@@ -27,9 +29,8 @@ public:
 
 	virtual string getName();
 	virtual void setName(string);
-
-	static string GetFullClassName() {return "BehaviorBase";} // TODO: fix this dirt 
-	virtual string getClassName(){return BehaviorBase::GetFullClassName();}
+	
+	virtual BehaviorType getType(){return INVALID;};
 
 protected:
 	virtual void init(int, string);

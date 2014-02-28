@@ -16,6 +16,8 @@ public:
 	CustomPoint* getDestination();
 	int getForce();
 
+	BehaviorType getType(){return USER_CONTROL;};
+
 private:
 	GamepadBehavior* gamepad;
 

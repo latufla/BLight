@@ -10,7 +10,8 @@ public:
 	~GamepadBehavior(void);
 
 	CustomPoint* getTouch();
-
+	
+	BehaviorType getType(){return GAMEPAD;};
 private:
 	CustomPoint* touch;
 };

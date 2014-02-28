@@ -36,17 +36,6 @@ bool UserControlBehavior::doStep(int step)
 	__super::doStep(step);
 
 	gamepad->doStep(step);
-
-	CustomPoint* dest = getDestination();
-	if(dest != nullptr){
-		CustomPoint pos = controller->getObject()->getGlobalCenter();
-		CustomPoint impulse = *dest;
-		impulse.x = impulse.x - pos.x; // TODO: EngineConnector axises
-		impulse.y = impulse.y - pos.y;
-		impulse.normalize();
-		controller->getObject()->applyLinearImpulse(&impulse);
-	}
-
 	return true;
 }
 

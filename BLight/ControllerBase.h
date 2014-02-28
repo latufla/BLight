@@ -1,9 +1,11 @@
 #pragma once
 #include "stdafx.h"
+#include "EventHeap.h"
 #include "ObjectBase.h"
 #include "ViewBase.h"
 
 class BehaviorBase;
+enum BehaviorType;
 
 class ControllerBase
 {
@@ -14,8 +16,10 @@ public:
 	
 	bool addBehavior(BehaviorBase*);
 	bool removeBehavior(BehaviorBase*);
+	
+	BehaviorBase* getBehaviorBy(BehaviorType);	
+	
 	bool startBehaviors();
-	bool startBehaviors(string className);	
 	bool stopBehaviors();
 	bool doBehaviorsStep(int);
 

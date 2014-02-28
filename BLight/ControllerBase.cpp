@@ -1,6 +1,5 @@
 #include "ControllerBase.h"
 #include "BehaviorBase.h"
-#include "EventHeap.h"
 
 ControllerBase::ControllerBase(void)
 {
@@ -66,13 +65,14 @@ bool ControllerBase::startBehaviors()
 	return true;
 }
 
-bool ControllerBase::startBehaviors(string cName)
+
+BehaviorBase* ControllerBase::getBehaviorBy(BehaviorType bType)
 {
 	for (auto it = behaviors->cbegin(); it != behaviors->cend(); it++){
-		if(cName == (*it)->getClassName())
-			(*it)->start(this);
+		if((*it)->getType() == bType)
+			return *it;
 	}
-	return true;
+	return nullptr;
 }
 
 
