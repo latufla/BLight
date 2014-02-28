@@ -84,11 +84,19 @@ void EngineConnector::drawLine( CustomPoint b, CustomPoint e)
 	window->draw(line, 2, Lines);
 }
 
+
 void EngineConnector::applyAxises( CustomPoint* outPoint)
 {
 	outPoint->x = outPoint->x * MUL_X * SCALE_X;
 	outPoint->y = outPoint->y * MUL_Y * SCALE_Y + WINDOW_H;
 }
+
+void EngineConnector::declineAxises( CustomPoint* outPoint)
+{
+	outPoint->x = (outPoint->x / MUL_X) / SCALE_X;
+	outPoint->y = ((outPoint->y - WINDOW_H) / MUL_Y) / SCALE_Y;
+}
+
 
 void EngineConnector::drawShape(CustomPolygon* poly)
 {
@@ -124,8 +132,12 @@ CustomPoint EngineConnector::getMousePosition()
 {
 	Vector2i pos = Mouse::getPosition(); // get relative right here
 	Vector2i wPos = window->getPosition();
-	return CustomPoint(pos.x - wPos.x, pos.y - wPos.y);	
+
+	CustomPoint res(pos.x - wPos.x, pos.y - wPos.y);
+	declineAxises(&res);
+	return res;	
 }
+
 
 
 

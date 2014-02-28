@@ -40,7 +40,8 @@ private:
 	static Int32 shouldDoStep(Clock&);
 	
 	static void applyAxises(CustomPoint*);
-	
+	static void declineAxises(CustomPoint*);
+
 	static RenderWindow* window;
 
 };

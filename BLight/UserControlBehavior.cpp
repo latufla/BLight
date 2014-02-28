@@ -41,8 +41,8 @@ bool UserControlBehavior::doStep(int step)
 	if(dest != nullptr){
 		CustomPoint pos = controller->getObject()->getGlobalCenter();
 		CustomPoint impulse = *dest;
-		impulse.x = impulse.x / 20.0f - pos.x; // TODO: EngineConnector axises
-		impulse.y = (impulse.y - 768) / -20.0f - pos.y;
+		impulse.x = impulse.x - pos.x; // TODO: EngineConnector axises
+		impulse.y = impulse.y - pos.y;
 		impulse.normalize();
 		controller->getObject()->applyLinearImpulse(&impulse);
 	}
