@@ -11,15 +11,15 @@ public:
 	
 	bool start(ControllerBase*);
 	bool stop();
-	bool doStep(int);
-
+	
 	CustomPoint* getDestination();
 	float getForce();
 
 	BehaviorType getType(){return USER_CONTROL;};
 
-private:
-	GamepadBehavior* gamepad;
+private:	
+	bool doStep(int);
 
+	GamepadBehavior* gamepad;
 };
 

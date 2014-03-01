@@ -30,12 +30,9 @@ bool UserControlBehavior::stop()
 
 bool UserControlBehavior::doStep(int step)
 {
-	if(!enabled)
-		return false;
-
 	__super::doStep(step);
 
-	gamepad->doStep(step);
+	gamepad->tryDoStep(step);
 	return true;
 }
 

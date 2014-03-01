@@ -14,7 +14,7 @@ public:
 
 	virtual bool start(ControllerBase*);
 	virtual bool stop();
-	virtual bool doStep(int); // frame behavior
+	virtual bool tryDoStep(int); // frame behavior
 
 	// event behavior	
 	virtual bool onBeginInteraction(ObjectBase*){return false;}; 
@@ -37,7 +37,8 @@ public:
 
 protected:
 	virtual void init(int, string);
-	
+	virtual bool doStep(int);
+
 	int id;
 	string name;
 	ControllerBase* controller; // get`s no ownership

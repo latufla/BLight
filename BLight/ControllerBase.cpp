@@ -85,7 +85,7 @@ bool ControllerBase::stopBehaviors()
 bool ControllerBase::doBehaviorsStep( int stepInMSec )
 {
 	for (auto it = behaviors->cbegin(); it != behaviors->cend(); it++){
-		(*it)->doStep(stepInMSec);
+		(*it)->tryDoStep(stepInMSec);
 	}
 	return true;
 }

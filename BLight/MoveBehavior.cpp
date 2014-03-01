@@ -11,9 +11,6 @@ MoveBehavior::~MoveBehavior(void)
 
 bool MoveBehavior::doStep(int step)
 {
-	if(!enabled)
-		return false;
-
 	__super::doStep(step);
 	
 	ControlBehavior* control = (ControlBehavior*)controller->getBehaviorBy(USER_CONTROL);

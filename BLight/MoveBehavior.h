@@ -8,11 +8,11 @@ public:
 	MoveBehavior(void);
 	~MoveBehavior(void);
 
-	bool doStep(int);
-
 	BehaviorType getType(){return MOVE;};
 
 protected:
+	bool doStep(int);
+	
 	bool shouldStop(CustomPoint*);
 	void applyStoppage();
 };

@@ -39,7 +39,13 @@ bool BehaviorBase::stop()
 	return true;
 }
 
-bool BehaviorBase::doStep( int stepInMSecs )
+
+bool BehaviorBase::tryDoStep( int stepInMSecs )
+{
+	return enabled ? doStep(stepInMSecs) : false;
+}
+
+bool BehaviorBase::doStep(int)
 {
 	return true;
 }

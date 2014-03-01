@@ -30,11 +30,8 @@ bool ChargerBehavior::stop()
 }
 
 
-bool ChargerBehavior::doStep( int step )
+bool ChargerBehavior::doStep(int step)
 {
-	if(!enabled)
-		return false;
-
 	__super::doStep(step);
 	
 	if(chargingObject == nullptr)

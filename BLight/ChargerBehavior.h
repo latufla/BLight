@@ -12,11 +12,12 @@ public:
 
 	bool start(ControllerBase*);
 	bool stop();
-	bool doStep(int);
 	bool onBeginInteraction(ObjectBase*);
 	bool onEndInteraction(ObjectBase*);
 
 protected:
-	ObjectBase* chargingObject;
+	bool doStep(int);
+
+	ObjectBase* chargingObject;	
 };
 
