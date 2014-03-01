@@ -17,8 +17,8 @@ public:
 	virtual bool doStep(int); // frame behavior
 
 	// event behavior	
-	virtual bool onBeginInteraction(ObjectBase*, ObjectBase*){return false;}; 
-	virtual bool onEndInteraction(ObjectBase*, ObjectBase*){return false;};
+	virtual bool onBeginInteraction(ObjectBase*){return false;}; 
+	virtual bool onEndInteraction(ObjectBase*){return false;};
 
 	virtual bool operator == (BehaviorBase);
 	virtual operator string();

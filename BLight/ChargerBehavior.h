@@ -13,8 +13,8 @@ public:
 	bool start(ControllerBase*);
 	bool stop();
 	bool doStep(int);
-	bool onBeginInteraction(ObjectBase*, ObjectBase*);
-	bool onEndInteraction(ObjectBase*, ObjectBase*);
+	bool onBeginInteraction(ObjectBase*);
+	bool onEndInteraction(ObjectBase*);
 
 protected:
 	ObjectBase* chargingObject;

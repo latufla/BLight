@@ -45,34 +45,22 @@ bool ChargerBehavior::doStep( int step )
 		return false;	
 		
 	chargingObject->setEnergy(++energy);
-	EngineConnector::printDebug(to_string(long long(chargingObject->getEnergy())));
+	EngineConnector::printDebug(chargingObject->getName() + " " + to_string(long long(chargingObject->getEnergy())));
 	return true;
 }
 
-bool ChargerBehavior::onBeginInteraction( ObjectBase* obj1, ObjectBase* obj2)
+bool ChargerBehavior::onBeginInteraction(ObjectBase* target)
 {
-
-	ObjectBase* charger = controller->getObject();
-	if(*charger == *obj1){
-		chargingObject = obj2;
-		return true;
-	} else if(*charger == *obj2){
-		chargingObject = obj1;
-		return true;
-	}
-	
-	
-	return false;
+	chargingObject = target;
+	return true;
 }
 
-bool ChargerBehavior::onEndInteraction( ObjectBase* obj1, ObjectBase* obj2)
+bool ChargerBehavior::onEndInteraction(ObjectBase* target)
 {
-	ObjectBase* charger = controller->getObject();
-	if(*charger == *obj1 || *charger == *obj2){
+	if(*chargingObject == *target){
 		chargingObject = nullptr;
 		return true;
 	}	
-
 	return false;
 }
 

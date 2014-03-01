@@ -13,5 +13,8 @@ public:
 	
 	void BeginContact(b2Contact*);
 	void EndContact(b2Contact*);
+
+protected:
+	map<BehaviorBase*, ObjectBase*>* filter(b2Contact*);
 };
 
