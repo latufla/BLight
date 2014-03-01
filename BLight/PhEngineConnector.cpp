@@ -8,6 +8,7 @@ void PhEngineConnector::init(Field* f)
 	
 	contactListener = new CustomContactListener();
 	world->SetContactListener(contactListener);
+	
 }
 
 // TODO: if it`s network multi player
@@ -176,6 +177,12 @@ void PhEngineConnector::setLinearVelocity( ObjectBase* obj, CustomPoint* vel)
 void PhEngineConnector::addContactReceiver( BehaviorBase* b)
 {
 	contactReceivers.push_back(b);
+}
+
+void PhEngineConnector::setSensor( ObjectBase* obj, bool val )
+{
+	b2Body* b = objectToBody[obj];
+	b->GetFixtureList()->SetSensor(val);
 }
 
 

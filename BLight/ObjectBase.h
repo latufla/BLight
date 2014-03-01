@@ -44,6 +44,8 @@ public:
 	void setLinearDamping(float);
 	void setLinearVelocity(CustomPoint*);
 
+	void setSensor(bool);
+
 	CustomPoint getGlobalCenter();
 	// end Ph
 

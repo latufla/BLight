@@ -143,3 +143,8 @@ void ObjectBase::setEnergy(int step)
 {
 	energy = step;
 }
+
+void ObjectBase::setSensor(bool val)
+{
+	PhEngineConnector::getInstance().setSensor(this, val);
+}

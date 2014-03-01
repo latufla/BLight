@@ -40,6 +40,8 @@ public:
 	void setLinearDamping(ObjectBase*, float);
 	void setLinearVelocity(ObjectBase*, CustomPoint*);
 
+	void setSensor(ObjectBase*, bool);
+
 	CustomPoint getGlobalCenter(ObjectBase*);
 
 	void doStep(int);

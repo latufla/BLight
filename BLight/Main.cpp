@@ -11,10 +11,13 @@
 
 void mainLoop(int);
 
-ObjectBase* groundBox;
-ObjectBase* dynamicBox;
-ControllerBase* groundBoxC;
-ControllerBase* dynamicBoxC;
+ObjectBase* obstacle;
+ObjectBase* charger;
+ObjectBase* hero;
+
+ControllerBase* obstacleC;
+ControllerBase* chargerC;
+ControllerBase* heroC;
 
 Field* field;
 
@@ -23,27 +26,37 @@ int _tmain(int argc, _TCHAR* argv[])
 	field = new Field();
 	PhEngineConnector::getInstance().init(field); // should be earlier all object bases
 
-	groundBox = field->createObject(1, "gBox", 0, CustomPoint(0.1f, 0.1f));	
-	
-	CustomPolygon* poly = new CustomPolygon(5.0f, 1.0f);
-	groundBox->setShape((CustomShape*)poly);
-	groundBoxC = new ControllerBase(groundBox);
-	groundBoxC->addBehavior(new ChargerBehavior());
-	groundBoxC->startBehaviors();
+	obstacle = field->createObject(1, "gBox", 0, CustomPoint(0.1f, 0.1f));	
 
-	dynamicBox = field->createObject(2, "dBox", 2, CustomPoint(1.0f, 10.0f));
+	CustomPolygon* poly = new CustomPolygon(5.0f, 1.0f);
+	obstacle->setShape((CustomShape*)poly);
+	obstacleC = new ControllerBase(obstacle);
+	obstacleC->startBehaviors();
+
+
+	charger = field->createObject(2, "sBox", 0, CustomPoint(5.0f, 20.0f));	
+
+	poly = new CustomPolygon(4.0f, 4.0f);
+	charger->setShape((CustomShape*)poly);
+	charger->setSensor(true);
+	chargerC = new ControllerBase(charger);
+	chargerC->addBehavior(new ChargerBehavior());
+	chargerC->startBehaviors();
+
+
+	hero = field->createObject(3, "dBox", 2, CustomPoint(1.0f, 10.0f));
 
 	CustomCircle* circle = new CustomCircle(CustomPoint(0.0f, 0.0f), 1.0f);
-	dynamicBox->setShape((CustomShape*)circle);
-	dynamicBox->setDensity(1.0f);
-	dynamicBox->setFriction(0.3f);
-	dynamicBox->setRestitution(.5f);
-	dynamicBox->setLinearDamping(1.0f);
+	hero->setShape((CustomShape*)circle);
+	hero->setDensity(1.0f);
+	hero->setFriction(0.3f);
+	hero->setRestitution(.5f);
+	hero->setLinearDamping(1.0f);
 
-	dynamicBoxC = new ControllerBase(dynamicBox);
-	dynamicBoxC->addBehavior(new UserControlBehavior());
-	dynamicBoxC->addBehavior(new MoveBehavior());
-	dynamicBoxC->startBehaviors();
+	heroC = new ControllerBase(hero);
+	heroC->addBehavior(new UserControlBehavior());
+	heroC->addBehavior(new MoveBehavior());
+	heroC->startBehaviors();
 
 	EngineConnector::start(&mainLoop);
 	
@@ -55,16 +68,15 @@ void mainLoop(int elapsedTime)
   	// EngineConnector::printDebug(to_string(long long(elapsedTime)));
 
 	// behaviors
-	groundBoxC->doBehaviorsStep(elapsedTime);
-	dynamicBoxC->doBehaviorsStep(elapsedTime);
+	obstacleC->doBehaviorsStep(elapsedTime);
+	heroC->doBehaviorsStep(elapsedTime);
+	chargerC->doBehaviorsStep(elapsedTime);
 
 	// phys
 	PhEngineConnector::getInstance().doStep(elapsedTime);
 
-	CustomPoint position = dynamicBox->getPosition();
-	float angle = dynamicBox->getRotation();
- 	
 	// draw stuff
-	groundBoxC->draw();
-	dynamicBoxC->draw();
+	obstacleC->draw();
+	heroC->draw();
+	chargerC->draw();
 }
