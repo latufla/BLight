@@ -169,7 +169,14 @@ void EngineConnector::drawText(TextBase* text)
 	t.setPosition(pos->x, pos->y);	
 
 	t.setStyle(Text::Regular);
-	t.setColor(Color::Blue);
+	
+	int c = text->getColor();
+	static Color color;
+	color.r = (c >> 16) & 0xFF;
+	color.g = (c >> 8) & 0xFF;
+	color.b = c & 0xFF;
+	color.a = text->getAlpha();
+	t.setColor(color);
 
 	window->draw(t);
 }

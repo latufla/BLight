@@ -16,6 +16,12 @@ public:
 	string getFont()  { return font; }
 	void setFont(string val) { font = val; }
 
+	int getColor() const { return color; }
+	void setColor(int val) { color = val; }
+
+	int getAlpha() const { return alpha; }
+	void setAlpha(int val) { alpha = val; }
+
 	int getCharacterSize()  { return characterSize; }
 	void setCharacterSize(int val) { characterSize = val; }
 
@@ -28,6 +34,8 @@ protected:
 	string text;
 	string font;
 	
+	int color;
+	int alpha;
 	int characterSize;
 
 	CustomPoint position;
