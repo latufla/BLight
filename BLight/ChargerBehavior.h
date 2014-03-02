@@ -18,6 +18,7 @@ public:
 protected:
 	bool doStep(int);
 
-	ObjectBase* chargingObject;	
+	ObjectBase* chargingObject;
+	TextBase debugEnergyText;
 };
 

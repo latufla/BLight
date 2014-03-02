@@ -12,6 +12,7 @@ const int EngineConnector::WINDOW_W = 1024;
 const int EngineConnector::WINDOW_H = 768;
 
 RenderWindow* EngineConnector::window = nullptr;
+map<string, sf::Font> EngineConnector::fonts;
 
 void EngineConnector::start( void(*mainLoop)(int) )
 {
@@ -19,7 +20,11 @@ void EngineConnector::start( void(*mainLoop)(int) )
 	settings.antialiasingLevel = 0;
 	window = new RenderWindow(VideoMode(WINDOW_W, WINDOW_H), "", Style::Default, settings);
 	window->setFramerateLimit(FPS);
-	
+
+	sf::Font font;
+	font.loadFromFile("fonts/tahoma.ttf");
+	fonts["tahoma"] = font;
+
 	Clock timer;
 	while (window->isOpen()){
 
@@ -151,6 +156,22 @@ CustomPoint EngineConnector::getMousePosition()
 	CustomPoint res((float)pos.x, (float)pos.y);
 	declineAxises(&res);
 	return res;	
+}
+
+void EngineConnector::drawText(TextBase* text)
+{
+	static Text t;
+
+	t.setString(text->getText());
+	t.setFont(fonts[text->getFont()]);
+	t.setCharacterSize(text->getCharacterSize());
+	CustomPoint* pos = text->getPosition();
+	t.setPosition(pos->x, pos->y);	
+
+	t.setStyle(Text::Regular);
+	t.setColor(Color::Blue);
+
+	window->draw(t);
 }
 
 

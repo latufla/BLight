@@ -7,6 +7,8 @@
 #include "ObjectBase.h"
 #include "CustomCircle.h"
 #include "CustomPolygon.h"
+#include "SFML/Graphics/Font.hpp"
+#include "TextBase.h"
 
 using namespace sf;
 
@@ -33,6 +35,8 @@ public:
 	static void drawPoint(CustomPoint);
 	static void drawLine(CustomPoint, CustomPoint);
 
+	static void drawText(TextBase*);
+
 	static bool isLeftMouseButtonPressed();
 	static CustomPoint getMousePosition();
 
@@ -45,5 +49,6 @@ private:
 
 	static RenderWindow* window;
 
+	static map<string, sf::Font> fonts;
 };
 

@@ -1,9 +1,11 @@
 #include "ChargerBehavior.h"
 
-
 ChargerBehavior::ChargerBehavior(void)
 {
 	chargingObject = nullptr;
+
+	debugEnergyText.setText("Energy: 20");
+	debugEnergyText.setFont("tahoma");
 }
 
 
@@ -32,6 +34,8 @@ bool ChargerBehavior::stop()
 
 bool ChargerBehavior::doStep(int step)
 {
+	EngineConnector::drawText(&debugEnergyText);
+
 	__super::doStep(step);
 	
 	if(chargingObject == nullptr)
@@ -42,7 +46,9 @@ bool ChargerBehavior::doStep(int step)
 		return false;	
 		
 	chargingObject->setEnergy(++energy);
-	EngineConnector::printDebug(chargingObject->getName() + " " + to_string(long long(chargingObject->getEnergy())));
+	
+	debugEnergyText.setText("Energy: " + to_string(long long(energy)));
+	
 	return true;
 }
 
