@@ -1,6 +1,7 @@
 #pragma once
 #include "CustomPoint.h"
 #include "BehaviorBase.h"
+
 class ControlBehavior : public BehaviorBase
 {
 public:

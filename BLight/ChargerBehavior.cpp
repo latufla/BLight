@@ -1,4 +1,5 @@
 #include "ChargerBehavior.h"
+#include "Scene.h"
 
 ChargerBehavior::ChargerBehavior(void)
 {
@@ -6,6 +7,7 @@ ChargerBehavior::ChargerBehavior(void)
 
 	debugEnergyText.setText("Energy: 20");
 	debugEnergyText.setFont("tahoma");
+	Scene::getInstance().addChild(&debugEnergyText);
 }
 
 
@@ -46,9 +48,7 @@ bool ChargerBehavior::doStep(int step)
 		return false;	
 		
 	chargingObject->setEnergy(++energy);
-	
 	debugEnergyText.setText("Energy: " + to_string(long long(energy)));
-	
 	return true;
 }
 

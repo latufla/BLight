@@ -1,14 +1,17 @@
 #pragma once
 #include "stdafx.h"
 #include "CustomPoint.h"
+#include "IDrawable.h"
 
-class TextBase
+class TextBase : public IDrawable
 {
 public:
 	TextBase(void);
 	TextBase(string, string);
 	
 	~TextBase(void);
+
+	void draw();
 
 	string getText()  { return text; }
 	void setText(string val) { text = val; }

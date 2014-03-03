@@ -3,11 +3,12 @@
 #include "EventHeap.h"
 #include "ObjectBase.h"
 #include "ViewBase.h"
+#include "IDrawable.h"
 
 class BehaviorBase;
 enum BehaviorType;
 
-class ControllerBase
+class ControllerBase : public IDrawable
 {
 public:
 	ControllerBase(void);

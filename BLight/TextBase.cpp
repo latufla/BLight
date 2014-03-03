@@ -30,3 +30,8 @@ void TextBase::init(string text, string font)
 	position.x = 5.0f;
 	position.y = 5.0f;
 }
+
+void TextBase::draw()
+{
+	EngineConnector::drawText(this);
+}

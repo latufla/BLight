@@ -8,6 +8,7 @@
 #include "UserControlBehavior.h"
 #include "MoveBehavior.h"
 #include "ChargerBehavior.h"
+#include "Scene.h"
 
 void mainLoop(int);
 
@@ -32,6 +33,7 @@ int _tmain(int argc, _TCHAR* argv[])
 	obstacle->setShape((CustomShape*)poly);
 	obstacleC = new ControllerBase(obstacle);
 	obstacleC->startBehaviors();
+	Scene::getInstance().addChild(obstacleC);
 
 
 	charger = field->createObject(2, "sBox", 0, CustomPoint(5.0f, 20.0f));	
@@ -42,7 +44,7 @@ int _tmain(int argc, _TCHAR* argv[])
 	chargerC = new ControllerBase(charger);
 	chargerC->addBehavior(new ChargerBehavior());
 	chargerC->startBehaviors();
-
+	Scene::getInstance().addChild(chargerC);
 
 	hero = field->createObject(3, "dBox", 2, CustomPoint(1.0f, 10.0f));
 
@@ -57,6 +59,7 @@ int _tmain(int argc, _TCHAR* argv[])
 	heroC->addBehavior(new UserControlBehavior());
 	heroC->addBehavior(new MoveBehavior());
 	heroC->startBehaviors();
+	Scene::getInstance().addChild(heroC);
 
 	EngineConnector::start(&mainLoop);
 	
@@ -76,7 +79,5 @@ void mainLoop(int elapsedTime)
 	PhEngineConnector::getInstance().doStep(elapsedTime);
 
 	// draw stuff
-	obstacleC->draw();
-	heroC->draw();
-	chargerC->draw();
+	Scene::getInstance().draw();
 }
