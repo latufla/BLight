@@ -36,8 +36,6 @@ bool ChargerBehavior::stop()
 
 bool ChargerBehavior::doStep(int step)
 {
-	EngineConnector::drawText(&debugEnergyText);
-
 	__super::doStep(step);
 	
 	if(chargingObject == nullptr)

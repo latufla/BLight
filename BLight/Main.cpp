@@ -9,16 +9,19 @@
 #include "MoveBehavior.h"
 #include "ChargerBehavior.h"
 #include "Scene.h"
+#include "SimpleDropBehavior.h"
 
 void mainLoop(int);
 
 ObjectBase* obstacle;
 ObjectBase* charger;
 ObjectBase* hero;
+ObjectBase* energyPack;
 
 ControllerBase* obstacleC;
 ControllerBase* chargerC;
 ControllerBase* heroC;
+ControllerBase* energyPackC;
 
 Field* field;
 
@@ -60,6 +63,16 @@ int _tmain(int argc, _TCHAR* argv[])
 	heroC->addBehavior(new MoveBehavior());
 	heroC->startBehaviors();
 	Scene::getInstance().addChild(heroC);
+
+	
+	energyPack = field->createObject(2, "eBox", 0, CustomPoint(20.0f, 30.0f));	
+
+	poly = new CustomPolygon(1.0f, 1.0f);
+	energyPack->setShape((CustomShape*)poly);
+	energyPackC = new ControllerBase(energyPack);
+	energyPackC->addBehavior(new SimpleDropBehavior(20));
+	energyPackC->startBehaviors();
+	Scene::getInstance().addChild(energyPackC);
 
 	EngineConnector::start(&mainLoop);
 	
