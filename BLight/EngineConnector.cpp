@@ -165,8 +165,9 @@ void EngineConnector::drawText(TextBase* text)
 	t.setString(text->getText());
 	t.setFont(fonts[text->getFont()]);
 	t.setCharacterSize(text->getCharacterSize());
-	CustomPoint* pos = text->getPosition();
-	t.setPosition(pos->x, pos->y);	
+	CustomPoint pos = *text->getPosition();
+	applyAxises(&pos);
+	t.setPosition(pos.x, pos.y);	
 
 	t.setStyle(Text::Regular);
 	

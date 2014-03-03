@@ -87,6 +87,7 @@ void mainLoop(int elapsedTime)
 	obstacleC->doBehaviorsStep(elapsedTime);
 	heroC->doBehaviorsStep(elapsedTime);
 	chargerC->doBehaviorsStep(elapsedTime);
+	energyPackC->doBehaviorsStep(elapsedTime);
 
 	// phys
 	PhEngineConnector::getInstance().doStep(elapsedTime);

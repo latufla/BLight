@@ -27,8 +27,8 @@ void TextBase::init(string text, string font)
 	
 	characterSize = 18;
 
-	position.x = 5.0f;
-	position.y = 5.0f;
+	position.x = 1.0f;
+	position.y = 38.0f;
 }
 
 void TextBase::draw()

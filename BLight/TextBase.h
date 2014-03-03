@@ -11,7 +11,7 @@ public:
 	
 	~TextBase(void);
 
-	void draw();
+	virtual void draw();
 
 	string getText()  { return text; }
 	void setText(string val) { text = val; }

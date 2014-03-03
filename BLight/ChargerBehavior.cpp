@@ -6,7 +6,6 @@ ChargerBehavior::ChargerBehavior(void)
 	chargingObject = nullptr;
 
 	debugEnergyText.setText("Energy: 20");
-	debugEnergyText.setFont("tahoma");
 	Scene::getInstance().addChild(&debugEnergyText);
 }
 

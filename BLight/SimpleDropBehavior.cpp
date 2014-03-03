@@ -1,4 +1,6 @@
 #include "SimpleDropBehavior.h"
+#include "PopupText.h"
+#include "Scene.h"
 
 
 SimpleDropBehavior::SimpleDropBehavior(void)
@@ -43,6 +45,14 @@ bool SimpleDropBehavior::onBeginInteraction(ObjectBase* target)
 
 	int energy = target->getEnergy() + drop;
 	target->setEnergy(energy);
+	
+	PopupText* debugPopUp = new PopupText();
+	debugPopUp->setText((drop >= 0 ? "+" : "-") + to_string(long long(drop)));
+	CustomPoint pos = controller->getObject()->getPosition();
+	debugPopUp->setPosition(&pos);
+	
+	Scene::getInstance().addChild((TextBase*)debugPopUp);		
+
 	return processed = true;
 }
 
