@@ -1,7 +1,8 @@
 #pragma once
 #include "BehaviorBase.h"
-#include "EngineConnector.h"
 #include "PhEngineConnector.h"
+#include "SceneController.h"
+
 
 // charges main hero energy
 class ChargerBehavior : public BehaviorBase
@@ -19,6 +20,5 @@ protected:
 	bool doStep(int);
 
 	ObjectBase* chargingObject;
-	TextBase debugEnergyText;
 };
 

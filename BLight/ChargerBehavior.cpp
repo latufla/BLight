@@ -1,12 +1,8 @@
 #include "ChargerBehavior.h"
-#include "Scene.h"
 
 ChargerBehavior::ChargerBehavior(void)
 {
 	chargingObject = nullptr;
-
-	debugEnergyText.setText("Energy: 20");
-	Scene::getInstance().addChild(&debugEnergyText);
 }
 
 
@@ -45,7 +41,9 @@ bool ChargerBehavior::doStep(int step)
 		return false;	
 		
 	chargingObject->setEnergy(++energy);
-	debugEnergyText.setText("Energy: " + to_string(long long(energy)));
+	
+	TextBase* energyText = SceneController::getInstance().getEnergyText();
+	energyText->setText("Energy: " + to_string(long long(energy)));
 	return true;
 }
 

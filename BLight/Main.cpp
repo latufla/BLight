@@ -8,7 +8,7 @@
 #include "UserControlBehavior.h"
 #include "MoveBehavior.h"
 #include "ChargerBehavior.h"
-#include "Scene.h"
+#include "SceneController.h"
 #include "SimpleDropBehavior.h"
 #include "FieldController.h"
 
@@ -17,16 +17,19 @@ void mainLoop(int);
 
 int _tmain(int argc, _TCHAR* argv[])
 { 
+	SceneController& scene = SceneController::getInstance();
+	scene.init();
 
 	FieldController& field = FieldController::getInstance();
 	field.init();
+	
 
 	ControllerBase* obstacle = field.createObjectController(1, "gBox", 0, CustomPoint(0.1f, 0.1f));
 
 	CustomPolygon* poly = new CustomPolygon(5.0f, 1.0f);
 	ObjectBase* object = obstacle->getObject(); 
 	object->setShape((CustomShape*)poly);
-	Scene::getInstance().addChild(obstacle->getView());
+	scene.addChild(obstacle->getView());
 
 
 	ControllerBase* charger = field.createObjectController(2, "sBox", 0, CustomPoint(5.0f, 20.0f));
@@ -36,7 +39,7 @@ int _tmain(int argc, _TCHAR* argv[])
 	object->setShape((CustomShape*)poly);
 	object->setSensor(true);
 	charger->addBehavior(new ChargerBehavior());
-	Scene::getInstance().addChild(charger->getView());
+	scene.addChild(charger->getView());
 	
 	
 	ControllerBase* hero = field.createObjectController(3, "dBox", 2, CustomPoint(1.0f, 10.0f));
@@ -48,10 +51,12 @@ int _tmain(int argc, _TCHAR* argv[])
 	object->setFriction(0.3f);
 	object->setRestitution(.5f);
 	object->setLinearDamping(1.0f);
+	
+	scene.getEnergyText()->setText("Energy: " + to_string(long long(object->getEnergy())));
 
 	hero->addBehavior(new UserControlBehavior());
 	hero->addBehavior(new MoveBehavior());
-	Scene::getInstance().addChild(hero->getView());
+	scene.addChild(hero->getView());
 
 
 	ControllerBase* energyPack = field.createObjectController(2, "eBox", 0, CustomPoint(20.0f, 30.0f));
@@ -60,7 +65,7 @@ int _tmain(int argc, _TCHAR* argv[])
 	object = energyPack->getObject();
 	object->setShape((CustomShape*)poly);
 	energyPack->addBehavior(new SimpleDropBehavior(20));
-	Scene::getInstance().addChild(energyPack->getView());
+	scene.addChild(energyPack->getView());
 
 	
 	field.startBehaviors();
@@ -71,14 +76,7 @@ int _tmain(int argc, _TCHAR* argv[])
 
 void mainLoop(int elapsedTime)
 {
-  	// EngineConnector::printDebug(to_string(long long(elapsedTime)));
-
-	// behaviors
 	FieldController::getInstance().doBehaviorsStep(elapsedTime);
-
-	// phys
-	PhEngineConnector::getInstance().doStep(elapsedTime);
-
-	// draw stuff
-	Scene::getInstance().draw();
+	PhEngineConnector::getInstance().doStep(elapsedTime);	
+	SceneController::getInstance().draw();
 }
