@@ -18,9 +18,7 @@ ControllerBase::~ControllerBase(void)
 		(*it)->stop();
 		delete (*it);
 	}
-
-	EventHeap::getInstance().removeEventListener(object);
-
+	
 	delete behaviors;
 	delete object;
 	delete view;
@@ -35,8 +33,6 @@ void ControllerBase::init( int id, string name)
 	
 	view = new ViewBase();
 	view->setObject(object);
-
-	EventHeap::getInstance().addEventListener(object, view, view->getUpdateListener());
 }
 
 bool ControllerBase::addBehavior( BehaviorBase* b)

@@ -1,15 +1,10 @@
 #include "FieldController.h"
 
 
-FieldController::FieldController(void)
+void FieldController::init()
 {
 	field = new Field();
 	controllers = new vector<ControllerBase*>();
-}
-
-
-FieldController::~FieldController(void)
-{
 }
 
 ControllerBase* FieldController::createObjectController(int id, string name, int oType, CustomPoint pos)

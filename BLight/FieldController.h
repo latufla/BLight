@@ -5,8 +5,12 @@
 class FieldController : ControllerBase
 {
 public:
-	FieldController(void);
-	~FieldController(void);
+	static FieldController& getInstance() {
+		static FieldController instance;
+		return instance;
+	}
+
+	void init();
 
 	bool startBehaviors();
 	bool stopBehaviors();
@@ -18,8 +22,11 @@ public:
 	Field* getField() const { return field; }
 
 protected:
-	Field* field;
+	FieldController() {};               
+	FieldController(FieldController const&);              
+	void operator=(FieldController const&);
 
+	Field* field;
 	vector<ControllerBase*>* controllers;
 };
 

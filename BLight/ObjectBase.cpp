@@ -1,5 +1,4 @@
 #include "ObjectBase.h"
-#include "EventHeap.h"
 #include "PhEngineConnector.h"
 
 ObjectBase::ObjectBase(void)
@@ -26,7 +25,6 @@ void ObjectBase::init( int id, string name )
 
 bool ObjectBase::fireUpdates()
 {
-	EventHeap::getInstance().dispatch(this, CHANGE);
 	return true;
 }
 

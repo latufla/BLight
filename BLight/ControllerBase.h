@@ -1,6 +1,5 @@
 #pragma once
 #include "stdafx.h"
-#include "EventHeap.h"
 #include "ObjectBase.h"
 #include "ViewBase.h"
 
