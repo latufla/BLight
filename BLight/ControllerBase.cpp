@@ -32,7 +32,9 @@ void ControllerBase::init( int id, string name)
 	this->name = name;
 
 	behaviors = new vector<BehaviorBase*>();
+	
 	view = new ViewBase();
+	view->setObject(object);
 
 	EventHeap::getInstance().addEventListener(object, view, view->getUpdateListener());
 }
@@ -88,12 +90,6 @@ bool ControllerBase::doBehaviorsStep( int stepInMSec )
 		(*it)->tryDoStep(stepInMSec);
 	}
 	return true;
-}
-
-
-void ControllerBase::draw()
-{
-	view->draw(object);
 }
 
 

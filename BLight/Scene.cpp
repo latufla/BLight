@@ -7,13 +7,13 @@ void Scene::draw()
 	}
 }
 
-void Scene::addChild(ControllerBase* c)
-{
-	drawList.push_back(c);
-}
-
-void Scene::addChild(TextBase* v)
+void Scene::addChild(ViewBase* v)
 {
 	drawList.push_back(v);
+}
+
+void Scene::addChild(TextBase* t)
+{
+	drawList.push_back(t);
 }
 

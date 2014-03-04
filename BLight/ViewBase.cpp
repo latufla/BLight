@@ -14,9 +14,12 @@ ViewBase::~ViewBase(void)
 {
 }
 
-void ViewBase::draw(ObjectBase* obj)
+void ViewBase::draw()
 {	
-	CustomShape* sp = obj->getShape();
+	if(object == nullptr)
+		return;
+
+	CustomShape* sp = object->getShape();
 	if(CustomShape::isPolygon(sp))
 		EngineConnector::drawShape((CustomPolygon*)sp);
 	else if(CustomShape::isCircle(sp))

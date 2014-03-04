@@ -3,12 +3,11 @@
 #include "EventHeap.h"
 #include "ObjectBase.h"
 #include "ViewBase.h"
-#include "IDrawable.h"
 
 class BehaviorBase;
 enum BehaviorType;
 
-class ControllerBase : public IDrawable
+class ControllerBase
 {
 public:
 	ControllerBase(void);
@@ -20,11 +19,9 @@ public:
 	
 	BehaviorBase* getBehaviorBy(BehaviorType);	
 	
-	bool startBehaviors();
-	bool stopBehaviors();
-	bool doBehaviorsStep(int);
-
-	void draw();
+	virtual bool startBehaviors();
+	virtual bool stopBehaviors();
+	virtual bool doBehaviorsStep(int);
 
 	operator string();
 
@@ -35,7 +32,8 @@ public:
 	void setName(string);
 
 	ObjectBase* getObject();
-
+	ViewBase* getView() const { return view; }
+	
 protected:
 	void init(int, string);
 
@@ -43,7 +41,7 @@ protected:
 	string name;
 	ObjectBase* object; // gets ownership
 	ViewBase* view; // gets ownership
-
+	
 	vector<BehaviorBase*> *behaviors; // gets ownership
 };
 

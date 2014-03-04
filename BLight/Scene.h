@@ -14,7 +14,7 @@ public:
 		
 	void draw();
 
-	void addChild(ControllerBase*);
+	void addChild(ViewBase*);
 	void addChild(TextBase*);
 
 protected:	
