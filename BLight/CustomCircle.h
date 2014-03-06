@@ -7,13 +7,13 @@ class CustomCircle : public CustomShape
 {
 public:
 	CustomCircle(void);
-	CustomCircle(CustomPoint, float);
+	CustomCircle(const CustomPoint&, float);
 	~CustomCircle(void);
 
 	CustomPoint* getPosition(){return &position;}
 	
-	void setRadius(float);
-	float getRadius();
+	void setRadius(float val){radius = val; }
+	float getRadius(){return radius;}
 
 	CustomPoint* getOrigin();
 
@@ -21,6 +21,8 @@ public:
 
 protected:
 	CustomPoint position;
+	CustomPoint origin;
+
 	float radius;
 };
 

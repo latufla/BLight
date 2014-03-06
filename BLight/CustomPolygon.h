@@ -7,18 +7,16 @@ class CustomPolygon : public CustomShape
 {
 public:
 	CustomPolygon(void);
-	CustomPolygon(vector<CustomPoint>);
+	CustomPolygon(const vector<CustomPoint>&);
 	CustomPolygon(float, float);
 
 	~CustomPolygon(void);
 
-	void setVertexes(vector<CustomPoint>);
-	vector<CustomPoint>* getVertexes();
+	vector<CustomPoint>* getVertexes(){return &vertexes;}
 
 	ShapeType getType(){return POLYGON;};
 
 protected:
 	vector<CustomPoint> vertexes;
-
 };
 

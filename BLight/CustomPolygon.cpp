@@ -5,7 +5,7 @@ CustomPolygon::CustomPolygon(void)
 {
 }
 
-CustomPolygon::CustomPolygon( vector<CustomPoint> vertexes)
+CustomPolygon::CustomPolygon(const vector<CustomPoint>& vertexes)
 {
 	this->vertexes = vertexes;
 }
@@ -20,15 +20,4 @@ CustomPolygon::CustomPolygon( float width, float height)
 
 CustomPolygon::~CustomPolygon(void)
 {
-}
-
-
-void CustomPolygon::setVertexes( vector<CustomPoint> val)
-{
-	vertexes = val;
-}
-
-vector<CustomPoint>* CustomPolygon::getVertexes()
-{
-	return &vertexes;
 }

@@ -126,7 +126,7 @@ void EngineConnector::drawShape(CustomCircle* circle)
 	c.setOrigin(origin->x * MUL_X, origin->y * MUL_Y);
 
 	static CustomPoint pos;
-	pos.set(circle->getPosition());
+	pos.set(*circle->getPosition());
 	applyAxises(&pos);
 	c.setPosition(pos.x, pos.y);
 
@@ -158,7 +158,7 @@ void EngineConnector::drawText(TextBase* text)
 	t.setCharacterSize(text->getCharacterSize());
 	
 	static CustomPoint pos;
-	pos.set(text->getPosition());
+	pos.set(*text->getPosition());
 	applyAxises(&pos);
 	t.setPosition(pos.x, pos.y);	
 
