@@ -122,10 +122,11 @@ void EngineConnector::drawShape(CustomCircle* circle)
 	
 	c.setRadius(circle->getRadius() * MUL_X);
 	
-	CustomPoint origin = circle->getOrigin();
-	c.setOrigin(origin.x * MUL_X, origin.y * MUL_Y);
+	CustomPoint* origin = circle->getOrigin();
+	c.setOrigin(origin->x * MUL_X, origin->y * MUL_Y);
 
-	CustomPoint pos = circle->getPosition();
+	static CustomPoint pos;
+	pos.set(circle->getPosition());
 	applyAxises(&pos);
 	c.setPosition(pos.x, pos.y);
 
@@ -139,12 +140,13 @@ bool EngineConnector::isLeftMouseButtonPressed()
 	return Mouse::isButtonPressed(Mouse::Left);
 }
 
-CustomPoint EngineConnector::getMousePosition()
+CustomPoint* EngineConnector::getMousePosition()
 {
-	Vector2i pos = Mouse::getPosition(*window);
-	CustomPoint res((float)pos.x, (float)pos.y);
+	Vector2i* pos = &Mouse::getPosition(*window);
+	static CustomPoint res;
+	res.set((float)pos->x, (float)pos->y);
 	declineAxises(&res);
-	return res;	
+	return &res;	
 }
 
 void EngineConnector::drawText(TextBase* text)
@@ -154,7 +156,9 @@ void EngineConnector::drawText(TextBase* text)
 	t.setString(text->getText());
 	t.setFont(fonts[text->getFont()]);
 	t.setCharacterSize(text->getCharacterSize());
-	CustomPoint pos = *text->getPosition();
+	
+	static CustomPoint pos;
+	pos.set(text->getPosition());
 	applyAxises(&pos);
 	t.setPosition(pos.x, pos.y);	
 

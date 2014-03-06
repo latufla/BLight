@@ -16,16 +16,6 @@ CustomCircle::~CustomCircle(void)
 {
 }
 
-void CustomCircle::setPosition( CustomPoint val)
-{
-	position = val;
-}
-
-CustomPoint CustomCircle::getPosition()
-{
-	return position;
-}
-
 void CustomCircle::setRadius(float val)
 {
 	radius = val;
@@ -36,7 +26,9 @@ float CustomCircle::getRadius()
 	return radius;
 }
 
-CustomPoint CustomCircle::getOrigin()
+CustomPoint* CustomCircle::getOrigin()
 {
-	return CustomPoint(radius, radius);
+	static CustomPoint origin;
+	origin.x = origin.y = radius;
+	return &origin;
 }

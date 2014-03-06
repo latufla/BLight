@@ -36,3 +36,9 @@ void CustomPoint::set(float x, float y)
 	this->x = x;
 	this->y = y;
 }
+
+void CustomPoint::set(CustomPoint* pos)
+{
+	this->x = pos->x;
+	this->y = pos->y;
+}

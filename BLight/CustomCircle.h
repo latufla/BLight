@@ -10,13 +10,12 @@ public:
 	CustomCircle(CustomPoint, float);
 	~CustomCircle(void);
 
-	void setPosition(CustomPoint);
-	CustomPoint getPosition();
+	CustomPoint* getPosition(){return &position;}
 	
 	void setRadius(float);
 	float getRadius();
 
-	CustomPoint getOrigin();
+	CustomPoint* getOrigin();
 
 	ShapeType getType(){return CIRCLE;};
 

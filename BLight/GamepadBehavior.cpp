@@ -17,9 +17,9 @@ CustomPoint* GamepadBehavior::getTouch()
 	if(!ec.isLeftMouseButtonPressed())
 		return nullptr;		
 	
-	CustomPoint pos = ec.getMousePosition();
-	touch->x = pos.x;
-	touch->y = pos.y;
+	CustomPoint* pos = ec.getMousePosition();
+	touch->x = pos->x;
+	touch->y = pos->y;
 	return touch;
 }
 

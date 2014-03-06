@@ -10,6 +10,7 @@ public:
 	operator string();
 
 	void set(float, float);
+	void set(CustomPoint*);
 
 	float getLength();
 	void normalize(float = 1);

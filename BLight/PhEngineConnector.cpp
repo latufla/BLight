@@ -93,8 +93,8 @@ void PhEngineConnector::setShape( ObjectBase* obj, CustomCircle* circle)
 	
 	b2CircleShape shape;
 	shape.m_radius = circle->getRadius();
-	CustomPoint p = circle->getPosition();
-	shape.m_p = b2Vec2(p.x, p.y); 
+	CustomPoint* p = circle->getPosition();
+	shape.m_p = b2Vec2(p->x, p->y); 
 
 	b2FixtureDef fixtureDef;
 	fixtureDef.shape = &shape;
@@ -128,8 +128,7 @@ CustomShape* PhEngineConnector::getShape( ObjectBase* obj, CustomCircle* circle 
 	
 	b2CircleShape* shape = (b2CircleShape*)(fixture->GetShape());
 	circle->setRadius(shape->m_radius);
-	CustomPoint p(shape->m_p.x + pos.x, shape->m_p.y + pos.y);
-	circle->setPosition(p);
+	circle->getPosition()->set(shape->m_p.x + pos.x, shape->m_p.y + pos.y);
 	
 	return (CustomShape*)circle;
 }

@@ -43,7 +43,7 @@ public:
 	void drawText(TextBase*);
 
 	bool isLeftMouseButtonPressed();
-	CustomPoint getMousePosition();
+	CustomPoint* getMousePosition();
 
 private:
 	EngineConnector() {};               
