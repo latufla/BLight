@@ -30,20 +30,20 @@ public:
 	void setFriction(ObjectBase*, float);
 	void setResitution(ObjectBase*, float);
 
-	CustomPoint getPosition(ObjectBase*);
+	CustomPoint& getPosition(ObjectBase*, CustomPoint&);
 	float getRotation(ObjectBase*);
 
 	CustomShape* getShape(ObjectBase*, CustomPolygon*);
 	CustomShape* getShape(ObjectBase*, CustomCircle*);
 
-	void applyForce(ObjectBase*, CustomPoint*);
-	void applyLinearImpulse(ObjectBase*, CustomPoint*);
+	void applyForce(ObjectBase*, const CustomPoint&);
+	void applyLinearImpulse(ObjectBase*, const CustomPoint&);
 	void setLinearDamping(ObjectBase*, float);
-	void setLinearVelocity(ObjectBase*, CustomPoint*);
+	void setLinearVelocity(ObjectBase*, const CustomPoint&);
 
 	void setSensor(ObjectBase*, bool);
 
-	CustomPoint getGlobalCenter(ObjectBase*);
+	CustomPoint& getGlobalCenter(ObjectBase*, CustomPoint&);
 
 	void doStep(int);
 

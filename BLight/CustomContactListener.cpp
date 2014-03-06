@@ -49,9 +49,9 @@ map<BehaviorBase*, ObjectBase*>* CustomContactListener::filter(b2Contact* contac
 		obj2 = bodyToObject->at(b2);
 
 		receiver = (*it)->getController()->getObject();
-		if(*receiver == *obj1)
+		if(receiver == obj1)
 			target = obj2;
-		else if(*receiver == *obj2)
+		else if(receiver == obj2)
 			target = obj1;
 
 		if(target != nullptr)

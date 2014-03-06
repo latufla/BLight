@@ -59,13 +59,12 @@ void PhEngineConnector::setResitution( ObjectBase* obj, float r)
 	fixture->SetRestitution((float32)r);
 }
 
-CustomPoint PhEngineConnector::getPosition(ObjectBase* obj)
+CustomPoint& PhEngineConnector::getPosition(ObjectBase* obj, CustomPoint& outPosition)
 {
 	b2Body* body = objectToBody[obj];
 	const b2Vec2& pos = body->GetPosition();
-	static CustomPoint res;
-	res.set(pos.x, pos.y);
-	return res;
+	outPosition.set(pos.x, pos.y);
+	return outPosition;
 }
 
 float PhEngineConnector::getRotation(ObjectBase* obj)
@@ -141,11 +140,11 @@ CustomShape* PhEngineConnector::getShape( ObjectBase* obj, CustomCircle* circle 
 	return (CustomShape*)circle;
 }
 
-void PhEngineConnector::applyLinearImpulse( ObjectBase* obj, CustomPoint* impulse )
+void PhEngineConnector::applyLinearImpulse( ObjectBase* obj, const CustomPoint& impulse )
 {
 	b2Body* b = objectToBody[obj];
 	static b2Vec2 bImpulse;
-	bImpulse.Set(impulse->x, impulse->y);
+	bImpulse.Set(impulse.x, impulse.y);
 	b->ApplyLinearImpulse(bImpulse, b->GetWorldCenter());
 }
 
@@ -155,30 +154,30 @@ void PhEngineConnector::setLinearDamping( ObjectBase* obj, float damping )
 	b->SetLinearDamping(damping);
 }
 
-CustomPoint PhEngineConnector::getGlobalCenter( ObjectBase* obj )
+CustomPoint& PhEngineConnector::getGlobalCenter(ObjectBase* obj, CustomPoint& outGlobalCenter)
 {
 	b2Body* b = objectToBody[obj];
 	const b2Vec2& bCenter = b->GetWorldCenter();
-	static CustomPoint res(bCenter.x, bCenter.y);
-	return res;
+	outGlobalCenter.set(bCenter.x, bCenter.y);
+	return outGlobalCenter;
 }
 
-void PhEngineConnector::applyForce( ObjectBase* obj, CustomPoint* force )
+void PhEngineConnector::applyForce(ObjectBase* obj, const CustomPoint& force)
 {
 	b2Body* b = objectToBody[obj];
 	
 	static b2Vec2 bForce;
-	bForce.Set(force->x, force->y);
+	bForce.Set(force.x, force.y);
 	b->ApplyForceToCenter(bForce);	
 }
 
-void PhEngineConnector::setLinearVelocity( ObjectBase* obj, CustomPoint* vel)
+void PhEngineConnector::setLinearVelocity( ObjectBase* obj, const CustomPoint& vel)
 {
 	b2Body* b = objectToBody[obj];
 
 	static b2Vec2 bVel;
-	bVel.x = vel->x;
-	bVel.y = vel->y;
+	bVel.x = vel.x;
+	bVel.y = vel.y;
 	b->SetLinearVelocity(bVel);	
 }
 

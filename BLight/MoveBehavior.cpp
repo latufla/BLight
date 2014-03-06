@@ -32,7 +32,7 @@ bool MoveBehavior::doStep(int step)
 	}
 
 	force.normalize(control->getForce());	
-	controller->getObject()->applyForce(&force);
+	controller->getObject()->applyForce(force);
 	return true;
 }
 
@@ -44,7 +44,7 @@ bool MoveBehavior::shouldStop(CustomPoint* force)
 void MoveBehavior::applyStoppage()
 {
 	static CustomPoint vel(0.0f, 0.0f);
-	controller->getObject()->setLinearVelocity(&vel);	
+	controller->getObject()->setLinearVelocity(vel);	
 }
 
 

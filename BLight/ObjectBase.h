@@ -18,39 +18,36 @@ public:
 	~ObjectBase(void);
 
 	operator string();
-	bool operator == (ObjectBase);
 	
-	int getId();
-	void setId(int);
+	int getId(){return id;}
+	void setId(int val){id = val;}
 
-	string getName();
-	void setName(string);
-
-	bool fireUpdates();
-
+	string getName(){return name;}
+	void setName(string val){name = val;}
+		
 	// Ph
 	void setShape(CustomShape*);
+	CustomShape* getShape();
+
 	void setDensity(float);
 	void setFriction(float);
 	void setRestitution(float);
 
-	CustomPoint getPosition();
+	CustomPoint& getPosition();
 	float getRotation();
-
-	CustomShape* getShape();
 	
-	void applyForce(CustomPoint*);
-	void applyLinearImpulse(CustomPoint*);
+	void applyForce(const CustomPoint&);
+	void applyLinearImpulse(const CustomPoint&);
 	void setLinearDamping(float);
-	void setLinearVelocity(CustomPoint*);
+	void setLinearVelocity(const CustomPoint&);
 
 	void setSensor(bool);
 
-	CustomPoint getGlobalCenter();
+	CustomPoint& getGlobalCenter();
 	// end Ph
 
-	int getEnergy();
-	void setEnergy(int);
+	int getEnergy(){return energy;}
+	void setEnergy(int val){energy = val;}
 
 protected:
 	void init(int, string);
@@ -58,6 +55,10 @@ protected:
 	string name;
 	int energy;
 
+	CustomPoint position;
+	CustomPoint globalCenter;
+
 	CustomShape* shape;
+
 };
 

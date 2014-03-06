@@ -1,5 +1,6 @@
 #include "ObjectBase.h"
 #include "PhEngineConnector.h"
+#include "EngineConnector.h"
 
 ObjectBase::ObjectBase(void)
 {
@@ -13,6 +14,7 @@ ObjectBase::ObjectBase(int id, string name) : EventDispatcher(id)
 
 ObjectBase::~ObjectBase(void)
 {
+	delete shape;
 }
 
 void ObjectBase::init( int id, string name )
@@ -22,43 +24,10 @@ void ObjectBase::init( int id, string name )
 	energy = 20;
 }
 
-
-bool ObjectBase::fireUpdates()
-{
-	return true;
-}
-
-
-bool ObjectBase::operator == (ObjectBase obj)
-{
-	return this->id == obj.getId() && this->name == obj.getName();
-}
-
 ObjectBase::operator string()
 {
 	return string(typeid(*this).name()) + " id: " + to_string((long long)id) + ", "
 		+ "name:" + name; 
-}
-
-
-int ObjectBase::getId()
-{
-	return id;
-}
-
-std::string ObjectBase::getName()
-{
-	return name;
-}
-
-void ObjectBase::setId( int val )
-{
-	this->id = val;
-}
-
-void ObjectBase::setName( string val )
-{
-	this->name = val;
 }
 
 
@@ -77,9 +46,10 @@ void ObjectBase::setRestitution(float r)
 	PhEngineConnector::getInstance().setResitution(this, r);
 }
 
-CustomPoint ObjectBase::getPosition()
+CustomPoint& ObjectBase::getPosition()
 {
-	return PhEngineConnector::getInstance().getPosition(this);
+	PhEngineConnector::getInstance().getPosition(this, position);
+	return position;
 }
 
 float ObjectBase::getRotation()
@@ -107,7 +77,7 @@ CustomShape* ObjectBase::getShape()
 	return nullptr;
 }
 
-void ObjectBase::applyLinearImpulse( CustomPoint* impulse )
+void ObjectBase::applyLinearImpulse( const CustomPoint& impulse )
 {
 	PhEngineConnector::getInstance().applyLinearImpulse(this, impulse);
 }
@@ -117,29 +87,20 @@ void ObjectBase::setLinearDamping( float damping )
 	PhEngineConnector::getInstance().setLinearDamping(this, damping);
 }
 
-CustomPoint ObjectBase::getGlobalCenter()
+CustomPoint& ObjectBase::getGlobalCenter()
 {
-	return PhEngineConnector::getInstance().getGlobalCenter(this);
+	PhEngineConnector::getInstance().getGlobalCenter(this, globalCenter);
+	return globalCenter;
 }
 
-void ObjectBase::applyForce( CustomPoint* force)
+void ObjectBase::applyForce(const CustomPoint& force)
 {
 	PhEngineConnector::getInstance().applyForce(this, force);
 }
 
-void ObjectBase::setLinearVelocity( CustomPoint* vel)
+void ObjectBase::setLinearVelocity(const CustomPoint& vel)
 {
 	PhEngineConnector::getInstance().setLinearVelocity(this, vel);
-}
-
-int ObjectBase::getEnergy()
-{
-	return energy;
-}
-
-void ObjectBase::setEnergy(int step)
-{
-	energy = step;
 }
 
 void ObjectBase::setSensor(bool val)

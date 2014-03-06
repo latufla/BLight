@@ -55,7 +55,7 @@ bool ChargerBehavior::onBeginInteraction(ObjectBase* target)
 
 bool ChargerBehavior::onEndInteraction(ObjectBase* target)
 {
-	if(*chargingObject == *target){
+	if(chargingObject == target){
 		chargingObject = nullptr;
 		return true;
 	}	
