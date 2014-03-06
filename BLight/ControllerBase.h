@@ -13,8 +13,8 @@ public:
 	ControllerBase(ObjectBase*);
 	~ControllerBase(void);
 	
-	bool addBehavior(BehaviorBase*);
-	bool removeBehavior(BehaviorBase*);
+	void addBehavior(BehaviorBase*);
+	void removeBehavior(BehaviorBase*);
 	
 	BehaviorBase* getBehaviorBy(BehaviorType);	
 	
@@ -24,23 +24,24 @@ public:
 
 	operator string();
 
-	int getId();
-	void setId(int);
+	int getId(){return id;}
+	void setId(int val){id = val;}
 
-	string getName();
-	void setName(string);
+	string getName(){return name;}
+	void setName(string val){name = val;}
 
-	ObjectBase* getObject();
-	ViewBase* getView() const { return view; }
+	ObjectBase* getObject(){return object;}
+	ViewBase* getView() const {return view;}
 	
 protected:
 	void init(int, string);
 
 	int id;
 	string name;
+
 	ObjectBase* object; // gets ownership
 	ViewBase* view; // gets ownership
 	
-	vector<BehaviorBase*> *behaviors; // gets ownership
+	vector<BehaviorBase*> behaviors; // gets ownership
 };
 
