@@ -1,6 +1,7 @@
 #pragma once
 #include "stdafx.h"
 #include "TextBase.h"
+#include "SceneController.h"
 
 class PopupText : public TextBase
 {

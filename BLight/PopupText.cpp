@@ -1,10 +1,8 @@
 #include "PopupText.h"
 
-
-PopupText::PopupText(void)
+PopupText::PopupText(void) : alphaStep(-5), positionStep(0.01f)
 {
-	alphaStep = -5;
-	positionStep = 0.01f;
+	SceneController::getInstance().addChild((TextBase*)this);	
 }
 
 
@@ -17,6 +15,8 @@ void PopupText::draw()
 	if(alpha > 0){
 		alpha += alphaStep;
 		position.y += positionStep;	
-		__super::draw();	
+		__super::draw();
+	} else {
+		//SceneController::getInstance().removeChild(this);			
 	}
 }

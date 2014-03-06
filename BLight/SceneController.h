@@ -17,8 +17,7 @@ public:
 
 	void draw();
 
-	void addChild(ViewBase*);
-	void addChild(TextBase*);
+	void addChild(IDrawable*);
 	
 	TextBase* getEnergyText() { return &energyText;}
 

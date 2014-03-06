@@ -54,8 +54,7 @@ bool SimpleDropBehavior::onBeginInteraction(ObjectBase* target)
 	debugPopUp->setText((drop >= 0 ? "+" : "-") + to_string(long long(drop)));
 	CustomPoint* pos = &controller->getObject()->getPosition();
 	debugPopUp->getPosition()->set(pos->x, pos->y);
-	
-	SceneController::getInstance().addChild((TextBase*)debugPopUp);		
+		
 	//
 
 	return processed = true;
