@@ -20,7 +20,7 @@ void PhEngineConnector::doStep(int stepInMSecs)
 	world->Step(step, velocityIterations, positionIterations); 
 }
 
-void PhEngineConnector::createBody(ObjectBase* obj, int oType, CustomPoint pos)
+void PhEngineConnector::createBody(ObjectBase* obj, int oType, const CustomPoint& pos)
 {
 	static b2BodyDef bodyDef;
 	bodyDef.type = (b2BodyType)oType; 

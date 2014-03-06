@@ -52,7 +52,7 @@ int _tmain(int argc, _TCHAR* argv[])
 	object->setRestitution(.5f);
 	object->setLinearDamping(1.0f);
 	
-	scene.getEnergyText()->setText("Energy: " + to_string(long long(object->getEnergy())));
+	scene.getEnergyText().setText("Energy: " + to_string(long long(object->getEnergy())));
 
 	hero->addBehavior(new UserControlBehavior());
 	hero->addBehavior(new MoveBehavior());

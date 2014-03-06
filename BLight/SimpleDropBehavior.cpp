@@ -46,7 +46,7 @@ bool SimpleDropBehavior::onBeginInteraction(ObjectBase* target)
 	target->setEnergy(energy);
 
 	SceneController& scene = SceneController::getInstance();
-	scene.getEnergyText()->setText("Energy: " + to_string(long long(energy)));
+	scene.getEnergyText().setText("Energy: " + to_string(long long(energy)));
 	return processed = true;
 }
 

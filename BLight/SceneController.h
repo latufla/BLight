@@ -20,7 +20,7 @@ public:
 	void addChild(IDrawable*);
 	void removeChild(IDrawable*);
 	
-	TextBase* getEnergyText() { return &energyText;}
+	TextBase& getEnergyText() { return energyText;}
 
 protected:	
 	SceneController() {};               

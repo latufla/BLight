@@ -21,7 +21,7 @@ public:
 
 	void init(Field*);
 	
-	void createBody(ObjectBase*, int oType, CustomPoint pos);
+	void createBody(ObjectBase*, int oType, const CustomPoint& pos);
 	void destroyBody(ObjectBase*);
 	void setShape(ObjectBase*, CustomPolygon*);
 	void setShape(ObjectBase*, CustomCircle*);

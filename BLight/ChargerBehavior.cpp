@@ -42,8 +42,8 @@ bool ChargerBehavior::doStep(int step)
 		
 	chargingObject->setEnergy(++energy);
 	
-	TextBase* energyText = SceneController::getInstance().getEnergyText();
-	energyText->setText("Energy: " + to_string(long long(energy)));
+	TextBase& energyText = SceneController::getInstance().getEnergyText();
+	energyText.setText("Energy: " + to_string(long long(energy)));
 	return true;
 }
 
