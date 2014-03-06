@@ -17,7 +17,7 @@ void ViewBase::draw()
 
 	CustomShape* sp = object->getShape();
 	if(CustomShape::isPolygon(sp))
-		EngineConnector::drawShape((CustomPolygon*)sp);
+		EngineConnector::getInstance().drawShape((CustomPolygon*)sp);
 	else if(CustomShape::isCircle(sp))
-		EngineConnector::drawShape((CustomCircle*)sp);
+		EngineConnector::getInstance().drawShape((CustomCircle*)sp);
 }

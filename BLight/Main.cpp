@@ -69,7 +69,7 @@ int _tmain(int argc, _TCHAR* argv[])
 
 	
 	field.startBehaviors();
-	EngineConnector::start(&mainLoop);
+	EngineConnector::getInstance().init(&mainLoop);
 	
 	return 0; 
 }

@@ -13,10 +13,11 @@ GamepadBehavior::~GamepadBehavior(void)
 
 CustomPoint* GamepadBehavior::getTouch()
 {
-	if(!EngineConnector::isLeftMouseButtonPressed())
+	EngineConnector& ec = EngineConnector::getInstance();
+	if(!ec.isLeftMouseButtonPressed())
 		return nullptr;		
 	
-	CustomPoint pos = EngineConnector::getMousePosition();
+	CustomPoint pos = ec.getMousePosition();
 	touch->x = pos.x;
 	touch->y = pos.y;
 	return touch;

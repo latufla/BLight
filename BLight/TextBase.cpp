@@ -30,5 +30,5 @@ void TextBase::init(string text, string font)
 
 void TextBase::draw()
 {
-	EngineConnector::drawText(this);
+	EngineConnector::getInstance().drawText(this);
 }

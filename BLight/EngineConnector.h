@@ -15,7 +15,12 @@ using namespace sf;
 class EngineConnector
 {
 public:
-	
+	static EngineConnector& getInstance()
+	{
+		static EngineConnector instance;
+		return instance;
+	}
+
 	static const int FPS;
 
 	static const int MUL_X;
@@ -26,29 +31,32 @@ public:
 	static const int WINDOW_W; 
 	static const int WINDOW_H; 
 
-	static void start(void(*)(int));
-  	static void printDebug(string);
+	void init(void(*)(int));
+  	void printDebug(string);
 	
-	static void drawShape(CustomPolygon*);
-	static void drawShape(CustomCircle*);
+	void drawShape(CustomPolygon*);
+	void drawShape(CustomCircle*);
 
-	static void drawPoint(CustomPoint);
-	static void drawLine(CustomPoint, CustomPoint);
+	void drawPoint(CustomPoint);
+	void drawLine(CustomPoint, CustomPoint);
 
-	static void drawText(TextBase*);
+	void drawText(TextBase*);
 
-	static bool isLeftMouseButtonPressed();
-	static CustomPoint getMousePosition();
+	bool isLeftMouseButtonPressed();
+	CustomPoint getMousePosition();
 
 private:
-	static bool shouldStop(RenderWindow*);
-	static Int32 shouldDoStep(Clock&);
+	EngineConnector() {};               
+	EngineConnector(EngineConnector const&);              
+	void operator=(EngineConnector const&);
+
+	bool shouldStop(RenderWindow*);
+	Int32 shouldDoStep(Clock&);
 	
-	static void applyAxises(CustomPoint*);
-	static void declineAxises(CustomPoint*);
+	void applyAxises(CustomPoint*);
+	void declineAxises(CustomPoint*);
 
-	static RenderWindow* window;
-
-	static map<string, sf::Font> fonts;
+	RenderWindow* window;
+	map<string, sf::Font> fonts;
 };
 

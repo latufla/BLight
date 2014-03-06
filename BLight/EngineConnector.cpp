@@ -1,5 +1,4 @@
 #include "EngineConnector.h"
-#include "CustomCircle.h"
 
 const int EngineConnector::FPS = 60;
 
@@ -11,10 +10,7 @@ const int EngineConnector::SCALE_Y = -1;
 const int EngineConnector::WINDOW_W = 1024;
 const int EngineConnector::WINDOW_H = 768;
 
-RenderWindow* EngineConnector::window = nullptr;
-map<string, sf::Font> EngineConnector::fonts;
-
-void EngineConnector::start( void(*mainLoop)(int) )
+void EngineConnector::init( void(*mainLoop)(int) )
 {
 	ContextSettings settings;
 	settings.antialiasingLevel = 0;
@@ -48,7 +44,7 @@ void EngineConnector::printDebug( string str)
 
 bool EngineConnector::shouldStop( RenderWindow* window)
 {
-	Event event;
+	static Event event;
 	while (window->pollEvent(event)){
 		if (event.type == Event::Closed)
 			return true;
@@ -58,13 +54,6 @@ bool EngineConnector::shouldStop( RenderWindow* window)
 
 Int32 EngineConnector::shouldDoStep( Clock& timer)
 {
-// 	Int32 stepInterval = 1000 / FPS;
-// 	Int32 time = timer.getElapsedTime().asMilliseconds();
-// 	if(time > stepInterval){
-// 		timer.restart();
-// 		return time;
-// 	}
-// 	return 0;
 	Int32 time = timer.getElapsedTime().asMilliseconds();
 	timer.restart();
 	return time;
