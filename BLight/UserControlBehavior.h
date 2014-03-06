@@ -15,7 +15,7 @@ public:
 	CustomPoint* getDestination();
 	float getForce();
 
-	BehaviorType getType(){return USER_CONTROL;};
+	BehaviorType getType(){return USER_CONTROL_BEHAVIOR;};
 
 private:	
 	bool doStep(int);

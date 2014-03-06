@@ -50,48 +50,9 @@ bool BehaviorBase::doStep(int)
 	return true;
 }
 
-
-bool BehaviorBase::operator ==(BehaviorBase obj)
-{
-	return this->id == obj.getId()
-		&& this->name == obj.getName()
-		&& this->enabled == obj.getEnabled(); // doubtful
-}
-
 BehaviorBase::operator string()
 {
 	return string(typeid(*this).name()) + " id: " + to_string((long long)id)
 		+ ", name: " + name 
 		+ ", enabled: " + to_string((long long)enabled); 
-}
-
-
-int BehaviorBase::getId()
-{
-	return id;
-}
-
-std::string BehaviorBase::getName()
-{
-	return name;
-}
-
-void BehaviorBase::setId( int val )
-{
-	this->id = val;
-}
-
-void BehaviorBase::setName( string val )
-{
-	this->name = val;
-}
-
-ControllerBase* BehaviorBase::getController()
-{
-	return controller;
-}
-
-bool BehaviorBase::getEnabled()
-{
-	return enabled;
 }
