@@ -4,7 +4,7 @@
 void SceneController::init()
 {
 	energyText.setText("Energy: ");	
-	energyText.setPosition(new CustomPoint(1.0f, 38.0f));
+	energyText.getPosition()->set(1.0f, 38.0f);
 	addChild(&energyText);
 }
 

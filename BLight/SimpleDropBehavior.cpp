@@ -52,8 +52,8 @@ bool SimpleDropBehavior::onBeginInteraction(ObjectBase* target)
 	// TODO: dirty leak stuff
 	PopupText* debugPopUp = new PopupText();
 	debugPopUp->setText((drop >= 0 ? "+" : "-") + to_string(long long(drop)));
-	CustomPoint pos = controller->getObject()->getPosition();
-	debugPopUp->setPosition(&pos);
+	CustomPoint* pos = &controller->getObject()->getPosition();
+	debugPopUp->getPosition()->set(pos->x, pos->y);
 	
 	SceneController::getInstance().addChild((TextBase*)debugPopUp);		
 	//

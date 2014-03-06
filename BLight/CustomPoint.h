@@ -9,6 +9,8 @@ public:
 
 	operator string();
 
+	void set(float, float);
+
 	float getLength();
 	void normalize(float = 1);
 

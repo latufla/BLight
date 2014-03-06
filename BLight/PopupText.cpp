@@ -4,7 +4,7 @@
 PopupText::PopupText(void)
 {
 	alphaStep = -5;
-	positionStep = 0.01;
+	positionStep = 0.01f;
 }
 
 

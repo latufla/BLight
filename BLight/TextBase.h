@@ -27,9 +27,8 @@ public:
 
 	int getCharacterSize()  { return characterSize; }
 	void setCharacterSize(int val) { characterSize = val; }
-
-	CustomPoint* getPosition()  { return &position; }
-	void setPosition(CustomPoint* val) { position = *val; }
+	
+	CustomPoint* getPosition(){return &position;}
 
 protected:
 	void init(string = "no text", string = "tahoma");

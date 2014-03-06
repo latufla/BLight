@@ -30,3 +30,9 @@ void CustomPoint::normalize(float weight)
 	x /= length;
 	y /= length;
 }
+
+void CustomPoint::set(float x, float y)
+{
+	this->x = x;
+	this->y = y;
+}
