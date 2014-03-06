@@ -13,13 +13,13 @@ public:
 	bool stop();
 	
 	CustomPoint* getDestination();
-	float getForce();
+	float getForce(){return 15.0f;}
 
 	BehaviorType getType(){return USER_CONTROL_BEHAVIOR;};
 
 private:	
 	bool doStep(int);
 
-	GamepadBehavior* gamepad;
+	GamepadBehavior gamepad;
 };
 

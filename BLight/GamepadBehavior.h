@@ -13,6 +13,6 @@ public:
 	
 	BehaviorType getType(){return GAMEPAD_BEHAVIOR;};
 private:
-	CustomPoint* touch;
+	CustomPoint touch;
 };
 

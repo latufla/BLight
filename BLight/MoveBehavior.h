@@ -13,7 +13,7 @@ public:
 protected:
 	bool doStep(int);
 	
-	bool shouldStop(CustomPoint*);
+	bool shouldStop(CustomPoint&);
 	void applyStoppage();
 };
 

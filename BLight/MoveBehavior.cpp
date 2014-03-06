@@ -26,7 +26,7 @@ bool MoveBehavior::doStep(int step)
 	force.x = dest->x - pos.x;
 	force.y = dest->y - pos.y;
 	
-	if(shouldStop(&force)){
+	if(shouldStop(force)){
 		applyStoppage();
 		return false;
 	}
@@ -36,9 +36,9 @@ bool MoveBehavior::doStep(int step)
 	return true;
 }
 
-bool MoveBehavior::shouldStop(CustomPoint* force)
+bool MoveBehavior::shouldStop(CustomPoint& force)
 {
-	return force->getLength() < .1f;
+	return force.getLength() < .1f;
 }
 
 void MoveBehavior::applyStoppage()
