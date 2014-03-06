@@ -1,4 +1,5 @@
 #include "SceneController.h"
+#include "EngineConnector.h"
 
 
 void SceneController::init()
@@ -20,12 +21,10 @@ void SceneController::addChild(IDrawable* v)
 	drawList.push_back(v);
 }
 
-// IDrawable* SceneController::removeChild(IDrawable* t)
-// {
-// // 	drawList.erase(remove_if(drawList.begin(), drawList.end(), [t](IDrawable* view) -> bool{
-// // 		return t == view;
-// // 	}), drawList.end());
-// 	
-// 	return t;
-// }
+void SceneController::removeChild( IDrawable* view)
+{	
+	drawList.erase(remove_if(drawList.begin(), drawList.end(), [view](IDrawable* v) -> bool{
+				return view == v;
+	}), drawList.end());
+}
 

@@ -18,6 +18,7 @@ public:
 	void draw();
 
 	void addChild(IDrawable*);
+	void removeChild(IDrawable*);
 	
 	TextBase* getEnergyText() { return &energyText;}
 
