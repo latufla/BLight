@@ -43,7 +43,7 @@ public:
 	void drawText(TextBase*);
 
 	bool isLeftMouseButtonPressed();
-	CustomPoint* getMousePosition();
+	CustomPoint& getMousePosition();
 
 private:
 	EngineConnector() {};               
@@ -53,8 +53,8 @@ private:
 	bool shouldStop(RenderWindow*);
 	Int32 shouldDoStep(Clock&);
 	
-	void applyAxises(CustomPoint*);
-	void declineAxises(CustomPoint*);
+	void applyAxises(CustomPoint&);
+	void declineAxises(CustomPoint&);
 
 	RenderWindow* window;
 	map<string, sf::Font> fonts;

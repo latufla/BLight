@@ -21,7 +21,7 @@ bool MoveBehavior::doStep(int step)
 	if(dest == nullptr)
 		return false;
 
-	CustomPoint pos = controller->getObject()->getPosition();
+	CustomPoint& pos = controller->getObject()->getPosition();
 	static CustomPoint force;
 	force.x = dest->x - pos.x;
 	force.y = dest->y - pos.y;

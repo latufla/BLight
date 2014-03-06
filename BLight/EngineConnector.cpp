@@ -67,7 +67,7 @@ void EngineConnector::drawPoint(CustomPoint p)
 	
 	c.setOrigin(2, 2);
 
-	applyAxises(&p);
+	applyAxises(p);
 	c.setPosition(p.x, p.y);
 
 	c.setFillColor(Color::Blue);
@@ -77,8 +77,8 @@ void EngineConnector::drawPoint(CustomPoint p)
 
 void EngineConnector::drawLine(CustomPoint b, CustomPoint e)
 {
-	applyAxises(&b);
-	applyAxises(&e);
+	applyAxises(b);
+	applyAxises(e);
 
 	static VertexArray line(Lines, 2);
 	
@@ -94,26 +94,26 @@ void EngineConnector::drawLine(CustomPoint b, CustomPoint e)
 }
 
 
-void EngineConnector::applyAxises( CustomPoint* outPoint)
+void EngineConnector::applyAxises( CustomPoint& outPoint)
 {
-	outPoint->x = outPoint->x * MUL_X * SCALE_X;
-	outPoint->y = outPoint->y * MUL_Y * SCALE_Y + WINDOW_H;
+	outPoint.x = outPoint.x * MUL_X * SCALE_X;
+	outPoint.y = outPoint.y * MUL_Y * SCALE_Y + WINDOW_H;
 }
 
-void EngineConnector::declineAxises( CustomPoint* outPoint)
+void EngineConnector::declineAxises( CustomPoint& outPoint)
 {
-	outPoint->x = (outPoint->x / MUL_X) / SCALE_X;
-	outPoint->y = ((outPoint->y - WINDOW_H) / MUL_Y) / SCALE_Y;
+	outPoint.x = (outPoint.x / MUL_X) / SCALE_X;
+	outPoint.y = ((outPoint.y - WINDOW_H) / MUL_Y) / SCALE_Y;
 }
 
 
 void EngineConnector::drawShape(CustomPolygon* poly)
 {
-	vector<CustomPoint>* vxs = poly->getVertexes();
-	for (auto it = vxs->cbegin(); it != vxs->cend() - 1; it++){
+	vector<CustomPoint>& vxs = poly->getVertexes();
+	for (auto it = vxs.cbegin(); it != vxs.cend() - 1; it++){
 		EngineConnector::drawLine(*it, *(it + 1));
 	}
-	EngineConnector::drawLine(*vxs->cbegin(), *(vxs->cend() - 1));
+	EngineConnector::drawLine(*vxs.cbegin(), *(vxs.cend() - 1));
 }
 
 void EngineConnector::drawShape(CustomCircle* circle)
@@ -122,12 +122,12 @@ void EngineConnector::drawShape(CustomCircle* circle)
 	
 	c.setRadius(circle->getRadius() * MUL_X);
 	
-	CustomPoint* origin = circle->getOrigin();
-	c.setOrigin(origin->x * MUL_X, origin->y * MUL_Y);
+	CustomPoint& origin = circle->getOrigin();
+	c.setOrigin(origin.x * MUL_X, origin.y * MUL_Y);
 
 	static CustomPoint pos;
-	pos.set(*circle->getPosition());
-	applyAxises(&pos);
+	pos.set(circle->getPosition());
+	applyAxises(pos);
 	c.setPosition(pos.x, pos.y);
 
 	c.setOutlineThickness(1);
@@ -140,13 +140,13 @@ bool EngineConnector::isLeftMouseButtonPressed()
 	return Mouse::isButtonPressed(Mouse::Left);
 }
 
-CustomPoint* EngineConnector::getMousePosition()
+CustomPoint& EngineConnector::getMousePosition()
 {
 	Vector2i* pos = &Mouse::getPosition(*window);
 	static CustomPoint res;
 	res.set((float)pos->x, (float)pos->y);
-	declineAxises(&res);
-	return &res;	
+	declineAxises(res);
+	return res;	
 }
 
 void EngineConnector::drawText(TextBase* text)
@@ -158,8 +158,8 @@ void EngineConnector::drawText(TextBase* text)
 	t.setCharacterSize(text->getCharacterSize());
 	
 	static CustomPoint pos;
-	pos.set(*text->getPosition());
-	applyAxises(&pos);
+	pos.set(text->getPosition());
+	applyAxises(pos);
 	t.setPosition(pos.x, pos.y);	
 
 	t.setStyle(Text::Regular);

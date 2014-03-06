@@ -12,7 +12,7 @@ public:
 
 	~CustomPolygon(void);
 
-	vector<CustomPoint>* getVertexes(){return &vertexes;}
+	vector<CustomPoint>& getVertexes(){return vertexes;}
 
 	ShapeType getType(){return POLYGON;};
 

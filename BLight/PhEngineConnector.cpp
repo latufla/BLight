@@ -78,12 +78,12 @@ void PhEngineConnector::setShape(ObjectBase* obj, CustomPolygon* poly)
 	b2Body* b = objectToBody[obj];
 	static b2PolygonShape shape;
 
-	vector<CustomPoint>* vertexes = poly->getVertexes();
+	vector<CustomPoint>& vertexes = poly->getVertexes();
 	CustomPoint* vertex;
-	char n = vertexes->size();
+	char n = vertexes.size();
 	b2Vec2* vxsB2 = new b2Vec2[n];
 	for(int i = 0; i < n; i++){
-		vertex = &vertexes->at(i);
+		vertex = &vertexes[i];
 		vxsB2[i] = b2Vec2((float32)vertex->x, (float32)vertex->y);
 	}
 	shape.Set(vxsB2, n);
@@ -101,8 +101,8 @@ void PhEngineConnector::setShape( ObjectBase* obj, CustomCircle* circle)
 	
 	static b2CircleShape shape;
 	shape.m_radius = circle->getRadius();
-	CustomPoint* p = circle->getPosition();
-	shape.m_p.Set(p->x, p->y); 
+	CustomPoint& p = circle->getPosition();
+	shape.m_p.Set(p.x, p.y); 
 
 	static b2FixtureDef fixtureDef;
 	fixtureDef.shape = &shape;
@@ -113,29 +113,29 @@ void PhEngineConnector::setShape( ObjectBase* obj, CustomCircle* circle)
 
 CustomShape* PhEngineConnector::getShape( ObjectBase* obj, CustomPolygon* poly)
 {
-	CustomPoint pos = obj->getPosition();
+	CustomPoint& pos = obj->getPosition();
 	b2Fixture* fixture = objectToBody[obj]->GetFixtureList();
 
 	b2PolygonShape* shape = (b2PolygonShape*)(fixture->GetShape());	
 
-	vector<CustomPoint>* vertexes = ((CustomPolygon*)poly)->getVertexes();
+	vector<CustomPoint>& vertexes = ((CustomPolygon*)poly)->getVertexes();
 	char n = shape->GetVertexCount();
 	for (char i = 0; i < n; i++){
 		const b2Vec2& bVx = shape->GetVertex(i);
-		(*vertexes)[i].x = (float)bVx.x + pos.x;
-		(*vertexes)[i].y = (float)bVx.y + pos.y;
+		vertexes[i].x = (float)bVx.x + pos.x;
+		vertexes[i].y = (float)bVx.y + pos.y;
 	}
 	return (CustomShape*)poly;
 };
 
 CustomShape* PhEngineConnector::getShape( ObjectBase* obj, CustomCircle* circle )
 {
-	CustomPoint pos = obj->getPosition();
+	CustomPoint& pos = obj->getPosition();
 	b2Fixture* fixture = objectToBody[obj]->GetFixtureList();
 	
 	b2CircleShape* shape = (b2CircleShape*)(fixture->GetShape());
 	circle->setRadius(shape->m_radius);
-	circle->getPosition()->set(shape->m_p.x + pos.x, shape->m_p.y + pos.y);
+	circle->getPosition().set(shape->m_p.x + pos.x, shape->m_p.y + pos.y);
 	
 	return (CustomShape*)circle;
 }

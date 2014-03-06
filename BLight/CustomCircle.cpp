@@ -18,8 +18,8 @@ CustomCircle::~CustomCircle(void)
 }
 
 
-CustomPoint* CustomCircle::getOrigin()
+CustomPoint& CustomCircle::getOrigin()
 {	
 	origin.x = origin.y = radius;
-	return &origin;
+	return origin;
 }
