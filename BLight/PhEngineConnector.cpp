@@ -7,8 +7,7 @@ void PhEngineConnector::init(Field* f)
 	world = new b2World(gravity);
 	
 	contactListener = new CustomContactListener();
-	world->SetContactListener(contactListener);
-	
+	world->SetContactListener(contactListener);	
 }
 
 // TODO: if it`s network multi player
@@ -23,7 +22,7 @@ void PhEngineConnector::doStep(int stepInMSecs)
 
 void PhEngineConnector::createBody(ObjectBase* obj, int oType, CustomPoint pos)
 {
-	b2BodyDef bodyDef;
+	static b2BodyDef bodyDef;
 	bodyDef.type = (b2BodyType)oType; 
 	bodyDef.position.Set((float32)pos.x, (float32)pos.y);
 	
@@ -32,6 +31,15 @@ void PhEngineConnector::createBody(ObjectBase* obj, int oType, CustomPoint pos)
 	objectToBody[obj] = body;
 	bodyToObject[body] = obj;
 }
+
+void PhEngineConnector::destroyBody(ObjectBase* obj)
+{
+	b2Body* body = objectToBody[obj];
+	objectToBody.erase(obj);
+	bodyToObject.erase(body);	
+	world->DestroyBody(body);
+}
+
 
 void PhEngineConnector::setDensity( ObjectBase* obj, float d)
 {
@@ -54,8 +62,9 @@ void PhEngineConnector::setResitution( ObjectBase* obj, float r)
 CustomPoint PhEngineConnector::getPosition(ObjectBase* obj)
 {
 	b2Body* body = objectToBody[obj];
-	b2Vec2 pos = body->GetPosition();
-	CustomPoint res((float)pos.x, (float)pos.y);
+	const b2Vec2& pos = body->GetPosition();
+	static CustomPoint res;
+	res.set(pos.x, pos.y);
 	return res;
 }
 
@@ -68,7 +77,7 @@ float PhEngineConnector::getRotation(ObjectBase* obj)
 void PhEngineConnector::setShape(ObjectBase* obj, CustomPolygon* poly)
 {
 	b2Body* b = objectToBody[obj];
-	b2PolygonShape shape;
+	static b2PolygonShape shape;
 
 	vector<CustomPoint>* vertexes = poly->getVertexes();
 	CustomPoint* vertex;
@@ -81,7 +90,7 @@ void PhEngineConnector::setShape(ObjectBase* obj, CustomPolygon* poly)
 	shape.Set(vxsB2, n);
 	delete [] vxsB2;
 
-	b2FixtureDef fixtureDef;
+	static b2FixtureDef fixtureDef;
 	fixtureDef.shape = &shape;
 
 	b->CreateFixture(&fixtureDef);
@@ -91,12 +100,12 @@ void PhEngineConnector::setShape( ObjectBase* obj, CustomCircle* circle)
 {
 	b2Body* b = objectToBody[obj];
 	
-	b2CircleShape shape;
+	static b2CircleShape shape;
 	shape.m_radius = circle->getRadius();
 	CustomPoint* p = circle->getPosition();
-	shape.m_p = b2Vec2(p->x, p->y); 
+	shape.m_p.Set(p->x, p->y); 
 
-	b2FixtureDef fixtureDef;
+	static b2FixtureDef fixtureDef;
 	fixtureDef.shape = &shape;
 
 	b->CreateFixture(&fixtureDef);
@@ -111,10 +120,9 @@ CustomShape* PhEngineConnector::getShape( ObjectBase* obj, CustomPolygon* poly)
 	b2PolygonShape* shape = (b2PolygonShape*)(fixture->GetShape());	
 
 	vector<CustomPoint>* vertexes = ((CustomPolygon*)poly)->getVertexes();
-	b2Vec2 bVx; 
 	char n = shape->GetVertexCount();
 	for (char i = 0; i < n; i++){
-		bVx = shape->GetVertex(i);
+		const b2Vec2& bVx = shape->GetVertex(i);
 		(*vertexes)[i].x = (float)bVx.x + pos.x;
 		(*vertexes)[i].y = (float)bVx.y + pos.y;
 	}
@@ -136,7 +144,8 @@ CustomShape* PhEngineConnector::getShape( ObjectBase* obj, CustomCircle* circle 
 void PhEngineConnector::applyLinearImpulse( ObjectBase* obj, CustomPoint* impulse )
 {
 	b2Body* b = objectToBody[obj];
-	b2Vec2 bImpulse(impulse->x, impulse->y);
+	static b2Vec2 bImpulse;
+	bImpulse.Set(impulse->x, impulse->y);
 	b->ApplyLinearImpulse(bImpulse, b->GetWorldCenter());
 }
 
@@ -149,8 +158,9 @@ void PhEngineConnector::setLinearDamping( ObjectBase* obj, float damping )
 CustomPoint PhEngineConnector::getGlobalCenter( ObjectBase* obj )
 {
 	b2Body* b = objectToBody[obj];
-	b2Vec2 bCenter = b->GetWorldCenter();
-	return CustomPoint(bCenter.x, bCenter.y);
+	const b2Vec2& bCenter = b->GetWorldCenter();
+	static CustomPoint res(bCenter.x, bCenter.y);
+	return res;
 }
 
 void PhEngineConnector::applyForce( ObjectBase* obj, CustomPoint* force )
@@ -158,8 +168,7 @@ void PhEngineConnector::applyForce( ObjectBase* obj, CustomPoint* force )
 	b2Body* b = objectToBody[obj];
 	
 	static b2Vec2 bForce;
-	bForce.x = force->x;
-	bForce.y = force->y;
+	bForce.Set(force->x, force->y);
 	b->ApplyForceToCenter(bForce);	
 }
 

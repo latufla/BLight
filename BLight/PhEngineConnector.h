@@ -22,6 +22,7 @@ public:
 	void init(Field*);
 	
 	void createBody(ObjectBase*, int oType, CustomPoint pos);
+	void destroyBody(ObjectBase*);
 	void setShape(ObjectBase*, CustomPolygon*);
 	void setShape(ObjectBase*, CustomCircle*);
 
@@ -54,10 +55,10 @@ private:
 	void operator=(PhEngineConnector const&);
 
 	b2World* world;
-	map<ObjectBase*, b2Body*> objectToBody;
+	map<ObjectBase*, b2Body*> objectToBody; 
 	map<b2Body*, ObjectBase*> bodyToObject;
 	
-	vector<BehaviorBase*> contactReceivers;
+	vector<BehaviorBase*> contactReceivers; 
 	CustomContactListener* contactListener;
 	
 	friend class CustomContactListener;
