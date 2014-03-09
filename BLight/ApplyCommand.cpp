@@ -34,7 +34,12 @@ bool ApplyCommand::canExecute()
 {
 	BehaviorType bType = caller->getType();
 	if(prop == target->getEnergyProp()){
-		return *prop < 100;
+		switch(bType){
+			case CHARGER_BEHAVIOR:
+				return *prop < 100;
+			case SIMPLE_DROP_BEHAVIOR:
+				return true;
+		}
 	}
 	return false;
 }

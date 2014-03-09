@@ -7,8 +7,8 @@ class MoveBehavior : public BehaviorBase
 public:
 	MoveBehavior(void);
 	~MoveBehavior(void);
-
-	BehaviorType getType(){return MOVE_BEHAVIOR;};
+	
+	BehaviorType getType(){return MOVE_BEHAVIOR;}
 
 protected:
 	bool doStep(int);

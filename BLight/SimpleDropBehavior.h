@@ -16,8 +16,8 @@ public:
 	bool stop();
 
 	bool onBeginInteraction(ObjectBase*);
-
-	BehaviorType getType() const {return SIMPLE_DROP_BEHAVIOR;}
+	
+	BehaviorType getType(){return SIMPLE_DROP_BEHAVIOR;}
 
 protected:
 	bool doStep(int);

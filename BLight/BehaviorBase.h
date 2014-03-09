@@ -32,8 +32,8 @@ public:
 	virtual string getName(){return name;}
 	virtual void setName(string val){name = val;}
 	
-	virtual BehaviorType getType(){return NONE_BEHAVIOR;};
-
+	virtual BehaviorType getType(){return NONE_BEHAVIOR;}
+	
 protected:
 	virtual void init(int, string);
 	virtual bool doStep(int);

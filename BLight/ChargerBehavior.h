@@ -16,8 +16,8 @@ public:
 	bool stop();
 	bool onBeginInteraction(ObjectBase*);
 	bool onEndInteraction(ObjectBase*);
-
-	BehaviorType getType() const {return CHARGER_BEHAVIOR;}
+	
+	BehaviorType getType(){return CHARGER_BEHAVIOR;}
 	
 protected:
 	bool doStep(int);
