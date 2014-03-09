@@ -46,6 +46,7 @@ public:
 	CustomPoint& getGlobalCenter();
 	// end Ph
 
+	int* getEnergyProp(){return &energy;}
 	int getEnergy(){return energy;}
 	void setEnergy(int val){energy = val;}
 
@@ -59,6 +60,5 @@ protected:
 	CustomPoint globalCenter;
 
 	CustomShape* shape;
-
 };
 

@@ -2,6 +2,7 @@
 #include "BehaviorBase.h"
 #include "PhEngineConnector.h"
 #include "SceneController.h"
+#include "ApplyCommand.h"
 
 
 // charges main hero energy
@@ -20,5 +21,7 @@ protected:
 	bool doStep(int);
 
 	ObjectBase* chargingObject;
+
+	ApplyCommand command;
 };
 

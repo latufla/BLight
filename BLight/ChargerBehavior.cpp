@@ -33,18 +33,11 @@ bool ChargerBehavior::doStep(int step)
 {
 	__super::doStep(step);
 	
-	if(chargingObject == nullptr)
+	if(chargingObject == nullptr || chargingObject->getEnergy() >= 100)
 		return false;
 
-	int energy = chargingObject->getEnergy();
-	if(energy >= 100)
-		return false;	
-		
-	chargingObject->setEnergy(++energy);
-	
-	TextBase& energyText = SceneController::getInstance().getEnergyText();
-	energyText.setText("Energy: " + to_string(long long(energy)));
-	return true;
+	command.setUp(chargingObject, chargingObject->getEnergyProp(), 1);
+	return command.tryToExecute();
 }
 
 bool ChargerBehavior::onBeginInteraction(ObjectBase* target)

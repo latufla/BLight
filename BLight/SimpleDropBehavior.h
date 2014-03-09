@@ -2,6 +2,7 @@
 #include "ObjectBase.h"
 #include "BehaviorBase.h"
 #include "PhEngineConnector.h"
+#include "ApplyCommand.h"
 
 class SimpleDropBehavior : public BehaviorBase
 {
@@ -21,5 +22,7 @@ protected:
 
 	int drop;
 	bool processed;
+	
+	ApplyCommand command;
 };
 

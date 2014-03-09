@@ -42,12 +42,9 @@ bool SimpleDropBehavior::onBeginInteraction(ObjectBase* target)
 	if(processed)
 		return false;
 
-	int energy = target->getEnergy() + drop;
-	target->setEnergy(energy);
-
-	SceneController& scene = SceneController::getInstance();
-	scene.getEnergyText().setText("Energy: " + to_string(long long(energy)));
-	return processed = true;
+	command.setUp(target, target->getEnergyProp(), drop);
+	processed = command.tryToExecute();
+	return processed;
 }
 
 bool SimpleDropBehavior::doStep(int step)
