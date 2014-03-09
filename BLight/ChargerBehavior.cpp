@@ -32,11 +32,11 @@ bool ChargerBehavior::stop()
 bool ChargerBehavior::doStep(int step)
 {
 	__super::doStep(step);
-	
-	if(chargingObject == nullptr || chargingObject->getEnergy() >= 100)
+
+	if(chargingObject == nullptr)
 		return false;
 
-	command.setUp(chargingObject, chargingObject->getEnergyProp(), 1);
+	command.setUp(this, chargingObject, chargingObject->getEnergyProp(), 1);
 	return command.tryToExecute();
 }
 

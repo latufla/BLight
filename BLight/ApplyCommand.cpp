@@ -12,8 +12,9 @@ ApplyCommand::~ApplyCommand(void)
 }
 
 
-void ApplyCommand::setUp(ObjectBase* target, int* prop, int applyValue)
+void ApplyCommand::setUp(BehaviorBase* caller, ObjectBase* target, int* prop, int applyValue)
 {
+	this->caller = caller;
 	this->target = target;
 	this->prop = prop;
 	this->applyValue = applyValue;
@@ -31,7 +32,11 @@ bool ApplyCommand::tryToExecute()
 
 bool ApplyCommand::canExecute()
 {
-	return true;
+	BehaviorType bType = caller->getType();
+	if(prop == target->getEnergyProp()){
+		return *prop < 100;
+	}
+	return false;
 }
 
 void ApplyCommand::execute()

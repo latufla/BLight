@@ -1,5 +1,6 @@
 #pragma once
 #include "ObjectBase.h"
+#include "BehaviorBase.h"
 class ApplyCommand
 {
 public:
@@ -10,9 +11,10 @@ public:
 	bool canExecute();
 	void execute();
 
-	void setUp(ObjectBase*, int*, int);
+	void setUp(BehaviorBase*, ObjectBase*, int*, int);
 
 protected:
+	BehaviorBase* caller;
 	ObjectBase* target;
 	int* prop;
 	int applyValue;

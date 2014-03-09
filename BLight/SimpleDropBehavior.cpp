@@ -42,7 +42,7 @@ bool SimpleDropBehavior::onBeginInteraction(ObjectBase* target)
 	if(processed)
 		return false;
 
-	command.setUp(target, target->getEnergyProp(), drop);
+	command.setUp(this, target, target->getEnergyProp(), drop);
 	processed = command.tryToExecute();
 	return processed;
 }
