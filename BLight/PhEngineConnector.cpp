@@ -35,9 +35,11 @@ void PhEngineConnector::createBody(ObjectBase* obj, int oType, const CustomPoint
 void PhEngineConnector::destroyBody(ObjectBase* obj)
 {
 	b2Body* body = objectToBody[obj];
-	objectToBody.erase(obj);
-	bodyToObject.erase(body);	
+
 	world->DestroyBody(body);
+
+	objectToBody.erase(obj);
+	bodyToObject.erase(body);
 }
 
 
@@ -48,7 +50,7 @@ void PhEngineConnector::setDensity( ObjectBase* obj, float d)
 }
 
 void PhEngineConnector::setFriction( ObjectBase* obj, float f)
-{
+{ 
 	b2Fixture* fixture = objectToBody[obj]->GetFixtureList();
 	fixture->SetFriction((float32)f);
 }

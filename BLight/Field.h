@@ -8,8 +8,6 @@ public:
 	~Field(void);
 
 	ObjectBase* createObject(int, string, int, const CustomPoint&);
-
-protected:
-	vector<ObjectBase*> objects; 
+	void destroyObject(ObjectBase*); 
 };
 

@@ -14,12 +14,13 @@ ControllerBase::ControllerBase( ObjectBase* object )
 
 ControllerBase::~ControllerBase(void)
 {
-	for (auto it = behaviors.cbegin(); it != behaviors.cend(); it++){
-		(*it)->stop();
+ 	for (auto it = behaviors.cbegin(); it != behaviors.cend(); it++){
+ 		(*it)->stop();
 		delete (*it);
-	}
-	
-	delete object;
+ 	}
+	behaviors.clear();
+
+	SceneController::getInstance().removeChild(view);
 	delete view;
 }
 
@@ -27,6 +28,7 @@ void ControllerBase::init( int id, string name)
 {
 	this->id = id;
 	this->name = name;
+	toDestroy = false;
 
 	view = new ViewBase();
 	view->setObject(object);

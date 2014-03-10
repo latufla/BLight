@@ -2,6 +2,7 @@
 #include "stdafx.h"
 #include "ObjectBase.h"
 #include "IDrawable.h"
+#include "EngineConnector.h"
 
 class ViewBase : public IDrawable
 {

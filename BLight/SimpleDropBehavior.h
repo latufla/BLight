@@ -3,6 +3,8 @@
 #include "BehaviorBase.h"
 #include "PhEngineConnector.h"
 #include "ApplyCommand.h"
+#include "SceneController.h"
+#include "FieldController.h"
 
 class SimpleDropBehavior : public BehaviorBase
 {

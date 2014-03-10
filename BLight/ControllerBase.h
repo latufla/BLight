@@ -2,6 +2,7 @@
 #include "stdafx.h"
 #include "ObjectBase.h"
 #include "ViewBase.h"
+#include "SceneController.h"
 
 class BehaviorBase;
 enum BehaviorType;
@@ -31,7 +32,10 @@ public:
 	void setName(string val){name = val;}
 
 	ObjectBase* getObject(){return object;}
-	ViewBase* getView() const {return view;}
+	ViewBase* getView(){return view;}
+
+	bool getToDestroy() const { return toDestroy; }
+	void setToDestroy(bool val) { toDestroy = val; }
 	
 protected:
 	void init(int, string);
@@ -39,9 +43,11 @@ protected:
 	int id;
 	string name;
 
-	ObjectBase* object; // gets ownership
-	ViewBase* view; // gets ownership
+	ObjectBase* object;
+	ViewBase* view;
 	
-	vector<BehaviorBase*> behaviors; // gets ownership
+	vector<BehaviorBase*> behaviors;
+
+	bool toDestroy;
 };
 

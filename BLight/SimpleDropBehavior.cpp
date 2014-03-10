@@ -1,6 +1,4 @@
 #include "SimpleDropBehavior.h"
-#include "SceneController.h"
-
 
 SimpleDropBehavior::SimpleDropBehavior(void)
 {
@@ -49,13 +47,14 @@ bool SimpleDropBehavior::onBeginInteraction(ObjectBase* target)
 	return processed;
 }
 
+
+
 bool SimpleDropBehavior::doStep(int step)
 {
 	__super::doStep(step);
 
-	if(processed){
-		// destroy here
-	}
-
+	if(processed)
+		FieldController::getInstance().destroyObjectController(controller);
+	
 	return true;
 }

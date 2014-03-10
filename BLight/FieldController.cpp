@@ -13,6 +13,12 @@ ControllerBase* FieldController::createObjectController(int id, string name, int
 	return c;
 }
 
+void FieldController::destroyObjectController(ControllerBase* c)
+{
+	c->setToDestroy(true);
+}
+
+
 bool FieldController::startBehaviors()
 {
 	__super::startBehaviors();
@@ -37,5 +43,19 @@ bool FieldController::doBehaviorsStep(int step)
 	for(auto it = controllers.cbegin(); it < controllers.cend(); it++){
 		(*it)->doBehaviorsStep(step);
 	}
+	doDestroyStep();
 	return true;
+}
+
+void FieldController::doDestroyStep()
+{
+	controllers.erase(remove_if(controllers.begin(), controllers.end(), [this](ControllerBase* c) -> bool{
+ 		bool res = c->getToDestroy();
+ 		if(res){
+ 			ObjectBase* obj = c->getObject();
+			delete c;
+			field.destroyObject(obj);
+ 		}			
+		return res;
+	}), controllers.end());
 }
