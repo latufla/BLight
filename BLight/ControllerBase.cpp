@@ -12,11 +12,17 @@ ControllerBase::ControllerBase( ObjectBase* object )
 	init(object->getId(), object->getName());	
 }
 
+
+void ControllerBase::setToDestroy(bool val)
+{
+	toDestroy = val;
+	stopBehaviors();
+}
+
 ControllerBase::~ControllerBase(void)
 {
  	for (auto it = behaviors.cbegin(); it != behaviors.cend(); it++){
- 		(*it)->stop();
-		delete (*it);
+ 		delete (*it);
  	}
 	behaviors.clear();
 

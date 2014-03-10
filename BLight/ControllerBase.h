@@ -35,7 +35,7 @@ public:
 	ViewBase* getView(){return view;}
 
 	bool getToDestroy() const { return toDestroy; }
-	void setToDestroy(bool val) { toDestroy = val; }
+	void setToDestroy(bool val);
 	
 protected:
 	void init(int, string);

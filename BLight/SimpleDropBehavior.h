@@ -24,9 +24,9 @@ public:
 protected:
 	bool doStep(int);
 
+	ObjectBase* target;
+
 	int drop;
-	bool processed;
-	
 	ApplyCommand command;
 };
 

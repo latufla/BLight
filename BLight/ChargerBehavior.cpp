@@ -2,7 +2,7 @@
 
 ChargerBehavior::ChargerBehavior(void)
 {
-	chargingObject = nullptr;
+	target = nullptr;
 }
 
 
@@ -36,23 +36,23 @@ bool ChargerBehavior::doStep(int step)
 {
 	__super::doStep(step);
 
-	if(chargingObject == nullptr)
+	if(target == nullptr)
 		return false;
 
-	command.setUp(this, chargingObject, chargingObject->getEnergyProp(), 1);
+	command.setUp(this, target, target->getEnergyProp(), 1);
 	return command.tryToExecute();
 }
 
 bool ChargerBehavior::onBeginInteraction(ObjectBase* target)
 {
-	chargingObject = target;
+	this->target = target;
 	return true;
 }
 
 bool ChargerBehavior::onEndInteraction(ObjectBase* target)
 {
-	if(chargingObject == target){
-		chargingObject = nullptr;
+	if(this->target == target){
+		this->target = nullptr;
 		return true;
 	}	
 	return false;

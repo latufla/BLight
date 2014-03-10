@@ -64,10 +64,11 @@ int _tmain(int argc, _TCHAR* argv[])
 	object = energyPack->getObject();
 	object->setShape((CustomShape*)poly);
 	energyPack->addBehavior(new SimpleDropBehavior(20));
+	energyPack->addBehavior(new SimpleDropBehavior(40));
 	scene.addChild(energyPack->getView());
 
 
-	energyPack = field.createObjectController(2, "eBox", 0, CustomPoint(40.0f, 30.0f));
+	energyPack = field.createObjectController(2, "e2Box", 0, CustomPoint(40.0f, 30.0f));
 
 	poly = new CustomPolygon(2.0f, 2.0f);
 	object = energyPack->getObject();

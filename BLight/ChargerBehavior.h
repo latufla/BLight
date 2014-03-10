@@ -22,7 +22,7 @@ public:
 protected:
 	bool doStep(int);
 
-	ObjectBase* chargingObject;
+	ObjectBase* target;
 
 	ApplyCommand command;
 };

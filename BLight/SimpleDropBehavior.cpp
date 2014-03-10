@@ -7,7 +7,7 @@ SimpleDropBehavior::SimpleDropBehavior(void)
 SimpleDropBehavior::SimpleDropBehavior(int drop)
 {
 	this->drop = drop;
-	processed = false;
+	target = nullptr;
 }
 
 
@@ -39,22 +39,25 @@ bool SimpleDropBehavior::stop()
 
 bool SimpleDropBehavior::onBeginInteraction(ObjectBase* target)
 {
-	if(processed)
+	if(this->target != nullptr)
 		return false;
 
-	command.setUp(this, target, target->getEnergyProp(), drop);
-	processed = command.tryToExecute();
-	return processed;
+	this->target = target;
+	return true;
 }
-
-
 
 bool SimpleDropBehavior::doStep(int step)
 {
 	__super::doStep(step);
 
-	if(processed)
+	if(target == nullptr)
+		return false;
+
+	command.setUp(this, target, target->getEnergyProp(), drop);
+	if(command.tryToExecute()){
 		FieldController::getInstance().destroyObjectController(controller);
-	
-	return true;
+		target = nullptr;
+		return true;
+	}
+	return false;
 }
