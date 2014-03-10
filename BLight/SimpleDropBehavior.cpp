@@ -24,15 +24,17 @@ bool SimpleDropBehavior::start(ControllerBase* c)
 	
 	controller->getObject()->setSensor(true);
 	PhEngineConnector::getInstance().addContactReceiver(this);
-	
+
 	return true;
 }
 
 bool SimpleDropBehavior::stop()
 {
 	controller->getObject()->setSensor(false);
+	PhEngineConnector::getInstance().removeContactReceiver(this);
 
 	__super::stop();
+
 	return true;	
 }
 

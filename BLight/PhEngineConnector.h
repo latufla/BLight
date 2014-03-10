@@ -48,6 +48,7 @@ public:
 	void doStep(int);
 
 	void addContactReceiver(BehaviorBase*);
+	void removeContactReceiver(BehaviorBase*);
 
 private:
 	PhEngineConnector() {};               

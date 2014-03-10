@@ -186,6 +186,13 @@ void PhEngineConnector::addContactReceiver( BehaviorBase* b)
 	contactReceivers.push_back(b);
 }
 
+void PhEngineConnector::removeContactReceiver( BehaviorBase* b)
+{
+	contactReceivers.erase(remove_if(contactReceivers.begin(), contactReceivers.end(), [b](BehaviorBase* bhr) -> bool{
+		return b == bhr;
+	}), contactReceivers.end());
+}
+
 void PhEngineConnector::setSensor( ObjectBase* obj, bool val )
 {
 	b2Body* b = objectToBody[obj];

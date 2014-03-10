@@ -15,16 +15,19 @@ bool ChargerBehavior::start(ControllerBase* c)
 {
 	__super::start(c);
 
+	controller->getObject()->setSensor(true);
 	PhEngineConnector::getInstance().addContactReceiver(this);
+	
 	return true;
 }
 
 bool ChargerBehavior::stop()
 {
+	controller->getObject()->setSensor(false);
+	PhEngineConnector::getInstance().removeContactReceiver(this);
+
 	__super::stop();
-
-	// remove collision listener
-
+	
 	return true;
 }
 

@@ -37,7 +37,6 @@ int _tmain(int argc, _TCHAR* argv[])
 	poly = new CustomPolygon(4.0f, 4.0f);
 	object = charger->getObject();
 	object->setShape((CustomShape*)poly);
-	object->setSensor(true);
 	charger->addBehavior(new ChargerBehavior());
 	scene.addChild(charger->getView());
 	
