@@ -10,7 +10,7 @@ class BehaviorBase
 public:
 	 BehaviorBase(void);
 	 BehaviorBase(int, string);
-	~BehaviorBase(void);
+	virtual ~BehaviorBase(void);
 
 	virtual bool start(ControllerBase*);
 	virtual bool stop();

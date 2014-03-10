@@ -21,6 +21,8 @@ void ControllerBase::setToDestroy(bool val)
 
 ControllerBase::~ControllerBase(void)
 {
+	cout << "\n" + string(__FUNCTION__) + " " + string(*this);
+
  	for (auto it = behaviors.cbegin(); it != behaviors.cend(); it++){
  		delete (*it);
  	}
@@ -94,7 +96,6 @@ ControllerBase::operator string()
 	string res = string(typeid(*this).name()) 
 		+ " id: " + to_string((long long)id) 
 		+ ", name:" + name
-		+ ", object: { " + string(*object) + " }" + 
 		+ ", behaviors: [ ";
 	for (auto it = behaviors.cbegin(); it != behaviors.cend(); it++){
 		res += "{ ";

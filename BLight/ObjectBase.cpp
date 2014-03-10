@@ -14,6 +14,8 @@ ObjectBase::ObjectBase(int id, string name) : EventDispatcher(id)
 
 ObjectBase::~ObjectBase(void)
 {
+	cout << "\n" + string(__FUNCTION__) + " " + string(*this);
+
 	delete shape;
 }
 
