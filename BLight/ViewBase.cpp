@@ -2,10 +2,12 @@
 
 ViewBase::ViewBase(void) : object(nullptr)
 {
+	cout << "\n" + string(__FUNCTION__);
 }
 
 ViewBase::~ViewBase(void)
 {
+	cout << "\n" + string(__FUNCTION__);
 }
 
 

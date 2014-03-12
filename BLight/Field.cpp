@@ -23,7 +23,6 @@ ObjectBase* Field::createObject(int id, string name, int oType, const CustomPoin
 void Field::destroyObject(ObjectBase* obj)
 {
 	PhEngineConnector::getInstance().destroyBody(obj);
-	delete obj;
 }
 
 

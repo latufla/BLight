@@ -52,10 +52,9 @@ void FieldController::doDestroyStep()
 	controllers.erase(remove_if(controllers.begin(), controllers.end(), [this](ControllerBase* c) -> bool{
  		bool res = c->getToDestroy();
  		if(res){
- 			ObjectBase* obj = c->getObject();
+			field.destroyObject(c->getObject());
 			delete c;
-			field.destroyObject(obj);
- 		}			
+		}			
 		return res;
 	}), controllers.end());
 }

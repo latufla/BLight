@@ -23,6 +23,8 @@ ControllerBase::~ControllerBase(void)
 {
 	cout << "\n" + string(__FUNCTION__) + " " + string(*this);
 
+	delete object;
+
  	for (auto it = behaviors.cbegin(); it != behaviors.cend(); it++){
  		delete (*it);
  	}
@@ -34,6 +36,8 @@ ControllerBase::~ControllerBase(void)
 
 void ControllerBase::init( int id, string name)
 {
+	cout << "\n=>" + string(__FUNCTION__);
+
 	this->id = id;
 	this->name = name;
 	toDestroy = false;

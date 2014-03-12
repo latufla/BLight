@@ -17,6 +17,7 @@ BehaviorBase::~BehaviorBase(void)
 
 void BehaviorBase::init( int id, string name )
 {
+	cout << "\n" + string(__FUNCTION__);
 	this->id = id;
 	this->name = name;
 	enabled = false;

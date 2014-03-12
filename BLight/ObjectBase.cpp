@@ -21,6 +21,8 @@ ObjectBase::~ObjectBase(void)
 
 void ObjectBase::init( int id, string name )
 {
+	cout << "\n" + string(__FUNCTION__);
+
 	this->id = id;
 	this->name = name;
 	energy = 20;
