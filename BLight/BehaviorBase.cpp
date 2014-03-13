@@ -1,5 +1,7 @@
 #include "BehaviorBase.h"
 
+int BehaviorBase::count = 0;
+
 BehaviorBase::BehaviorBase(void)
 {
 	init(0, "dummy");
@@ -12,15 +14,16 @@ BehaviorBase::BehaviorBase( int id, string name)
 
 BehaviorBase::~BehaviorBase(void)
 {
-	cout << "\n" + string(__FUNCTION__) + " " + string(*this);
+	count--;
 }
 
 void BehaviorBase::init( int id, string name )
 {
-	cout << "\n" + string(__FUNCTION__);
 	this->id = id;
 	this->name = name;
 	enabled = false;
+
+	count++;
 }
 
 
@@ -43,7 +46,12 @@ bool BehaviorBase::stop()
 
 bool BehaviorBase::tryDoStep( int stepInMSecs )
 {
-	return enabled ? doStep(stepInMSecs) : false;
+	return canDoStep() ? doStep(stepInMSecs) : false;
+}
+
+bool BehaviorBase::canDoStep()
+{
+	return enabled;
 }
 
 bool BehaviorBase::doStep(int)

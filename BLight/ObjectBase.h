@@ -14,8 +14,9 @@ class ObjectBase : public EventDispatcher
 public:
 	ObjectBase(void);
 	ObjectBase(int, string);
-
 	~ObjectBase(void);
+
+	static int count;
 
 	operator string();
 	

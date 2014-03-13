@@ -12,6 +12,8 @@ public:
 	 BehaviorBase(int, string);
 	virtual ~BehaviorBase(void);
 
+	static int count;
+
 	virtual bool start(ControllerBase*);
 	virtual bool stop();
 	virtual bool tryDoStep(int); // frame behavior
@@ -37,6 +39,7 @@ public:
 protected:
 	virtual void init(int, string);
 	virtual bool doStep(int);
+	virtual bool canDoStep();
 
 	int id;
 	string name;

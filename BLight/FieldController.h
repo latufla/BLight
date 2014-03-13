@@ -2,7 +2,7 @@
 #include "Field.h"
 #include "ControllerBase.h"
 
-class FieldController : ControllerBase
+class FieldController : public ControllerBase
 {
 public:
 	static FieldController& getInstance() {

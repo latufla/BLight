@@ -10,6 +10,8 @@ public:
 	ViewBase(void);
 	~ViewBase(void);
 
+	static int count;
+
 	void draw();
 
 	void setObject(ObjectBase* val) { object = val; }

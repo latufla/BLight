@@ -11,6 +11,7 @@
 #include "SceneController.h"
 #include "SimpleDropBehavior.h"
 #include "FieldController.h"
+#include "DebuggerBehavior.h"
 
 void mainLoop(int);
 
@@ -21,10 +22,12 @@ int _tmain(int argc, _TCHAR* argv[])
 	scene.init();
 
 	FieldController& field = FieldController::getInstance();
+	field.setName("field");
+	field.addBehavior(new DebuggerBehavior());
 	field.init();
 	
 
-	ControllerBase* obstacle = field.createObjectController(1, "gBox", 0, CustomPoint(0.1f, 0.1f));
+	ControllerBase* obstacle = field.createObjectController(1, "obstacle", 0, CustomPoint(0.1f, 0.1f));
 
 	CustomPolygon* poly = new CustomPolygon(5.0f, 1.0f);
 	ObjectBase* object = obstacle->getObject(); 
@@ -32,7 +35,7 @@ int _tmain(int argc, _TCHAR* argv[])
 	scene.addChild(obstacle->getView());
 
 
-	ControllerBase* charger = field.createObjectController(2, "sBox", 0, CustomPoint(5.0f, 20.0f));
+	ControllerBase* charger = field.createObjectController(2, "charger", 0, CustomPoint(5.0f, 20.0f));
 
 	poly = new CustomPolygon(4.0f, 4.0f);
 	object = charger->getObject();
@@ -41,7 +44,7 @@ int _tmain(int argc, _TCHAR* argv[])
 	scene.addChild(charger->getView());
 	
 	
-	ControllerBase* hero = field.createObjectController(3, "dBox", 2, CustomPoint(1.0f, 10.0f));
+	ControllerBase* hero = field.createObjectController(3, "hero", 2, CustomPoint(1.0f, 10.0f));
 
 	CustomCircle* circle = new CustomCircle(CustomPoint(0.0f, 0.0f), 1.0f);
 	object = hero->getObject();
@@ -58,7 +61,7 @@ int _tmain(int argc, _TCHAR* argv[])
 	scene.addChild(hero->getView());
 
 
-	ControllerBase* energyPack = field.createObjectController(2, "eBox", 0, CustomPoint(20.0f, 30.0f));
+	ControllerBase* energyPack = field.createObjectController(2, "pack +20", 0, CustomPoint(20.0f, 30.0f));
 
 	poly = new CustomPolygon(1.0f, 1.0f);
 	object = energyPack->getObject();
@@ -68,17 +71,20 @@ int _tmain(int argc, _TCHAR* argv[])
 	scene.addChild(energyPack->getView());
 
 
-	energyPack = field.createObjectController(2, "e2Box", 0, CustomPoint(40.0f, 30.0f));
+	energyPack = field.createObjectController(2, "pack +30", 0, CustomPoint(40.0f, 30.0f));
 
 	poly = new CustomPolygon(2.0f, 2.0f);
 	object = energyPack->getObject();
 	object->setShape((CustomShape*)poly);
-	energyPack->addBehavior(new SimpleDropBehavior(20));
+	energyPack->addBehavior(new SimpleDropBehavior(30));
 	scene.addChild(energyPack->getView());
 
 	field.startBehaviors();
+
+
+	EngineConnector::getInstance().printDebugInstances();
 	EngineConnector::getInstance().init(&mainLoop);
-	
+
 	return 0; 
 }
 

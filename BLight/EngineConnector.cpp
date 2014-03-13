@@ -1,4 +1,6 @@
 #include "EngineConnector.h"
+#include "BehaviorBase.h"
+#include "FieldController.h"
 
 const int EngineConnector::FPS = 60;
 
@@ -9,6 +11,9 @@ const int EngineConnector::SCALE_Y = -1;
 
 const int EngineConnector::WINDOW_W = 1024;
 const int EngineConnector::WINDOW_H = 768;
+
+const int EngineConnector::F = Keyboard::F;
+const int EngineConnector::D = Keyboard::D;
 
 void EngineConnector::init( void(*mainLoop)(int) )
 {
@@ -135,6 +140,33 @@ void EngineConnector::drawShape(CustomCircle* circle)
 	window->draw(c);
 }
 
+void EngineConnector::drawText(TextBase* text)
+{
+	static Text t;
+
+	t.setString(text->getText());
+	t.setFont(fonts[text->getFont()]);
+	t.setCharacterSize(text->getCharacterSize());
+
+	static CustomPoint pos;
+	pos.set(text->getPosition());
+	applyAxises(pos);
+	t.setPosition(pos.x, pos.y);	
+
+	t.setStyle(Text::Regular);
+
+	int c = text->getColor();
+	static Color color;
+	color.r = (c >> 16) & 0xFF;
+	color.g = (c >> 8) & 0xFF;
+	color.b = c & 0xFF;
+	color.a = text->getAlpha();
+	t.setColor(color);
+
+	window->draw(t);
+}
+
+
 bool EngineConnector::isLeftMouseButtonPressed()
 {
 	return Mouse::isButtonPressed(Mouse::Left);
@@ -149,31 +181,31 @@ CustomPoint& EngineConnector::getMousePosition()
 	return res;	
 }
 
-void EngineConnector::drawText(TextBase* text)
+bool EngineConnector::isKeyPressed(int key)
 {
-	static Text t;
-
-	t.setString(text->getText());
-	t.setFont(fonts[text->getFont()]);
-	t.setCharacterSize(text->getCharacterSize());
-	
-	static CustomPoint pos;
-	pos.set(text->getPosition());
-	applyAxises(pos);
-	t.setPosition(pos.x, pos.y);	
-
-	t.setStyle(Text::Regular);
-	
-	int c = text->getColor();
-	static Color color;
-	color.r = (c >> 16) & 0xFF;
-	color.g = (c >> 8) & 0xFF;
-	color.b = c & 0xFF;
-	color.a = text->getAlpha();
-	t.setColor(color);
-
-	window->draw(t);
+	return Keyboard::isKeyPressed((Keyboard::Key)key);
 }
+
+
+void EngineConnector::printDebugInstances()
+{
+	printDebug("\nControllerBase: " + to_string(long long(ControllerBase::count)));
+	printDebug("ObjectBase: " + to_string(long long(ObjectBase::count)));
+	printDebug("ViewBase: " + to_string(long long(ViewBase::count)));
+	printDebug("BehaviorBase: " + to_string(long long(BehaviorBase::count)));	
+}
+
+void EngineConnector::printDebugControllers()
+{
+	printDebug("\n" + string(FieldController::getInstance()));
+
+	vector<ControllerBase*>& controllers = FieldController::getInstance().getControllers();
+	for(auto it = controllers.cbegin(); it != controllers.cend(); it++){
+		printDebug(string(**it));
+	}
+}
+
+
 
 
 

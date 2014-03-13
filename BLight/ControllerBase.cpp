@@ -1,7 +1,9 @@
 #include "ControllerBase.h"
 #include "BehaviorBase.h"
 
-ControllerBase::ControllerBase(void)
+int ControllerBase::count = 0;
+
+ControllerBase::ControllerBase(void) : object (nullptr)
 {
 	init(0, "dummy");
 }
@@ -21,7 +23,8 @@ void ControllerBase::setToDestroy(bool val)
 
 ControllerBase::~ControllerBase(void)
 {
-	cout << "\n" + string(__FUNCTION__) + " " + string(*this);
+	cout << "\n" + string(__FUNCTION__) + "\n" + string(*this);
+	count--;
 
 	delete object;
 
@@ -36,14 +39,15 @@ ControllerBase::~ControllerBase(void)
 
 void ControllerBase::init( int id, string name)
 {
-	cout << "\n=>" + string(__FUNCTION__);
-
 	this->id = id;
 	this->name = name;
 	toDestroy = false;
 
 	view = new ViewBase();
 	view->setObject(object);
+
+	count++;
+	cout << "\n=>" + string(*this);
 }
 
 void ControllerBase::addBehavior( BehaviorBase* b)
@@ -99,14 +103,15 @@ ControllerBase::operator string()
 {
 	string res = string(typeid(*this).name()) 
 		+ " id: " + to_string((long long)id) 
-		+ ", name:" + name
-		+ ", behaviors: [ ";
+		+ ", name: " + name
+		+ (object != nullptr ? (",\n object: " + string(*object)) : "")
+		+ ",\n behaviors: [ ";
 	for (auto it = behaviors.cbegin(); it != behaviors.cend(); it++){
-		res += "{ ";
+		res += "\n{";
 		res += (**it);
-		res += " }, ";
+		res += "}, ";
 	}
-	res.erase(res.size() - 2, 2); // sizeof(char)
-	res += " ]";
+	res.erase(res.size() - 1, 2); // sizeof(char)
+	res += " ]\n";
 	return res;
 }

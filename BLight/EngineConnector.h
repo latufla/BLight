@@ -31,9 +31,15 @@ public:
 	static const int WINDOW_W; 
 	static const int WINDOW_H; 
 
+	static const int F;
+	static const int D;
+
 	void init(void(*)(int));
-  	void printDebug(string);
-	
+
+	void printDebug(string);
+	void printDebugInstances();
+	void printDebugControllers();
+
 	void drawShape(CustomPolygon*);
 	void drawShape(CustomCircle*);
 
@@ -44,6 +50,8 @@ public:
 
 	bool isLeftMouseButtonPressed();
 	CustomPoint& getMousePosition();
+
+	bool isKeyPressed(int);
 
 private:
 	EngineConnector() {};               

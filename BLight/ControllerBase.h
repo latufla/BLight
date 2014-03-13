@@ -14,6 +14,8 @@ public:
 	ControllerBase(ObjectBase*);
 	~ControllerBase(void);
 	
+	static int count;
+
 	void addBehavior(BehaviorBase*);
 	void removeBehavior(BehaviorBase*);
 	

@@ -1,13 +1,15 @@
 #include "ViewBase.h"
 
+int ViewBase::count = 0;
+
 ViewBase::ViewBase(void) : object(nullptr)
 {
-	cout << "\n" + string(__FUNCTION__);
+	count++;
 }
 
 ViewBase::~ViewBase(void)
 {
-	cout << "\n" + string(__FUNCTION__);
+	count--;
 }
 
 

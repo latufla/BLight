@@ -2,6 +2,8 @@
 #include "PhEngineConnector.h"
 #include "EngineConnector.h"
 
+int ObjectBase::count = 0;
+
 ObjectBase::ObjectBase(void)
 {
 	init(0, "dummy");
@@ -14,18 +16,17 @@ ObjectBase::ObjectBase(int id, string name) : EventDispatcher(id)
 
 ObjectBase::~ObjectBase(void)
 {
-	cout << "\n" + string(__FUNCTION__) + " " + string(*this);
-
+	count--;
 	delete shape;
 }
 
 void ObjectBase::init( int id, string name )
 {
-	cout << "\n" + string(__FUNCTION__);
-
 	this->id = id;
 	this->name = name;
 	energy = 20;
+
+	count++;
 }
 
 ObjectBase::operator string()
