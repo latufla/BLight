@@ -12,7 +12,7 @@ public:
 	bool start(ControllerBase*);
 	bool stop();
 	
-	CustomPoint* getDestination();
+	CustomPoint* getMoveTo();
 	float getForce(){return 15.0f;}
 
 	BehaviorType getType(){return USER_CONTROL_BEHAVIOR;};

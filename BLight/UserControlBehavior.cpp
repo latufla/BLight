@@ -34,7 +34,7 @@ bool UserControlBehavior::doStep(int step)
 	return true;
 }
 
-CustomPoint* UserControlBehavior::getDestination()
+CustomPoint* UserControlBehavior::getMoveTo()
 {
 	return gamepad.getTouch();
 }

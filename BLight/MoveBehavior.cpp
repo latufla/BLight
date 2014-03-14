@@ -17,7 +17,7 @@ bool MoveBehavior::doStep(int step)
 	if(control == nullptr)
 		return false;
 	
-	CustomPoint* dest = control->getDestination();	
+	CustomPoint* dest = control->getMoveTo();	
 	if(dest == nullptr)
 		return false;
 
