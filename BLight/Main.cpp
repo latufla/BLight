@@ -12,6 +12,7 @@
 #include "SimpleDropBehavior.h"
 #include "FieldController.h"
 #include "DebuggerBehavior.h"
+#include "AIControlBehavior.h"
 
 void mainLoop(int);
 
@@ -61,7 +62,7 @@ int _tmain(int argc, _TCHAR* argv[])
 	scene.addChild(hero->getView());
 
 
-	ControllerBase* energyPack = field.createObjectController(2, "pack +20", 0, CustomPoint(20.0f, 30.0f));
+	ControllerBase* energyPack = field.createObjectController(4, "pack +20", 0, CustomPoint(20.0f, 30.0f));
 
 	poly = new CustomPolygon(1.0f, 1.0f);
 	object = energyPack->getObject();
@@ -71,13 +72,29 @@ int _tmain(int argc, _TCHAR* argv[])
 	scene.addChild(energyPack->getView());
 
 
-	energyPack = field.createObjectController(2, "pack +30", 0, CustomPoint(40.0f, 30.0f));
+	energyPack = field.createObjectController(5, "pack +30", 0, CustomPoint(40.0f, 30.0f));
 
 	poly = new CustomPolygon(2.0f, 2.0f);
 	object = energyPack->getObject();
 	object->setShape((CustomShape*)poly);
 	energyPack->addBehavior(new SimpleDropBehavior(30));
 	scene.addChild(energyPack->getView());
+
+
+	ControllerBase* aiDummy = field.createObjectController(6, "aiDummy", 2, CustomPoint(40.0f, 10.0f));
+
+	circle = new CustomCircle(CustomPoint(0.0f, 0.0f), 1.0f);
+	object = aiDummy->getObject();
+	object->setShape((CustomShape*)circle);
+	object->setDensity(1.0f);
+	object->setFriction(0.3f);
+	object->setRestitution(.5f);
+	object->setLinearDamping(1.0f);
+		
+	aiDummy->addBehavior(new AIControlBehavior());
+	aiDummy->addBehavior(new MoveBehavior());
+	scene.addChild(aiDummy->getView());
+
 
 	field.startBehaviors();
 

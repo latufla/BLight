@@ -31,7 +31,7 @@ bool MoveBehavior::doStep(int step)
 		return false;
 	}
 
-	force.normalize(control->getForce());	
+	force.normalize(control->getMoveForce());	
 	controller->getObject()->applyForce(force);
 	return true;
 }

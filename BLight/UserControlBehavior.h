@@ -13,9 +13,12 @@ public:
 	bool stop();
 	
 	CustomPoint* getMoveTo();
-	float getForce(){return 15.0f;}
+	float getMoveForce(){return 15.0f;}
 
-	BehaviorType getType(){return USER_CONTROL_BEHAVIOR;};
+	ControllerBase* getTarget(){return nullptr;}
+	ControlAction getAction(){return NONE_ACTION;}
+
+	BehaviorType getType(){return USER_CONTROL_BEHAVIOR;}
 
 private:	
 	bool doStep(int);
