@@ -14,6 +14,8 @@ public:
 	ControllerBase* getTarget(){return blackboard.getTarget();}
 	ControlAction getAction(){return blackboard.getAction();}
 
+	BehaviorType getType(){return CONTROL_BEHAVIOR;}
+
 protected:
 	AIBlackboard blackboard;
 };

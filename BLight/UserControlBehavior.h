@@ -18,7 +18,7 @@ public:
 	ControllerBase* getTarget(){return nullptr;}
 	ControlAction getAction(){return NONE_ACTION;}
 
-	BehaviorType getType(){return USER_CONTROL_BEHAVIOR;}
+	BehaviorType getType(){return CONTROL_BEHAVIOR;}
 
 private:	
 	bool doStep(int);

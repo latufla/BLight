@@ -13,7 +13,7 @@ bool MoveBehavior::doStep(int step)
 {
 	__super::doStep(step);
 	
-	ControlBehavior* control = (ControlBehavior*)controller->getBehaviorBy(USER_CONTROL_BEHAVIOR);
+	ControlBehavior* control = (ControlBehavior*)controller->getBehaviorBy(CONTROL_BEHAVIOR);
 	if(control == nullptr)
 		return false;
 	

@@ -3,7 +3,9 @@
 
 AIBlackboard::AIBlackboard(void)
 {
-	moveForce = 0.0f;
+	moveTo = nullptr;
+	moveForce = 10.0f;
+
 	target = nullptr;
 	action = NONE_ACTION;
 }
