@@ -19,9 +19,6 @@ FindControllerAINode::~FindControllerAINode(void)
 
 bool FindControllerAINode::run()
 {
-	if(blackboard->getTarget() != nullptr)
-		return true;
-
 	vector<ControllerBase*> targets;
 	vector<ControllerBase*>& cs = FieldController::getInstance().getControllers();
 	for(auto it = cs.cbegin(); it != cs.cend(); it++){

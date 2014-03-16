@@ -22,6 +22,8 @@ public:
 	BehaviorType getType(){return CONTROL_BEHAVIOR;}
 
 protected:
+	bool doStep(int);
+
 	AIBlackboard blackboard;
 	AINode* tree;
 };

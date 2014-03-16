@@ -19,8 +19,10 @@ MoveToTargetAINode::~MoveToTargetAINode(void)
 bool MoveToTargetAINode::run()
 {
 	ControllerBase* target = blackboard->getTarget();
-	if(target == nullptr)
+	if(target == nullptr || target->getToDestroy()){
+		blackboard->setMoveTo(nullptr);
 		return false;
+	}
 	
 	CustomPoint* pos = new CustomPoint();
 	pos->set(target->getObject()->getPosition());
