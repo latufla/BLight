@@ -1,12 +1,17 @@
 #pragma once
 #include "AIBlackboard.h"
 #include "ControlBehavior.h"
+#include "AINode.h"
 
 class AIControlBehavior : public ControlBehavior
 {
 public:
 	AIControlBehavior(void);
 	~AIControlBehavior(void);
+
+	bool start(ControllerBase*);
+//	virtual bool stop();
+//	virtual bool tryDoStep(int); // frame behavior
 
 	CustomPoint* getMoveTo(){return blackboard.getMoveTo();}
 	float getMoveForce(){return blackboard.getMoveForce();}
@@ -18,5 +23,6 @@ public:
 
 protected:
 	AIBlackboard blackboard;
+	AINode* tree;
 };
 

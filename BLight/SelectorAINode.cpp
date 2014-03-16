@@ -12,7 +12,7 @@ SelectorAINode::~SelectorAINode(void)
 
 bool SelectorAINode::run()
 {
-	for(auto it = children.cbegin(); it <= children.cend(); it++){
+	for(auto it = children.cbegin(); it != children.cend(); it++){
 		if((*it)->run())
 			return true;
 	}
