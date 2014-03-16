@@ -26,7 +26,7 @@ bool FindControllerAINode::run()
 			targets.push_back(*it);
 	}
 
-	if(targets.size() == 0){
+	if(targets.size() == 0 || targets[0]->getToDestroy()){
 		blackboard->setTarget(nullptr);
 		return false;
 	}

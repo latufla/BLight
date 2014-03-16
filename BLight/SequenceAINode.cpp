@@ -5,12 +5,6 @@ SequenceAINode::SequenceAINode(void)
 {
 }
 
-SequenceAINode::SequenceAINode( AIBlackboard* blackboard)
-{
-	this->blackboard = blackboard;
-}
-
-
 SequenceAINode::~SequenceAINode(void)
 {
 }

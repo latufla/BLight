@@ -5,8 +5,6 @@ class SequenceAINode : public AINode
 {
 public:
 	SequenceAINode(void);
-	SequenceAINode(AIBlackboard*);
-
 	~SequenceAINode(void);
 
 	bool run();

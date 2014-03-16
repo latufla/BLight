@@ -16,14 +16,10 @@ MoveToTargetAINode::~MoveToTargetAINode(void)
 }
 
 
+// TODO: fix leak
 bool MoveToTargetAINode::run()
 {
 	ControllerBase* target = blackboard->getTarget();
-	if(target == nullptr || target->getToDestroy()){
-		blackboard->setMoveTo(nullptr);
-		return false;
-	}
-	
 	CustomPoint* pos = new CustomPoint();
 	pos->set(target->getObject()->getPosition());
 	blackboard->setMoveTo(pos);
