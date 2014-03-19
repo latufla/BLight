@@ -9,6 +9,8 @@ public:
 	GamepadBehavior(void);
 	~GamepadBehavior(void);
 
+	BehaviorBase* clone();
+
 	CustomPoint* getTouch();
 	
 	BehaviorType getType(){return GAMEPAD_BEHAVIOR;}

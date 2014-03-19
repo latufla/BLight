@@ -61,3 +61,8 @@ bool SimpleDropBehavior::doStep(int step)
 	}
 	return false;
 }
+
+BehaviorBase* SimpleDropBehavior::clone()
+{
+	return new SimpleDropBehavior(drop);
+}

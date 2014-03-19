@@ -9,6 +9,8 @@ public:
 	UserControlBehavior(void);
 	~UserControlBehavior(void);
 	
+	BehaviorBase* clone();
+
 	bool start(ControllerBase*);
 	bool stop();
 	

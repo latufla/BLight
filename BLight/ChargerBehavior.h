@@ -12,6 +12,8 @@ public:
 	ChargerBehavior(void);
 	~ChargerBehavior(void);
 
+	BehaviorBase* clone();
+
 	bool start(ControllerBase*);
 	bool stop();
 	bool onBeginInteraction(ObjectBase*);

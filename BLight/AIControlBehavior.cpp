@@ -40,4 +40,9 @@ bool AIControlBehavior::doStep(int step)
 	return tree->run();
 }
 
+BehaviorBase* AIControlBehavior::clone()
+{
+	return new AIControlBehavior();
+}
+
 

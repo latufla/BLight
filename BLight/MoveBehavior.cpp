@@ -47,5 +47,10 @@ void MoveBehavior::applyStoppage()
 	controller->getObject()->setLinearVelocity(vel);	
 }
 
+BehaviorBase* MoveBehavior::clone()
+{
+	return new MoveBehavior();
+}
+
 
 

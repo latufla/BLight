@@ -38,3 +38,8 @@ CustomPoint* UserControlBehavior::getMoveTo()
 {
 	return gamepad.getTouch();
 }
+
+BehaviorBase* UserControlBehavior::clone()
+{
+	return new UserControlBehavior();
+}

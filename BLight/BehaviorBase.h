@@ -14,13 +14,15 @@ public:
 
 	static int count;
 
+	virtual BehaviorBase* clone(){return nullptr;}
+
 	virtual bool start(ControllerBase*);
 	virtual bool stop();
 	virtual bool tryDoStep(int); // frame behavior
 
 	// event behavior	
-	virtual bool onBeginInteraction(ObjectBase*){return false;}; 
-	virtual bool onEndInteraction(ObjectBase*){return false;};
+	virtual bool onBeginInteraction(ObjectBase*){return false;} 
+	virtual bool onEndInteraction(ObjectBase*){return false;}
 
 	virtual operator string();
 

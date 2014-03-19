@@ -8,6 +8,8 @@ public:
 	DebuggerBehavior(void);
 	~DebuggerBehavior(void);
 
+	BehaviorBase* clone();
+
 protected:
 	bool doStep(int);	
 	bool canDoStep();

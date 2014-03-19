@@ -13,6 +13,8 @@ public:
 	SimpleDropBehavior(int);
 
 	~SimpleDropBehavior(void);
+	
+	BehaviorBase* clone();
 
 	bool start(ControllerBase*);
 	bool stop();

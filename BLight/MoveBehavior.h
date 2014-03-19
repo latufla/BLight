@@ -8,6 +8,8 @@ public:
 	MoveBehavior(void);
 	~MoveBehavior(void);
 	
+	BehaviorBase* clone();
+
 	BehaviorType getType(){return MOVE_BEHAVIOR;}
 
 protected:

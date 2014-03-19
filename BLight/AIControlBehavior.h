@@ -8,6 +8,8 @@ class AIControlBehavior : public ControlBehavior
 public:
 	AIControlBehavior(void);
 	~AIControlBehavior(void);
+	
+	BehaviorBase* clone();
 
 	bool start(ControllerBase*);
 //	virtual bool stop();

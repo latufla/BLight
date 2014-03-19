@@ -20,4 +20,9 @@ CustomPoint* GamepadBehavior::getTouch()
 	return &touch;
 }
 
+BehaviorBase* GamepadBehavior::clone()
+{
+	return new GamepadBehavior();
+}
+
 

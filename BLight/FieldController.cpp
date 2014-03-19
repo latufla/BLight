@@ -23,9 +23,10 @@ ControllerBase* FieldController::createObjectController( int id, const ObjectInf
 	obj->setRestitution(info.restitution);
 	obj->setLinearDamping(info.linearDamping);
 
-// 	for (auto it = info.behaviors.cbegin(); it < info.behaviors.cend(); it++){
-// 		c->addBehavior((*it).clone());
-// 	}
+	for (auto it = info.behaviors.cbegin(); it < info.behaviors.cend(); it++){
+		c->addBehavior((*it)->clone());
+	}
+
 	// and ai too
 	return c;
 }

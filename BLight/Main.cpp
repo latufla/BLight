@@ -58,15 +58,13 @@ int _tmain(int argc, _TCHAR* argv[])
 	heroInfo->friction = 0.3f;
 	heroInfo->restitution = .5f;
 	heroInfo->linearDamping = 1.0f;
-
-// 	heroInfo->behaviors.push_back(new UserControlBehavior());
-// 	heroInfo->behaviors.push_back(new MoveBehavior());
+	
+	heroInfo->behaviors.push_back(new UserControlBehavior());
+	heroInfo->behaviors.push_back(new MoveBehavior());
 
 	ControllerBase* hero = field.createObjectController(3, *heroInfo, CustomPoint(1.0f, 10.0f));
 	scene.getEnergyText().setText("Energy: " + to_string(long long(object->getEnergy())));
 
-	hero->addBehavior(new UserControlBehavior());
-	hero->addBehavior(new MoveBehavior());
 	delete heroInfo;
 
 	scene.addChild(hero->getView());

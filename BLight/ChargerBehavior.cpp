@@ -58,3 +58,8 @@ bool ChargerBehavior::onEndInteraction(ObjectBase* target)
 	return false;
 }
 
+BehaviorBase* ChargerBehavior::clone()
+{
+	return new ChargerBehavior();
+}
+

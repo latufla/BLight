@@ -31,3 +31,8 @@ bool DebuggerBehavior::canDoStep()
 {
 	return __super::canDoStep() && (debugStep++ >= DEBUG_STEP);
 }
+
+BehaviorBase* DebuggerBehavior::clone()
+{
+	return new DebuggerBehavior();
+}
