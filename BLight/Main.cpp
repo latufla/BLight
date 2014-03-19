@@ -14,14 +14,14 @@
 #include "DebuggerBehavior.h"
 #include "AIControlBehavior.h"
 #include "JsonConnector.h"
+#include "Infos.h"
 
 void mainLoop(int);
 
-
 int _tmain(int argc, _TCHAR* argv[])
 { 
-	FILE * pFile = fopen ("config/game_objects.json" , "r");
-	JsonConnector::getInstance().createInfoFromJson(pFile);
+// 	FILE * pFile = fopen ("config/game_objects.json" , "r");
+// 	JsonConnector::getInstance().createInfoFromJson(pFile);
 
 	SceneController& scene = SceneController::getInstance();
 	scene.init();
@@ -30,83 +30,38 @@ int _tmain(int argc, _TCHAR* argv[])
 	field.setName("field");
 	field.addBehavior(new DebuggerBehavior());
 	field.init();
+
 	
-
-	ControllerBase* obstacle = field.createObjectController(1, "obstacle", 0, CustomPoint(0.1f, 0.1f));
-
-	CustomPolygon* poly = new CustomPolygon(5.0f, 1.0f);
-	ObjectBase* object = obstacle->getObject(); 
-	object->setShape((CustomShape*)poly);
-	scene.addChild(obstacle->getView());
-
-
-	ControllerBase* charger = field.createObjectController(2, "charger", 0, CustomPoint(5.0f, 20.0f));
-
-	poly = new CustomPolygon(4.0f, 4.0f);
-	object = charger->getObject();
-	object->setShape((CustomShape*)poly);
-	charger->addBehavior(new ChargerBehavior());
-	scene.addChild(charger->getView());
-	
-	
-	
-	CustomCircle* circle = new CustomCircle(CustomPoint(0.0f, 0.0f), 1.0f);
-	ObjectInfo* heroInfo = new ObjectInfo();
-	heroInfo->physicType = 2;
-	heroInfo->shape = circle;
-	heroInfo->density = 1.0f;
-	heroInfo->friction = 0.3f;
-	heroInfo->restitution = .5f;
-	heroInfo->linearDamping = 1.0f;
-	
-	heroInfo->behaviors.push_back(new UserControlBehavior());
-	heroInfo->behaviors.push_back(new MoveBehavior());
-
-	ControllerBase* hero = field.createObjectController(3, *heroInfo, CustomPoint(1.0f, 10.0f));
-	scene.getEnergyText().setText("Energy: " + to_string(long long(object->getEnergy())));
-
+	ObjectInfo* heroInfo = Infos::createHero();
+	ControllerBase* hero = field.createObjectController(1, *heroInfo, CustomPoint(1.0f, 10.0f));
 	delete heroInfo;
-
+	scene.getEnergyText().setText("Energy: " + to_string(long long(hero->getObject()->getEnergy())));	
 	scene.addChild(hero->getView());
 	
-	
-	ControllerBase* energyPack = field.createObjectController(4, "pack +20", 0, CustomPoint(20.0f, 30.0f));
-
-	poly = new CustomPolygon(1.0f, 1.0f);
-	object = energyPack->getObject();
-	object->setShape((CustomShape*)poly);
-	energyPack->addBehavior(new SimpleDropBehavior(20));
-	energyPack->addBehavior(new SimpleDropBehavior(40));
-	scene.addChild(energyPack->getView());
-
-
-	energyPack = field.createObjectController(5, "pack +30", 0, CustomPoint(40.0f, 30.0f));
-
-	poly = new CustomPolygon(2.0f, 2.0f);
-	object = energyPack->getObject();
-	object->setShape((CustomShape*)poly);
-	energyPack->addBehavior(new SimpleDropBehavior(30));
-	scene.addChild(energyPack->getView());
-
-
-	ControllerBase* aiDummy = field.createObjectController(6, "aiDummy", 2, CustomPoint(40.0f, 10.0f));
-
-	circle = new CustomCircle(CustomPoint(0.0f, 0.0f), 1.0f);
-	object = aiDummy->getObject();
-	object->setShape((CustomShape*)circle);
-	object->setDensity(1.0f);
-	object->setFriction(0.3f);
-	object->setRestitution(.5f);
-	object->setLinearDamping(1.0f);
-		
-	aiDummy->addBehavior(new AIControlBehavior());
-	aiDummy->addBehavior(new MoveBehavior());
+	ObjectInfo* aiDummyInfo = Infos::createEnemy();
+	ControllerBase* aiDummy = field.createObjectController(2, *aiDummyInfo, CustomPoint(40.0f, 10.0f));
+	delete aiDummyInfo;
 	scene.addChild(aiDummy->getView());
 
 
+	ObjectInfo* chargerInfo = Infos::createCharger();
+	ControllerBase* charger = field.createObjectController(3, *chargerInfo, CustomPoint(5.0f, 20.0f));
+	delete chargerInfo;
+	scene.addChild(charger->getView());
+
+
+	ObjectInfo* energyPackInfo = Infos::createSmallEnergyPack();
+	ControllerBase* energyPack = field.createObjectController(4, *energyPackInfo, CustomPoint(20.0f, 30.0f));
+	delete energyPackInfo;
+	scene.addChild(energyPack->getView());
+		
+	energyPackInfo = Infos::createMediumEnergyPack();
+	energyPack = field.createObjectController(5, *energyPackInfo, CustomPoint(40.0f, 30.0f));
+	delete energyPackInfo;
+	scene.addChild(energyPack->getView());
+
+
 	field.startBehaviors();
-
-
 	EngineConnector::getInstance().printDebugInstances();
 	EngineConnector::getInstance().init(&mainLoop);
 
@@ -119,3 +74,4 @@ void mainLoop(int elapsedTime)
 	PhEngineConnector::getInstance().doStep(elapsedTime);	
 	SceneController::getInstance().draw();
 }
+

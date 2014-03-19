@@ -17,12 +17,12 @@ ControllerBase* FieldController::createObjectController( int id, const ObjectInf
 {
 	ControllerBase* c = createObjectController(id, info.name, info.physicType, pos);
 	ObjectBase* obj = c->getObject();
-	obj->setShape(info.shape->clone());
+	obj->setShape(info.shape->clone());	
 	obj->setDensity(info.density);
 	obj->setFriction(info.friction);
 	obj->setRestitution(info.restitution);
 	obj->setLinearDamping(info.linearDamping);
-
+	
 	for (auto it = info.behaviors.cbegin(); it < info.behaviors.cend(); it++){
 		c->addBehavior((*it)->clone());
 	}

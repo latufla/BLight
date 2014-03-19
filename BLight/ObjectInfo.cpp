@@ -3,6 +3,10 @@
 
 ObjectInfo::ObjectInfo(void)
 {
+	density = 0.0f;
+	friction = 0.0f;
+	restitution = 0.0f;
+	linearDamping = 0.0f;
 }
 
 
