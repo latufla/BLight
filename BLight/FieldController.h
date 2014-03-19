@@ -1,6 +1,7 @@
 #pragma once
 #include "Field.h"
 #include "ControllerBase.h"
+#include "ObjectInfo.h"
 
 class FieldController : public ControllerBase
 {
@@ -17,6 +18,7 @@ public:
 	bool doBehaviorsStep(int);
 
 	ControllerBase* createObjectController(int, string, int, const CustomPoint&);
+	ControllerBase* createObjectController(int, const ObjectInfo&, const CustomPoint&);
 	void destroyObjectController(ControllerBase*);
 
 	vector<ControllerBase*>& getControllers(){ return controllers; }

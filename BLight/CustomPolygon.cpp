@@ -21,3 +21,8 @@ CustomPolygon::CustomPolygon( float width, float height)
 CustomPolygon::~CustomPolygon(void)
 {
 }
+
+CustomShape* CustomPolygon::clone()
+{
+	return new CustomPolygon(vertexes);
+}

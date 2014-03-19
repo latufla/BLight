@@ -10,6 +10,8 @@ public:
 	CustomCircle(const CustomPoint&, float);
 	~CustomCircle(void);
 
+	CustomShape* clone(); 
+
 	CustomPoint& getPosition(){return position;}
 	
 	void setRadius(float val){radius = val; }

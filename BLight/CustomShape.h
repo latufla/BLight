@@ -9,6 +9,8 @@ public:
 	CustomShape(void);
 	~CustomShape(void);
 		
+	virtual CustomShape* clone(){return nullptr;}
+
 	virtual ShapeType getType(){return NONE;};
 
 	static bool isPolygon(CustomShape* shape){return shape->getType() == POLYGON;};

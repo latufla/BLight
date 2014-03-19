@@ -23,3 +23,8 @@ CustomPoint& CustomCircle::getOrigin()
 	origin.x = origin.y = radius;
 	return origin;
 }
+
+CustomShape* CustomCircle::clone()
+{
+	return new CustomCircle(position, radius);
+}

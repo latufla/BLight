@@ -13,10 +13,7 @@
 #include "FieldController.h"
 #include "DebuggerBehavior.h"
 #include "AIControlBehavior.h"
-
-#include "rapidjson\rapidjson.h"
-#include "rapidjson\document.h"
-#include "rapidjson\filestream.h"
+#include "JsonConnector.h"
 
 void mainLoop(int);
 
@@ -24,22 +21,8 @@ void mainLoop(int);
 int _tmain(int argc, _TCHAR* argv[])
 { 
 	FILE * pFile = fopen ("config/game_objects.json" , "r");
-	if(pFile != nullptr){
-		rapidjson::FileStream is(pFile);
-		rapidjson::Document d;
-		if(!d.ParseStream<0>(is).HasParseError()){
-			printf("%s\n", d["hello"].GetString());
-			printf("%s\n", d["bye"].GetString());
+	JsonConnector::getInstance().createInfoFromJson(pFile);
 
-			rapidjson::Value& a = d["a"];
-			rapidjson::SizeType id = 1;
-			if(d["a"].IsArray()){
-				printf("a[%d] = %d\n", id, a[id].GetInt());
-			}
-		}
-	}
-	_getch();
-	
 	SceneController& scene = SceneController::getInstance();
 	scene.init();
 
@@ -66,23 +49,29 @@ int _tmain(int argc, _TCHAR* argv[])
 	scene.addChild(charger->getView());
 	
 	
-	ControllerBase* hero = field.createObjectController(3, "hero", 2, CustomPoint(1.0f, 10.0f));
-
-	CustomCircle* circle = new CustomCircle(CustomPoint(0.0f, 0.0f), 1.0f);
-	object = hero->getObject();
-	object->setShape((CustomShape*)circle);
-	object->setDensity(1.0f);
-	object->setFriction(0.3f);
-	object->setRestitution(.5f);
-	object->setLinearDamping(1.0f);
 	
+	CustomCircle* circle = new CustomCircle(CustomPoint(0.0f, 0.0f), 1.0f);
+	ObjectInfo* heroInfo = new ObjectInfo();
+	heroInfo->physicType = 2;
+	heroInfo->shape = circle;
+	heroInfo->density = 1.0f;
+	heroInfo->friction = 0.3f;
+	heroInfo->restitution = .5f;
+	heroInfo->linearDamping = 1.0f;
+
+// 	heroInfo->behaviors.push_back(new UserControlBehavior());
+// 	heroInfo->behaviors.push_back(new MoveBehavior());
+
+	ControllerBase* hero = field.createObjectController(3, *heroInfo, CustomPoint(1.0f, 10.0f));
 	scene.getEnergyText().setText("Energy: " + to_string(long long(object->getEnergy())));
 
 	hero->addBehavior(new UserControlBehavior());
 	hero->addBehavior(new MoveBehavior());
+	delete heroInfo;
+
 	scene.addChild(hero->getView());
-
-
+	
+	
 	ControllerBase* energyPack = field.createObjectController(4, "pack +20", 0, CustomPoint(20.0f, 30.0f));
 
 	poly = new CustomPolygon(1.0f, 1.0f);

@@ -13,6 +13,23 @@ ControllerBase* FieldController::createObjectController(int id, string name, int
 	return c;
 }
 
+ControllerBase* FieldController::createObjectController( int id, const ObjectInfo& info, const CustomPoint& pos)
+{
+	ControllerBase* c = createObjectController(id, info.name, info.physicType, pos);
+	ObjectBase* obj = c->getObject();
+	obj->setShape(info.shape->clone());
+	obj->setDensity(info.density);
+	obj->setFriction(info.friction);
+	obj->setRestitution(info.restitution);
+	obj->setLinearDamping(info.linearDamping);
+
+// 	for (auto it = info.behaviors.cbegin(); it < info.behaviors.cend(); it++){
+// 		c->addBehavior((*it).clone());
+// 	}
+	// and ai too
+	return c;
+}
+
 void FieldController::destroyObjectController(ControllerBase* c)
 {
 	c->setToDestroy(true);

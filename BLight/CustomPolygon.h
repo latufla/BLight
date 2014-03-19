@@ -12,6 +12,8 @@ public:
 
 	~CustomPolygon(void);
 
+	CustomShape* clone();
+
 	vector<CustomPoint>& getVertexes(){return vertexes;}
 
 	ShapeType getType(){return POLYGON;};
