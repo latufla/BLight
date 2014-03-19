@@ -14,11 +14,32 @@
 #include "DebuggerBehavior.h"
 #include "AIControlBehavior.h"
 
+#include "rapidjson\rapidjson.h"
+#include "rapidjson\document.h"
+#include "rapidjson\filestream.h"
+
 void mainLoop(int);
 
 
 int _tmain(int argc, _TCHAR* argv[])
 { 
+	FILE * pFile = fopen ("config/game_objects.json" , "r");
+	if(pFile != nullptr){
+		rapidjson::FileStream is(pFile);
+		rapidjson::Document d;
+		if(!d.ParseStream<0>(is).HasParseError()){
+			printf("%s\n", d["hello"].GetString());
+			printf("%s\n", d["bye"].GetString());
+
+			rapidjson::Value& a = d["a"];
+			rapidjson::SizeType id = 1;
+			if(d["a"].IsArray()){
+				printf("a[%d] = %d\n", id, a[id].GetInt());
+			}
+		}
+	}
+	_getch();
+	
 	SceneController& scene = SceneController::getInstance();
 	scene.init();
 
