@@ -4,6 +4,7 @@ void StatusViewManager::addStatusView(ControllerBase* c)
 {
 	TextBase* p = new TextBase();
 	p->setText(c->getName() + to_string(long long(c->getObject()->getEnergy())));
+	p->setCharacterSize(14);
 	p->getPosition().set(c->getObject()->getGlobalCenter());
 	SceneController::getInstance().addChild(p);
 	controllerToStatusView[c] = p;
