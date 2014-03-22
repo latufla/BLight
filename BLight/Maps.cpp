@@ -1,4 +1,5 @@
 #include "Maps.h"
+#include "StatusViewManager.h"
 
 
 vector<ControllerBase*> Maps::createDemoMap(FieldController& field)

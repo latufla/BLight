@@ -9,6 +9,7 @@
 #include "Infos.h"
 #include "Maps.h"
 #include "PopupManager.h"
+#include "StatusViewManager.h"
 
 void mainLoop(int);
 
@@ -28,6 +29,9 @@ int _tmain(int argc, _TCHAR* argv[])
 	vector<ControllerBase*> mapInfo = Maps::createDemoMap(field);
 	for(auto it = mapInfo.cbegin(); it != mapInfo.cend(); it++){
 		scene.addChild((*it)->getView());
+
+		if((*it)->getName() == "aiDummy")
+			StatusViewManager::getInstance().addStatusView(*it);
 	}
 
 	field.startBehaviors();
@@ -45,6 +49,7 @@ void mainLoop(int elapsedTime)
 	
 	// managers
 	PopupManager::getInstance().doStep(elapsedTime);
+	StatusViewManager::getInstance().doStep(elapsedTime);
 	// ---
 	
 	SceneController::getInstance().draw();
