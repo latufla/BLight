@@ -5,14 +5,6 @@ void FieldController::init()
 {
 }
 
-ControllerBase* FieldController::createObjectController(int id, string name, int oType, const CustomPoint& pos)
-{
-	ObjectBase* obj = field.createObject(id, name, oType, pos);
-	ControllerBase* c = new ControllerBase(obj);
-	controllers.push_back(c);
-	return c;
-}
-
 ControllerBase* FieldController::createObjectController( int id, const ObjectInfo& info, const CustomPoint& pos)
 {
 	ControllerBase* c = createObjectController(id, info.name, info.physicType, pos);
@@ -28,6 +20,14 @@ ControllerBase* FieldController::createObjectController( int id, const ObjectInf
 	}
 
 	// and ai too
+	return c;
+}
+
+ControllerBase* FieldController::createObjectController(int id, string name, int oType, const CustomPoint& pos)
+{
+	ObjectBase* obj = field.createObject(id, name, oType, pos);
+	ControllerBase* c = new ControllerBase(obj);
+	controllers.push_back(c);
 	return c;
 }
 

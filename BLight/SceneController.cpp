@@ -4,9 +4,6 @@
 
 void SceneController::init()
 {
-	energyText.setText("Energy: ");	
-	energyText.getPosition().set(1.0f, 38.0f);
-	addChild(&energyText);
 }
 
 void SceneController::draw()

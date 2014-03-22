@@ -1,21 +1,14 @@
 #include "stdafx.h"
-#include "ObjectBase.h"
-#include "BehaviorBase.h"
 #include "ControllerBase.h"
 #include "EngineConnector.h"
 #include "PhEngineConnector.h"
-#include "CustomCircle.h"
-#include "UserControlBehavior.h"
-#include "MoveBehavior.h"
-#include "ChargerBehavior.h"
 #include "SceneController.h"
-#include "SimpleDropBehavior.h"
 #include "FieldController.h"
 #include "DebuggerBehavior.h"
-#include "AIControlBehavior.h"
 #include "JsonConnector.h"
 #include "Infos.h"
 #include "Maps.h"
+#include "PopupManager.h"
 
 void mainLoop(int);
 
@@ -49,6 +42,11 @@ void mainLoop(int elapsedTime)
 {
 	FieldController::getInstance().doBehaviorsStep(elapsedTime);
 	PhEngineConnector::getInstance().doStep(elapsedTime);	
+	
+	// managers
+	PopupManager::getInstance().doStep(elapsedTime);
+	// ---
+	
 	SceneController::getInstance().draw();
 }
 

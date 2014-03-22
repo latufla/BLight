@@ -25,6 +25,7 @@ public:
 
 protected:
 	bool doStep(int);
+	void showPopup(ControllerBase*);
 
 	ObjectBase* target;
 

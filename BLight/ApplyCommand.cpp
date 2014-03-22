@@ -47,9 +47,4 @@ bool ApplyCommand::canExecute()
 void ApplyCommand::execute()
 {
 	*prop += applyValue;
-	
-	SceneController& scene = SceneController::getInstance();
- 	if(prop == target->getEnergyProp()){
- 		scene.getEnergyText().setText("Energy: " + to_string(long long(target->getEnergy())));
- 	}
 }

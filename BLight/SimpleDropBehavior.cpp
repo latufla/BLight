@@ -1,4 +1,5 @@
 #include "SimpleDropBehavior.h"
+#include "PopupManager.h"
 
 SimpleDropBehavior::SimpleDropBehavior(void)
 {
@@ -55,6 +56,8 @@ bool SimpleDropBehavior::doStep(int step)
 
 	command.setUp(this, target, target->getEnergyProp(), drop);
 	if(command.tryToExecute()){
+		showPopup(controller);
+
 		FieldController::getInstance().destroyObjectController(controller);
 		target = nullptr;
 		return true;
@@ -65,4 +68,12 @@ bool SimpleDropBehavior::doStep(int step)
 BehaviorBase* SimpleDropBehavior::clone()
 {
 	return new SimpleDropBehavior(drop);
+}
+
+void SimpleDropBehavior::showPopup(ControllerBase* c)
+{
+	PopupText* p = new PopupText();
+	p->setText("" + string(drop > 0 ? "+" : "-") + to_string(long long(drop)));
+	p->getPosition().set(c->getObject()->getGlobalCenter());
+	PopupManager::getInstance().add(p);
 }

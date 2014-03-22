@@ -17,7 +17,6 @@ public:
 	bool stopBehaviors();
 	bool doBehaviorsStep(int);
 
-	ControllerBase* createObjectController(int, string, int, const CustomPoint&);
 	ControllerBase* createObjectController(int, const ObjectInfo&, const CustomPoint&);
 	void destroyObjectController(ControllerBase*);
 
@@ -28,6 +27,8 @@ protected:
 	FieldController() {};               
 	FieldController(FieldController const&);              
 	void operator=(FieldController const&);
+
+	ControllerBase* createObjectController(int, string, int, const CustomPoint&);
 
 	void doDestroyStep();
 

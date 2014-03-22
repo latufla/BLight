@@ -20,15 +20,11 @@ public:
 	void addChild(IDrawable*);
 	void removeChild(IDrawable*);
 	
-	TextBase& getEnergyText() { return energyText;}
-
 protected:	
 	SceneController() {};               
 	SceneController(SceneController const&);              
 	void operator=(SceneController const&);
 
 	vector<IDrawable*> drawList;
-	
-	TextBase energyText;
 };
 
