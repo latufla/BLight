@@ -50,6 +50,8 @@ public:
 	void addContactReceiver(BehaviorBase*);
 	void removeContactReceiver(BehaviorBase*);
 
+	bool contains(ObjectBase*, const CustomPoint&);
+
 private:
 	PhEngineConnector() {};               
 	PhEngineConnector(PhEngineConnector const&);              

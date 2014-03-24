@@ -1,8 +1,9 @@
 #pragma once
 #include "ControllerBase.h"
 #include "TextBase.h"
+#include "IManager.h"
 
-class StatusViewManager
+class StatusViewManager : public IManager
 {
 public:
 	static StatusViewManager& getInstance()

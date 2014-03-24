@@ -8,21 +8,26 @@ GamepadBehavior::~GamepadBehavior(void)
 {
 }
 
-CustomPoint* GamepadBehavior::getTouch()
-{
-	EngineConnector& ec = EngineConnector::getInstance();
-	if(!ec.isLeftMouseButtonPressed())
-		return nullptr;		
-	
-	CustomPoint& pos = ec.getMousePosition();
-	touch.x = pos.x;
-	touch.y = pos.y;
-	return &touch;
-}
-
 BehaviorBase* GamepadBehavior::clone()
 {
 	return new GamepadBehavior();
+}
+
+
+CustomPoint* GamepadBehavior::getTouch()
+{
+	if(EngineConnector::getInstance().isLeftMouseButtonPressed())
+		return getOverPoint();
+
+	return nullptr;
+}
+
+CustomPoint* GamepadBehavior::getOverPoint()
+{
+	CustomPoint& pos = EngineConnector::getInstance().getMousePosition();
+	touch.x = pos.x;
+	touch.y = pos.y;
+	return &touch;	
 }
 
 

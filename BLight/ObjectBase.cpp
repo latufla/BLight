@@ -112,3 +112,8 @@ void ObjectBase::setSensor(bool val)
 {
 	PhEngineConnector::getInstance().setSensor(this, val);
 }
+
+bool ObjectBase::contains(const CustomPoint& p)
+{
+	return PhEngineConnector::getInstance().contains(this, p);
+}

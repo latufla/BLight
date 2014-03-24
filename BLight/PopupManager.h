@@ -1,8 +1,9 @@
 #pragma once
 #include "PopupText.h"
 #include "SceneController.h"
+#include "IManager.h"
 
-class PopupManager
+class PopupManager : public IManager
 {
 public:
 	static PopupManager& getInstance()

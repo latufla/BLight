@@ -201,5 +201,14 @@ void PhEngineConnector::setSensor( ObjectBase* obj, bool val )
 	b->GetFixtureList()->SetSensor(val);
 }
 
+bool PhEngineConnector::contains(ObjectBase* obj, const CustomPoint& p)
+{
+	b2Body* b = objectToBody[obj];
+	static b2Vec2 b2Pnt;
+	b2Pnt.Set((float32)p.x, (float32)p.y);
+	b2Shape* s = b->GetFixtureList()->GetShape();
+	return s->TestPoint(b->GetTransform(), b2Pnt);
+}
+
 
 

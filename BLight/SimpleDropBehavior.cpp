@@ -1,5 +1,6 @@
 #include "SimpleDropBehavior.h"
 #include "PopupManager.h"
+#include "Config.h"
 
 SimpleDropBehavior::SimpleDropBehavior(void)
 {
@@ -51,9 +52,13 @@ bool SimpleDropBehavior::doStep(int step)
 {
 	__super::doStep(step);
 
+	CustomPoint& pos = EngineConnector::getInstance().getMousePosition();
+	if(controller->getObject()->contains(pos))
+		target = Config::player->getObject();
+
 	if(target == nullptr)
 		return false;
-
+		
 	command.setUp(this, target, target->getEnergyProp(), drop);
 	if(command.tryToExecute()){
 		showPopup(controller);

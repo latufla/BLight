@@ -45,6 +45,7 @@ public:
 	void setSensor(bool);
 
 	CustomPoint& getGlobalCenter();
+	bool contains(const CustomPoint&);
 	// end Ph
 
 	int* getEnergyProp(){return &energy;}
