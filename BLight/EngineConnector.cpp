@@ -1,6 +1,6 @@
 #include "EngineConnector.h"
 #include "BehaviorBase.h"
-#include "FieldController.h"
+#include "Config.h"
 
 const int EngineConnector::FPS = 60;
 
@@ -199,7 +199,7 @@ void EngineConnector::printDebugControllers()
 {
 	printDebug("\n" + string(FieldController::getInstance()));
 
-	vector<ControllerBase*>& controllers = FieldController::getInstance().getControllers();
+	vector<ControllerBase*>& controllers = Config::field->getControllers();
 	for(auto it = controllers.cbegin(); it != controllers.cend(); it++){
 		printDebug(string(**it));
 	}

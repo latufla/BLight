@@ -1,4 +1,5 @@
 #include "StatusViewManager.h"
+#include "Config.h"
 
 void StatusViewManager::addStatusView(ControllerBase* c)
 {
@@ -6,7 +7,7 @@ void StatusViewManager::addStatusView(ControllerBase* c)
 	p->setText(c->getName() + to_string(long long(c->getObject()->getEnergy())));
 	p->setCharacterSize(14);
 	p->getPosition().set(c->getObject()->getGlobalCenter());
-	SceneController::getInstance().addChild(p);
+	Config::scene->addChild(p);
 	controllerToStatusView[c] = p;
 }
 

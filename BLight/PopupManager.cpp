@@ -1,9 +1,10 @@
 #include "PopupManager.h"
+#include "Config.h"
 
 void PopupManager::add(PopupText* p)
 {
 	popUps.push_back(p);
-	SceneController::getInstance().addChild(p);
+	Config::scene->addChild(p);
 }
 
 bool PopupManager::doStep(int step)
@@ -12,7 +13,7 @@ bool PopupManager::doStep(int step)
 		bool res = p->getToDestroy();
 
 		if(res){
-			SceneController::getInstance().removeChild(p);
+			Config::scene->removeChild(p);
 			delete p;
 		}
 		

@@ -1,6 +1,7 @@
 #pragma once
 #include "AINode.h"
 #include "BehaviorBase.h"
+#include "Config.h"
 
 class FindControllerAINode : public AINode
 {

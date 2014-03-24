@@ -1,5 +1,4 @@
 #include "FindControllerAINode.h"
-#include "FieldController.h"
 
 
 FindControllerAINode::FindControllerAINode(void)
@@ -20,7 +19,7 @@ FindControllerAINode::~FindControllerAINode(void)
 bool FindControllerAINode::run()
 {
 	vector<ControllerBase*> targets;
-	vector<ControllerBase*>& cs = FieldController::getInstance().getControllers();
+	vector<ControllerBase*>& cs = Config::field->getControllers();
 	for(auto it = cs.cbegin(); it != cs.cend(); it++){
 		if((*it)->getBehaviorBy(bType) != nullptr)
 			targets.push_back(*it);

@@ -1,4 +1,5 @@
 #include "DebuggerBehavior.h"
+#include "Config.h"
 
 const int DebuggerBehavior::DEBUG_STEP = 5;
 
@@ -16,11 +17,11 @@ bool DebuggerBehavior::doStep(int step)
 {
 	__super::doStep(step);
 	
-	EngineConnector& ec = EngineConnector::getInstance();
-	if(ec.isKeyPressed(EngineConnector::F))
-		ec.printDebugInstances();
-	else if(ec.isKeyPressed(EngineConnector::D))
-		ec.printDebugControllers();
+	EngineConnector* ec = Config::engine;
+	if(ec->isKeyPressed(EngineConnector::F))
+		ec->printDebugInstances();
+	else if(ec->isKeyPressed(EngineConnector::D))
+		ec->printDebugControllers();
 
 	debugStep = 0;
 

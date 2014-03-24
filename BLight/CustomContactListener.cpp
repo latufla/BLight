@@ -1,5 +1,5 @@
 #include "CustomContactListener.h"
-#include "PhEngineConnector.h"
+#include "Config.h"
 
 
 CustomContactListener::CustomContactListener(void)
@@ -32,8 +32,8 @@ map<BehaviorBase*, ObjectBase*>* CustomContactListener::filter(b2Contact* contac
 	static map<BehaviorBase*, ObjectBase*> res;
 	res.erase(res.cbegin(), res.cend());
 
-	vector<BehaviorBase*>* receivers = &PhEngineConnector::getInstance().contactReceivers;
-	map<b2Body*, ObjectBase*>* bodyToObject = &PhEngineConnector::getInstance().bodyToObject;
+	vector<BehaviorBase*>* receivers = &Config::phEngine->contactReceivers;
+	map<b2Body*, ObjectBase*>* bodyToObject = &Config::phEngine->bodyToObject;
 
 	b2Body* b1;
 	b2Body* b2; 

@@ -1,5 +1,5 @@
 #include "TextBase.h"
-#include "EngineConnector.h"
+#include "Config.h"
 
 
 TextBase::TextBase(void)
@@ -30,5 +30,5 @@ void TextBase::init(string text, string font)
 
 void TextBase::draw()
 {
-	EngineConnector::getInstance().drawText(this);
+	Config::engine->drawText(this);
 }

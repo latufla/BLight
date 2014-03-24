@@ -1,4 +1,5 @@
 #include "ViewBase.h"
+#include "Config.h"
 
 int ViewBase::count = 0;
 
@@ -20,7 +21,7 @@ void ViewBase::draw()
 
 	CustomShape* sp = object->getShape();
 	if(CustomShape::isPolygon(sp))
-		EngineConnector::getInstance().drawShape((CustomPolygon*)sp);
+		Config::engine->drawShape((CustomPolygon*)sp);
 	else if(CustomShape::isCircle(sp))
-		EngineConnector::getInstance().drawShape((CustomCircle*)sp);
+		Config::engine->drawShape((CustomCircle*)sp);
 }

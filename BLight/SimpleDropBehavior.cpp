@@ -1,6 +1,4 @@
 #include "SimpleDropBehavior.h"
-#include "PopupManager.h"
-#include "Config.h"
 
 SimpleDropBehavior::SimpleDropBehavior(void)
 {
@@ -23,7 +21,7 @@ bool SimpleDropBehavior::start(ControllerBase* c)
 	__super::start(c);
 	
 	controller->getObject()->setSensor(true);
-	PhEngineConnector::getInstance().addContactReceiver(this);
+	Config::phEngine->addContactReceiver(this);
 
 	return true;
 }
@@ -31,7 +29,7 @@ bool SimpleDropBehavior::start(ControllerBase* c)
 bool SimpleDropBehavior::stop()
 {
 	controller->getObject()->setSensor(false);
-	PhEngineConnector::getInstance().removeContactReceiver(this);
+	Config::phEngine->removeContactReceiver(this);
 
 	__super::stop();
 
@@ -52,7 +50,7 @@ bool SimpleDropBehavior::doStep(int step)
 {
 	__super::doStep(step);
 
-	CustomPoint& pos = EngineConnector::getInstance().getMousePosition();
+	CustomPoint& pos = Config::engine->getMousePosition();
 	if(controller->getObject()->contains(pos))
 		target = Config::player->getObject();
 
@@ -63,7 +61,7 @@ bool SimpleDropBehavior::doStep(int step)
 	if(command.tryToExecute()){
 		showPopup(controller);
 
-		FieldController::getInstance().destroyObjectController(controller);
+		Config::field->destroyObjectController(controller);
 		target = nullptr;
 		return true;
 	}

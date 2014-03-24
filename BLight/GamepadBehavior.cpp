@@ -1,4 +1,5 @@
 #include "GamepadBehavior.h"
+#include "Config.h"
 
 GamepadBehavior::GamepadBehavior(void)
 {
@@ -16,7 +17,7 @@ BehaviorBase* GamepadBehavior::clone()
 
 CustomPoint* GamepadBehavior::getTouch()
 {
-	if(EngineConnector::getInstance().isLeftMouseButtonPressed())
+	if(Config::engine->isLeftMouseButtonPressed())
 		return getOverPoint();
 
 	return nullptr;
@@ -24,7 +25,7 @@ CustomPoint* GamepadBehavior::getTouch()
 
 CustomPoint* GamepadBehavior::getOverPoint()
 {
-	CustomPoint& pos = EngineConnector::getInstance().getMousePosition();
+	CustomPoint& pos = Config::engine->getMousePosition();
 	touch.x = pos.x;
 	touch.y = pos.y;
 	return &touch;	

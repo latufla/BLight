@@ -1,9 +1,5 @@
 #include "stdafx.h"
 #include "ControllerBase.h"
-#include "EngineConnector.h"
-#include "PhEngineConnector.h"
-#include "SceneController.h"
-#include "FieldController.h"
 #include "DebuggerBehavior.h"
 #include "JsonConnector.h"
 #include "Infos.h"
@@ -13,7 +9,7 @@
 #include "Config.h"
 
 void mainLoop(int);
-void setUp(ControllerBase*);
+void applyAdditionalSettings(ControllerBase*);
 
 int _tmain(int argc, _TCHAR* argv[])
 { 
@@ -39,7 +35,7 @@ int _tmain(int argc, _TCHAR* argv[])
 	vector<ControllerBase*> mapInfo = Maps::createDemoMap(field);
 	for(auto it = mapInfo.cbegin(); it != mapInfo.cend(); it++){
 		scene.addChild((*it)->getView());
-		setUp(*it);
+		applyAdditionalSettings(*it);
 	}
 
 	field.startBehaviors();
@@ -62,7 +58,7 @@ void mainLoop(int elapsedTime)
 	Config::scene->draw();
 }
 
-void setUp(ControllerBase* c)
+void applyAdditionalSettings(ControllerBase* c)
 {
 	if(c->getName() == "aiDummy")
 		StatusViewManager::getInstance().addStatusView(c);

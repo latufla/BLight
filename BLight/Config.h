@@ -3,6 +3,7 @@
 #include "PhEngineConnector.h"
 #include "FieldController.h"
 #include "EngineConnector.h"
+#include "SceneController.h"
 #include "IManager.h"
 
 // TODO: implement dtor for all static and clear Config

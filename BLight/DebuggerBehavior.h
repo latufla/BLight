@@ -1,6 +1,5 @@
 #pragma once
 #include "BehaviorBase.h"
-#include "EngineConnector.h"
 
 class DebuggerBehavior : public BehaviorBase
 {

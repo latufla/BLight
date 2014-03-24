@@ -1,5 +1,6 @@
 #include "ControllerBase.h"
 #include "BehaviorBase.h"
+#include "Config.h"
 
 int ControllerBase::count = 0;
 
@@ -33,7 +34,7 @@ ControllerBase::~ControllerBase(void)
  	}
 	behaviors.clear();
 
-	SceneController::getInstance().removeChild(view);
+	Config::scene->removeChild(view);
 	delete view;
 }
 

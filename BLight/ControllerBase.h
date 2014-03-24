@@ -2,7 +2,6 @@
 #include "stdafx.h"
 #include "ObjectBase.h"
 #include "ViewBase.h"
-#include "SceneController.h"
 
 class BehaviorBase;
 enum BehaviorType;

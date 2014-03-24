@@ -1,10 +1,8 @@
 #pragma once
-#include "ObjectBase.h"
 #include "BehaviorBase.h"
-#include "PhEngineConnector.h"
 #include "ApplyCommand.h"
-#include "SceneController.h"
-#include "FieldController.h"
+#include "PopupManager.h"
+#include "Config.h"
 
 class SimpleDropBehavior : public BehaviorBase
 {

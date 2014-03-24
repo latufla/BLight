@@ -1,4 +1,5 @@
 #include "ChargerBehavior.h"
+#include "Config.h"
 
 ChargerBehavior::ChargerBehavior(void)
 {
@@ -16,7 +17,7 @@ bool ChargerBehavior::start(ControllerBase* c)
 	__super::start(c);
 
 	controller->getObject()->setSensor(true);
-	PhEngineConnector::getInstance().addContactReceiver(this);
+	Config::phEngine->addContactReceiver(this);
 	
 	return true;
 }
@@ -24,7 +25,7 @@ bool ChargerBehavior::start(ControllerBase* c)
 bool ChargerBehavior::stop()
 {
 	controller->getObject()->setSensor(false);
-	PhEngineConnector::getInstance().removeContactReceiver(this);
+	Config::phEngine->removeContactReceiver(this);
 
 	__super::stop();
 	

@@ -1,6 +1,5 @@
 #pragma once
 #include "PopupText.h"
-#include "SceneController.h"
 #include "IManager.h"
 
 class PopupManager : public IManager

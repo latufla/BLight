@@ -1,9 +1,6 @@
 #pragma once
 #include "BehaviorBase.h"
-#include "PhEngineConnector.h"
-#include "SceneController.h"
 #include "ApplyCommand.h"
-
 
 // charges main hero energy
 class ChargerBehavior : public BehaviorBase

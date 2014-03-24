@@ -1,5 +1,4 @@
 #include "ApplyCommand.h"
-#include "SceneController.h"
 
 
 ApplyCommand::ApplyCommand(void)
