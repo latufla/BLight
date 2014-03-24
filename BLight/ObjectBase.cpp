@@ -8,7 +8,7 @@ ObjectBase::ObjectBase(void)
 	init(0, "dummy");
 }
 
-ObjectBase::ObjectBase(int id, string name) : EventDispatcher(id)
+ObjectBase::ObjectBase(int id, string name)
 {	
 	init(id, name);
 }

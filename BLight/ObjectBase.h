@@ -1,6 +1,5 @@
 #pragma once
 #include "stdafx.h"
-#include "EventDispatcher.h"
 #include <utility>
 #include <map>
 #include "CustomPoint.h"
@@ -9,7 +8,7 @@
 
 using namespace std;
 
-class ObjectBase : public EventDispatcher
+class ObjectBase
 {
 public:
 	ObjectBase(void);
@@ -54,8 +53,10 @@ public:
 
 protected:
 	void init(int, string);
-
+	
+	int id;
 	string name;
+	
 	int energy;
 
 	CustomPoint position;
