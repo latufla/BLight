@@ -3,11 +3,11 @@
 class Infos
 {
 public:
-	static ObjectInfo* createHero();
-	static ObjectInfo* createEnemy();
-	static ObjectInfo* createSmallEnergyPack();
-	static ObjectInfo* createMediumEnergyPack();
-	static ObjectInfo* createCharger();
-	static ObjectInfo* createEnemySpawner();
+	static ObjectInfo* getHeroInfo();
+	static ObjectInfo* getEnemyInfo();
+	static ObjectInfo* getSmallEnergyPackInfo();
+	static ObjectInfo* getMediumEnergyPackInfo();
+	static ObjectInfo* getChargerInfo();
+	static ObjectInfo* getEnemySpawnerInfo();
 };
 

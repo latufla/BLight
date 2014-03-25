@@ -60,9 +60,6 @@ void mainLoop(int elapsedTime)
 
 void applyAdditionalSettings(ControllerBase* c)
 {
-	if(c->getName() == "aiDummy")
-		StatusViewManager::getInstance().addStatusView(c);
-
 	if(c->getName() == "hero"){
 		Config::player = c;
 		StatusViewManager::getInstance().addStatusView(c);

@@ -6,9 +6,9 @@
 #include "ChargerBehavior.h"
 #include "SpawnerBehavior.h"
 
-ObjectInfo* Infos::createHero()
+ObjectInfo* Infos::getHeroInfo()
 {
-	ObjectInfo* info = new ObjectInfo();
+	static ObjectInfo* info = new ObjectInfo();
 	info->name = "hero";
 	info->physicType = 2;
 	info->shape = new CustomCircle(CustomPoint(0.0f, 0.0f), 1.0f);
@@ -22,9 +22,9 @@ ObjectInfo* Infos::createHero()
 	return info;
 }
 
-ObjectInfo* Infos::createEnemy()
+ObjectInfo* Infos::getEnemyInfo()
 {
-	ObjectInfo* info = new ObjectInfo();
+	static ObjectInfo* info = new ObjectInfo();
 	info->name = "aiDummy";
 	info->physicType = 2;
 	info->shape = new CustomCircle(CustomPoint(0.0f, 0.0f), 1.0f);
@@ -38,9 +38,9 @@ ObjectInfo* Infos::createEnemy()
 	return info;
 }
 
-ObjectInfo* Infos::createSmallEnergyPack()
+ObjectInfo* Infos::getSmallEnergyPackInfo()
 {
-	ObjectInfo* info = new ObjectInfo();
+	static ObjectInfo* info = new ObjectInfo();
 	info->name = "pack +20";
 	info->physicType = 0;
 	info->shape = new CustomPolygon(1.0f, 1.0f); 
@@ -50,9 +50,9 @@ ObjectInfo* Infos::createSmallEnergyPack()
 	return info;
 }
 
-ObjectInfo* Infos::createMediumEnergyPack()
+ObjectInfo* Infos::getMediumEnergyPackInfo()
 {
-	ObjectInfo* info = new ObjectInfo();
+	static ObjectInfo* info = new ObjectInfo();
 	info = new ObjectInfo();
 	info->name = "pack +30";
 	info->physicType = 0;
@@ -62,9 +62,9 @@ ObjectInfo* Infos::createMediumEnergyPack()
 	return info;
 }
 
-ObjectInfo* Infos::createCharger()
+ObjectInfo* Infos::getChargerInfo()
 {
-	ObjectInfo* info = new ObjectInfo();
+	static ObjectInfo* info = new ObjectInfo();
 	info->name = "charger";
 	info->physicType = 0;
 	info->shape = new CustomPolygon(4.0f, 4.0f); 
@@ -73,10 +73,10 @@ ObjectInfo* Infos::createCharger()
 	return info;
 }
 
-ObjectInfo* Infos::createEnemySpawner()
+ObjectInfo* Infos::getEnemySpawnerInfo()
 {
-	ObjectInfo* eInfo = createEnemy(); 
-	ObjectInfo* info = new ObjectInfo();
+	ObjectInfo* eInfo = getEnemyInfo(); 
+	static ObjectInfo* info = new ObjectInfo();
 	info->name = "spawner";
 	info->physicType = 0;
 	info->shape = new CustomPolygon(3.0f, 3.0f); 
