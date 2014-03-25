@@ -11,10 +11,10 @@ vector<ControllerBase*> Maps::createDemoMap(FieldController& field)
 	delete heroInfo;
 	res.push_back(hero);	
 	
-	ObjectInfo* aiDummyInfo = Infos::createEnemy();
-	ControllerBase* aiDummy = field.createObjectController(2, *aiDummyInfo, CustomPoint(40.0f, 10.0f));
-	delete aiDummyInfo;
-	res.push_back(aiDummy);
+	ObjectInfo* aiSpawnerInfo = Infos::createEnemySpawner();
+	ControllerBase* aiSpawner = field.createObjectController(2, *aiSpawnerInfo, CustomPoint(40.0f, 10.0f));
+	delete aiSpawnerInfo;
+	res.push_back(aiSpawner);
 	
 	ObjectInfo* chargerInfo = Infos::createCharger();
 	ControllerBase* charger = field.createObjectController(3, *chargerInfo, CustomPoint(5.0f, 20.0f));

@@ -4,6 +4,7 @@
 #include "AIControlBehavior.h"
 #include "SimpleDropBehavior.h"
 #include "ChargerBehavior.h"
+#include "SpawnerBehavior.h"
 
 ObjectInfo* Infos::createHero()
 {
@@ -69,5 +70,17 @@ ObjectInfo* Infos::createCharger()
 	info->shape = new CustomPolygon(4.0f, 4.0f); 
 
 	info->behaviors.push_back(new ChargerBehavior());
+	return info;
+}
+
+ObjectInfo* Infos::createEnemySpawner()
+{
+	ObjectInfo* eInfo = createEnemy(); 
+	ObjectInfo* info = new ObjectInfo();
+	info->name = "spawner";
+	info->physicType = 0;
+	info->shape = new CustomPolygon(3.0f, 3.0f); 
+
+	info->behaviors.push_back(new SpawnerBehavior(eInfo));
 	return info;
 }

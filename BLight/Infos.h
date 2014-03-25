@@ -8,5 +8,6 @@ public:
 	static ObjectInfo* createSmallEnergyPack();
 	static ObjectInfo* createMediumEnergyPack();
 	static ObjectInfo* createCharger();
+	static ObjectInfo* createEnemySpawner();
 };
 
