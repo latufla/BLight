@@ -1,4 +1,5 @@
 #include "SimpleDropBehavior.h"
+#include "DestroyCommand.h"
 
 SimpleDropBehavior::SimpleDropBehavior(void)
 {
@@ -53,15 +54,19 @@ bool SimpleDropBehavior::doStep(int step)
 	CustomPoint& pos = Config::engine->getMousePosition();
 	if(controller->getObject()->contains(pos))
 		target = Config::player->getObject();
-
+	
 	if(target == nullptr)
 		return false;
 		
-	command.setUp(this, target, target->getEnergyProp(), drop);
-	if(command.tryToExecute()){
+	ApplyCommand applyCmd;
+	applyCmd.setUp(this, target, target->getEnergyProp(), drop);
+	if(applyCmd.tryToExecute()){
 		showPopup(controller);
 
-		Config::field->destroyObjectController(controller);
+		DestroyCommand destroyCmd;
+		destroyCmd.setUp(this, controller);
+		destroyCmd.tryToExecute();
+
 		target = nullptr;
 		return true;
 	}

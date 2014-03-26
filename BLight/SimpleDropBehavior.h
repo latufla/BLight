@@ -29,5 +29,6 @@ protected:
 
 	int drop;
 	ApplyCommand command;
+	
 };
 

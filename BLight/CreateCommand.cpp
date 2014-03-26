@@ -18,15 +18,6 @@ void CreateCommand::setUp(BehaviorBase* caller, ObjectInfo* creature)
 	this->creature = creature;
 }
 
-bool CreateCommand::tryToExecute()
-{
-	if(canExecute()){
-		execute();
-		return true;
-	}
-	return false;
-}
-
 bool CreateCommand::canExecute()
 {
 	return true;

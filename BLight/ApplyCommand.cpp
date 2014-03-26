@@ -20,15 +20,6 @@ void ApplyCommand::setUp(BehaviorBase* caller, ObjectBase* target, int* prop, in
 }
 
 
-bool ApplyCommand::tryToExecute()
-{
-	if(canExecute()){
-		execute();
-		return true;
-	}
-	return false;
-}
-
 bool ApplyCommand::canExecute()
 {
 	BehaviorType bType = caller->getType();

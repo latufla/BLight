@@ -2,23 +2,22 @@
 #include "BehaviorBase.h"
 #include "ObjectInfo.h"
 #include "Config.h"
+#include "Command.h"
 
-class CreateCommand
+class CreateCommand : public Command
 {
 public:
 	CreateCommand(void);
 	~CreateCommand(void);
 
-	bool tryToExecute();
 	bool canExecute();
 	void execute();
 
 	void setUp(BehaviorBase*, ObjectInfo*);
 
 protected:
-	BehaviorBase* caller;
 	ObjectInfo* creature;
 
-	static int id;
+	static int id; // TODO: fix this dirt
 };
 
