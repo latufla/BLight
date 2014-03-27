@@ -1,7 +1,9 @@
 #include "UserControlBehavior.h"
+#include "Config.h"
 
 UserControlBehavior::UserControlBehavior(void)
 {
+	target = nullptr;
 }
 
 
@@ -29,9 +31,28 @@ bool UserControlBehavior::stop()
 bool UserControlBehavior::doStep(int step)
 {
 	__super::doStep(step);
-
+	
 	gamepad.tryDoStep(step);
-	return true;
+	action = NONE_ACTION;
+
+	CustomPoint* touch = gamepad.getTouch();
+	if(touch == nullptr)
+		return false;
+
+	vector<ControllerBase*>& controllers = Config::field->getControllers(); // TODO: optimize
+	for(auto it = controllers.cbegin(); it != controllers.cend(); ++it){
+		if((*it)->getObject()->contains(*touch)){
+			target = *it;
+			break;
+		}
+	}			
+
+	if(target != nullptr){
+		action = ATTACK_ACTION;
+		return true;
+	}
+	
+	return false;
 }
 
 CustomPoint* UserControlBehavior::getMoveTo()

@@ -5,7 +5,9 @@
 #include "SimpleDropBehavior.h"
 #include "ChargerBehavior.h"
 #include "SpawnerBehavior.h"
+#include "AttackBehavior.h"
 
+// TODO: cleanup
 ObjectInfo* Infos::getHeroInfo()
 {
 	static ObjectInfo* info = new ObjectInfo();
@@ -19,6 +21,7 @@ ObjectInfo* Infos::getHeroInfo()
 
 	info->behaviors.push_back(new UserControlBehavior());
 	info->behaviors.push_back(new MoveBehavior());
+	info->behaviors.push_back(new AttackBehavior());
 	return info;
 }
 

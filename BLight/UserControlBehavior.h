@@ -17,8 +17,8 @@ public:
 	CustomPoint* getMoveTo();
 	float getMoveForce(){return 15.0f;}
 
-	ControllerBase* getTarget(){return nullptr;}
-	ControlAction getAction(){return NONE_ACTION;}
+	ControllerBase* getTarget(){return target;}
+	ControlAction getAction(){return action;}
 
 	BehaviorType getType(){return CONTROL_BEHAVIOR;}
 
@@ -26,5 +26,7 @@ private:
 	bool doStep(int);
 
 	GamepadBehavior gamepad;
+	ControllerBase* target;
+	ControlAction action;
 };
 

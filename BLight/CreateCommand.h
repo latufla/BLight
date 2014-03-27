@@ -14,10 +14,12 @@ public:
 	void execute();
 
 	void setUp(BehaviorBase*, ObjectInfo*);
+	ControllerBase* getCreature() const { return creature; }
 
 protected:
-	ObjectInfo* creature;
-
+	ObjectInfo* info;
+	ControllerBase* creature;
+	
 	static int id; // TODO: fix this dirt
 };
 

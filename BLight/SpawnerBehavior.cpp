@@ -1,4 +1,5 @@
 #include "SpawnerBehavior.h"
+#include "StatusViewManager.h"
 
 
 SpawnerBehavior::SpawnerBehavior(void)
@@ -27,6 +28,7 @@ bool SpawnerBehavior::doStep(int step)
 		CreateCommand create;
 		create.setUp(this, creature);
 		if(create.tryToExecute()){
+			StatusViewManager::getInstance().addStatusView(create.getCreature());
 			time = 0;
 			return true;
 		}

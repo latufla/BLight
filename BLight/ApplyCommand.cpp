@@ -27,6 +27,8 @@ bool ApplyCommand::canExecute()
 		switch(bType){
 			case CHARGER_BEHAVIOR:
 				return *prop < 100;
+			case ATTACK_BEHAVIOR:
+				return *prop >= 20;
 			case SIMPLE_DROP_BEHAVIOR:
 				return true;
 		}

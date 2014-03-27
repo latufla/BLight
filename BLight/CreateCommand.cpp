@@ -9,13 +9,14 @@ CreateCommand::CreateCommand(void)
 
 CreateCommand::~CreateCommand(void)
 {
+	creature = nullptr;
 }
 
 
-void CreateCommand::setUp(BehaviorBase* caller, ObjectInfo* creature)
+void CreateCommand::setUp(BehaviorBase* caller, ObjectInfo* info)
 {
 	this->caller = caller;
-	this->creature = creature;
+	this->info = info;
 }
 
 bool CreateCommand::canExecute()
@@ -25,8 +26,8 @@ bool CreateCommand::canExecute()
 
 void CreateCommand::execute()
 {
-	ControllerBase* c = Config::field->createObjectController(id++, *creature, caller->getController()->getObject()->getPosition());
-	c->startBehaviors();
-	Config::scene->addChild(c->getView());
+	creature = Config::field->createObjectController(id++, *info, caller->getController()->getObject()->getPosition());
+	creature->startBehaviors();
+	Config::scene->addChild(creature->getView());
 }
 
