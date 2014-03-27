@@ -2,7 +2,7 @@
 #include "CustomPoint.h"
 #include "BehaviorBase.h"
 
-enum ControlAction{NONE_ACTION, ATTACK_ACTION, COLLECT_ACTION}; //, APPLY_ACTION};
+enum ControlAction{NONE_ACTION, ATTACK_ACTION, APPLY_ACTION};
 
 class ControlBehavior : public BehaviorBase
 {

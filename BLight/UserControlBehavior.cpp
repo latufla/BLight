@@ -37,20 +37,25 @@ bool UserControlBehavior::doStep(int step)
 	target = nullptr;
 	action = NONE_ACTION;
 
-	CustomPoint* touch = gamepad.getTouch();
-	if(touch == nullptr)
-		return false;
-
+	CustomPoint* pos = gamepad.getTouch();
+	
+	if(pos == nullptr)
+		pos = gamepad.getOverPoint();	
+		
 	vector<ControllerBase*>& controllers = Config::field->getControllers(); // TODO: optimize
 	for(auto it = controllers.cbegin(); it != controllers.cend(); ++it){
-		if((*it)->getObject()->contains(*touch)){
+		if((*it)->getObject()->contains(*pos)){
 			target = *it;
 			break;
 		}
 	}			
 
 	if(target != nullptr){
-		action = ATTACK_ACTION;
+		if(pos == gamepad.getTouch() && target->getName() == "aiDummy")
+			action = ATTACK_ACTION;
+		else if(pos == gamepad.getOverPoint())
+			action = APPLY_ACTION;
+		
 		return true;
 	}
 	

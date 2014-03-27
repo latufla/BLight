@@ -27,6 +27,6 @@ private:
 
 	GamepadBehavior gamepad;
 	ControllerBase* target;
-	ControlAction action;
+	ControlAction action; // use commands
 };
 
