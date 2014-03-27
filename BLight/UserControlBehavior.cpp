@@ -33,6 +33,8 @@ bool UserControlBehavior::doStep(int step)
 	__super::doStep(step);
 	
 	gamepad.tryDoStep(step);
+
+	target = nullptr;
 	action = NONE_ACTION;
 
 	CustomPoint* touch = gamepad.getTouch();
@@ -57,7 +59,7 @@ bool UserControlBehavior::doStep(int step)
 
 CustomPoint* UserControlBehavior::getMoveTo()
 {
-	return gamepad.getTouch();
+	return action == NONE_ACTION ? gamepad.getTouch() : nullptr;
 }
 
 BehaviorBase* UserControlBehavior::clone()
