@@ -51,8 +51,11 @@ bool SimpleDropBehavior::doStep(int step)
 {
 	__super::doStep(step);
 
-	CustomPoint& pos = Config::engine->getMousePosition();
-	if(controller->getObject()->contains(pos))
+	ControlBehavior* control = (ControlBehavior*)Config::player->getBehaviorBy(CONTROL_BEHAVIOR);
+	if(control == nullptr)
+		return false;
+
+	if(control->getAction() == APPLY_ACTION && control->getTarget() == controller)
 		target = Config::player->getObject();
 	
 	if(target == nullptr)
