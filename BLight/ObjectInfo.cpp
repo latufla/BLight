@@ -1,6 +1,5 @@
 #include "ObjectInfo.h"
 
-
 ObjectInfo::ObjectInfo(void)
 {
 	density = 0.0f;
@@ -14,8 +13,17 @@ ObjectInfo::~ObjectInfo(void)
 {
 	delete shape;
 
-	for (auto it = behaviors.cbegin(); it != behaviors.cend(); it++){
+	for (auto it = behaviors.cbegin(); it != behaviors.cend(); ++it){
 		delete (*it);
 	}
 	behaviors.clear();
+}
+
+bool ObjectInfo::canApplyCommand(CommandType command)
+{
+	for (auto it = applicableCommands.cbegin(); it != applicableCommands.cend(); ++it){
+		if((*it) == command)
+			return true;
+	}
+	return false;
 }

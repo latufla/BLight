@@ -19,7 +19,6 @@ ControllerBase* FieldController::createObjectController( int id, const ObjectInf
 		c->addBehavior((*it)->clone());
 	}
 
-	// and ai too
 	return c;
 }
 
@@ -27,7 +26,7 @@ ControllerBase* FieldController::createObjectController(int id, string name, int
 {
 	ObjectBase* obj = field.createObject(id, name, oType, pos);
 	ControllerBase* c = new ControllerBase(obj);
-	controllers.insert(controllers.end(), c);
+	controllers.push_back(c);
 	return c;
 }
 

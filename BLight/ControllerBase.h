@@ -6,6 +6,7 @@
 class BehaviorBase;
 enum BehaviorType;
 
+
 class ControllerBase
 {
 public:
@@ -48,7 +49,7 @@ protected:
 	ViewBase* view;
 	
 	vector<BehaviorBase*> behaviors;
-
+	
 	bool toDestroy;
 };
 

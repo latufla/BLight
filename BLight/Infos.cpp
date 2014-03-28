@@ -7,11 +7,45 @@
 #include "SpawnerBehavior.h"
 #include "AttackBehavior.h"
 
+const string Infos::HERO_NAME = "hero";
+const string Infos::ENEMY_NAME = "enemy";
+const string Infos::SMALL_ENERGY_PACK_NAME = "small_energy_pack";
+const string Infos::MEDIUM_ENERGY_PACK_NAME = "medium_energy_pack";
+const string Infos::CHARGER_NAME = "charger";
+const string Infos::ENEMY_SPAWNER_NAME = "enemy_spawner";
+
+map<int, ObjectInfo*> Infos::idToInfo;
+map<string, ObjectInfo*> Infos::nameToInfo;
+
+void Infos::init()
+{
+	getHeroInfo();
+	getEnemySpawnerInfo();
+	getChargerInfo();
+	getSmallEnergyPackInfo();
+	getMediumEnergyPackInfo();
+}
+
+ObjectInfo* Infos::getInfoBy(int id)
+{
+	return idToInfo[id];
+}
+
+ObjectInfo* Infos::getInfoBy(string name)
+{
+	return nameToInfo[name];
+}
+
 // TODO: cleanup
 ObjectInfo* Infos::getHeroInfo()
 {
-	static ObjectInfo* info = new ObjectInfo();
-	info->name = "hero";
+	ObjectInfo* info = new ObjectInfo();
+	info->id = HERO;
+	info->name = HERO_NAME;
+
+	idToInfo[info->id] = info;
+	nameToInfo[info->name] = info;
+
 	info->physicType = 2;
 	info->shape = new CustomCircle(CustomPoint(0.0f, 0.0f), 1.0f);
 	info->density = 1.0f;
@@ -27,8 +61,13 @@ ObjectInfo* Infos::getHeroInfo()
 
 ObjectInfo* Infos::getEnemyInfo()
 {
-	static ObjectInfo* info = new ObjectInfo();
-	info->name = "aiDummy";
+	ObjectInfo* info = new ObjectInfo();
+	info->id = ENEMY;
+	info->name = ENEMY_NAME;
+
+	idToInfo[info->id] = info;
+	nameToInfo[info->name] = info;
+
 	info->physicType = 2;
 	info->shape = new CustomCircle(CustomPoint(0.0f, 0.0f), 1.0f);
 	info->density = 1.0f;
@@ -38,41 +77,68 @@ ObjectInfo* Infos::getEnemyInfo()
 
 	info->behaviors.push_back(new AIControlBehavior());
 	info->behaviors.push_back(new MoveBehavior());
+	
+	info->applicableCommands.push_back(ATTACK_COMMAND);
+	
 	return info;
 }
 
 ObjectInfo* Infos::getSmallEnergyPackInfo()
 {
-	static ObjectInfo* info = new ObjectInfo();
-	info->name = "pack +20";
+	ObjectInfo* info = new ObjectInfo();
+	info->id = SMALL_ENERGY_PACK;	
+	info->name = SMALL_ENERGY_PACK_NAME;
+
+	idToInfo[info->id] = info;
+	nameToInfo[info->name] = info;
+
 	info->physicType = 0;
 	info->shape = new CustomPolygon(1.0f, 1.0f); 
 
 	info->behaviors.push_back(new SimpleDropBehavior(20));
 	info->behaviors.push_back(new SimpleDropBehavior(40));
+
+	info->applicableCommands.push_back(APPLY_COMMAND);
+
 	return info;
 }
 
 ObjectInfo* Infos::getMediumEnergyPackInfo()
 {
-	static ObjectInfo* info = new ObjectInfo();
+	ObjectInfo* info = new ObjectInfo();
 	info = new ObjectInfo();
-	info->name = "pack +30";
+	info->id = MEDIUM_ENERGY_PACK;
+	info->name = MEDIUM_ENERGY_PACK_NAME;
+	
+	idToInfo[info->id] = info;
+	nameToInfo[info->name] = info;
+
 	info->physicType = 0;
 	info->shape = new CustomPolygon(2.0f, 2.0f); 
 
 	info->behaviors.push_back(new SimpleDropBehavior(30));
+	
+	info->applicableCommands.push_back(APPLY_COMMAND);
+	
 	return info;
 }
 
 ObjectInfo* Infos::getChargerInfo()
 {
 	static ObjectInfo* info = new ObjectInfo();
-	info->name = "charger";
+	info->id = CHARGER;
+	info->name = CHARGER_NAME;
+
+	idToInfo[info->id] = info;
+	nameToInfo[info->name] = info;
+
 	info->physicType = 0;
 	info->shape = new CustomPolygon(4.0f, 4.0f); 
 
 	info->behaviors.push_back(new ChargerBehavior());
+	
+	info->applicableCommands.push_back(APPLY_COMMAND);
+	
 	return info;
 }
 
@@ -80,10 +146,16 @@ ObjectInfo* Infos::getEnemySpawnerInfo()
 {
 	ObjectInfo* eInfo = getEnemyInfo(); 
 	static ObjectInfo* info = new ObjectInfo();
-	info->name = "spawner";
+	info->id = ENEMY_SPAWNER;
+	info->name = ENEMY_SPAWNER_NAME;
+
+	idToInfo[info->id] = info;
+	nameToInfo[info->name] = info;
+
 	info->physicType = 0;
 	info->shape = new CustomPolygon(3.0f, 3.0f); 
 
 	info->behaviors.push_back(new SpawnerBehavior(eInfo));
 	return info;
 }
+

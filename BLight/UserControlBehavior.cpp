@@ -1,5 +1,6 @@
 #include "UserControlBehavior.h"
 #include "Config.h"
+#include "Infos.h"
 
 UserControlBehavior::UserControlBehavior(void)
 {
@@ -50,8 +51,9 @@ bool UserControlBehavior::doStep(int step)
 		}
 	}			
 
+
 	if(target != nullptr){
-		if(pos == gamepad.getTouch() && target->getName() == "aiDummy")
+		if(pos == gamepad.getTouch())
 			command = ATTACK_COMMAND;
 		else if(pos == gamepad.getOverPoint())
 			command = APPLY_COMMAND;

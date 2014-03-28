@@ -1,5 +1,6 @@
 #include "AttackBehavior.h"
 #include "PopupManager.h"
+#include "Infos.h"
 
 
 AttackBehavior::AttackBehavior(void)
@@ -22,7 +23,12 @@ bool AttackBehavior::doStep(int step)
 
 	CommandType command = control->getCommand();
 	ControllerBase* cTarget = control->getTarget();
-	if(command == ATTACK_COMMAND && cTarget != nullptr){
+	if(!cTarget)
+		return false;
+
+	ObjectInfo* info = Infos::getInfoBy(cTarget->getName());
+		
+	if(command == ATTACK_COMMAND && info->canApplyCommand(ATTACK_COMMAND)){
 		AttackCommand attack;
 		attack.setUp(this, cTarget, damage);		
 		if(attack.tryToExecute()){
@@ -42,7 +48,7 @@ BehaviorBase* AttackBehavior::clone()
 void AttackBehavior::showPopup(ControllerBase* c)
 {
 	PopupText* p = new PopupText();
-	p->setText("" + string(damage > 0 ? "+" : "") + to_string(long long(damage)));
+	p->setText("-" + to_string(long long(damage)));
 	p->getPosition().set(c->getObject()->getGlobalCenter());
 	PopupManager::getInstance().add(p);
 }
