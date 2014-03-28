@@ -61,14 +61,14 @@ bool SimpleDropBehavior::doStep(int step)
 	if(target == nullptr)
 		return false;
 		
-	ApplyCommand applyCmd;
-	applyCmd.setUp(this, target, target->getEnergyProp(), drop);
-	if(applyCmd.tryToExecute()){
+	ApplyCommand apply;
+	apply.setUp(this, target, target->getEnergyProp(), drop);
+	if(apply.tryToExecute()){
 		showPopup(controller);
 
-		DestroyCommand destroyCmd;
-		destroyCmd.setUp(this, controller);
-		destroyCmd.tryToExecute();
+		DestroyCommand destroy;
+		destroy.setUp(this, controller);
+		destroy.tryToExecute();
 
 		target = nullptr;
 		return true;

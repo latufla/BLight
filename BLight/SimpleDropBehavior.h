@@ -28,7 +28,6 @@ protected:
 	ObjectBase* target;
 
 	int drop;
-	ApplyCommand command;
 	
 };
 
