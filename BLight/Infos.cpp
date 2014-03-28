@@ -98,8 +98,6 @@ ObjectInfo* Infos::getSmallEnergyPackInfo()
 	info->behaviors.push_back(new SimpleDropBehavior(20));
 	info->behaviors.push_back(new SimpleDropBehavior(40));
 
-	info->applicableCommands.push_back(APPLY_COMMAND);
-
 	return info;
 }
 
@@ -118,8 +116,6 @@ ObjectInfo* Infos::getMediumEnergyPackInfo()
 
 	info->behaviors.push_back(new SimpleDropBehavior(30));
 	
-	info->applicableCommands.push_back(APPLY_COMMAND);
-	
 	return info;
 }
 
@@ -136,8 +132,6 @@ ObjectInfo* Infos::getChargerInfo()
 	info->shape = new CustomPolygon(4.0f, 4.0f); 
 
 	info->behaviors.push_back(new ChargerBehavior());
-	
-	info->applicableCommands.push_back(APPLY_COMMAND);
 	
 	return info;
 }
