@@ -20,9 +20,9 @@ bool AttackBehavior::doStep(int step)
 	if(control == nullptr)
 		return false;
 
-	ControlAction action = control->getAction();
+	CommandType command = control->getCommand();
 	ControllerBase* cTarget = control->getTarget();
-	if(action == ATTACK_ACTION && cTarget != nullptr){
+	if(command == ATTACK_COMMAND && cTarget != nullptr){
 		AttackCommand attack;
 		attack.setUp(this, cTarget, damage);		
 		if(attack.tryToExecute()){

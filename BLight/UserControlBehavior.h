@@ -18,7 +18,7 @@ public:
 	float getMoveForce(){return 15.0f;}
 
 	ControllerBase* getTarget(){return target;}
-	ControlAction getAction(){return action;}
+	CommandType getCommand(){return command;}
 
 	BehaviorType getType(){return CONTROL_BEHAVIOR;}
 
@@ -26,7 +26,8 @@ private:
 	bool doStep(int);
 
 	GamepadBehavior gamepad;
+
 	ControllerBase* target;
-	ControlAction action; // use commands
+	CommandType command; 
 };
 

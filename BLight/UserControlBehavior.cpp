@@ -35,7 +35,7 @@ bool UserControlBehavior::doStep(int step)
 	gamepad.tryDoStep(step);
 
 	target = nullptr;
-	action = NONE_ACTION;
+	command = NONE_COMMAND;
 
 	CustomPoint* pos = gamepad.getTouch();
 	
@@ -52,9 +52,9 @@ bool UserControlBehavior::doStep(int step)
 
 	if(target != nullptr){
 		if(pos == gamepad.getTouch() && target->getName() == "aiDummy")
-			action = ATTACK_ACTION;
+			command = ATTACK_COMMAND;
 		else if(pos == gamepad.getOverPoint())
-			action = APPLY_ACTION;
+			command = APPLY_COMMAND;
 		
 		return true;
 	}
@@ -64,7 +64,7 @@ bool UserControlBehavior::doStep(int step)
 
 CustomPoint* UserControlBehavior::getMoveTo()
 {
-	return action == NONE_ACTION ? gamepad.getTouch() : nullptr;
+	return command == NONE_COMMAND ? gamepad.getTouch() : nullptr;
 }
 
 BehaviorBase* UserControlBehavior::clone()

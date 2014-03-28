@@ -27,7 +27,6 @@ protected:
 
 	ObjectBase* target;
 
-	int drop;
-	
+	int drop;	
 };
 

@@ -1,5 +1,6 @@
 #include "SimpleDropBehavior.h"
 #include "DestroyCommand.h"
+#include "ControlBehavior.h"
 
 SimpleDropBehavior::SimpleDropBehavior(void)
 {
@@ -55,7 +56,7 @@ bool SimpleDropBehavior::doStep(int step)
 	if(control == nullptr)
 		return false;
 
-	if(control->getAction() == APPLY_ACTION && control->getTarget() == controller)
+	if(control->getCommand() == APPLY_COMMAND && control->getTarget() == controller)
 		target = Config::player->getObject();
 	
 	if(target == nullptr)

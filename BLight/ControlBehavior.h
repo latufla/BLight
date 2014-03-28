@@ -1,8 +1,7 @@
 #pragma once
 #include "CustomPoint.h"
 #include "BehaviorBase.h"
-
-enum ControlAction{NONE_ACTION, ATTACK_ACTION, APPLY_ACTION};
+#include "Command.h"
 
 class ControlBehavior : public BehaviorBase
 {
@@ -11,6 +10,6 @@ public:
 	virtual float getMoveForce() = 0;
 
 	virtual ControllerBase* getTarget() = 0;
-	virtual ControlAction getAction() = 0;
+	virtual CommandType getCommand() = 0;
 };
 

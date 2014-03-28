@@ -1,7 +1,7 @@
 #pragma once
 #include "CustomPoint.h"
 #include "ControllerBase.h"
-#include "ControlBehavior.h"
+#include "Command.h"
 
 class AIBlackboard
 {
@@ -18,14 +18,14 @@ public:
 	ControllerBase* getTarget() const { return target; }
 	void setTarget(ControllerBase* val) { target = val; }
 
-	ControlAction getAction() const { return action; }
-	void setAction(ControlAction val) { action = val; }
+	CommandType getCommand() const { return command; }
+	void setCommand(CommandType val) { command = val; }
 
 protected:
 	CustomPoint* moveTo;
 	float moveForce;
 	
 	ControllerBase* target;
-	ControlAction action;	
+	CommandType command;	
 };
 

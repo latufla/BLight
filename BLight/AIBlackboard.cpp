@@ -7,7 +7,7 @@ AIBlackboard::AIBlackboard(void)
 	moveForce = 10.0f;
 
 	target = nullptr;
-	action = NONE_ACTION;
+	command = NONE_COMMAND;
 }
 
 

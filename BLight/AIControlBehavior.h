@@ -2,6 +2,7 @@
 #include "AIBlackboard.h"
 #include "ControlBehavior.h"
 #include "AINode.h"
+#include "Command.h"
 
 class AIControlBehavior : public ControlBehavior
 {
@@ -12,14 +13,12 @@ public:
 	BehaviorBase* clone();
 
 	bool start(ControllerBase*);
-//	virtual bool stop();
-//	virtual bool tryDoStep(int); // frame behavior
 
 	CustomPoint* getMoveTo(){return blackboard.getMoveTo();}
 	float getMoveForce(){return blackboard.getMoveForce();}
 
 	ControllerBase* getTarget(){return blackboard.getTarget();}
-	ControlAction getAction(){return blackboard.getAction();}
+	CommandType getCommand(){return blackboard.getCommand();}
 
 	BehaviorType getType(){return CONTROL_BEHAVIOR;}
 
