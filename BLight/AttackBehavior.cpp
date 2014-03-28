@@ -23,20 +23,16 @@ bool AttackBehavior::doStep(int step)
 
 	CommandType command = control->getCommand();
 	ControllerBase* cTarget = control->getTarget();
-	if(!cTarget)
+	if(!cTarget || command != ATTACK_COMMAND)
 		return false;
 
-	ObjectInfo* info = Infos::getInfoBy(cTarget->getName());
-		
-	if(command == ATTACK_COMMAND && info->canApplyCommand(ATTACK_COMMAND)){
-		AttackCommand attack;
-		attack.setUp(this, cTarget, damage);		
-		if(attack.tryToExecute()){
-			showPopup(cTarget);
-			return true;
-		}
+	AttackCommand attack;
+	attack.setUp(this, cTarget, damage);		
+	if(attack.tryToExecute()){
+		showPopup(cTarget);
+		return true;
 	}
-
+	
 	return false;
 }
 

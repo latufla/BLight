@@ -1,4 +1,5 @@
 #include "AttackCommand.h"
+#include "Infos.h"
 
 
 AttackCommand::AttackCommand(void)
@@ -19,7 +20,9 @@ void AttackCommand::setUp(BehaviorBase* caller, ControllerBase* target, int dama
 
 bool AttackCommand::canExecute()
 {
-	return target->getObject()->getEnergy() > 0;
+	ObjectInfo* info = Infos::getInfoBy(target->getName());
+	return info->canApplyCommand(getType()) 
+		&& target->getObject()->getEnergy() > 0;
 }
 
 void AttackCommand::execute()
