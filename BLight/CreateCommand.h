@@ -16,6 +16,8 @@ public:
 	void setUp(BehaviorBase*, ObjectInfo*);
 	ControllerBase* getCreature() const { return creature; }
 
+	CommandType getType(){return CREATE_COMMAND;}
+
 protected:
 	ObjectInfo* info;
 	ControllerBase* creature;

@@ -1,7 +1,7 @@
 #pragma once
 #include "BehaviorBase.h"
 #include "ControlBehavior.h"
-#include "ApplyCommand.h"
+#include "AttackCommand.h"
 
 class AttackBehavior : public BehaviorBase
 {

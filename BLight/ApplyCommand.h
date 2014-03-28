@@ -13,6 +13,8 @@ public:
 
 	void setUp(BehaviorBase*, ObjectBase*, int*, int);
 
+	CommandType getType(){return APPLY_COMMAND;}
+
 protected:
 	ObjectBase* target;
 	int* prop;

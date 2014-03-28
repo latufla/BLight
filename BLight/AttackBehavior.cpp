@@ -4,7 +4,7 @@
 
 AttackBehavior::AttackBehavior(void)
 {
-	damage = -20;
+	damage = 20;
 }
 
 
@@ -23,10 +23,8 @@ bool AttackBehavior::doStep(int step)
 	ControlAction action = control->getAction();
 	ControllerBase* cTarget = control->getTarget();
 	if(action == ATTACK_ACTION && cTarget != nullptr){
-		ApplyCommand attack;
-		ObjectBase* oTarget = cTarget->getObject();
-		attack.setUp(this, oTarget, oTarget->getEnergyProp(), damage);
-		
+		AttackCommand attack;
+		attack.setUp(this, cTarget, damage);		
 		if(attack.tryToExecute()){
 			showPopup(cTarget);
 			return true;
