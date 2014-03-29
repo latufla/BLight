@@ -1,6 +1,6 @@
 #pragma once
 #include "BehaviorBase.h"
-#include "ApplyCommand.h"
+#include "ChargeCommand.h"
 
 // charges main hero energy
 class ChargerBehavior : public BehaviorBase
@@ -23,6 +23,6 @@ protected:
 
 	ObjectBase* target;
 
-	ApplyCommand command;
+	ChargeCommand command;
 };
 

@@ -56,6 +56,7 @@ ObjectInfo* Infos::getHeroInfo()
 	info->behaviors.push_back(new UserControlBehavior());
 	info->behaviors.push_back(new MoveBehavior());
 	info->behaviors.push_back(new AttackBehavior());
+	
 	return info;
 }
 

@@ -1,7 +1,14 @@
 #pragma once
 #include "BehaviorBase.h"
 
-enum CommandType{NONE_COMMAND, CREATE_COMMAND, DESTROY_COMMAND, APPLY_COMMAND, ATTACK_COMMAND};
+enum CommandType{
+	NONE_COMMAND, 
+	CREATE_COMMAND, 
+	DESTROY_COMMAND, 
+	APPLY_COMMAND, 
+	ATTACK_COMMAND, 
+	CHARGE_COMMAND
+};
 
 class Command
 {

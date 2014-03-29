@@ -40,7 +40,7 @@ bool ChargerBehavior::doStep(int step)
 	if(target == nullptr)
 		return false;
 
-	command.setUp(this, target, target->getEnergyProp(), 1);
+	command.setUp(this, target, 1);
 	return command.tryToExecute();
 }
 

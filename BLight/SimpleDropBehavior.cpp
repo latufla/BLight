@@ -1,6 +1,7 @@
 #include "SimpleDropBehavior.h"
 #include "DestroyCommand.h"
 #include "ControlBehavior.h"
+#include "ChargeCommand.h"
 
 SimpleDropBehavior::SimpleDropBehavior(void)
 {
@@ -62,9 +63,9 @@ bool SimpleDropBehavior::doStep(int step)
 	if(target == nullptr)
 		return false;
 		
-	ApplyCommand apply;
-	apply.setUp(this, target, target->getEnergyProp(), drop);
-	if(apply.tryToExecute()){
+	ChargeCommand charge;
+	charge.setUp(this, target, drop);
+	if(charge.tryToExecute()){
 		showPopup(controller);
 
 		DestroyCommand destroy;
