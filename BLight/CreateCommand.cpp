@@ -5,11 +5,12 @@ int CreateCommand::id = 6;
 
 CreateCommand::CreateCommand(void)
 {
+	creature = nullptr;
 }
 
 CreateCommand::~CreateCommand(void)
 {
-	creature = nullptr;
+	
 }
 
 

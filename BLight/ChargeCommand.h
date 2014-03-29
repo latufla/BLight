@@ -16,7 +16,6 @@ public:
 	CommandType getType(){return CHARGE_COMMAND;}
 
 protected:
-	ObjectBase* target;
 	int charge;
 };
 

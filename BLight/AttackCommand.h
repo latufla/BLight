@@ -11,12 +11,11 @@ public:
 	bool canExecute();
 	void execute();
 
-	void setUp(BehaviorBase*, ControllerBase*, int);
+	void setUp(BehaviorBase*, ObjectBase*, int);
 
 	CommandType getType(){return ATTACK_COMMAND;}
 
 protected:
-	ControllerBase* target;
 	int damage;
 };
 

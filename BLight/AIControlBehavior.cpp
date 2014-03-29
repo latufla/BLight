@@ -25,7 +25,7 @@ bool AIControlBehavior::start(ControllerBase* c)
 	SequenceAINode* sequence = new SequenceAINode();
 	
 	sequence->getChildren().push_back(new CheckPropAINode(&blackboard, c->getObject()->getEnergyProp(), 100));
-	sequence->getChildren().push_back(new FindControllerAINode(&blackboard, SIMPLE_DROP_BEHAVIOR));
+	sequence->getChildren().push_back(new FindControllerAINode(&blackboard, CHARGE_PACK_BEHAVIOR));
 	sequence->getChildren().push_back(new MoveToTargetAINode(&blackboard));
 
 	tree->getChildren().push_back(sequence);

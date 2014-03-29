@@ -11,20 +11,18 @@ DestroyCommand::~DestroyCommand(void)
 {
 }
 
-void DestroyCommand::setUp(BehaviorBase* caller, ControllerBase* target)
+void DestroyCommand::setUp(BehaviorBase* caller, ControllerBase* targetToDestroy)
 {
 	this->caller = caller;
-	this->target = target;
+	this->targetToDestroy = targetToDestroy;
 }
 
 bool DestroyCommand::canExecute()
 {
-	return target 
-		&& !target->getToDestroy() 
-		&& __super::canExecute();
+	return targetToDestroy && !targetToDestroy->getToDestroy();
 }
 
 void DestroyCommand::execute()
 {
-	Config::field->destroyObjectController(target);
+	Config::field->destroyObjectController(targetToDestroy);
 }

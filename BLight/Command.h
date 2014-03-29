@@ -24,5 +24,6 @@ public:
 
 protected:
 	BehaviorBase* caller;
+	ObjectBase* target;
 };
 

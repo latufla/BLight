@@ -11,7 +11,7 @@ AttackCommand::~AttackCommand(void)
 {
 }
 
-void AttackCommand::setUp(BehaviorBase* caller, ControllerBase* target, int damage)
+void AttackCommand::setUp(BehaviorBase* caller, ObjectBase* target, int damage)
 {
 	this->caller = caller;
 	this->target = target;
@@ -20,14 +20,11 @@ void AttackCommand::setUp(BehaviorBase* caller, ControllerBase* target, int dama
 
 bool AttackCommand::canExecute()
 {
-	ObjectInfo* info = Infos::getInfoBy(target->getName());
-	return info->canApplyCommand(getType()) 
-		&& target->getObject()->getEnergy() > 0;
+	return __super::canExecute() && target->getEnergy() > 0;
 }
 
 void AttackCommand::execute()
 {
-	ObjectBase* obj = target->getObject();
-	int energy = obj->getEnergy() - damage;
-	obj->setEnergy(energy >= 0 ? energy : 0);
+	int energy = target->getEnergy() - damage;
+	target->setEnergy(energy >= 0 ? energy : 0);
 }

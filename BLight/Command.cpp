@@ -1,4 +1,5 @@
 #include "Command.h"
+#include "Infos.h"
 
 
 Command::Command(void)
@@ -21,7 +22,8 @@ bool Command::tryToExecute()
 
 bool Command::canExecute()
 {
-	return true;
+	ObjectInfo* info = Infos::getInfoBy(target->getName());
+	return info->canApplyCommand(getType()); 
 }
 
 void Command::execute()
