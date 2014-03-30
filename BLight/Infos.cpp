@@ -6,6 +6,7 @@
 #include "ChargerBehavior.h"
 #include "SpawnerBehavior.h"
 #include "AttackBehavior.h"
+#include "DeathBehavior.h"
 
 const string Infos::HERO_NAME = "hero";
 const string Infos::ENEMY_NAME = "enemy";
@@ -85,9 +86,14 @@ ObjectInfo* Infos::getEnemyInfo()
 
 	info->behaviors.push_back(new AIControlBehavior());
 	info->behaviors.push_back(new MoveBehavior());
-	
+	info->behaviors.push_back(new DeathBehavior());
+
 	info->applicableCommands.push_back(ATTACK_COMMAND);
 	info->applicableCommands.push_back(CHARGE_COMMAND);
+
+	DropInfo* drop = new DropInfo();
+	drop->target[DropInfo::XP] = 2;
+	info->drop[DESTROY_COMMAND] = drop;
 
 	return info;
 }

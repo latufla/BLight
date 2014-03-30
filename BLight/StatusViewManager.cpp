@@ -11,10 +11,21 @@ void StatusViewManager::addStatusView(ControllerBase* c)
 	controllerToStatusView[c] = p;
 }
 
+void StatusViewManager::removeStatusView(ControllerBase* c)
+{
+	Config::scene->removeChild(controllerToStatusView[c]);	
+	delete controllerToStatusView[c];
+	
+	auto it = controllerToStatusView.find(c);
+	controllerToStatusView.erase(it);
+}
+
+
 bool StatusViewManager::doStep(int step)
 {
 	for(auto it = controllerToStatusView.cbegin(); it != controllerToStatusView.cend(); it++){
 		ControllerBase* c = (*it).first; 
+		
 		(*it).second->setText(c->getName() + "\nenergy: " + to_string(long long(c->getObject()->getEnergy())));
 		
 		CustomPoint& pos = c->getObject()->getGlobalCenter();

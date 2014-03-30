@@ -15,6 +15,8 @@ public:
 	CommandType getType(){return DESTROY_COMMAND;}
 
 protected:
+	bool canShowPopup();
+
 	ControllerBase* targetToDestroy;
 };
 

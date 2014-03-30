@@ -40,7 +40,8 @@ void ChargeCommand::execute()
 	ObjectInfo* info = Infos::getInfoBy(cObj->getName());
 	DropInfo* drop = info->drop[getType()];
 
-	showPopup(drop->target, cObj->getGlobalCenter());
+	if(drop != nullptr)
+		showPopup(drop->target, cObj->getGlobalCenter());
 
 	__super::execute();
 }

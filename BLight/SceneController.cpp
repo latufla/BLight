@@ -14,11 +14,15 @@ void SceneController::draw()
 
 void SceneController::addChild(IDrawable* v)
 {
-	drawList.push_back(v);
+	if(v != nullptr)
+		drawList.push_back(v);
 }
 
 void SceneController::removeChild( IDrawable* view)
 {	
+	if(view == nullptr)
+		return;
+
 	drawList.erase(remove_if(drawList.begin(), drawList.end(), [view](IDrawable* v) -> bool{
 				return view == v;
 	}), drawList.end());

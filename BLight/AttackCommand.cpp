@@ -28,9 +28,11 @@ void AttackCommand::execute()
 	ObjectInfo* info = Infos::getInfoBy(cObj->getName());
 	DropInfo* drop = info->drop[getType()];
 
-	showPopup(drop->caller, cObj->getGlobalCenter());
-	showPopup(drop->target, target->getGlobalCenter());
-
+	if(drop != nullptr){
+		showPopup(drop->caller, cObj->getGlobalCenter());
+		showPopup(drop->target, target->getGlobalCenter());
+	}
+	
 	__super::execute();
 }
 

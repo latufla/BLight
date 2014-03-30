@@ -1,6 +1,7 @@
 #include "ControllerBase.h"
 #include "BehaviorBase.h"
 #include "Config.h"
+#include "StatusViewManager.h"
 
 int ControllerBase::count = 0;
 
@@ -36,6 +37,8 @@ ControllerBase::~ControllerBase(void)
 
 	Config::scene->removeChild(view);
 	delete view;
+
+	StatusViewManager::getInstance().removeStatusView(this);
 }
 
 void ControllerBase::init( int id, string name)

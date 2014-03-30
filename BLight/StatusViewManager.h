@@ -13,6 +13,7 @@ public:
 	}
 
 	void addStatusView(ControllerBase* c);
+	void removeStatusView(ControllerBase* c);
 
 	bool doStep(int);
 
