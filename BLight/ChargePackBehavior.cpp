@@ -5,14 +5,8 @@
 
 ChargePackBehavior::ChargePackBehavior(void)
 {
-}
-
-ChargePackBehavior::ChargePackBehavior(int drop)
-{
-	this->drop = drop;
 	target = nullptr;
 }
-
 
 ChargePackBehavior::~ChargePackBehavior(void)
 {
@@ -78,5 +72,5 @@ bool ChargePackBehavior::doStep(int step)
 
 BehaviorBase* ChargePackBehavior::clone()
 {
-	return new ChargePackBehavior(drop);
+	return new ChargePackBehavior();
 }

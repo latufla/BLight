@@ -7,8 +7,6 @@ class ChargePackBehavior : public BehaviorBase
 {
 public:
 	ChargePackBehavior(void);
-	ChargePackBehavior(int);
-
 	~ChargePackBehavior(void);
 	
 	BehaviorBase* clone();
@@ -25,7 +23,5 @@ protected:
 	void showPopup(ControllerBase*);
 
 	ObjectBase* target;
-
-	int drop;	
 };
 

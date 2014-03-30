@@ -132,7 +132,7 @@ ObjectInfo* Infos::getMediumEnergyPackInfo()
 	info->physicType = 0;
 	info->shape = new CustomPolygon(2.0f, 2.0f); 
 
-	info->behaviors.push_back(new ChargePackBehavior(30));
+	info->behaviors.push_back(new ChargePackBehavior());
 	
 	DropInfo* drop = new DropInfo();
 	drop->target[DropInfo::ENERGY] = 22;
