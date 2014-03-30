@@ -24,8 +24,8 @@ public:
 	virtual CommandType getType(){return NONE_COMMAND;}
 
 protected:
-	virtual bool canShowPopUp();
-	virtual void showPopUp(DropInfo*, const CustomPoint&);
+	virtual bool canShowPopup();
+	virtual void showPopup(DropInfo*, const CustomPoint&);
 
 	BehaviorBase* caller;
 	ObjectBase* target;

@@ -11,11 +11,11 @@ public:
 	bool canExecute();
 	void execute();
 
-	void setUp(BehaviorBase*, ObjectBase*, int);
+	void setUp(BehaviorBase*, ObjectBase*);
 
 	CommandType getType(){return ATTACK_COMMAND;}
 
 protected:
-	int damage;
+	bool canShowPopup();
 };
 

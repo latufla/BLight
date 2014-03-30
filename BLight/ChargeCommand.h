@@ -17,6 +17,6 @@ public:
 	CommandType getType(){return CHARGE_COMMAND;}
 
 protected:
-	bool canShowPopUp();
+	bool canShowPopup();
 };
 

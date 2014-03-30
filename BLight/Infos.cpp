@@ -56,7 +56,9 @@ ObjectInfo* Infos::getHeroInfo()
 	info->behaviors.push_back(new UserControlBehavior());
 	info->behaviors.push_back(new MoveBehavior());
 	info->behaviors.push_back(new AttackBehavior());
-	
+
+	info->drop[ATTACK_COMMAND] = new pair<DropInfo*, DropInfo*>(new DropInfo(-10, 0), new DropInfo(-20, 0)); // TODO: add player level multiplier	
+
 	return info;
 }
 
@@ -79,7 +81,8 @@ ObjectInfo* Infos::getEnemyInfo()
 	info->behaviors.push_back(new AIControlBehavior());
 	info->behaviors.push_back(new MoveBehavior());
 	
-	info->applicableCommands.push_back(ATTACK_COMMAND);	
+	//info->drop[ATTACK_COMMAND] = <new DropInfo(-10, 0), ; // TODO: add player level multiplier	
+	
 	return info;
 }
 
@@ -96,7 +99,7 @@ ObjectInfo* Infos::getSmallEnergyPackInfo()
 	info->shape = new CustomPolygon(1.0f, 1.0f); 
 
 	info->behaviors.push_back(new ChargePackBehavior());	
-	info->drop[CHARGE_COMMAND] = new DropInfo(11, 0);
+	info->drop[CHARGE_COMMAND] = new pair<DropInfo*, DropInfo*>(nullptr, new DropInfo(11, 0));
 
 	return info;
 }
@@ -115,7 +118,7 @@ ObjectInfo* Infos::getMediumEnergyPackInfo()
 	info->shape = new CustomPolygon(2.0f, 2.0f); 
 
 	info->behaviors.push_back(new ChargePackBehavior(30));
-	info->drop[CHARGE_COMMAND] = new DropInfo(22, 0);
+	info->drop[CHARGE_COMMAND] = new pair<DropInfo*, DropInfo*>(nullptr, new DropInfo(22, 0));
 
 	return info;
 }
@@ -133,7 +136,7 @@ ObjectInfo* Infos::getChargerInfo()
 	info->shape = new CustomPolygon(4.0f, 4.0f); 
 
 	info->behaviors.push_back(new ChargerBehavior());
-	info->drop[CHARGE_COMMAND] = new DropInfo(1, 0);
+	info->drop[CHARGE_COMMAND] = new pair<DropInfo*, DropInfo*>(nullptr, new DropInfo(1, 0));
 
 	return info;
 }

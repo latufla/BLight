@@ -38,14 +38,13 @@ void ChargeCommand::execute()
 {
 	ObjectBase* cObj = caller->getController()->getObject();
 	ObjectInfo* info = Infos::getInfoBy(cObj->getName());
-	DropInfo* drop = info->drop[getType()];
-	int energy = target->getEnergy();
-	target->setEnergy(energy + drop->energy);
-	
+	DropInfo* drop = info->drop[getType()]->second;
+	showPopup(drop, cObj->getGlobalCenter());
+
 	__super::execute();
 }
 
-bool ChargeCommand::canShowPopUp()
+bool ChargeCommand::canShowPopup()
 {
 	return caller->getType() == CHARGE_PACK_BEHAVIOR;
 }

@@ -32,20 +32,27 @@ void Command::execute()
 {
 	ObjectBase* cObj = caller->getController()->getObject();
 	ObjectInfo* info = Infos::getInfoBy(cObj->getName());
-	DropInfo* drop = info->drop[getType()];
-	if(canShowPopUp())
-		showPopUp(drop, cObj->getGlobalCenter());
+	DropInfo* drop = info->drop[getType()]->first;
+	if(drop != nullptr)
+		cObj->setEnergy(cObj->getEnergy() + drop->energy);
+
+	drop = info->drop[getType()]->second;
+	if(drop != nullptr)
+		target->setEnergy(target->getEnergy() + drop->energy);
 }
 
-bool Command::canShowPopUp()
+bool Command::canShowPopup()
 {
 	return false;
 }
 
-void Command::showPopUp(DropInfo* drop, const CustomPoint& pos)
+void Command::showPopup(DropInfo* drop, const CustomPoint& pos)
 {
+	if(drop == nullptr || !canShowPopup())
+		return;
+
 	PopupText* p = new PopupText();
-	p->setText((drop->energy < 0 ? "-" : "+") + to_string(long long(drop->energy)));
+	p->setText((drop->energy > 0 ? "+" : "") + to_string(long long(drop->energy)));
 	p->getPosition().set(pos);
 	PopupManager::getInstance().add(p);
 }

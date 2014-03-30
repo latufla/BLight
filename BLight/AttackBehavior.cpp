@@ -27,24 +27,11 @@ bool AttackBehavior::doStep(int step)
 		return false;
 
 	AttackCommand attack;
-	attack.setUp(this, cTarget->getObject(), damage);		
-	if(attack.tryToExecute()){
-		showPopup(cTarget);
-		return true;
-	}
-	
-	return false;
+	attack.setUp(this, cTarget->getObject());		
+	return attack.tryToExecute();
 }
 
 BehaviorBase* AttackBehavior::clone()
 {
 	return new AttackBehavior();
-}
-
-void AttackBehavior::showPopup(ControllerBase* c)
-{
-	PopupText* p = new PopupText();
-	p->setText("-" + to_string(long long(damage)));
-	p->getPosition().set(c->getObject()->getGlobalCenter());
-	PopupManager::getInstance().add(p);
 }
