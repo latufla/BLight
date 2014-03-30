@@ -23,7 +23,9 @@ void ObjectBase::init( int id, string name )
 {
 	this->id = id;
 	this->name = name;
+	
 	energy = 20;
+	xp = 0;
 
 	count++;
 }

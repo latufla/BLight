@@ -3,6 +3,7 @@
 #include "CustomShape.h"
 #include "BehaviorBase.h"
 #include "Command.h"
+#include "DropInfo.h"
 
 class ObjectInfo
 {
@@ -10,7 +11,7 @@ public:
 	ObjectInfo(void);
 	~ObjectInfo(void);
 
-	bool canApplyCommand(CommandType);
+	bool canExecuteCommand(CommandType);
 
 	int id;
 	string name;
@@ -22,7 +23,9 @@ public:
 	float linearDamping;
 	
 	vector<BehaviorBase*> behaviors;
-
 	vector<CommandType> applicableCommands;
+
+	map<CommandType, DropInfo*> drop;
+
 };
 

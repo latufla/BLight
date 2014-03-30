@@ -1,4 +1,6 @@
 #include "ChargeCommand.h"
+#include "Infos.h"
+#include "PopupManager.h"
 
 
 ChargeCommand::ChargeCommand(void)
@@ -10,11 +12,10 @@ ChargeCommand::~ChargeCommand(void)
 {
 }
 
-void ChargeCommand::setUp(BehaviorBase* caller, ObjectBase* target, int charge)
+void ChargeCommand::setUp(BehaviorBase* caller, ObjectBase* target)
 {
 	this->caller = caller;
 	this->target = target;
-	this->charge = charge;
 }
 
 bool ChargeCommand::canExecute()
@@ -35,6 +36,18 @@ bool ChargeCommand::canExecute()
 
 void ChargeCommand::execute()
 {
+	ObjectBase* cObj = caller->getController()->getObject();
+	ObjectInfo* info = Infos::getInfoBy(cObj->getName());
+	DropInfo* drop = info->drop[getType()];
 	int energy = target->getEnergy();
-	target->setEnergy(energy + charge);
+	target->setEnergy(energy + drop->energy);
+	
+	__super::execute();
 }
+
+bool ChargeCommand::canShowPopUp()
+{
+	return caller->getType() == CHARGE_PACK_BEHAVIOR;
+}
+
+

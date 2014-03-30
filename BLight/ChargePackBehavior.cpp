@@ -64,10 +64,8 @@ bool ChargePackBehavior::doStep(int step)
 		return false;
 		
 	ChargeCommand charge;
-	charge.setUp(this, target, drop);
+	charge.setUp(this, target);
 	if(charge.tryToExecute()){
-		showPopup(controller);
-
 		DestroyCommand destroy;
 		destroy.setUp(this, controller);
 		destroy.tryToExecute();
@@ -81,12 +79,4 @@ bool ChargePackBehavior::doStep(int step)
 BehaviorBase* ChargePackBehavior::clone()
 {
 	return new ChargePackBehavior(drop);
-}
-
-void ChargePackBehavior::showPopup(ControllerBase* c)
-{
-	PopupText* p = new PopupText();
-	p->setText("" + string(drop > 0 ? "+" : "-") + to_string(long long(drop)));
-	p->getPosition().set(c->getObject()->getGlobalCenter());
-	PopupManager::getInstance().add(p);
 }

@@ -1,6 +1,7 @@
 #pragma once
 #include "BehaviorBase.h"
 #include "Command.h"
+#include "DropInfo.h"
 
 class ChargeCommand : public Command
 {
@@ -11,11 +12,11 @@ public:
 	bool canExecute();
 	void execute();
 
-	void setUp(BehaviorBase*, ObjectBase*, int);
-
+	void setUp(BehaviorBase*, ObjectBase*);
+	
 	CommandType getType(){return CHARGE_COMMAND;}
 
 protected:
-	int charge;
+	bool canShowPopUp();
 };
 

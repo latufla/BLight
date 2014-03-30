@@ -1,5 +1,6 @@
 #pragma once
 #include "BehaviorBase.h"
+#include "DropInfo.h"
 
 enum CommandType{
 	NONE_COMMAND, 
@@ -23,6 +24,9 @@ public:
 	virtual CommandType getType(){return NONE_COMMAND;}
 
 protected:
+	virtual bool canShowPopUp();
+	virtual void showPopUp(DropInfo*, const CustomPoint&);
+
 	BehaviorBase* caller;
 	ObjectBase* target;
 };

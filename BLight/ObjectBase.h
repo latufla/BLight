@@ -51,6 +51,9 @@ public:
 	int getEnergy(){return energy;}
 	void setEnergy(int val){energy = val;}
 
+	int getXp() const { return xp; }
+	void setXp(int val) { xp = val; }
+
 protected:
 	void init(int, string);
 	
@@ -58,7 +61,8 @@ protected:
 	string name;
 	
 	int energy;
-
+	int xp;
+	
 	CustomPoint position;
 	CustomPoint globalCenter;
 
