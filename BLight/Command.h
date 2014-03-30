@@ -25,7 +25,7 @@ public:
 
 protected:
 	virtual bool canShowPopup();
-	virtual void showPopup(DropInfo*, const CustomPoint&);
+	virtual void showPopup(const map<string, int>&, const CustomPoint&);
 
 	BehaviorBase* caller;
 	ObjectBase* target;

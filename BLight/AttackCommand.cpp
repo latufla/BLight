@@ -26,12 +26,11 @@ void AttackCommand::execute()
 {
 	ObjectBase* cObj = caller->getController()->getObject();
 	ObjectInfo* info = Infos::getInfoBy(cObj->getName());
-	DropInfo* drop = info->drop[getType()]->first;
-	showPopup(drop, cObj->getGlobalCenter());
-	
-	drop = info->drop[getType()]->second;
-	showPopup(drop, target->getGlobalCenter());
-	
+	DropInfo* drop = info->drop[getType()];
+
+	showPopup(drop->caller, cObj->getGlobalCenter());
+	showPopup(drop->target, target->getGlobalCenter());
+
 	__super::execute();
 }
 

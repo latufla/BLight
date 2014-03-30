@@ -1,12 +1,17 @@
 #pragma once
+#include "stdafx.h"
+#include <map>
+
 class DropInfo
 {
 public:
-	DropInfo(void);
-	DropInfo(int, int);
-	~DropInfo(void);
+	static string const ENERGY;
+	static string const XP;
 
-	int energy;
-	int xp;
+	DropInfo(void);
+	~DropInfo(void);
+	
+	map<string, int> caller;
+	map<string, int> target;
 };
 

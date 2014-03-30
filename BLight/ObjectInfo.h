@@ -25,7 +25,7 @@ public:
 	vector<BehaviorBase*> behaviors;
 	vector<CommandType> applicableCommands;
 
-	map<CommandType, pair<DropInfo*, DropInfo*>*> drop;
+	map<CommandType, DropInfo*> drop;
 
 };
 

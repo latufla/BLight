@@ -1,6 +1,7 @@
 #include "Command.h"
 #include "Infos.h"
 #include "PopupManager.h"
+#include "CustomUtils.h"
 
 
 Command::Command(void)
@@ -31,13 +32,15 @@ void Command::execute()
 {
 	ObjectBase* cObj = caller->getController()->getObject();
 	ObjectInfo* info = Infos::getInfoBy(cObj->getName());
-	DropInfo* drop = info->drop[getType()]->first;
-	if(drop != nullptr)
-		cObj->setEnergy(cObj->getEnergy() + drop->energy);
+	DropInfo* drop = info->drop[getType()];
+	if(drop == nullptr)
+		return;
 
-	drop = info->drop[getType()]->second;
-	if(drop != nullptr)
-		target->setEnergy(target->getEnergy() + drop->energy);
+	cObj->setEnergy(cObj->getEnergy() + drop->caller[DropInfo::ENERGY]);
+	cObj->setXp(cObj->getXp() + drop->caller[DropInfo::XP]);		
+		
+	target->setEnergy(target->getEnergy() + drop->target[DropInfo::ENERGY]);
+	target->setXp(target->getXp() + drop->target[DropInfo::XP]);
 }
 
 bool Command::canShowPopup()
@@ -45,13 +48,24 @@ bool Command::canShowPopup()
 	return false;
 }
 
-void Command::showPopup(DropInfo* drop, const CustomPoint& pos)
+void Command::showPopup(const map<string, int>& drop, const CustomPoint& pos)
 {
-	if(drop == nullptr || !canShowPopup())
+	if(!canShowPopup())
 		return;
 
 	PopupText* p = new PopupText();
-	p->setText((drop->energy > 0 ? "+" : "") + to_string(long long(drop->energy)));
+
+	string txt = "";
+	int energy = drop.at(DropInfo::ENERGY);
+	if(energy != 0)
+		txt += (energy > 0 ? "en: +" : "en: ") + CustomUtils::iToS(energy) + "\n";
+
+	int xp = drop.at(DropInfo::XP);
+	if(xp != 0)
+		txt += (xp > 0 ? "xp: +" : "xp: ") + CustomUtils::iToS(xp) + "\n";
+	
+	p->setText(txt);
 	p->getPosition().set(pos);
+	
 	PopupManager::getInstance().add(p);
 }

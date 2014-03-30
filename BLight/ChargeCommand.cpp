@@ -38,8 +38,9 @@ void ChargeCommand::execute()
 {
 	ObjectBase* cObj = caller->getController()->getObject();
 	ObjectInfo* info = Infos::getInfoBy(cObj->getName());
-	DropInfo* drop = info->drop[getType()]->second;
-	showPopup(drop, cObj->getGlobalCenter());
+	DropInfo* drop = info->drop[getType()];
+
+	showPopup(drop->target, cObj->getGlobalCenter());
 
 	__super::execute();
 }
