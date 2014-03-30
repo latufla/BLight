@@ -57,6 +57,8 @@ ObjectInfo* Infos::getHeroInfo()
 	info->behaviors.push_back(new MoveBehavior());
 	info->behaviors.push_back(new AttackBehavior());
 
+	info->applicableCommands.push_back(CHARGE_COMMAND);
+
 	info->drop[ATTACK_COMMAND] = new pair<DropInfo*, DropInfo*>(new DropInfo(-10, 0), new DropInfo(-20, 0)); // TODO: add player level multiplier	
 
 	return info;
@@ -81,8 +83,9 @@ ObjectInfo* Infos::getEnemyInfo()
 	info->behaviors.push_back(new AIControlBehavior());
 	info->behaviors.push_back(new MoveBehavior());
 	
-	//info->drop[ATTACK_COMMAND] = <new DropInfo(-10, 0), ; // TODO: add player level multiplier	
-	
+	info->applicableCommands.push_back(ATTACK_COMMAND);
+	info->applicableCommands.push_back(CHARGE_COMMAND);
+
 	return info;
 }
 

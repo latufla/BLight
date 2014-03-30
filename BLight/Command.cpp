@@ -23,9 +23,8 @@ bool Command::tryToExecute()
 
 bool Command::canExecute()
 {
-	string iName = caller->getController()->getName();
-	ObjectInfo* info = Infos::getInfoBy(iName);
-	return info->canExecuteCommand(getType()); 
+	ObjectInfo* info = Infos::getInfoBy(target->getName());
+	return info->canApplyCommand(getType()); 
 }
 
 void Command::execute()

@@ -11,7 +11,7 @@ public:
 	ObjectInfo(void);
 	~ObjectInfo(void);
 
-	bool canExecuteCommand(CommandType);
+	bool canApplyCommand(CommandType);
 
 	int id;
 	string name;
