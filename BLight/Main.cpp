@@ -13,9 +13,6 @@ void applyAdditionalSettings(ControllerBase*);
 
 int _tmain(int argc, _TCHAR* argv[])
 { 
-// 	FILE * pFile = fopen ("config/game_objects.json" , "r");
-// 	JsonConnector::getInstance().createInfoFromJson(pFile);
-	
 	Config::engine = &EngineConnector::getInstance();
 	Config::phEngine = &PhEngineConnector::getInstance();
 

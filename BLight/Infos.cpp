@@ -7,6 +7,7 @@
 #include "SpawnerBehavior.h"
 #include "AttackBehavior.h"
 #include "DeathBehavior.h"
+#include "JsonConnector.h"
 
 const string Infos::HERO_NAME = "hero";
 const string Infos::ENEMY_NAME = "enemy";
@@ -20,7 +21,14 @@ map<string, ObjectInfo*> Infos::nameToInfo;
 
 void Infos::init()
 {
-	getHeroInfo();
+
+//	getHeroInfo();
+
+	FILE * pFile = fopen ("config/game_objects.json" , "r");	
+	ObjectInfo* info = JsonConnector::getInstance().createInfoFromJson(pFile);
+	idToInfo[info->id] = info;
+	nameToInfo[info->name] = info;
+	
 	getEnemySpawnerInfo();
 	getChargerInfo();
 	getSmallEnergyPackInfo();

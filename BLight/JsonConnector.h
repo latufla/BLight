@@ -21,5 +21,8 @@ private:
 	JsonConnector(JsonConnector const&);              
 	void operator=(JsonConnector const&);
 
+	BehaviorBase* createBehaviorBy(rapidjson::Value&);
+	CommandType createCommandTypeBy(rapidjson::Value&);
+	DropInfo* createDropInfoBy(rapidjson::Value&);
 };
 

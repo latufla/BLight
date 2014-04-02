@@ -1,10 +1,36 @@
 {
-    "hello": "world",
-    "bye": "bitch",
-    "a": [
-        1,
-        2,
-        3,
-        4
-    ]
+	"items": [{
+		"id": 0,
+		"name": "hero",
+		"physicType": 2,
+		"shape": {
+			"name": "circle",
+			"radius": 1.0
+		},
+		"density": 1.0,
+		"friction": 0.3,
+		"restitution": 0.5,
+		"linearDamping": 1.0,
+		"behaviors": [{
+			"name": "UserControlBehavior"
+		},
+		{
+			"name": "MoveBehavior"
+		},
+		{
+			"name": "AttackBehavior"
+		}],
+		"applicableCommands": [{
+			"name": "charge"
+		}],
+		"drop": [{
+			"name": "attack",
+			"caller": {
+				"energy": -5
+			},
+			"target": {
+				"energy": -20
+			}
+		}]
+	}]
 }
