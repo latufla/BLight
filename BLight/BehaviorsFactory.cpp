@@ -8,29 +8,54 @@
 #include "DeathBehavior.h"
 #include "SpawnerBehavior.h"
 
-bool BehaviorsFactory::mapped = false;
-map <string, BehaviorBase*(*)()> BehaviorsFactory::nameToBehavior;
+bool BehaviorsFactory::inited = false;
+
+map <string, BehaviorBase*(*)()> BehaviorsFactory::nameToInstance;
+map <string,  BehaviorType> BehaviorsFactory::nameToType;
 
 BehaviorBase* BehaviorsFactory::create(string name)
 {
-	if(!mapped)
-		initMap();
+	if(!inited)
+		init();
 
-	return nameToBehavior[name]();
+	return nameToInstance[name]();
 }
 
-void BehaviorsFactory::initMap()
+BehaviorType BehaviorsFactory::getType(string name)
 {
-	nameToBehavior["UserControlBehavior"] = &createInstance<UserControlBehavior>;
-	nameToBehavior["AIControlBehavior"] = &createInstance<AIControlBehavior>;
-	
-	nameToBehavior["AttackBehavior"] = &createInstance<AttackBehavior>;
-	nameToBehavior["ChargePackBehavior"] = &createInstance<ChargePackBehavior>;
-	nameToBehavior["ChargerBehavior"] = &createInstance<ChargerBehavior>;
-	nameToBehavior["DeathBehavior"] = &createInstance<DeathBehavior>;
-	nameToBehavior["MoveBehavior"] = &createInstance<MoveBehavior>;
-	nameToBehavior["SpawnerBehavior"] = &createInstance<SpawnerBehavior>;
+	if(!inited)
+		init();
 
-	mapped = true;
+	return nameToType[name];
 }
+
+void BehaviorsFactory::init()
+{
+	nameToInstance["UserControlBehavior"] = &createInstance<UserControlBehavior>;
+	nameToType["UserControlBehavior"] = CONTROL_BEHAVIOR;
+
+	nameToInstance["AIControlBehavior"] = &createInstance<AIControlBehavior>;
+	nameToType["AIControlBehavior"] = CONTROL_BEHAVIOR;
+
+	nameToInstance["AttackBehavior"] = &createInstance<AttackBehavior>;
+	nameToType["AttackBehavior"] = ATTACK_BEHAVIOR;
+	
+	nameToInstance["ChargePackBehavior"] = &createInstance<ChargePackBehavior>;
+	nameToType["ChargePackBehavior"] = CHARGE_PACK_BEHAVIOR;
+
+	nameToInstance["ChargerBehavior"] = &createInstance<ChargerBehavior>;
+	nameToType["ChargerBehavior"] = CHARGER_BEHAVIOR;
+
+	nameToInstance["DeathBehavior"] = &createInstance<DeathBehavior>;
+	nameToType["DeathBehavior"] = DEATH_BEHAVIOR;
+
+	nameToInstance["MoveBehavior"] = &createInstance<MoveBehavior>;
+	nameToType["MoveBehavior"] = MOVE_BEHAVIOR;
+
+	nameToInstance["SpawnerBehavior"] = &createInstance<SpawnerBehavior>;
+	nameToType["SpawnerBehavior"] = SPAWNER_BEHAVIOR;
+
+	inited = true;
+}
+
 

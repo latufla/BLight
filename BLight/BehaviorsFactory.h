@@ -7,11 +7,14 @@ class BehaviorsFactory
 {
 public:
 	static BehaviorBase* create(string);
+	static BehaviorType getType(string);
 
 private:
-	static void initMap();
+	static void init();
 	
-	static map <string,  BehaviorBase*(*)()> nameToBehavior;
-	static bool mapped;
+	static map <string,  BehaviorBase*(*)()> nameToInstance;
+	static map <string,  BehaviorType> nameToType;
+	
+	static bool inited;
 };
 

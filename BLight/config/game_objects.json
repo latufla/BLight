@@ -21,10 +21,10 @@
 			"name": "AttackBehavior"
 		}],
 		"applicableCommands": [{
-			"name": "charge"
+			"name": "ChargeCommand"
 		}],
 		"drop": [{
-			"name": "attack",
+			"name": "AttackCommand",
 			"caller": {
 				"energy": -5
 			},

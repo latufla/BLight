@@ -1,6 +1,7 @@
 #include "JsonConnector.h"
 #include "CustomCircle.h"
 #include "BehaviorsFactory.h"
+#include "CommandsFactory.h"
 
 ObjectInfo* JsonConnector::createInfoFromJson(FILE* file)
 {
@@ -66,15 +67,9 @@ BehaviorBase* JsonConnector::createBehaviorBy(rapidjson::Value& b)
 CommandType JsonConnector::createCommandTypeBy(rapidjson::Value& c)
 {
 	if(!c.IsObject())
-		return (CommandType)42;
+		return NONE_COMMAND;
 	
-	string name = c["name"].GetString();
-	if(name == "charge")
-		return CHARGE_COMMAND;
-	else if(name == "attack")
-		return ATTACK_COMMAND;
-	
-	return (CommandType)42;
+	return CommandsFactory::getType(c["name"].GetString());
 }
 
 DropInfo* JsonConnector::createDropInfoBy(rapidjson::Value& d)
@@ -83,8 +78,22 @@ DropInfo* JsonConnector::createDropInfoBy(rapidjson::Value& d)
 		return nullptr;
 
 	DropInfo* info = new DropInfo();
-	info->caller[DropInfo::ENERGY] = d["caller"]["energy"].GetInt();
-	info->target[DropInfo::ENERGY] = d["target"]["energy"].GetInt();
+	if(d.HasMember("caller")){
+		if(d["caller"].HasMember("energy"))
+			info->caller[DropInfo::ENERGY] = d["caller"]["energy"].GetInt();
+	
+		if(d["caller"].HasMember("xp"))
+			info->caller[DropInfo::XP] = d["caller"]["xp"].GetInt();
+	}
+	
+	if(d.HasMember("target")){
+		if(d["target"].HasMember("energy"))
+			info->target[DropInfo::ENERGY] = d["target"]["energy"].GetInt();
+
+		if(d["target"].HasMember("xp"))
+			info->target[DropInfo::XP] = d["target"]["xp"].GetInt();
+	}
+
 	return info;
 }
 
