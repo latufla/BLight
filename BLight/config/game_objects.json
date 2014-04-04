@@ -32,5 +32,53 @@
 				"energy": -20
 			}
 		}]
+	},
+	{
+		"id": 1,
+		"name": "enemy",
+		"physicType": 2,
+		"shape": {
+			"name": "circle",
+			"radius": 1.0
+		},
+		"density": 1.0,
+		"friction": 0.3,
+		"restitution": 0.5,
+		"linearDamping": 1.0,
+		"behaviors": [{
+			"name": "AIControlBehavior"
+		},
+		{
+			"name": "MoveBehavior"
+		},
+		{
+			"name": "DeathBehavior"
+		}],
+		"applicableCommands": [{
+			"name": "AttackCommand"
+		},
+		{
+			"name": "ChargeCommand"
+		}],
+		"drop": []
+	},
+	{
+		"id": 5,
+		"name": "enemy_spawner",
+		"physicType": 0,
+		"density": 1.0,
+		"friction": 0.3,
+		"restitution": 0.5,
+		"linearDamping": 1.0,
+		"shape": {
+			"name": "circle",
+			"radius": 0.5
+		},
+		"behaviors": [{
+			"name": "SpawnerBehavior",
+			"creature": "enemy"
+		}],
+		"applicableCommands": [],
+		"drop": []
 	}]
 }
