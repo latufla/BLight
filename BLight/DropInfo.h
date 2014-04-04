@@ -1,8 +1,9 @@
 #pragma once
 #include "stdafx.h"
 #include <map>
+#include "Info.h"
 
-class DropInfo
+class DropInfo : public Info
 {
 public:
 	static string const ENERGY;

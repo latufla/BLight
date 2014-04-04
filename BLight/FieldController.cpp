@@ -1,4 +1,5 @@
 #include "FieldController.h"
+#include "BehaviorsFactory.h"
 
 
 void FieldController::init()
@@ -16,7 +17,7 @@ ControllerBase* FieldController::createObjectController( int id, const ObjectInf
 	obj->setLinearDamping(info.linearDamping);
 	
 	for (auto it = info.behaviors.cbegin(); it != info.behaviors.cend(); it++){
-		c->addBehavior((*it)->clone());
+		c->addBehavior(BehaviorsFactory::create(*it));
 	}
 
 	return c;

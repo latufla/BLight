@@ -1,16 +1,13 @@
 #include "SpawnerBehavior.h"
 #include "StatusViewManager.h"
-
+#include "SpawnerBehaviorInfo.h"
+#include "Infos.h"
 
 SpawnerBehavior::SpawnerBehavior(void)
 {
-}
-
-SpawnerBehavior::SpawnerBehavior(ObjectInfo* creature, int intervalMSec, int chance)
-{
-	this->creature = creature;
-	this->intervalMSec = intervalMSec;
-	this->chance = chance;
+	this->intervalMSec = 5000;
+	this->chance = 1000;
+	this->creature = Infos::getInfoBy("enemy"); 
 
 	time = 0;
 }
@@ -36,10 +33,3 @@ bool SpawnerBehavior::doStep(int step)
 
 	return false;
 }
-
-BehaviorBase* SpawnerBehavior::clone()
-{
-	return new SpawnerBehavior(creature, intervalMSec, chance);
-}
-
-

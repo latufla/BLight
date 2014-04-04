@@ -7,11 +7,8 @@ class SpawnerBehavior : public BehaviorBase
 {
 public:
 	SpawnerBehavior(void);
-	SpawnerBehavior(ObjectInfo*, int = 5000, int = 1000);
 	~SpawnerBehavior(void);
 	
-	BehaviorBase* clone();
-
 	BehaviorType getType(){return SPAWNER_BEHAVIOR;}
 
 protected:

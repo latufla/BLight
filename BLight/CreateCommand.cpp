@@ -27,7 +27,10 @@ bool CreateCommand::canExecute()
 
 void CreateCommand::execute()
 {
-	creature = Config::field->createObjectController(id++, *info, caller->getController()->getObject()->getPosition());
+	CustomPoint pos = caller->getController()->getObject()->getPosition();
+	pos.x -= 1.0;
+	pos.y += 1.0;
+	creature = Config::field->createObjectController(id++, *info, pos);
 	creature->startBehaviors();
 	Config::scene->addChild(creature->getView());
 }

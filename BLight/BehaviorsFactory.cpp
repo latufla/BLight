@@ -7,18 +7,30 @@
 #include "ChargerBehavior.h"
 #include "DeathBehavior.h"
 #include "SpawnerBehavior.h"
+#include "SpawnerBehaviorInfo.h"
 
 bool BehaviorsFactory::inited = false;
 
+map <string,  Info*(*)()> BehaviorsFactory::nameToInfo;
 map <string, BehaviorBase*(*)()> BehaviorsFactory::nameToInstance;
 map <string,  BehaviorType> BehaviorsFactory::nameToType;
 
-BehaviorBase* BehaviorsFactory::create(string name)
+Info* BehaviorsFactory::createInfo(string name)
 {
 	if(!inited)
 		init();
 
-	return nameToInstance[name]();
+	Info* bInfo = nameToInfo[name]();
+	bInfo->name = name;
+	return bInfo;
+}
+
+BehaviorBase* BehaviorsFactory::create(Info* info)
+{
+	if(!inited)
+		init();
+
+	return nameToInstance[info->name]();
 }
 
 BehaviorType BehaviorsFactory::getType(string name)
@@ -31,31 +43,38 @@ BehaviorType BehaviorsFactory::getType(string name)
 
 void BehaviorsFactory::init()
 {
-	nameToInstance["UserControlBehavior"] = &createInstance<UserControlBehavior>;
+	nameToInfo["UserControlBehavior"] = &createInstance<Info, Info>;
+	nameToInstance["UserControlBehavior"] = &createInstance<UserControlBehavior, BehaviorBase>;
 	nameToType["UserControlBehavior"] = CONTROL_BEHAVIOR;
 
-	nameToInstance["AIControlBehavior"] = &createInstance<AIControlBehavior>;
+	nameToInfo["AIControlBehavior"] = &createInstance<Info, Info>;
+	nameToInstance["AIControlBehavior"] = &createInstance<AIControlBehavior, BehaviorBase>;
 	nameToType["AIControlBehavior"] = CONTROL_BEHAVIOR;
 
-	nameToInstance["AttackBehavior"] = &createInstance<AttackBehavior>;
+	nameToInfo["AttackBehavior"] = &createInstance<Info, Info>;
+	nameToInstance["AttackBehavior"] = &createInstance<AttackBehavior, BehaviorBase>;
 	nameToType["AttackBehavior"] = ATTACK_BEHAVIOR;
 	
-	nameToInstance["ChargePackBehavior"] = &createInstance<ChargePackBehavior>;
+	nameToInfo["ChargePackBehavior"] = &createInstance<Info, Info>;
+	nameToInstance["ChargePackBehavior"] = &createInstance<ChargePackBehavior, BehaviorBase>;
 	nameToType["ChargePackBehavior"] = CHARGE_PACK_BEHAVIOR;
 
-	nameToInstance["ChargerBehavior"] = &createInstance<ChargerBehavior>;
+	nameToInfo["ChargerBehavior"] = &createInstance<Info, Info>;
+	nameToInstance["ChargerBehavior"] = &createInstance<ChargerBehavior, BehaviorBase>;
 	nameToType["ChargerBehavior"] = CHARGER_BEHAVIOR;
 
-	nameToInstance["DeathBehavior"] = &createInstance<DeathBehavior>;
+	nameToInfo["DeathBehavior"] = &createInstance<Info, Info>;
+	nameToInstance["DeathBehavior"] = &createInstance<DeathBehavior, BehaviorBase>;
 	nameToType["DeathBehavior"] = DEATH_BEHAVIOR;
 
-	nameToInstance["MoveBehavior"] = &createInstance<MoveBehavior>;
+	nameToInfo["MoveBehavior"] = &createInstance<Info, Info>;
+	nameToInstance["MoveBehavior"] = &createInstance<MoveBehavior, BehaviorBase>;
 	nameToType["MoveBehavior"] = MOVE_BEHAVIOR;
 
-	nameToInstance["SpawnerBehavior"] = &createInstance<SpawnerBehavior>;
+	nameToInfo["SpawnerBehavior"] = &createInstance<SpawnerBehaviorInfo, Info>;
+	nameToInstance["SpawnerBehavior"] = &createInstance<SpawnerBehavior, BehaviorBase>;
 	nameToType["SpawnerBehavior"] = SPAWNER_BEHAVIOR;
 
 	inited = true;
 }
-
 

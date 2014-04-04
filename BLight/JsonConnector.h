@@ -14,14 +14,14 @@ public:
 		return instance;
 	}
 	
-	ObjectInfo* createInfoFromJson(FILE*);
+	vector<ObjectInfo*>* createInfosFromJson(FILE*);
 	
 private:
 	JsonConnector(void) {};               
 	JsonConnector(JsonConnector const&);              
 	void operator=(JsonConnector const&);
 
-	BehaviorBase* createBehaviorBy(rapidjson::Value&);
+	Info* createBehaviorInfoBy(rapidjson::Value&);
 	CommandType createCommandTypeBy(rapidjson::Value&);
 	DropInfo* createDropInfoBy(rapidjson::Value&);
 };

@@ -5,7 +5,7 @@
 #include "Command.h"
 #include "DropInfo.h"
 
-class ObjectInfo
+class ObjectInfo : public Info
 {
 public:
 	ObjectInfo(void);
@@ -13,8 +13,6 @@ public:
 
 	bool canApplyCommand(CommandType);
 
-	int id;
-	string name;
 	int physicType;
 	CustomShape* shape;
 	float density;
@@ -22,7 +20,7 @@ public:
 	float restitution;
 	float linearDamping;
 	
-	vector<BehaviorBase*> behaviors;
+	vector<Info*> behaviors;
 	vector<CommandType> applicableCommands;
 
 	map<CommandType, DropInfo*> drop;

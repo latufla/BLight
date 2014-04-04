@@ -21,18 +21,15 @@ map<string, ObjectInfo*> Infos::nameToInfo;
 
 void Infos::init()
 {
-
-//	getHeroInfo();
-
 	FILE * pFile = fopen ("config/game_objects.json" , "r");	
-	ObjectInfo* info = JsonConnector::getInstance().createInfoFromJson(pFile);
-	idToInfo[info->id] = info;
-	nameToInfo[info->name] = info;
 	
-	getEnemySpawnerInfo();
-	getChargerInfo();
-	getSmallEnergyPackInfo();
-	getMediumEnergyPackInfo();
+	vector<ObjectInfo*>* res = JsonConnector::getInstance().createInfosFromJson(pFile);
+	for(auto it = res->cbegin(); it != res->cend(); ++it){
+		idToInfo[(*it)->id] = (*it);
+		nameToInfo[((*it))->name] = (*it);
+	}
+
+	delete res; // but not infos
 }
 
 ObjectInfo* Infos::getInfoBy(int id)
@@ -62,9 +59,9 @@ ObjectInfo* Infos::getHeroInfo()
 	info->restitution = .5f;
 	info->linearDamping = 1.0f;
 
-	info->behaviors.push_back(new UserControlBehavior());
-	info->behaviors.push_back(new MoveBehavior());
-	info->behaviors.push_back(new AttackBehavior());
+// 	info->behaviors.push_back(new UserControlBehavior());
+// 	info->behaviors.push_back(new MoveBehavior());
+// 	info->behaviors.push_back(new AttackBehavior());
 
 	info->applicableCommands.push_back(CHARGE_COMMAND);
 
@@ -92,9 +89,9 @@ ObjectInfo* Infos::getEnemyInfo()
 	info->restitution = .5f;
 	info->linearDamping = 1.0f;
 
-	info->behaviors.push_back(new AIControlBehavior());
-	info->behaviors.push_back(new MoveBehavior());
-	info->behaviors.push_back(new DeathBehavior());
+// 	info->behaviors.push_back(new AIControlBehavior());
+// 	info->behaviors.push_back(new MoveBehavior());
+// 	info->behaviors.push_back(new DeathBehavior());
 
 	info->applicableCommands.push_back(ATTACK_COMMAND);
 	info->applicableCommands.push_back(CHARGE_COMMAND);
@@ -118,7 +115,7 @@ ObjectInfo* Infos::getSmallEnergyPackInfo()
 	info->physicType = 0;
 	info->shape = new CustomPolygon(1.0f, 1.0f); 
 
-	info->behaviors.push_back(new ChargePackBehavior());	
+// 	info->behaviors.push_back(new ChargePackBehavior());	
 
 	DropInfo* drop = new DropInfo();
 	drop->target[DropInfo::ENERGY] = 11;
@@ -140,7 +137,7 @@ ObjectInfo* Infos::getMediumEnergyPackInfo()
 	info->physicType = 0;
 	info->shape = new CustomPolygon(2.0f, 2.0f); 
 
-	info->behaviors.push_back(new ChargePackBehavior());
+// 	info->behaviors.push_back(new ChargePackBehavior());
 	
 	DropInfo* drop = new DropInfo();
 	drop->target[DropInfo::ENERGY] = 22;
@@ -161,7 +158,7 @@ ObjectInfo* Infos::getChargerInfo()
 	info->physicType = 0;
 	info->shape = new CustomPolygon(4.0f, 4.0f); 
 
-	info->behaviors.push_back(new ChargerBehavior());
+// 	info->behaviors.push_back(new ChargerBehavior());
 
 	DropInfo* drop = new DropInfo();
 	drop->target[DropInfo::ENERGY] = 1;
@@ -183,7 +180,7 @@ ObjectInfo* Infos::getEnemySpawnerInfo()
 	info->physicType = 0;
 	info->shape = new CustomPolygon(3.0f, 3.0f); 
 
-	info->behaviors.push_back(new SpawnerBehavior(eInfo));
+// 	info->behaviors.push_back(new SpawnerBehavior(eInfo));
 	return info;
 }
 
