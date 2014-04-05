@@ -76,7 +76,9 @@
 		},
 		"behaviors": [{
 			"name": "SpawnerBehavior",
-			"creature": "enemy"
+			"creature": "enemy",
+			"intervalMSec": 3000,
+			"chance": 1000
 		}],
 		"applicableCommands": [],
 		"drop": []

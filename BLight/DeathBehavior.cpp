@@ -2,10 +2,13 @@
 #include "DestroyCommand.h"
 
 
-DeathBehavior::DeathBehavior(void)
+DeathBehavior::DeathBehavior(void) : BehaviorBase()
 {
 }
 
+DeathBehavior::DeathBehavior(Info* info) : BehaviorBase(info)
+{
+}
 
 DeathBehavior::~DeathBehavior(void)
 {
@@ -22,9 +25,4 @@ bool DeathBehavior::doStep(int step)
 	}
 
 	return false;
-}
-
-BehaviorBase* DeathBehavior::clone()
-{
-	return new DeathBehavior();
 }

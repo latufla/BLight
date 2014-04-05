@@ -1,17 +1,12 @@
 #include "GamepadBehavior.h"
 #include "Config.h"
 
-GamepadBehavior::GamepadBehavior(void)
+GamepadBehavior::GamepadBehavior(void) : BehaviorBase()
 {
 }
 
 GamepadBehavior::~GamepadBehavior(void)
 {
-}
-
-BehaviorBase* GamepadBehavior::clone()
-{
-	return new GamepadBehavior();
 }
 
 

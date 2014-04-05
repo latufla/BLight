@@ -2,28 +2,28 @@
 
 int BehaviorBase::count = 0;
 
-BehaviorBase::BehaviorBase(void)
+
+BehaviorBase::BehaviorBase( void )
 {
-	init(0, "dummy");
+	id = -1;
+	name = "dummy";
+
+	enabled = false;
+	count++;
 }
 
-BehaviorBase::BehaviorBase( int id, string name)
+BehaviorBase::BehaviorBase(Info* info)
 {
-	init(id, name);
+	id = -1;
+	name = info->name;
+
+	enabled = false;
+	count++;
 }
 
 BehaviorBase::~BehaviorBase(void)
 {
 	count--;
-}
-
-void BehaviorBase::init( int id, string name )
-{
-	this->id = id;
-	this->name = name;
-	enabled = false;
-
-	count++;
 }
 
 

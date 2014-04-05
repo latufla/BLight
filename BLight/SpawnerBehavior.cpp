@@ -5,9 +5,19 @@
 
 SpawnerBehavior::SpawnerBehavior(void)
 {
-	this->intervalMSec = 5000;
-	this->chance = 1000;
-	this->creature = Infos::getInfoBy("enemy"); 
+	this->intervalMSec = 0;
+	this->chance = 0;
+	this->creature = nullptr;
+
+	time = 0;
+}
+
+SpawnerBehavior::SpawnerBehavior(Info* info)
+{
+	SpawnerBehaviorInfo* sInfo = (SpawnerBehaviorInfo*) info;
+	this->intervalMSec = sInfo->intervalMSec;
+	this->chance = sInfo->chance;
+	this->creature = Infos::getInfoBy(sInfo->creature); 
 
 	time = 0;
 }

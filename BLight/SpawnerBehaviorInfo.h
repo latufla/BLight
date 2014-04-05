@@ -7,6 +7,8 @@ public:
 	SpawnerBehaviorInfo(void);
 	~SpawnerBehaviorInfo(void);
 
+	int intervalMSec;
+	int chance;
 	string creature;
 };
 

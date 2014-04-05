@@ -7,6 +7,7 @@ class SpawnerBehavior : public BehaviorBase
 {
 public:
 	SpawnerBehavior(void);
+	SpawnerBehavior(Info *info);
 	~SpawnerBehavior(void);
 	
 	BehaviorType getType(){return SPAWNER_BEHAVIOR;}

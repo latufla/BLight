@@ -69,9 +69,13 @@ Info* JsonConnector::createBehaviorInfoBy( rapidjson::Value& b)
 		return nullptr;
 
 	Info* bInfo = BehaviorsFactory::createInfo(b["name"].GetString());
-	if(b.HasMember("creature"))
-		((SpawnerBehaviorInfo*)bInfo)->creature = b["creature"].GetString();
 	
+	if(bInfo->name == "SpawnerBehavior"){
+		((SpawnerBehaviorInfo*)bInfo)->intervalMSec = b["intervalMSec"].GetInt();
+		((SpawnerBehaviorInfo*)bInfo)->chance= b["chance"].GetInt();
+		((SpawnerBehaviorInfo*)bInfo)->creature = b["creature"].GetString();
+	}
+
 	return bInfo;
 }
 

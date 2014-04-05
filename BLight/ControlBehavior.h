@@ -6,6 +6,9 @@
 class ControlBehavior : public BehaviorBase
 {
 public:
+	ControlBehavior(void) : BehaviorBase(){};
+	ControlBehavior(Info* info) : BehaviorBase(info){};
+	
 	virtual CustomPoint* getMoveTo() = 0;
 	virtual float getMoveForce() = 0;
 

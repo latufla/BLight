@@ -7,9 +7,8 @@ class ChargerBehavior : public BehaviorBase
 {
 public:
 	ChargerBehavior(void);
+	ChargerBehavior(Info*);
 	~ChargerBehavior(void);
-
-	BehaviorBase* clone();
 
 	bool start(ControllerBase*);
 	bool stop();

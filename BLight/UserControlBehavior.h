@@ -7,9 +7,8 @@ class UserControlBehavior : public ControlBehavior
 {
 public:
 	UserControlBehavior(void);
+	UserControlBehavior(Info*);
 	~UserControlBehavior(void);
-	
-	BehaviorBase* clone();
 
 	bool start(ControllerBase*);
 	bool stop();

@@ -6,9 +6,8 @@ class MoveBehavior : public BehaviorBase
 {
 public:
 	MoveBehavior(void);
+	MoveBehavior(Info*);
 	~MoveBehavior(void);
-	
-	BehaviorBase* clone();
 
 	BehaviorType getType(){return MOVE_BEHAVIOR;}
 

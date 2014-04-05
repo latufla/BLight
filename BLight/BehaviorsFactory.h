@@ -3,6 +3,7 @@
 #include "Info.h"
 
 template<typename T, typename P> P* createInstance() { return new T; }
+template<typename T, typename P> P* createInstance(Info* info) { return new T(info); }
 
 class BehaviorsFactory
 {
@@ -15,7 +16,7 @@ public:
 private:
 	static void init();
 	
-	static map <string,  BehaviorBase*(*)()> nameToInstance;
+	static map <string,  BehaviorBase*(*)(Info*)> nameToInstance;
 	static map <string,  BehaviorType> nameToType;
 	static map <string,  Info*(*)()> nameToInfo;
 

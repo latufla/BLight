@@ -1,7 +1,12 @@
 #include "ChargerBehavior.h"
 #include "Config.h"
 
-ChargerBehavior::ChargerBehavior(void)
+ChargerBehavior::ChargerBehavior(void) : BehaviorBase()
+{
+	target = nullptr;
+}
+
+ChargerBehavior::ChargerBehavior(Info* info) : BehaviorBase(info)
 {
 	target = nullptr;
 }
@@ -57,10 +62,5 @@ bool ChargerBehavior::onEndInteraction(ObjectBase* target)
 		return true;
 	}	
 	return false;
-}
-
-BehaviorBase* ChargerBehavior::clone()
-{
-	return new ChargerBehavior();
 }
 

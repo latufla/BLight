@@ -2,6 +2,7 @@
 #include "stdafx.h"
 #include "ObjectBase.h"
 #include "ControllerBase.h"
+#include "Info.h"
 
 enum BehaviorType{
 	NONE_BEHAVIOR, 
@@ -18,14 +19,12 @@ enum BehaviorType{
 class BehaviorBase
 {
 public:
-	 BehaviorBase(void);
-	 BehaviorBase(int, string);
+	BehaviorBase(void);
+	BehaviorBase(Info*);
 	virtual ~BehaviorBase(void);
 
 	static int count;
-
-	virtual BehaviorBase* clone(){return nullptr;}
-
+		
 	virtual bool start(ControllerBase*);
 	virtual bool stop();
 	virtual bool tryDoStep(int); // frame behavior
@@ -49,7 +48,6 @@ public:
 	virtual BehaviorType getType(){return NONE_BEHAVIOR;}
 	
 protected:
-	virtual void init(int, string);
 	virtual bool doStep(int);
 	virtual bool canDoStep();
 

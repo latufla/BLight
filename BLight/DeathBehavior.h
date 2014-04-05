@@ -5,9 +5,8 @@ class DeathBehavior : public BehaviorBase
 {
 public:
 	DeathBehavior(void);
+	DeathBehavior(Info* info);
 	~DeathBehavior(void);
-
-	BehaviorBase* clone();
 
 	BehaviorType getType(){return DEATH_BEHAVIOR;}
 

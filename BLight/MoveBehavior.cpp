@@ -1,9 +1,12 @@
 #include "MoveBehavior.h"
 
-MoveBehavior::MoveBehavior(void)
+MoveBehavior::MoveBehavior(void) : BehaviorBase()
 {
 }
 
+MoveBehavior::MoveBehavior(Info* info) : BehaviorBase(info)
+{
+}
 
 MoveBehavior::~MoveBehavior(void)
 {
@@ -46,11 +49,5 @@ void MoveBehavior::applyStoppage()
 	static CustomPoint vel(0.0f, 0.0f);
 	controller->getObject()->setLinearVelocity(vel);	
 }
-
-BehaviorBase* MoveBehavior::clone()
-{
-	return new MoveBehavior();
-}
-
 
 

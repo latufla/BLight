@@ -7,10 +7,9 @@ class ChargePackBehavior : public BehaviorBase
 {
 public:
 	ChargePackBehavior(void);
+	ChargePackBehavior(Info*);
 	~ChargePackBehavior(void);
 	
-	BehaviorBase* clone();
-
 	bool start(ControllerBase*);
 	bool stop();
 

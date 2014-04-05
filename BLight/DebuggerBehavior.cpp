@@ -4,8 +4,9 @@
 const int DebuggerBehavior::DEBUG_STEP = 5;
 
 
-DebuggerBehavior::DebuggerBehavior(void) : debugStep(DEBUG_STEP)
+DebuggerBehavior::DebuggerBehavior(void) : BehaviorBase()
 {
+	debugStep = DEBUG_STEP;
 }
 
 
@@ -31,9 +32,4 @@ bool DebuggerBehavior::doStep(int step)
 bool DebuggerBehavior::canDoStep()
 {
 	return __super::canDoStep() && (debugStep++ >= DEBUG_STEP);
-}
-
-BehaviorBase* DebuggerBehavior::clone()
-{
-	return new DebuggerBehavior();
 }

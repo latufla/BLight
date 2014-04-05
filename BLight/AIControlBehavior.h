@@ -8,10 +8,9 @@ class AIControlBehavior : public ControlBehavior
 {
 public:
 	AIControlBehavior(void);
+	AIControlBehavior(Info*);
 	~AIControlBehavior(void);
 	
-	BehaviorBase* clone();
-
 	bool start(ControllerBase*);
 
 	CustomPoint* getMoveTo(){return blackboard.getMoveTo();}

@@ -3,15 +3,20 @@
 #include "Infos.h"
 
 
-AttackBehavior::AttackBehavior(void)
+AttackBehavior::AttackBehavior(void) : BehaviorBase()
 {
 	damage = 20;
 }
 
+AttackBehavior::AttackBehavior(Info* info) : BehaviorBase(info)
+{
+	damage = 20;
+}
 
 AttackBehavior::~AttackBehavior(void)
 {
 }
+
 
 bool AttackBehavior::doStep(int step)
 {
@@ -29,9 +34,4 @@ bool AttackBehavior::doStep(int step)
 	AttackCommand attack;
 	attack.setUp(this, cTarget->getObject());		
 	return attack.tryToExecute();
-}
-
-BehaviorBase* AttackBehavior::clone()
-{
-	return new AttackBehavior();
 }

@@ -8,8 +8,6 @@ public:
 	GamepadBehavior(void);
 	~GamepadBehavior(void);
 
-	BehaviorBase* clone();
-
 	CustomPoint* getOverPoint();
 	CustomPoint* getTouch();
 	

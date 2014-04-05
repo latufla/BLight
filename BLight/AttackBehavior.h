@@ -7,9 +7,8 @@ class AttackBehavior : public BehaviorBase
 {
 public:
 	AttackBehavior(void);
+	AttackBehavior(Info*);
 	~AttackBehavior(void);
-
-	BehaviorBase* clone();
 
 	BehaviorType getType(){return ATTACK_BEHAVIOR;}
 

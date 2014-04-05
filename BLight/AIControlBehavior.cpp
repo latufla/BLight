@@ -7,8 +7,14 @@
 #include "StopMoveAINode.h"
 
 
-AIControlBehavior::AIControlBehavior(void)
+AIControlBehavior::AIControlBehavior(void) : ControlBehavior()
 {
+
+}
+
+AIControlBehavior::AIControlBehavior(Info* info) : ControlBehavior(info)
+{
+
 }
 
 
@@ -38,11 +44,6 @@ bool AIControlBehavior::doStep(int step)
 	__super::doStep(step);
 	
 	return tree->run();
-}
-
-BehaviorBase* AIControlBehavior::clone()
-{
-	return new AIControlBehavior();
 }
 
 

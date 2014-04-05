@@ -2,7 +2,12 @@
 #include "Config.h"
 #include "Infos.h"
 
-UserControlBehavior::UserControlBehavior(void)
+UserControlBehavior::UserControlBehavior(void) : ControlBehavior()
+{
+	target = nullptr;
+}
+
+UserControlBehavior::UserControlBehavior(Info* info) : ControlBehavior(info)
 {
 	target = nullptr;
 }
@@ -67,9 +72,4 @@ bool UserControlBehavior::doStep(int step)
 CustomPoint* UserControlBehavior::getMoveTo()
 {
 	return command == NONE_COMMAND ? gamepad.getTouch() : nullptr;
-}
-
-BehaviorBase* UserControlBehavior::clone()
-{
-	return new UserControlBehavior();
 }

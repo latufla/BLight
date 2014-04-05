@@ -12,7 +12,7 @@
 bool BehaviorsFactory::inited = false;
 
 map <string,  Info*(*)()> BehaviorsFactory::nameToInfo;
-map <string, BehaviorBase*(*)()> BehaviorsFactory::nameToInstance;
+map <string, BehaviorBase*(*)(Info*)> BehaviorsFactory::nameToInstance;
 map <string,  BehaviorType> BehaviorsFactory::nameToType;
 
 Info* BehaviorsFactory::createInfo(string name)
@@ -30,7 +30,7 @@ BehaviorBase* BehaviorsFactory::create(Info* info)
 	if(!inited)
 		init();
 
-	return nameToInstance[info->name]();
+	return nameToInstance[info->name](info);
 }
 
 BehaviorType BehaviorsFactory::getType(string name)

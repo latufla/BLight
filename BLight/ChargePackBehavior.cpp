@@ -3,7 +3,12 @@
 #include "ControlBehavior.h"
 #include "ChargeCommand.h"
 
-ChargePackBehavior::ChargePackBehavior(void)
+ChargePackBehavior::ChargePackBehavior(void) : BehaviorBase()
+{
+	target = nullptr;
+}
+
+ChargePackBehavior::ChargePackBehavior(Info* info) : BehaviorBase(info)
 {
 	target = nullptr;
 }
@@ -68,9 +73,4 @@ bool ChargePackBehavior::doStep(int step)
 		return true;
 	}
 	return false;
-}
-
-BehaviorBase* ChargePackBehavior::clone()
-{
-	return new ChargePackBehavior();
 }
