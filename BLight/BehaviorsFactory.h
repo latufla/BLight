@@ -8,17 +8,23 @@ template<typename T, typename P> P* createInstance(Info* info) { return new T(in
 class BehaviorsFactory
 {
 public:
+	static const string USER_CONTROL_BEHAVIOR;
+	static const string AI_CONTROL_BEHAVIOR;
+	static const string ATTACK_BEHAVIOR;
+	static const string CHARGE_PACK_BEHAVIOR;
+	static const string CHARGER_BEHAVIOR;
+	static const string DEATH_BEHAVIOR;
+	static const string MOVE_BEHAVIOR;
+	static const string SPAWNER_BEHAVIOR;
+
 	static BehaviorBase* create(Info*);
 	static Info* createInfo(string);
 
-	static BehaviorType getType(string);
-
 private:
 	static void init();
-	
-	static map <string,  BehaviorBase*(*)(Info*)> nameToInstance;
-	static map <string,  BehaviorType> nameToType;
+
 	static map <string,  Info*(*)()> nameToInfo;
+	static map <string,  BehaviorBase*(*)(Info*)> nameToInstance;
 
 	static bool inited;
 };

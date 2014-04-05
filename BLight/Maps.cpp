@@ -8,11 +8,11 @@ vector<ControllerBase*> Maps::createDemoMap(FieldController& field)
 
 	Infos::init();
 
-	ObjectInfo* heroInfo = Infos::getInfoBy(Infos::HERO);
+	ObjectInfo* heroInfo = Infos::getInfoBy("hero");
 	ControllerBase* hero = field.createObjectController(1, *heroInfo, CustomPoint(1.0f, 10.0f));
 	res.push_back(hero);	
 	
-	ObjectInfo* aiSpawnerInfo = Infos::getInfoBy(Infos::ENEMY_SPAWNER);
+	ObjectInfo* aiSpawnerInfo = Infos::getInfoBy("enemy_spawner");
 	ControllerBase* aiSpawner = field.createObjectController(2, *aiSpawnerInfo, CustomPoint(40.0f, 10.0f));
 	res.push_back(aiSpawner);
 

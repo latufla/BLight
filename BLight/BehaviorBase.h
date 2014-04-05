@@ -24,7 +24,7 @@ public:
 	virtual ~BehaviorBase(void);
 
 	static int count;
-		
+
 	virtual bool start(ControllerBase*);
 	virtual bool stop();
 	virtual bool tryDoStep(int); // frame behavior
