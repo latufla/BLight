@@ -3,6 +3,7 @@
 #include "BehaviorsFactory.h"
 #include "CommandsFactory.h"
 #include "SpawnerBehaviorInfo.h"
+#include "Config.h"
 
 vector<ObjectInfo*>* JsonConnector::createInfosFromJson(FILE* file)
 {
@@ -32,8 +33,8 @@ vector<ObjectInfo*>* JsonConnector::createInfosFromJson(FILE* file)
 		info->name = item["name"].GetString();
 		info->physicType = item["physicType"].GetInt();
 
-		info->shape = new CustomCircle(CustomPoint(0.0f, 0.0f), (float)item["shape"]["radius"].GetDouble());
-
+		info->shape = createShapeBy(item["shape"]);
+		
 		info->density = (float)item["density"].GetDouble();
 		info->friction = (float)item["friction"].GetDouble();
 		info->restitution = (float)item["restitution"].GetDouble();
@@ -62,6 +63,16 @@ vector<ObjectInfo*>* JsonConnector::createInfosFromJson(FILE* file)
 	return res;
 }
 
+CustomShape* JsonConnector::createShapeBy(rapidjson::Value& s){
+	CustomShape* res = nullptr;
+	string sName = s["name"].GetString();
+	if(sName == "circle"){
+		res = new CustomCircle(CustomPoint(0.0f, 0.0f), (float)s["radius"].GetDouble());
+	} else if(sName == "polygon"){
+		res = new CustomPolygon((float)s["width"].GetDouble(), (float)s["height"].GetDouble());
+	}
+	return res;
+}
 
 Info* JsonConnector::createBehaviorInfoBy( rapidjson::Value& b)
 {

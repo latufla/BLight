@@ -71,8 +71,9 @@
 		"restitution": 0.5,
 		"linearDamping": 1.0,
 		"shape": {
-			"name": "circle",
-			"radius": 0.5
+			"name": "polygon",
+			"width": 3.0,
+			"height": 3.0
 		},
 		"behaviors": [{
 			"name": "SpawnerBehavior",

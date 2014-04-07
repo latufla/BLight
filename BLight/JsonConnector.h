@@ -21,6 +21,7 @@ private:
 	JsonConnector(JsonConnector const&);              
 	void operator=(JsonConnector const&);
 
+	CustomShape* createShapeBy(rapidjson::Value&);
 	Info* createBehaviorInfoBy(rapidjson::Value&);
 	CommandType createCommandTypeBy(rapidjson::Value&);
 	DropInfo* createDropInfoBy(rapidjson::Value&);
