@@ -63,6 +63,77 @@
 		"drop": []
 	},
 	{
+		"id": 2,
+		"name": "small_energy_pack",
+		"physicType": 0,
+		"density": 1.0,
+		"friction": 0.3,
+		"restitution": 0.5,
+		"linearDamping": 1.0,
+		"shape": {
+			"name": "polygon",
+			"width": 1.0,
+			"height": 1.0
+		},
+		"behaviors": [{
+			"name": "ChargePackBehavior"
+		}],
+		"applicableCommands": [],
+		"drop": [{
+			"name": "ChargeCommand",
+			"target": {
+				"energy": 11
+			}
+		}]
+	},
+	{
+		"id": 3,
+		"name": "medium_energy_pack",
+		"physicType": 0,
+		"density": 1.0,
+		"friction": 0.3,
+		"restitution": 0.5,
+		"linearDamping": 1.0,
+		"shape": {
+			"name": "polygon",
+			"width": 2.0,
+			"height": 2.0
+		},
+		"behaviors": [{
+			"name": "ChargePackBehavior"
+		}],
+		"applicableCommands": [],
+		"drop": [{
+			"name": "ChargeCommand",
+			"target": {
+				"energy": 22
+			}
+		}]
+	},{
+		"id": 4,
+		"name": "charger",
+		"physicType": 0,
+		"density": 1.0,
+		"friction": 0.3,
+		"restitution": 0.5,
+		"linearDamping": 1.0,
+		"shape": {
+			"name": "polygon",
+			"width": 4.0,
+			"height": 4.0
+		},
+		"behaviors": [{
+			"name": "ChargerBehavior"
+		}],
+		"applicableCommands": [],
+		"drop": [{
+			"name": "ChargeCommand",
+			"target": {
+				"energy": 1
+			}
+		}]
+	},
+	{
 		"id": 5,
 		"name": "enemy_spawner",
 		"physicType": 0,
