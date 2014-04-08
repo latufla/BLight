@@ -7,6 +7,6 @@
 class Maps
 {
 public:
-	static vector<ControllerBase*> createDemoMap(FieldController&);
+	static vector<ControllerBase*>* createMap(FieldController&);
 };
 

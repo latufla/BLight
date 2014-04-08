@@ -29,11 +29,12 @@ int _tmain(int argc, _TCHAR* argv[])
 	field.init();
 	Config::field = &field;
 
-	vector<ControllerBase*> mapInfo = Maps::createDemoMap(field);
-	for(auto it = mapInfo.cbegin(); it != mapInfo.cend(); it++){
+	vector<ControllerBase*>* mapInfo = Maps::createMap(field);
+	for(auto it = mapInfo->cbegin(); it != mapInfo->cend(); it++){
 		scene.addChild((*it)->getView());
 		applyAdditionalSettings(*it);
 	}
+	delete mapInfo; // but not infos
 
 	field.startBehaviors();
 

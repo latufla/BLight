@@ -5,7 +5,7 @@
 class Infos
 {
 public:
-	static void init();
+	static void init(FILE*);
 
 	static ObjectInfo* getInfoBy(string);
 

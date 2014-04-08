@@ -15,7 +15,8 @@ public:
 	}
 	
 	vector<ObjectInfo*>* createInfosFromJson(FILE*);
-	
+	vector<ControllerBase*>* createMapFromJson(FILE*);
+
 private:
 	JsonConnector(void) {};               
 	JsonConnector(JsonConnector const&);              

@@ -4,6 +4,7 @@
 #include "CommandsFactory.h"
 #include "SpawnerBehaviorInfo.h"
 #include "Config.h"
+#include "Infos.h"
 
 vector<ObjectInfo*>* JsonConnector::createInfosFromJson(FILE* file)
 {
@@ -121,6 +122,33 @@ DropInfo* JsonConnector::createDropInfoBy(rapidjson::Value& d)
 	}
 
 	return info;
+}
+
+vector<ControllerBase*>* JsonConnector::createMapFromJson(FILE* f)
+{
+	if(f == nullptr)
+		return nullptr;
+
+	rapidjson::FileStream is(f);
+	rapidjson::Document d;
+	if(d.ParseStream<0>(is).HasParseError())
+		return nullptr;
+
+	rapidjson::Value& items = d["items"];
+	if(!items.IsArray())
+		return nullptr;
+
+	vector<ControllerBase*>* res = new vector<ControllerBase*>();
+	for (rapidjson::SizeType i = 0; i < items.Size(); i++){
+		ObjectInfo* info = Infos::getInfoBy(items[i]["info"].GetString());
+		CustomPoint pos(
+			(float)items[i]["x"].GetDouble(), 
+			(float)items[i]["y"].GetDouble()
+			);
+		ControllerBase* c = Config::field->createObjectController(1, *info, pos);
+		res->push_back(c);	
+	}
+	return res;
 }
 
 

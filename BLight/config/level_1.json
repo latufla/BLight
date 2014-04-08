@@ -1,0 +1,9 @@
+{
+	"items": [
+	{"info": "hero", "x": 1.0, "y": 30.0},
+	{"info": "enemy_spawner", "x": 40.0, "y": 10.0},
+	{"info": "charger", "x": 5.0, "y": 20.0},
+	{"info": "small_energy_pack", "x": 20.0, "y": 30.0},
+	{"info": "medium_energy_pack", "x": 40.0, "y": 30.0}
+	]
+}
