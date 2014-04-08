@@ -29,7 +29,7 @@ int _tmain(int argc, _TCHAR* argv[])
 	field.init();
 	Config::field = &field;
 
-	vector<ControllerBase*>* mapInfo = Maps::createMap(field);
+	vector<ControllerBase*>* mapInfo = Maps::createMap();
 	for(auto it = mapInfo->cbegin(); it != mapInfo->cend(); it++){
 		scene.addChild((*it)->getView());
 		applyAdditionalSettings(*it);

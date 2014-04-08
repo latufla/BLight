@@ -6,12 +6,12 @@
 #include "Config.h"
 #include "Infos.h"
 
-vector<ObjectInfo*>* JsonConnector::createInfosFromJson(FILE* file)
+vector<ObjectInfo*>* JsonConnector::createInfosFromJson(FILE* json)
 {
-	if(file == nullptr)
+	if(json == nullptr)
 		return nullptr;
 	
-	rapidjson::FileStream is(file);
+	rapidjson::FileStream is(json);
 	rapidjson::Document d;
 	if(d.ParseStream<0>(is).HasParseError())
 		return nullptr;
@@ -34,7 +34,7 @@ vector<ObjectInfo*>* JsonConnector::createInfosFromJson(FILE* file)
 		info->name = item["name"].GetString();
 		info->physicType = item["physicType"].GetInt();
 
-		info->shape = createShapeBy(item["shape"]);
+		info->shape = createShape(item["shape"]);
 		
 		info->density = (float)item["density"].GetDouble();
 		info->friction = (float)item["friction"].GetDouble();
@@ -44,19 +44,19 @@ vector<ObjectInfo*>* JsonConnector::createInfosFromJson(FILE* file)
 		rapidjson::Value& behaviors = item["behaviors"];
 		if(behaviors.IsArray()){
 			for (rapidjson::SizeType i = 0; i < behaviors.Size(); i++)
-				info->behaviors.push_back(createBehaviorInfoBy(behaviors[i]));
+				info->behaviors.push_back(createBehaviorInfo(behaviors[i]));
 		}
 
 		rapidjson::Value& applicableCommands = item["applicableCommands"];
 		if(applicableCommands.IsArray()){
 			for (rapidjson::SizeType i = 0; i < applicableCommands.Size(); i++)
-				info->applicableCommands.push_back(createCommandTypeBy(applicableCommands[i]));
+				info->applicableCommands.push_back(createCommandType(applicableCommands[i]));
 		}
 
 		rapidjson::Value& drop = item["drop"];
 		if(drop.IsArray()){
 			for (rapidjson::SizeType i = 0; i < drop.Size(); i++){
-				info->drop[createCommandTypeBy(drop[i])] = createDropInfoBy(drop[i]);
+				info->drop[createCommandType(drop[i])] = createDropInfo(drop[i]);
 			}
 		}
 	}
@@ -64,7 +64,7 @@ vector<ObjectInfo*>* JsonConnector::createInfosFromJson(FILE* file)
 	return res;
 }
 
-CustomShape* JsonConnector::createShapeBy(rapidjson::Value& s){
+CustomShape* JsonConnector::createShape(rapidjson::Value& s){
 	CustomShape* res = nullptr;
 	string sName = s["name"].GetString();
 	if(sName == "circle"){
@@ -75,7 +75,7 @@ CustomShape* JsonConnector::createShapeBy(rapidjson::Value& s){
 	return res;
 }
 
-Info* JsonConnector::createBehaviorInfoBy( rapidjson::Value& b)
+Info* JsonConnector::createBehaviorInfo( rapidjson::Value& b)
 {
 	if(!b.IsObject())
 		return nullptr;
@@ -91,7 +91,7 @@ Info* JsonConnector::createBehaviorInfoBy( rapidjson::Value& b)
 	return bInfo;
 }
 
-CommandType JsonConnector::createCommandTypeBy(rapidjson::Value& c)
+CommandType JsonConnector::createCommandType(rapidjson::Value& c)
 {
 	if(!c.IsObject())
 		return NONE_COMMAND;
@@ -99,7 +99,7 @@ CommandType JsonConnector::createCommandTypeBy(rapidjson::Value& c)
 	return CommandsFactory::getType(c["name"].GetString());
 }
 
-DropInfo* JsonConnector::createDropInfoBy(rapidjson::Value& d)
+DropInfo* JsonConnector::createDropInfo(rapidjson::Value& d)
 {
 	if(!d.IsObject())
 		return nullptr;
@@ -124,12 +124,12 @@ DropInfo* JsonConnector::createDropInfoBy(rapidjson::Value& d)
 	return info;
 }
 
-vector<ControllerBase*>* JsonConnector::createMapFromJson(FILE* f)
+vector<ControllerBase*>* JsonConnector::createMapFromJson(FILE* json)
 {
-	if(f == nullptr)
+	if(json == nullptr)
 		return nullptr;
 
-	rapidjson::FileStream is(f);
+	rapidjson::FileStream is(json);
 	rapidjson::Document d;
 	if(d.ParseStream<0>(is).HasParseError())
 		return nullptr;
@@ -138,6 +138,7 @@ vector<ControllerBase*>* JsonConnector::createMapFromJson(FILE* f)
 	if(!items.IsArray())
 		return nullptr;
 
+
 	vector<ControllerBase*>* res = new vector<ControllerBase*>();
 	for (rapidjson::SizeType i = 0; i < items.Size(); i++){
 		ObjectInfo* info = Infos::getInfoBy(items[i]["info"].GetString());
@@ -145,7 +146,7 @@ vector<ControllerBase*>* JsonConnector::createMapFromJson(FILE* f)
 			(float)items[i]["x"].GetDouble(), 
 			(float)items[i]["y"].GetDouble()
 			);
-		ControllerBase* c = Config::field->createObjectController(1, *info, pos);
+		ControllerBase* c = Config::field->createObjectController(items[i]["id"].GetInt(), *info, pos);
 		res->push_back(c);	
 	}
 	return res;

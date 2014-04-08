@@ -1,9 +1,10 @@
 #include "Maps.h"
 #include "StatusViewManager.h"
 #include "JsonConnector.h"
+#include "Config.h"
 
 
-vector<ControllerBase*>* Maps::createMap(FieldController& field)
+vector<ControllerBase*>* Maps::createMap()
 {
 	FILE* infos = fopen ("config/game_objects.json" , "r");	
 	Infos::init(infos);
@@ -14,3 +15,4 @@ vector<ControllerBase*>* Maps::createMap(FieldController& field)
 	fclose(level);
 	return res;
 }
+

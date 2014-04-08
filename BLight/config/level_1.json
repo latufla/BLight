@@ -1,9 +1,9 @@
 {
 	"items": [
-	{"info": "hero", "x": 1.0, "y": 30.0},
-	{"info": "enemy_spawner", "x": 40.0, "y": 10.0},
-	{"info": "charger", "x": 5.0, "y": 20.0},
-	{"info": "small_energy_pack", "x": 20.0, "y": 30.0},
-	{"info": "medium_energy_pack", "x": 40.0, "y": 30.0}
+	{"id": 0, "info": "hero", "x": 1.0, "y": 30.0},
+	{"id": 1, "info": "enemy_spawner", "x": 40.0, "y": 10.0},
+	{"id": 2, "info": "charger", "x": 5.0, "y": 20.0},
+	{"id": 3, "info": "small_energy_pack", "x": 20.0, "y": 30.0},
+	{"id": 4, "info": "medium_energy_pack", "x": 40.0, "y": 30.0}
 	]
 }
