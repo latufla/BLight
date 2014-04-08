@@ -33,15 +33,17 @@ vector<ObjectInfo*>* JsonConnector::createInfosFromJson(FILE* json)
 
 		info->id = item["id"].GetInt();
 		info->name = item["name"].GetString();
-		info->physicType = item["physicType"].GetInt();
+		info->physicType = item.HasMember("physicType") ? item["physicType"].GetInt() : 0;
 
 		info->shape = createShape(item["shape"]);
 		
-		info->density = (float)item["density"].GetDouble();
-		info->friction = (float)item["friction"].GetDouble();
-		info->restitution = (float)item["restitution"].GetDouble();
-		info->linearDamping = (float)item["linearDamping"].GetDouble();
+		info->density = item.HasMember("density") ? (float)item["density"].GetDouble() : 0.0f;
+		info->friction = item.HasMember("friction") ? (float)item["friction"].GetDouble() : 0.0f;
+		info->restitution = item.HasMember("restitution") ? (float)item["restitution"].GetDouble() : 0.0f;
+		info->linearDamping = item.HasMember("linearDamping") ? (float)item["linearDamping"].GetDouble() : 0.0f;
 	
+		info->displayStatus = item.HasMember("displayStatus") ? item["displayStatus"].GetBool() : false; 
+
 		rapidjson::Value& behaviors = item["behaviors"];
 		if(behaviors.IsArray()){
 			for (rapidjson::SizeType i = 0; i < behaviors.Size(); i++)

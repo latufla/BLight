@@ -11,6 +11,7 @@
 		"friction": 0.3,
 		"restitution": 0.5,
 		"linearDamping": 1.0,
+		"displayStatus": true,
 		"behaviors": [{
 			"name": "UserControlBehavior"
 		},
@@ -45,6 +46,7 @@
 		"friction": 0.3,
 		"restitution": 0.5,
 		"linearDamping": 1.0,
+		"displayStatus": true,
 		"behaviors": [{
 			"name": "AIControlBehavior"
 		},
@@ -65,11 +67,6 @@
 	{
 		"id": 2,
 		"name": "small_energy_pack",
-		"physicType": 0,
-		"density": 1.0,
-		"friction": 0.3,
-		"restitution": 0.5,
-		"linearDamping": 1.0,
 		"shape": {
 			"name": "polygon",
 			"width": 1.0,
@@ -89,11 +86,6 @@
 	{
 		"id": 3,
 		"name": "medium_energy_pack",
-		"physicType": 0,
-		"density": 1.0,
-		"friction": 0.3,
-		"restitution": 0.5,
-		"linearDamping": 1.0,
 		"shape": {
 			"name": "polygon",
 			"width": 2.0,
@@ -112,11 +104,6 @@
 	},{
 		"id": 4,
 		"name": "charger",
-		"physicType": 0,
-		"density": 1.0,
-		"friction": 0.3,
-		"restitution": 0.5,
-		"linearDamping": 1.0,
 		"shape": {
 			"name": "polygon",
 			"width": 4.0,
@@ -136,11 +123,6 @@
 	{
 		"id": 5,
 		"name": "enemy_spawner",
-		"physicType": 0,
-		"density": 1.0,
-		"friction": 0.3,
-		"restitution": 0.5,
-		"linearDamping": 1.0,
 		"shape": {
 			"name": "polygon",
 			"width": 3.0,

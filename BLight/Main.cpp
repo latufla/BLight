@@ -58,9 +58,10 @@ void mainLoop(int elapsedTime)
 
 void applyAdditionalSettings(ControllerBase* c)
 {
-	if(c->getName() == "hero"){
+	if(c->getName() == "hero")
 		Config::player = c;
+
+	if(c->getDisplayStatus())
 		StatusViewManager::getInstance().addStatusView(c);
-	}
 }
 

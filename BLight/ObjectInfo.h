@@ -25,5 +25,6 @@ public:
 
 	map<CommandType, DropInfo*> drop;
 
+	bool displayStatus;
 };
 

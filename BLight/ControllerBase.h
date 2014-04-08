@@ -38,7 +38,10 @@ public:
 
 	bool getToDestroy() const { return toDestroy; }
 	void setToDestroy(bool val);
-	
+
+	bool getDisplayStatus() const { return displayStatus; }
+	void setDisplayStatus(bool val) { displayStatus = val; }
+
 protected:
 	void init(int, string);
 
@@ -51,5 +54,6 @@ protected:
 	vector<BehaviorBase*> behaviors;
 	
 	bool toDestroy;
+	bool displayStatus;
 };
 

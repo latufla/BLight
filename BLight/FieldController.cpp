@@ -20,6 +20,8 @@ ControllerBase* FieldController::createObjectController( int id, const ObjectInf
 		c->addBehavior(BehaviorsFactory::create(*it));
 	}
 
+	c->setDisplayStatus(info.displayStatus);
+
 	return c;
 }
 

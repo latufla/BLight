@@ -1,4 +1,5 @@
 #include "CreateCommand.h"
+#include "StatusViewManager.h"
 
 int CreateCommand::id = 6;
 
@@ -33,5 +34,8 @@ void CreateCommand::execute()
 	creature = Config::field->createObjectController(id++, *info, pos);
 	creature->startBehaviors();
 	Config::scene->addChild(creature->getView());
+	
+	if(creature->getDisplayStatus())
+		StatusViewManager::getInstance().addStatusView(creature);
 }
 
