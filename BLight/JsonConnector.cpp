@@ -84,17 +84,21 @@ Info* JsonConnector::createBehaviorInfo( rapidjson::Value& b)
 		return nullptr;
 
 	Info* bInfo = BehaviorsFactory::createInfo(b["name"].GetString());
-	
-	if(bInfo->name == "SpawnerBehavior"){
-		((SpawnerBehaviorInfo*)bInfo)->intervalMSec = b["intervalMSec"].GetInt();
-		((SpawnerBehaviorInfo*)bInfo)->chance= b["chance"].GetInt();
-		((SpawnerBehaviorInfo*)bInfo)->creature = b["creature"].GetString();
-		((SpawnerBehaviorInfo*)bInfo)->spawnX = (float)b["spawnX"].GetDouble();
-		((SpawnerBehaviorInfo*)bInfo)->spawnY = (float)b["spawnY"].GetDouble();	
+	if(b.IsObject()){
+		for(auto it = b.MemberBegin(); it != b.MemberEnd(); ++it){
+			string pName = it->name.GetString();
+			rapidjson::Value& val = it->value;
+			if(val.IsInt())
+				bInfo->update(pName, val.GetInt());
+			else if(val.IsString())
+				bInfo->update(pName, val.GetString());
+			else if(val.IsDouble())
+				bInfo->update(pName, (float)val.GetDouble());
+		}
 	}
-
 	return bInfo;
 }
+
 
 CommandType JsonConnector::createCommandType(rapidjson::Value& c)
 {

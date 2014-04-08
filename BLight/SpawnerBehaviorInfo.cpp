@@ -1,4 +1,5 @@
 #include "SpawnerBehaviorInfo.h"
+#include "CustomValue.h"
 
 
 SpawnerBehaviorInfo::SpawnerBehaviorInfo(void) : Info()
@@ -6,6 +7,7 @@ SpawnerBehaviorInfo::SpawnerBehaviorInfo(void) : Info()
 	intervalMSec = 0;
 	chance = 0;
 	creature = "";
+	spawnX = spawnY = 0.0f;
 }
 
 SpawnerBehaviorInfo::~SpawnerBehaviorInfo(void)
