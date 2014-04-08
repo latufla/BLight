@@ -132,7 +132,9 @@
 			"name": "SpawnerBehavior",
 			"creature": "enemy",
 			"intervalMSec": 3000,
-			"chance": 1000
+			"chance": 1000,
+			"spawnX": -2.0,
+			"spawnY": 1.0
 		}],
 		"applicableCommands": [],
 		"drop": []

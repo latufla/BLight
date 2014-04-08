@@ -15,10 +15,11 @@ CreateCommand::~CreateCommand(void)
 }
 
 
-void CreateCommand::setUp(BehaviorBase* caller, ObjectInfo* info)
+void CreateCommand::setUp(BehaviorBase* caller, ObjectInfo* info, const CustomPoint& position)
 {
 	this->caller = caller;
 	this->info = info;
+	this->position = position;
 }
 
 bool CreateCommand::canExecute()
@@ -28,10 +29,7 @@ bool CreateCommand::canExecute()
 
 void CreateCommand::execute()
 {
-	CustomPoint pos = caller->getController()->getObject()->getPosition();
-	pos.x -= 1.0;
-	pos.y += 1.0;
-	creature = Config::field->createObjectController(id++, *info, pos);
+	creature = Config::field->createObjectController(id++, *info, position);
 	creature->startBehaviors();
 	Config::scene->addChild(creature->getView());
 	

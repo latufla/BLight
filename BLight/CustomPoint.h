@@ -11,6 +11,7 @@ public:
 
 	void set(float, float);
 	void set(const CustomPoint&);
+	void moveBy(const CustomPoint&);
 
 	float getLength();
 	void normalize(float = 1);

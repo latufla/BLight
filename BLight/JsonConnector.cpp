@@ -89,6 +89,8 @@ Info* JsonConnector::createBehaviorInfo( rapidjson::Value& b)
 		((SpawnerBehaviorInfo*)bInfo)->intervalMSec = b["intervalMSec"].GetInt();
 		((SpawnerBehaviorInfo*)bInfo)->chance= b["chance"].GetInt();
 		((SpawnerBehaviorInfo*)bInfo)->creature = b["creature"].GetString();
+		((SpawnerBehaviorInfo*)bInfo)->spawnX = (float)b["spawnX"].GetDouble();
+		((SpawnerBehaviorInfo*)bInfo)->spawnY = (float)b["spawnY"].GetDouble();	
 	}
 
 	return bInfo;

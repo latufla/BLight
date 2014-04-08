@@ -43,3 +43,9 @@ void CustomPoint::set(const CustomPoint& pos)
 	this->x = pos.x;
 	this->y = pos.y;
 }
+
+void CustomPoint::moveBy( const CustomPoint& delta)
+{
+	this->x += delta.x;
+	this->y += delta.y;
+}

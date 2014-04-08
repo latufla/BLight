@@ -13,7 +13,7 @@ public:
 	bool canExecute();
 	void execute();
 
-	void setUp(BehaviorBase*, ObjectInfo*);
+	void setUp(BehaviorBase*, ObjectInfo*, const CustomPoint&);
 	ControllerBase* getCreature() const { return creature; }
 
 	CommandType getType(){return CREATE_COMMAND;}
@@ -21,6 +21,7 @@ public:
 protected:
 	ObjectInfo* info;
 	ControllerBase* creature;
+	CustomPoint position;
 	
 	static int id; // TODO: fix this dirt
 };

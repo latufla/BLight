@@ -18,6 +18,7 @@ protected:
 	ObjectInfo* creature;
 	int intervalMSec;
 	int chance;
+	CustomPoint spawnPosition;
 
 	int time;
 };

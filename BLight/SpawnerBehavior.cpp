@@ -18,7 +18,8 @@ SpawnerBehavior::SpawnerBehavior(Info* info)
 	this->intervalMSec = sInfo->intervalMSec;
 	this->chance = sInfo->chance;
 	this->creature = Infos::getInfoBy(sInfo->creature); 
-
+	this->spawnPosition.set(sInfo->spawnX, sInfo->spawnY);
+	
 	time = 0;
 }
 
@@ -33,7 +34,9 @@ bool SpawnerBehavior::doStep(int step)
 	time += step;
 	if(time >= intervalMSec && rand() % 1000 <= chance){
 		CreateCommand create;
-		create.setUp(this, creature);
+		CustomPoint pos = controller->getObject()->getPosition();
+		pos.moveBy(spawnPosition);
+		create.setUp(this, creature, pos);
 		if(create.tryToExecute()){
 			time = 0;
 			return true;
