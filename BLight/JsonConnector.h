@@ -4,6 +4,7 @@
 #include "rapidjson\document.h"
 #include "rapidjson\filestream.h"
 #include "ObjectInfo.h"
+#include "MapInfo.h"
 
 class JsonConnector
 {
@@ -15,7 +16,7 @@ public:
 	}
 	
 	vector<ObjectInfo*>* createInfosFromJson(FILE*);
-	vector<ControllerBase*>* createMapFromJson(FILE*);
+	MapInfo* createMapFromJson(FILE*);
 
 private:
 	JsonConnector(void) {};               

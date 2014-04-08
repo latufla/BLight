@@ -5,6 +5,7 @@
 #include "SpawnerBehaviorInfo.h"
 #include "Config.h"
 #include "Infos.h"
+#include "MapInfo.h"
 
 vector<ObjectInfo*>* JsonConnector::createInfosFromJson(FILE* json)
 {
@@ -124,7 +125,7 @@ DropInfo* JsonConnector::createDropInfo(rapidjson::Value& d)
 	return info;
 }
 
-vector<ControllerBase*>* JsonConnector::createMapFromJson(FILE* json)
+MapInfo* JsonConnector::createMapFromJson(FILE* json)
 {
 	if(json == nullptr)
 		return nullptr;
@@ -138,18 +139,17 @@ vector<ControllerBase*>* JsonConnector::createMapFromJson(FILE* json)
 	if(!items.IsArray())
 		return nullptr;
 
-
-	vector<ControllerBase*>* res = new vector<ControllerBase*>();
+	MapInfo* mapInfo = new MapInfo();
 	for (rapidjson::SizeType i = 0; i < items.Size(); i++){
-		ObjectInfo* info = Infos::getInfoBy(items[i]["info"].GetString());
+		string name = items[i]["name"].GetString();		
+		int id = items[i]["id"].GetInt();
 		CustomPoint pos(
 			(float)items[i]["x"].GetDouble(), 
 			(float)items[i]["y"].GetDouble()
 			);
-		ControllerBase* c = Config::field->createObjectController(items[i]["id"].GetInt(), *info, pos);
-		res->push_back(c);	
+		mapInfo->infoNameToData[name] = pair<int, CustomPoint>(id, pos);	
 	}
-	return res;
+	return mapInfo;
 }
 
 

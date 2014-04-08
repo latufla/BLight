@@ -1,5 +1,4 @@
 #include "Maps.h"
-#include "StatusViewManager.h"
 #include "JsonConnector.h"
 #include "Config.h"
 
@@ -11,8 +10,17 @@ vector<ControllerBase*>* Maps::createMap()
 	fclose(infos);
 
 	FILE* level = fopen ("config/level_1.json" , "r");	
-	vector<ControllerBase*>* res = JsonConnector::getInstance().createMapFromJson(level);	
+	MapInfo* mapInfo = JsonConnector::getInstance().createMapFromJson(level);		
 	fclose(level);
+
+	vector<ControllerBase*>* res = new vector<ControllerBase*>();
+	auto items = &mapInfo->infoNameToData;
+	for(auto it = items->cbegin(); it != items->cend(); ++it){
+		ObjectInfo* info = Infos::getInfoBy(it->first);
+		ControllerBase* c = Config::field->createObjectController(it->second.first, *info, it->second.second);
+		res->push_back(c);
+	}	
+	delete mapInfo;
 	return res;
 }
 
