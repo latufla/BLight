@@ -1,6 +1,4 @@
 #include "SpawnerBehaviorInfo.h"
-#include "CustomValue.h"
-
 
 SpawnerBehaviorInfo::SpawnerBehaviorInfo(void) : Info()
 {

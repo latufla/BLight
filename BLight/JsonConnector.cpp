@@ -2,10 +2,8 @@
 #include "CustomCircle.h"
 #include "BehaviorsFactory.h"
 #include "CommandsFactory.h"
-#include "SpawnerBehaviorInfo.h"
 #include "Config.h"
 #include "Infos.h"
-#include "MapInfo.h"
 
 vector<ObjectInfo*>* JsonConnector::createInfosFromJson(FILE* json)
 {
