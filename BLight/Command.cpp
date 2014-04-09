@@ -25,7 +25,8 @@ bool Command::tryToExecute()
 bool Command::canExecute()
 {
 	ObjectInfo* info = Infos::getInfoBy(target->getName());
-	return info->canApplyCommand(getType()); 
+	ObjectBase* commander = caller->getController()->getObject();
+	return info->canApplyCommand(getType(), commander->getName()); 
 }
 
 void Command::execute()

@@ -58,7 +58,7 @@ void mainLoop(int elapsedTime)
 
 void applyAdditionalSettings(ControllerBase* c)
 {
-	if(c->getName() == "hero")
+	if(c->getName() == "player")
 		Config::player = c;
 
 	if(c->getDisplayStatus())

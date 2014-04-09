@@ -1,7 +1,7 @@
 {
 	"items": [{
 		"id": 0,
-		"name": "hero",
+		"name": "player",
 		"physicType": 2,
 		"shape": {
 			"name": "circle",
@@ -22,7 +22,10 @@
 			"name": "AttackBehavior"
 		}],
 		"applicableCommands": [{
-			"name": "ChargeCommand"
+			"name": "ChargeCommand",
+			"commanders": ["charger",
+			"small_energy_pack",
+			"medium_energy_pack"]
 		}],
 		"drop": [{
 			"name": "AttackCommand",
@@ -57,10 +60,14 @@
 			"name": "DeathBehavior"
 		}],
 		"applicableCommands": [{
-			"name": "AttackCommand"
+			"name": "AttackCommand",
+			"commanders": ["player"]
 		},
 		{
-			"name": "ChargeCommand"
+			"name": "ChargeCommand",
+			"commanders": ["charger",
+			"small_energy_pack",
+			"medium_energy_pack"]
 		}],
 		"drop": []
 	},
@@ -101,7 +108,8 @@
 				"energy": 22
 			}
 		}]
-	},{
+	},
+	{
 		"id": 4,
 		"name": "charger",
 		"shape": {
@@ -136,6 +144,17 @@
 			"spawnX": -2.0,
 			"spawnY": 1.0
 		}],
+		"applicableCommands": [],
+		"drop": []
+	},
+	{
+		"id": 6,
+		"name": "spot",
+		"shape": {
+			"name": "circle",
+			"radius": 2.0
+		},
+		"behaviors": [],
 		"applicableCommands": [],
 		"drop": []
 	}]

@@ -19,11 +19,15 @@ ObjectInfo::~ObjectInfo(void)
 	behaviors.clear();
 }
 
-bool ObjectInfo::canApplyCommand(CommandType command)
+bool ObjectInfo::canApplyCommand(CommandType command, string commander)
 {
 	for (auto it = applicableCommands.cbegin(); it != applicableCommands.cend(); ++it){
-		if((*it) == command)
-			return true;
+		if((*it).first == command){
+			for (auto st = (*it).second.cbegin(); st != (*it).second.cend(); ++st){
+				if((*st) == commander)
+					return true;
+			}
+		}			
 	}
 	return false;
 }

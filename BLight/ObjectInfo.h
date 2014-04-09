@@ -11,7 +11,7 @@ public:
 	ObjectInfo(void);
 	~ObjectInfo(void);
 
-	bool canApplyCommand(CommandType);
+	bool canApplyCommand(CommandType, string);
 
 	int physicType;
 	CustomShape* shape;
@@ -21,7 +21,7 @@ public:
 	float linearDamping;
 	
 	vector<Info*> behaviors;
-	vector<CommandType> applicableCommands;
+	map<CommandType, vector<string>> applicableCommands;
 
 	map<CommandType, DropInfo*> drop;
 

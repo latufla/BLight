@@ -50,8 +50,20 @@ vector<ObjectInfo*>* JsonConnector::createInfosFromJson(FILE* json)
 
 		rapidjson::Value& applicableCommands = item["applicableCommands"];
 		if(applicableCommands.IsArray()){
-			for (rapidjson::SizeType i = 0; i < applicableCommands.Size(); i++)
-				info->applicableCommands.push_back(createCommandType(applicableCommands[i]));
+			for (rapidjson::SizeType i = 0; i < applicableCommands.Size(); i++){
+				if(!applicableCommands[i].HasMember("commanders"))
+					continue;
+				
+				rapidjson::Value& commanders = applicableCommands[i]["commanders"];
+				if(!commanders.IsArray())
+					continue;
+				
+				CommandType command = createCommandType(applicableCommands[i]);
+				for(rapidjson::SizeType j = 0; j < commanders.Size(); j++){
+					info->applicableCommands[command].push_back(commanders[j].GetString());
+					EngineConnector::getInstance().printDebug(commanders[j].GetString());
+				}				
+			}
 		}
 
 		rapidjson::Value& drop = item["drop"];
