@@ -3,6 +3,7 @@
 
 CustomPoint::CustomPoint(void)
 {
+	x = y = 0.0f;
 }
 
 CustomPoint::CustomPoint( float x, float y)

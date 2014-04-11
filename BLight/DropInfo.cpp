@@ -10,6 +10,9 @@ DropInfo::DropInfo(void)
 
 	target[ENERGY] = 0;
 	target[XP] = 0;
+
+	player[ENERGY] = 0;
+	player[XP] = 0;
 }
 
 DropInfo::~DropInfo(void)

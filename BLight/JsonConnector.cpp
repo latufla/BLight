@@ -140,6 +140,14 @@ DropInfo* JsonConnector::createDropInfo(rapidjson::Value& d)
 			info->target[DropInfo::XP] = d["target"]["xp"].GetInt();
 	}
 
+	if(d.HasMember("player")){
+		if(d["player"].HasMember("energy"))
+			info->player[DropInfo::ENERGY] = d["player"]["energy"].GetInt();
+
+		if(d["player"].HasMember("xp"))
+			info->player[DropInfo::XP] = d["player"]["xp"].GetInt();
+	}
+
 	return info;
 }
 

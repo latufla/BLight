@@ -14,5 +14,6 @@ public:
 	
 	map<string, int> caller;
 	map<string, int> target;
+	map<string, int> player;
 };
 

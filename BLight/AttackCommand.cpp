@@ -19,7 +19,9 @@ void AttackCommand::setUp(BehaviorBase* caller, ObjectBase* target)
 
 bool AttackCommand::canExecute()
 {
-	return __super::canExecute() && target->getEnergy() > 0;
+	return __super::canExecute() 
+		&& caller->getController()->getObject()->getEnergy() > 0 
+		&& target->getEnergy() > 0;
 }
 
 void AttackCommand::execute()

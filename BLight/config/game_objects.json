@@ -25,7 +25,8 @@
 			"name": "ChargeCommand",
 			"commanders": ["charger",
 			"small_energy_pack",
-			"medium_energy_pack"]
+			"medium_energy_pack",
+			"spot"]
 		}],
 		"drop": [{
 			"name": "AttackCommand",
@@ -69,7 +70,12 @@
 			"small_energy_pack",
 			"medium_energy_pack"]
 		}],
-		"drop": []
+		"drop": [{
+			"name": "DestroyCommand",
+			"player": {
+				"xp": 2
+			}
+		}]
 	},
 	{
 		"id": 2,
@@ -150,12 +156,23 @@
 	{
 		"id": 6,
 		"name": "spot",
+		"displayStatus": true,
 		"shape": {
 			"name": "circle",
 			"radius": 2.0
 		},
-		"behaviors": [],
+		"behaviors": [{
+			"name": "ChargerBehavior"
+		}],
 		"applicableCommands": [],
-		"drop": []
+		"drop": [{
+			"name": "ChargeCommand",
+			"caller": {
+				"energy": 1
+			},
+			"target": {
+				"energy": -1
+			}
+		}]
 	}]
 }

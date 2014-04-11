@@ -2,6 +2,7 @@
 #include "Infos.h"
 #include "PopupManager.h"
 #include "CustomUtils.h"
+#include "Config.h"
 
 
 Command::Command(void)
@@ -42,6 +43,10 @@ void Command::execute()
 		
 	target->setEnergy(target->getEnergy() + drop->target[DropInfo::ENERGY]);
 	target->setXp(target->getXp() + drop->target[DropInfo::XP]);
+
+	ObjectBase* player = Config::player->getObject();
+	player->setEnergy(player->getEnergy() + drop->player[DropInfo::ENERGY]);
+	player->setXp(player->getXp() + drop->player[DropInfo::XP]);
 }
 
 bool Command::canShowPopup()

@@ -26,7 +26,9 @@ bool StatusViewManager::doStep(int step)
 	for(auto it = controllerToStatusView.cbegin(); it != controllerToStatusView.cend(); it++){
 		ControllerBase* c = (*it).first; 
 		
-		(*it).second->setText(c->getName() + "\nenergy: " + to_string(long long(c->getObject()->getEnergy())));
+		(*it).second->setText(c->getName() + "\nenergy: " 
+			+ to_string(long long(c->getObject()->getEnergy())) + "\nxp: " 
+			+ to_string(long long(c->getObject()->getXp())));
 		
 		CustomPoint& pos = c->getObject()->getGlobalCenter();
 		(*it).second->getPosition().set(pos.x + 1.0f, pos.y + 2.0f);
