@@ -61,7 +61,6 @@ vector<ObjectInfo*>* JsonConnector::createInfosFromJson(FILE* json)
 				CommandType command = createCommandType(applicableCommands[i]);
 				for(rapidjson::SizeType j = 0; j < commanders.Size(); j++){
 					info->applicableCommands[command].push_back(commanders[j].GetString());
-					EngineConnector::getInstance().printDebug(commanders[j].GetString());
 				}				
 			}
 		}
@@ -94,17 +93,15 @@ Info* JsonConnector::createBehaviorInfo( rapidjson::Value& b)
 		return nullptr;
 
 	Info* bInfo = BehaviorsFactory::createInfo(b["name"].GetString());
-	if(b.IsObject()){
-		for(auto it = b.MemberBegin(); it != b.MemberEnd(); ++it){
-			string pName = it->name.GetString();
-			rapidjson::Value& val = it->value;
-			if(val.IsInt())
-				bInfo->update(pName, val.GetInt());
-			else if(val.IsString())
-				bInfo->update(pName, val.GetString());
-			else if(val.IsDouble())
-				bInfo->update(pName, (float)val.GetDouble());
-		}
+	for(auto it = b.MemberBegin(); it != b.MemberEnd(); ++it){
+		string pName = it->name.GetString();
+		rapidjson::Value& val = it->value;
+		if(val.IsInt())
+			bInfo->update(pName, val.GetInt());
+		else if(val.IsString())
+			bInfo->update(pName, val.GetString());
+		else if(val.IsDouble())
+			bInfo->update(pName, (float)val.GetDouble());
 	}
 	return bInfo;
 }

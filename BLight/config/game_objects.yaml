@@ -1,0 +1,114 @@
+player:
+ id: 0
+ physicType: 2
+ shape:
+  name: circle
+  radius: 1.0
+ density: 1.0
+ friction: 0.3
+ restitution: 0.5
+ linearDamping: 1.0
+ displayStatus: true
+ behaviors:
+  - name: UserControlBehavior
+  - name: MoveBehavior
+  - name: AttackBehavior
+ applicableCommands:
+  - name: ChargeCommand
+    commanders: [charger, small_energy_pack, medium_energy_pack, spot]
+ drop:
+  - name: AttackCommand
+    caller: { energy: -5 }
+    target: { energy: -20 }
+	
+enemy:
+ id: 1
+ physicType: 2
+ shape:
+  name: circle
+  radius: 1.0
+ density: 1.0
+ friction: 0.3
+ restitution: 0.5
+ linearDamping: 1.0
+ displayStatus: true
+ behaviors:
+  - name: AIControlBehavior
+  - name: MoveBehavior
+  - name: DeathBehavior
+ applicableCommands:
+  - name: AttackCommand
+    commanders: [player]
+  - name: ChargeCommand
+    commanders: [charger, small_energy_pack, medium_energy_pack]
+ drop:
+  - name: DestroyCommand
+    player: { xp: 2 }
+
+small_energy_pack:
+ id: 2
+ physicType: 0
+ shape:
+  name: polygon
+  width: 1.0
+  height: 1.0
+ behaviors:
+  - name: ChargePackBehavior
+ drop:
+  - name: ChargeCommand
+    target: { energy: 11 }
+
+medium_energy_pack:
+ id: 3
+ physicType: 0
+ shape:
+  name: polygon
+  width: 1.0
+  height: 1.0
+ behaviors:
+  - name: ChargePackBehavior
+ drop:
+  - name: ChargeCommand
+    target: { energy: 22 }
+
+charger:
+ id: 4
+ physicType: 0
+ shape:
+  name: polygon
+  width: 4.0
+  height: 4.0
+ behaviors:
+  - name: ChargerBehavior
+ drop:
+  - name: ChargeCommand
+    target: { energy: 1 }
+
+enemy_spawner:
+ id: 5
+ physicType: 0
+ shape:
+  name: polygon
+  width: 3.0
+  height: 3.0
+ behaviors:
+  - name: SpawnerBehavior
+    creature: enemy
+    intervalMSec: 3000
+    chance: 1000
+    spawnX: -2.0
+    spawnY: 1.0
+    
+spot:
+ id: 6
+ physicType: 0
+ shape:
+  name: circle
+  radius: 4.0
+ behaviors:
+  - { name: ChargerBehavior }
+ drop:
+  - name: ChargeCommand
+    caller: { energy: 1 }
+    target: { energy: -1 }
+	

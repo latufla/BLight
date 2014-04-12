@@ -6,6 +6,11 @@
 class DropInfo : public Info
 {
 public:
+
+	static string const CALLER;
+	static string const TARGET;
+	static string const PLAYER;
+	
 	static string const ENERGY;
 	static string const XP;
 

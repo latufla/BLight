@@ -1,11 +1,13 @@
 #include "Infos.h"
-#include "JsonConnector.h"
+#include "YamlConnector.h"
+#include <iosfwd>
 
 map<string, ObjectInfo*> Infos::nameToInfo;
 
 void Infos::init(FILE* f)
 {
-	vector<ObjectInfo*>* res = JsonConnector::getInstance().createInfosFromJson(f);
+	vector<ObjectInfo*>* res= YamlConnector::getInstance().createInfosFromYaml("config/game_objects.yaml");
+	
 	for(auto it = res->cbegin(); it != res->cend(); ++it){
 		nameToInfo[((*it))->name] = (*it);
 	}

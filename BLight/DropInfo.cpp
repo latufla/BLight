@@ -1,5 +1,9 @@
 #include "DropInfo.h"
 
+string const DropInfo::CALLER = "caller";
+string const DropInfo::TARGET = "target";
+string const DropInfo::PLAYER = "player";
+
 string const DropInfo::ENERGY = "energy";
 string const DropInfo::XP = "xp";
 
