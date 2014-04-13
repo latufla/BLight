@@ -60,7 +60,7 @@ bool FieldController::stopBehaviors()
 bool FieldController::doBehaviorsStep(int step)
 {
 	__super::doBehaviorsStep(step);
-	for(int i = 0; i < controllers.size(); ++i){
+	for(unsigned int i = 0; i < controllers.size(); ++i){
 		controllers[i]->doBehaviorsStep(step);
 	}
 	doDestroyStep();

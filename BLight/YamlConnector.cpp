@@ -1,21 +1,24 @@
 #include "YamlConnector.h"
 #include <fstream>
-#include "Config.h"
 #include "BehaviorsFactory.h"
 #include "CommandsFactory.h"
+#include "MapInfo.h"
+#include "CustomCircle.h"
+#include "CustomPolygon.h"
 
 bool has(const Node& n, string name){
 	return n.FindValue(name) != nullptr; 
 }
 
-vector<ObjectInfo*>* YamlConnector::createInfosFromYaml(string path)
+vector<ObjectInfo*>* YamlConnector::createInfos(string path)
 {
-	ifstream infos(path);
-	if (!infos.is_open())	
+	ifstream stream;
+	stream.open(path);
+	if (!stream.is_open())	
 		return nullptr;
 	
 	vector<ObjectInfo*>* res = new vector<ObjectInfo*>();
-	Parser parser(infos);
+	Parser parser(stream);
 	Node doc;
 	if(!parser.GetNextDocument(doc))
 		return nullptr;
@@ -67,7 +70,7 @@ vector<ObjectInfo*>* YamlConnector::createInfosFromYaml(string path)
 		res->push_back(info);
 	}
 
-	infos.close();
+	stream.close();
 	return res;
 }
 
@@ -146,4 +149,27 @@ DropInfo* YamlConnector::createDropInfo(const Node& d)
 	}
 
 	return info;
+}
+
+MapInfo* YamlConnector::createMap(string path)
+{
+	ifstream stream;
+	stream.open(path);
+	if (!stream.is_open())	
+		return nullptr;
+
+	Parser parser(stream);
+	Node doc;
+	if(!parser.GetNextDocument(doc) || doc.Type() != NodeType::Sequence)
+		return nullptr;
+	
+	MapInfo* mapInfo = new MapInfo();
+	for(auto it = doc.begin(); it != doc.end(); ++it){
+		string name = get<string>((*it)["name"]);
+		int id = get<int>((*it)["id"]);
+		CustomPoint pos(get<float>((*it)["x"]), get<float>((*it)["y"]));
+		mapInfo->infoNameToData[name] = pair<int, CustomPoint>(id, pos);
+	}
+	stream.close();
+	return mapInfo;
 }

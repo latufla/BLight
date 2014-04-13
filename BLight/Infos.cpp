@@ -4,14 +4,12 @@
 
 map<string, ObjectInfo*> Infos::nameToInfo;
 
-void Infos::init(FILE* f)
+void Infos::init(string path)
 {
-	vector<ObjectInfo*>* res= YamlConnector::getInstance().createInfosFromYaml("config/game_objects.yaml");
-	
+	vector<ObjectInfo*>* res= YamlConnector::getInstance().createInfos(path);	
 	for(auto it = res->cbegin(); it != res->cend(); ++it){
 		nameToInfo[((*it))->name] = (*it);
 	}
-
 	delete res; // but not infos
 }
 

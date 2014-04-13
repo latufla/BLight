@@ -1,0 +1,6 @@
+ - {id: 0, name: player, x: 1.0, y: 30.0}
+ - {id: 1, name: enemy_spawner, x: 40.0, y: 10.0}
+ - {id: 2, name: charger, x: 5.0, y: 20.0}
+ - {id: 3, name: small_energy_pack, x: 20.0, y: 30.0}
+ - {id: 4, name: medium_energy_pack, x: 40.0, y: 30.0}
+ - {id: 5, name: spot, x: 10.0, y: 10.0}

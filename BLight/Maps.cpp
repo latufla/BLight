@@ -1,18 +1,13 @@
 #include "Maps.h"
-#include "JsonConnector.h"
 #include "Config.h"
-
+#include "YamlConnector.h"
 
 vector<ControllerBase*>* Maps::createMap()
 {
-	FILE* infos = fopen ("config/game_objects.json" , "r");	
-	Infos::init(infos);
-	fclose(infos);
+	Infos::init("config/game_objects.yaml");	
 
-	FILE* level = fopen ("config/level_1.json" , "r");	
-	MapInfo* mapInfo = JsonConnector::getInstance().createMapFromJson(level);		
-	fclose(level);
-
+	MapInfo* mapInfo = YamlConnector::getInstance().createMap("config/level_1.yaml");			
+	
 	vector<ControllerBase*>* res = new vector<ControllerBase*>();
 	auto items = &mapInfo->infoNameToData;
 	for(auto it = items->cbegin(); it != items->cend(); ++it){
@@ -21,6 +16,7 @@ vector<ControllerBase*>* Maps::createMap()
 		res->push_back(c);
 	}	
 	delete mapInfo;
+	
 	return res;
 }
 

@@ -1,7 +1,6 @@
 #include "stdafx.h"
 #include "ControllerBase.h"
 #include "DebuggerBehavior.h"
-#include "JsonConnector.h"
 #include "Infos.h"
 #include "Maps.h"
 #include "PopupManager.h"

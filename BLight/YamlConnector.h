@@ -3,6 +3,7 @@
 #include <vector>
 #include "ObjectInfo.h"
 #include "yaml-cpp/yaml.h"
+#include "MapInfo.h"
 
 using namespace YAML;
 
@@ -18,7 +19,8 @@ public:
 		return instance;
 	}
 
-    vector<ObjectInfo*>* createInfosFromYaml(string);
+    vector<ObjectInfo*>* createInfos(string);
+	MapInfo* createMap(string);
 private:
 	YamlConnector(void) {};               
 	YamlConnector(YamlConnector const&);              
