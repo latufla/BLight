@@ -1,0 +1,11 @@
+quest1:
+ id: 0
+ goals:
+  - {command: AttackCommand, count: 5}
+ 
+#quest2:
+# id: 1
+# requirements:
+#  - quests: [quest1]
+# goals:
+#  - {command: ChargeCommand, target: spot, count: 1}

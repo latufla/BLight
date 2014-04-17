@@ -3,6 +3,7 @@
 #include "PopupManager.h"
 #include "CustomUtils.h"
 #include "Config.h"
+#include "QuestManager.h"
 
 
 Command::Command(void)
@@ -47,6 +48,8 @@ void Command::execute()
 	ObjectBase* player = Config::player->getObject();
 	player->setEnergy(player->getEnergy() + drop->player[DropInfo::ENERGY]);
 	player->setXp(player->getXp() + drop->player[DropInfo::XP]);
+
+	QuestManager::getInstance().notify(getType(), target->getName());
 }
 
 bool Command::canShowPopup()

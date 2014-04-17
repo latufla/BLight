@@ -6,6 +6,7 @@
 #include "PopupManager.h"
 #include "StatusViewManager.h"
 #include "Config.h"
+#include "QuestManager.h"
 
 void mainLoop(int);
 void applyAdditionalSettings(ControllerBase*);
@@ -21,6 +22,20 @@ int _tmain(int argc, _TCHAR* argv[])
 
 	Config::managers.push_back((IManager*)&PopupManager::getInstance());
 	Config::managers.push_back((IManager*)&StatusViewManager::getInstance());
+	Config::managers.push_back((IManager*)&QuestManager::getInstance());
+
+	QuestInfo* qInfo = new QuestInfo();
+	qInfo->id = 0;
+	qInfo->name = "quest1";
+	QuestGoalInfo qGoalInfo;
+	qGoalInfo.command = "AttackCommand";
+	qGoalInfo.target = "enemy";
+	qGoalInfo.count = 1;
+	qInfo->goals.push_back(qGoalInfo);
+	QuestBase* quest = new QuestBase(*qInfo);
+	
+	QuestManager::getInstance().add(quest);
+
 
 	FieldController& field = FieldController::getInstance();
 	field.setName("field");
