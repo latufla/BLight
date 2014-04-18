@@ -1,6 +1,7 @@
 #include "QuestManager.h"
 #include "CommandsFactory.h"
 #include "EngineConnector.h"
+#include "PopupManager.h"
 
 
 bool QuestManager::doStep(int step)
@@ -20,7 +21,12 @@ bool QuestManager::doStep(int step)
 		auto cQuestIt = find(quests.begin(), quests.end(), *it);
 		if(cQuestIt != quests.end()){
 			quests.erase(cQuestIt);
-			EngineConnector::getInstance().printDebug("" + (*it)->getName() + " completed");		
+
+			PopupText* p = new PopupText();
+			p->setCharacterSize(24);
+			p->setText((*it)->getName() + " complete!");
+			p->getPosition().set(CustomPoint(20.0f, 25.0f));
+			PopupManager::getInstance().add(p);
 		}		
 	}
 	
