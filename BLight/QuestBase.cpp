@@ -11,8 +11,7 @@ QuestBase::QuestBase(const QuestInfo& info)
 	id = info.id;
 	name = info.name;
 	for(auto it = info.goals.cbegin(); it != info.goals.cend(); ++it){
-		const QuestGoalInfo& goalInfo = *it;
-		goals.push_back(new QuestGoal(goalInfo));
+		goals.push_back(new QuestGoal(**it));
 	}
 }
 

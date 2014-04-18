@@ -196,10 +196,10 @@ vector<QuestInfo*>* YamlConnector::createQuestInfos(string path)
 
 		const Node& goals = item["goals"];
 		for(auto qt = goals.begin(); qt != goals.end(); ++qt){
-			QuestGoalInfo goalInfo;
-			goalInfo.command = get<string>((*qt)["command"]);  
-			goalInfo.target = get<string>((*qt)["target"]);  
-			goalInfo.count = get<unsigned int>((*qt)["count"]);  
+			QuestGoalInfo* goalInfo = new QuestGoalInfo();
+			goalInfo->command = get<string>((*qt)["command"]);  
+			goalInfo->target = get<string>((*qt)["target"]);  
+			goalInfo->count = get<unsigned int>((*qt)["count"]);  
 			info->goals.push_back(goalInfo);
 		}		
 		quests->push_back(info);

@@ -17,6 +17,11 @@ ObjectInfo::~ObjectInfo(void)
 		delete (*it);
 	}
 	behaviors.clear();
+
+	for (auto it = drop.cbegin(); it != drop.cend(); ++it){
+		delete (*it).second;
+	}
+	drop.clear();
 }
 
 bool ObjectInfo::canApplyCommand(CommandType command, string commander)

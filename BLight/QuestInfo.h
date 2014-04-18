@@ -8,6 +8,6 @@ public:
 	QuestInfo(void);
 	~QuestInfo(void);
 	
-	vector<QuestGoalInfo> goals;
+	vector<QuestGoalInfo*> goals;
 };
 
