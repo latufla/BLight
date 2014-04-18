@@ -173,3 +173,36 @@ MapInfo* YamlConnector::createMap(string path)
 	stream.close();
 	return mapInfo;
 }
+
+vector<QuestInfo*>* YamlConnector::createQuestInfos(string path)
+{
+	ifstream stream;
+	stream.open(path);
+	if (!stream.is_open())	
+		return nullptr;
+
+	Parser parser(stream);
+	Node doc;
+	if(!parser.GetNextDocument(doc))
+		return nullptr;
+
+	vector<QuestInfo*>* quests = new vector<QuestInfo*>();
+	for(auto it = doc.begin(); it != doc.end(); ++it){
+		QuestInfo* info = new QuestInfo();
+		it.first() >> info->name;
+
+		const Node& item = it.second();
+		info->id = get<int>(item["id"]);	
+
+		const Node& goals = item["goals"];
+		for(auto qt = goals.begin(); qt != goals.end(); ++qt){
+			QuestGoalInfo goalInfo;
+			goalInfo.command = get<string>((*qt)["command"]);  
+			goalInfo.target = get<string>((*qt)["target"]);  
+			goalInfo.count = get<unsigned int>((*qt)["count"]);  
+			info->goals.push_back(goalInfo);
+		}		
+		quests->push_back(info);
+	}
+	return quests;
+}

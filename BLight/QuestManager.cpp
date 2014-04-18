@@ -23,7 +23,8 @@ bool QuestManager::doStep(int step)
 			EngineConnector::getInstance().printDebug("" + (*it)->getName() + " completed");		
 		}		
 	}
-
+	
+	targetToCommand.clear(); // TODO: wonder 
 	return true;
 }
 

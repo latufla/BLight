@@ -24,31 +24,25 @@ int _tmain(int argc, _TCHAR* argv[])
 	Config::managers.push_back((IManager*)&StatusViewManager::getInstance());
 	Config::managers.push_back((IManager*)&QuestManager::getInstance());
 
-	QuestInfo* qInfo = new QuestInfo();
-	qInfo->id = 0;
-	qInfo->name = "quest1";
-	QuestGoalInfo qGoalInfo;
-	qGoalInfo.command = "AttackCommand";
-	qGoalInfo.target = "enemy";
-	qGoalInfo.count = 1;
-	qInfo->goals.push_back(qGoalInfo);
-	QuestBase* quest = new QuestBase(*qInfo);
-	
-	QuestManager::getInstance().add(quest);
-
-
 	FieldController& field = FieldController::getInstance();
 	field.setName("field");
 	field.addBehavior(new DebuggerBehavior());
 	field.init();
 	Config::field = &field;
 
+	Infos::init("config/");		
+	
+	const vector<QuestInfo*>& questInfos = Infos::getQuestInfos(); 
+	for(auto it = questInfos.cbegin(); it != questInfos.cend(); it++){
+		QuestManager::getInstance().add(new QuestBase(**it));
+	}
+
 	vector<ControllerBase*>* mapInfo = Maps::createMap();
 	for(auto it = mapInfo->cbegin(); it != mapInfo->cend(); it++){
 		scene.addChild((*it)->getView());
 		applyAdditionalSettings(*it);
 	}
-	delete mapInfo; // but not infos
+	delete mapInfo;
 
 	field.startBehaviors();
 

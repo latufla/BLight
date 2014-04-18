@@ -1,7 +1,7 @@
 quest1:
  id: 0
  goals:
-  - {command: AttackCommand, count: 5}
+  - {command: AttackCommand, target: enemy, count: 2}
  
 #quest2:
 # id: 1

@@ -4,7 +4,6 @@
 
 vector<ControllerBase*>* Maps::createMap()
 {
-	Infos::init("config/game_objects.yaml");	
 
 	MapInfo* mapInfo = YamlConnector::getInstance().createMap("config/level_1.yaml");			
 	
@@ -16,7 +15,7 @@ vector<ControllerBase*>* Maps::createMap()
 		res->push_back(c);
 	}	
 	delete mapInfo;
-	
+
 	return res;
 }
 

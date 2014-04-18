@@ -4,6 +4,7 @@
 #include "ObjectInfo.h"
 #include "yaml-cpp/yaml.h"
 #include "MapInfo.h"
+#include "QuestInfo.h"
 
 using namespace YAML;
 
@@ -20,7 +21,9 @@ public:
 	}
 
     vector<ObjectInfo*>* createInfos(string);
+	vector<QuestInfo*>* createQuestInfos(string);
 	MapInfo* createMap(string);
+
 private:
 	YamlConnector(void) {};               
 	YamlConnector(YamlConnector const&);              
