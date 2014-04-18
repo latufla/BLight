@@ -26,7 +26,7 @@ bool Command::tryToExecute()
 
 bool Command::canExecute()
 {
-	ObjectInfo* info = Infos::getInfoBy(target->getName());
+	ObjectInfo* info = Infos::getInstance().getObjectInfoBy(target->getName());
 	ObjectBase* commander = caller->getController()->getObject();
 	return info->canApplyCommand(getType(), commander->getName()); 
 }
@@ -34,7 +34,7 @@ bool Command::canExecute()
 void Command::execute()
 {
 	ObjectBase* cObj = caller->getController()->getObject();
-	ObjectInfo* info = Infos::getInfoBy(cObj->getName());
+	ObjectInfo* info = Infos::getInstance().getObjectInfoBy(cObj->getName());
 	DropInfo* drop = info->drop[getType()];
 	if(drop == nullptr)
 		return;

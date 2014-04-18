@@ -24,7 +24,7 @@ ObjectInfo::~ObjectInfo(void)
 	drop.clear();
 }
 
-bool ObjectInfo::canApplyCommand(CommandType command, string commander)
+bool ObjectInfo::canApplyCommand(CommandType command, string commander) const
 {
 	for (auto it = applicableCommands.cbegin(); it != applicableCommands.cend(); ++it){
 		if((*it).first == command){

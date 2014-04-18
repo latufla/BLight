@@ -27,7 +27,7 @@ bool DestroyCommand::canExecute()
 void DestroyCommand::execute()
 {
 	ObjectBase* cObj = caller->getController()->getObject();
-	ObjectInfo* info = Infos::getInfoBy(cObj->getName());
+	ObjectInfo* info = Infos::getInstance().getObjectInfoBy(cObj->getName());
 	DropInfo* drop = info->drop[getType()];
 
 	if(drop != nullptr)

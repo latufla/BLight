@@ -17,7 +17,7 @@ SpawnerBehavior::SpawnerBehavior(Info* info)
 	SpawnerBehaviorInfo* sInfo = (SpawnerBehaviorInfo*) info;
 	this->intervalMSec = sInfo->intervalMSec;
 	this->chance = sInfo->chance;
-	this->creature = Infos::getInfoBy(sInfo->creature); 
+	this->creature = Infos::getInstance().getObjectInfoBy(sInfo->creature); 
 	this->spawnPosition.set(sInfo->spawnX, sInfo->spawnY);
 	
 	time = 0;

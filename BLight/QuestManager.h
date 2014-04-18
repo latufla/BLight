@@ -3,6 +3,7 @@
 #include "QuestBase.h"
 #include "Command.h"
 #include "IManager.h"
+#include "Infos.h"
 
 class QuestManager : public IManager
 {
@@ -12,6 +13,7 @@ public:
 		return instance;
 	}
 
+	void init(Infos&);
 	bool doStep(int);
 	
 	bool add(QuestBase*);
@@ -22,10 +24,11 @@ private:
 	QuestManager(QuestManager const&);              
 	void operator=(QuestManager const&);
 
+	~QuestManager();
+
 	vector<QuestBase*> quests;
 	vector<QuestBase*> completedQuests;
 
 	map<string, map<CommandType, unsigned int>> targetToCommand;
-
 };
 

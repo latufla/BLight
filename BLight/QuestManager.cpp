@@ -4,6 +4,27 @@
 #include "PopupManager.h"
 
 
+QuestManager::~QuestManager()
+{
+	for (auto it = quests.cbegin(); it != quests.cend(); it++){
+		delete (*it);
+	}
+	quests.clear();
+
+	for (auto it = completedQuests.cbegin(); it != completedQuests.cend(); it++){
+		delete (*it);
+	}
+	completedQuests.clear();
+}
+
+void QuestManager::init(Infos& infos)
+{
+	const vector<QuestInfo*>& qInfos = infos.getQuestInfos(); 
+	for(auto it = qInfos.cbegin(); it != qInfos.cend(); it++){
+		QuestManager::getInstance().add(new QuestBase(**it));
+	}
+}
+
 bool QuestManager::doStep(int step)
 {
 	for(auto it = quests.cbegin(); it != quests.cend(); ++it){

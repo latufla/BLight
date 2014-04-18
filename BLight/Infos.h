@@ -3,20 +3,30 @@
 #include "ObjectInfo.h"
 #include "QuestInfo.h"
 #include <vector>
+#include "MapInfo.h"
 
 class Infos
 {
 public:
-	static void init(string);
+	static Infos& getInstance(){
+		static Infos instance;
+		return instance;
+	}
 
-	static ObjectInfo* getInfoBy(string);
+	void init(string);
 
-	static vector<QuestInfo*>& getQuestInfos() { return questInfos; }
+	ObjectInfo* getObjectInfoBy(string);
+	vector<QuestInfo*>& getQuestInfos() { return questInfos; }
+	vector<MapInfo*>& getMapInfos(){return mapInfos; }
 
 private:
-	static map<string, ObjectInfo*> nameToInfo;
-	static vector<QuestInfo*> questInfos;
+	Infos(){};
+	Infos(Infos const&);
+	void operator=(Infos const&);
 	
+	~Infos();
+	
+	map<string, ObjectInfo*> nameToObjectInfo;
+	vector<QuestInfo*> questInfos;
+	vector<MapInfo*> mapInfos;	
 };
-
-DROP ALL STATIC STUFF AND MAKE SINGLETONS, CHECK MEMORY CLEANIN` WHEN CLOSE APP

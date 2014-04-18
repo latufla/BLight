@@ -2,7 +2,7 @@
 #include "ControllerBase.h"
 #include "DebuggerBehavior.h"
 #include "Infos.h"
-#include "Maps.h"
+#include "LevelManager.h"
 #include "PopupManager.h"
 #include "StatusViewManager.h"
 #include "Config.h"
@@ -16,35 +16,24 @@ int _tmain(int argc, _TCHAR* argv[])
 	Config::engine = &EngineConnector::getInstance();
 	Config::phEngine = &PhEngineConnector::getInstance();
 
-	SceneController& scene = SceneController::getInstance();
-	scene.init();
 	Config::scene = &SceneController::getInstance();
-
+	Config::scene->init();
+	
 	Config::managers.push_back((IManager*)&PopupManager::getInstance());
 	Config::managers.push_back((IManager*)&StatusViewManager::getInstance());
 	Config::managers.push_back((IManager*)&QuestManager::getInstance());
+	Config::managers.push_back((IManager*)&LevelManager::getInstance());
 
-	FieldController& field = FieldController::getInstance();
-	field.setName("field");
-	field.addBehavior(new DebuggerBehavior());
-	field.init();
-	Config::field = &field;
-
-	Infos::init("config/");		
+	Config::field = &FieldController::getInstance();
+	Config::field->setName("field");
+	Config::field->addBehavior(new DebuggerBehavior());
+	Config::field->init();
 	
-	const vector<QuestInfo*>& questInfos = Infos::getQuestInfos(); 
-	for(auto it = questInfos.cbegin(); it != questInfos.cend(); it++){
-		QuestManager::getInstance().add(new QuestBase(**it));
-	}
+	Infos::getInstance().init("config/");		
+	QuestManager::getInstance().init(Infos::getInstance());
+ 	LevelManager::getInstance().init(*Config::scene, *Config::field, Infos::getInstance());
 
-	vector<ControllerBase*>* mapInfo = Maps::createMap();
-	for(auto it = mapInfo->cbegin(); it != mapInfo->cend(); it++){
-		scene.addChild((*it)->getView());
-		applyAdditionalSettings(*it);
-	}
-	delete mapInfo;
-
-	field.startBehaviors();
+	Config::field->startBehaviors();
 
 	Config::engine->printDebugInstances();
 	Config::engine->init(&mainLoop);
@@ -62,14 +51,5 @@ void mainLoop(int elapsedTime)
 	}
 
 	Config::scene->draw();
-}
-
-void applyAdditionalSettings(ControllerBase* c)
-{
-	if(c->getName() == "player")
-		Config::player = c;
-
-	if(c->getDisplayStatus())
-		StatusViewManager::getInstance().addStatusView(c);
 }
 

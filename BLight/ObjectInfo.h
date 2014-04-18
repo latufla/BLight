@@ -11,7 +11,7 @@ public:
 	ObjectInfo(void);
 	~ObjectInfo(void);
 
-	bool canApplyCommand(CommandType, string);
+	bool canApplyCommand(CommandType, string) const;
 
 	int physicType;
 	CustomShape* shape;
