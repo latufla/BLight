@@ -3,7 +3,12 @@ quest1:
  goals:
   - {command: AttackCommand, target: enemy, count: 2}
  
-#quest2:
+quest2:
+ id: 1
+ goals:
+  - {command: ChargeCommand, target: player, count: 2}
+
+  #quest2:
 # id: 1
 # requirements:
 #  - quests: [quest1]
